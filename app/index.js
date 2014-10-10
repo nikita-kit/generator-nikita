@@ -32,6 +32,17 @@ var NikitaGenerator = yeoman.generators.Base.extend({
             };
         };
 
+        var promptCheckbox = function(name, question, choices, defaultChoices)
+        {
+            return {
+                type: 'checkbox',
+                name: name,
+                message: question,
+                choices: choices,
+                default: that.config.get(name, defaultChoices || choices)
+            };
+        };
+
         var prompts = [
             {
                 type: 'input',
@@ -40,48 +51,22 @@ var NikitaGenerator = yeoman.generators.Base.extend({
                 default: that.config.get('name', this.appname)
             },
             promptConfirm('private', 'Is this project private?', true),
-            {
-                type: 'checkbox',
-                name: 'nikitaCssMixins',
-                message: 'Which nikita.css mixins do you want to use?',
-                choices: [
-                    "centering",
-                    "fixed-ratiobox",
-                    "font-smoothing",
-                    "layering",
-                    "px-to-rem",
-                    "respond-to",
-                    "triangle"
-                ],
-                default: that.config.get('nikitaCssMixins', [
-                    "centering",
-                    "fixed-ratiobox",
-                    "font-smoothing",
-                    "layering",
-                    "px-to-rem",
-                    "respond-to",
-                    "triangle"
-                ])
-            },
-            {
-                type: 'checkbox',
-                name: 'nikitaCssExtends',
-                message: 'Which nikita.css extends do you want to use?',
-                choices: [
-                    "a11y",
-                    "cf",
-                    "ellipsis",
-                    "hide-text",
-                    "ib"
-                ],
-                default: that.config.get('nikitaCssExtends', [
-                    "a11y",
-                    "cf",
-                    "ellipsis",
-                    "hide-text",
-                    "ib"
-                ])
-            },
+            promptCheckbox('nikitaCssMixins',  'Which nikita.css mixins do you want to use?', [
+                "centering",
+                "fixed-ratiobox",
+                "font-smoothing",
+                "layering",
+                "px-to-rem",
+                "respond-to",
+                "triangle"
+            ]),
+            promptCheckbox('nikitaCssExtends',  'Which nikita.css extends do you want to use?', [
+                "a11y",
+                "cf",
+                "ellipsis",
+                "hide-text",
+                "ib"
+            ])
         ];
 
         this.prompt(prompts, function (props)
