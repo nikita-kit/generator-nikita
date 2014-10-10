@@ -54,7 +54,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
             promptConfirm('svgBackgrounds', 'Use svg-backgrounds?', true),
             promptCheckbox('features',  'Which features do you want to use?', [
                 "cssStyleGuide",
-                "jsDoc"
+                "jsDoc",
+                "photoBox",
+                "phantomas"
             ]),
             promptCheckbox('nikitaCssMixins',  'Which nikita.css mixins do you want to use?', [
                 "centering",
@@ -151,6 +153,16 @@ var NikitaGenerator = yeoman.generators.Base.extend({
             if (this.config.get('features').indexOf('jsDoc') == -1)
             {
                 delete packageJsonData['devDependencies']['grunt-jsdoc'];
+            }
+
+            if (this.config.get('features').indexOf('phantomas') == -1)
+            {
+                delete packageJsonData['devDependencies']['grunt-phantomas'];
+            }
+
+            if (this.config.get('features').indexOf('photoBox') == -1)
+            {
+                delete packageJsonData['devDependencies']['grunt-photobox'];
             }
 
             this.template('source/sass/extends/ui-components/_buttons.scss.ejs', 'source/sass/extends/ui-components/_buttons.scss');
