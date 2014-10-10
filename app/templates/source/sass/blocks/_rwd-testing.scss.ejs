@@ -1,0 +1,38 @@
+/**
+ * Responsive Webdesign Testing
+ * Different viewport sizes are simulated through iFrames.
+ *
+ * Markup:
+ * <div class="b-rwd-testing">
+ *     <div class="frame">
+ *         <iframe src="index.html" width="320" height="568" seamless="seamless" frameborder="0"></iframe>
+ *     </div>
+ * </div>
+ *
+ * Styleguide RWD Testing
+ */
+
+.b-rwd-testing {
+	text-align: center;
+	
+	h1 {
+		margin-bottom: 20px;
+		@include rem(font-size, 30px);
+		font-weight: 700;
+		@include rem(line-height, 32px);
+	}
+	
+	> .frame {
+		margin-bottom: 20px;
+		
+		h2 {
+			margin-bottom: 10px;
+		}
+		
+		iframe {
+			display: inline-block;
+			vertical-align: top;
+			border: 1px solid #000;
+		}
+	}
+}

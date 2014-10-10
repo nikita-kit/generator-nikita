@@ -1,0 +1,608 @@
+---
+title: Forms
+layout: lyt-default.hbs
+description: The nikita.kit form framework.
+---
+<form class="b-forms" action="#">
+	<header class="header">
+		<h2>Forms</h2>
+		<p>Please complete the fields below. All fields are required unless marked as <em>optional</em>.</p>
+	</header>
+	
+	<div class="main">
+		<fieldset class="section">
+			<legend>Section 1</legend>
+			
+			<p class="intro">Some optional section-intro-text …</p>
+			
+			<fieldset class="subsection">
+				<legend>Standard Form Components</legend>
+				
+				<p class="intro">Some optional subsection-intro-text …</p>
+				
+				<div class="row">
+					<div class="box size-100">
+						<div class="field radio" role="group" aria-labelledby="ref-radio-group-inline">
+							<strong id="ref-radio-group-inline" class="group-label">Radio group (inline)</strong>
+							
+							<div class="group-inline">
+								<label>
+									<input type="radio" name="radio-group-inline" value="option 1" required="required" />
+									<span class="label">option 1</span>
+								</label>
+								
+								<label>
+									<input type="radio" name="radio-group-inline" value="option 2" checked="checked" />
+									<span class="label">option 2</span>
+								</label>
+								
+								<label>
+									<input type="radio" name="radio-group-inline" value="option 3" />
+									<span class="label">option 3</span>
+								</label>
+							</div>
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="box size-100">
+						<div class="field radio" role="group" aria-labelledby="ref-radio-group-block">
+							<strong id="ref-radio-group-block" class="group-label">Radio group (block)</strong>
+							
+							<div class="group-block">
+								<label>
+									<input type="radio" name="radio-group-block" value="option 1" required="required" />
+									<span class="label">option 1</span>
+								</label>
+								
+								<label>
+									<input type="radio" name="radio-group-block" value="option 2" checked="checked" />
+									<span class="label">option 2</span>
+								</label>
+								
+								<label>
+									<input type="radio" name="radio-group-block" value="option 3" />
+									<span class="label">option 3</span>
+								</label>
+							</div>
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="box size-100">
+						<div class="field checkbox">
+							<label>
+								<input type="checkbox" name="checkbox" required="required" />
+								<span class="label">single checkbox</span>
+							</label>
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="box size-100">
+						<div class="field checkbox" role="group" aria-labelledby="ref-checkbox-group-inline">
+							<strong id="ref-checkbox-group-inline" class="group-label">Checkbox group (inline)</strong>
+							
+							<div class="group-inline">
+								<label>
+									<input type="checkbox" name="checkbox-group-inline-1" checked="checked" required="required" />
+									<span class="label">checkbox 1</span>
+								</label>
+								
+								<label>
+									<input type="checkbox" name="checkbox-group-inline-2" required="required" />
+									<span class="label">checkbox 2</span>
+								</label>
+								
+								<label>
+									<input type="checkbox" name="checkbox-group-inline-3" required="required" />
+									<span class="label">checkbox 3</span>
+								</label>
+							</div>
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="box size-100">
+						<div class="field checkbox" role="group" aria-labelledby="ref-checkbox-group-block">
+							<strong id="ref-checkbox-group-block" class="group-label">Checkbox group (block)</strong>
+							
+							<div class="group-block">
+								<label>
+									<input type="checkbox" name="checkbox-group-block-1" checked="checked" required="required" />
+									<span class="label">checkbox 1</span>
+								</label>
+								
+								<label>
+									<input type="checkbox" name="checkbox-group-block-2" required="required" />
+									<span class="label">checkbox 2</span>
+								</label>
+								
+								<label>
+									<input type="checkbox" name="checkbox-group-block-3" required="required" />
+									<span class="label">checkbox 3</span>
+								</label>
+							</div>
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="box size-100">
+						<div class="field text">
+							<label for="ref-text-input">text input</label>
+							
+							<input id="ref-text-input" type="text" name="text-input" placeholder="placeholder-text" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="box size-25">
+						<div class="field date">
+							<label for="ref-date-input">date input</label>
+							
+							<input id="ref-date-input" type="date" name="date-input" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+					
+					<div class="box size-25">
+						<div class="field month">
+							<label for="ref-month-input">month input</label>
+							
+							<input id="ref-month-input" type="month" name="month-input" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+					
+					<div class="box size-25">
+						<div class="field week">
+							<label for="ref-week-input">week input</label>
+							
+							<input id="ref-week-input" type="week" name="week-input" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+					
+					<div class="box size-25">
+						<div class="field time">
+							<label for="ref-time-input">time input</label>
+							
+							<input id="ref-time-input" type="time" name="time-input" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="box size-50">
+						<div class="field datetime">
+							<label for="ref-datetime-input">datetime input</label>
+							
+							<input id="ref-datetime-input" type="datetime" name="datetime-input" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+					
+					<div class="box size-50">
+						<div class="field datetime-local">
+							<label for="ref-datetime-local-input">datetime-local input</label>
+							
+							<input id="ref-datetime-local-input" type="datetime-local" name="datetime-local-input" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="box size-50">
+						<div class="field range">
+							<label for="ref-range-input">range input <em>(optional)</em></label>
+							
+							<input id="ref-range-input" type="range" name="range-input" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+					
+					<div class="box size-25">
+						<div class="field number">
+							<label for="ref-number-input">number input</label>
+							
+							<input id="ref-number-input" type="number" name="number-input" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+					
+					<div class="box size-25">
+						<div class="field tel">
+							<label for="ref-tel-input">tel input</label>
+							
+							<input id="ref-tel-input" type="tel" name="tel-input" placeholder="placeholder-text" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="box size-25">
+						<div class="field email">
+							<label for="ref-email-input">e-mail input</label>
+							
+							<input id="ref-email-input" type="email" name="email-input" placeholder="placeholder-text" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+					
+					<div class="box size-25">
+						<div class="field url">
+							<label for="ref-url-input">url input</label>
+							
+							<input id="ref-url-input" type="url" name="url-input" placeholder="placeholder-text" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+					
+					<div class="box size-50">
+						<div class="field search">
+							<label for="ref-search-input">search input <em>(optional)</em></label>
+							<input id="ref-search-input" type="search" name="search-input" placeholder="placeholder-text" value="" />
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="box size-50">
+						<div class="field password">
+							<label for="ref-password-input">password input</label>
+							
+							<input id="ref-password-input" type="password" name="password-input" placeholder="placeholder-text" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+					
+					<div class="box size-50">
+						<div class="field color">
+							<label for="ref-color-input">color input <em>(optional)</em></label>
+							
+							<input id="ref-color-input" type="color" name="color-input" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="box size-100">
+						<div class="field select">
+							<label for="ref-select">select</label>
+							
+							<select id="ref-select" name="select" required="required">
+								<option disabled="disabled" selected="selected" value="">Please choose:</option>
+								<option value="option 1">option 1</option>
+								<option value="option 2">option 2</option>
+								<option value="option 3">option 3</option>
+							</select>
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="box size-100">
+						<div class="field textarea">
+							<label for="ref-textarea">textarea <em>(optional)</em></label>
+							<textarea id="ref-textarea" maxlength="150" name="name-textarea"></textarea>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+			
+			<fieldset class="subsection">
+				<legend>Grouped Form Elements</legend>
+				
+				<div class="row" role="group" aria-labelledby="ref-form-group-1">
+					<strong id="ref-form-group-1" class="group-label">Form group with a single group row</strong>
+					
+					<div class="group">
+						<div class="group-row">
+							<div class="box size-50">
+								<div class="field text">
+									<label for="ref-medium-text-input">medium text input</label>
+									
+									<input id="ref-medium-text-input" type="text" name="medium-text-input" placeholder="placeholder-text" required="required" />
+									
+									<div class="error" hidden="hidden">
+										<small>Error message</small>
+									</div>
+								</div>
+							</div>
+							
+							<div class="box size-50">
+								<div class="field select">
+									<label for="ref-medium-select">medium select</label>
+									
+									<select id="ref-medium-select" name="medium-select" required="required">
+										<option disabled="disabled" selected="selected" value="">Please choose:</option>
+										<option value="option 1">option 1</option>
+										<option value="option 2">option 2</option>
+										<option value="option 3">option 3</option>
+									</select>
+									
+									<div class="error" hidden="hidden">
+										<small>Error message</small>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row" role="group" aria-labelledby="ref-form-group-2">
+					<strong id="ref-form-group-2" class="group-label">Form group with two group rows</strong>
+					
+					<div class="group">
+						<div class="group-row">
+							<div class="box size-25">
+								<div class="field text">
+									<label for="ref-small-text-input">small text input</label>
+									
+									<input id="ref-small-text-input" type="text" name="name-small-text-input" placeholder="placeholder-text" required="required" />
+									
+									<div class="error" hidden="hidden">
+										<small>Error message</small>
+									</div>
+								</div>
+							</div>
+							
+							<div class="box size-75">
+								<div class="field text">
+									<label for="ref-large-text-input">large text input</label>
+									
+									<input id="ref-large-text-input" type="text" name="name-large-text-input" placeholder="placeholder-text" required="required" />
+									
+									<div class="error" hidden="hidden">
+										<small>Error message</small>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="group-row">
+							<div class="box size-75">
+								<div class="field select">
+									<label for="ref-large-select">large select</label>
+									
+									<select id="ref-large-select" name="name-large-select" required="required">
+										<option disabled="disabled" selected="selected" value="">Please choose:</option>
+										<option value="option 1">option 1</option>
+										<option value="option 2">option 2</option>
+										<option value="option 3">option 3</option>
+									</select>
+									
+									<div class="error" hidden="hidden">
+										<small>Error message</small>
+									</div>
+								</div>
+							</div>
+							
+							<div class="box size-25">
+								<div class="field select">
+									<label for="ref-small-select">small select</label>
+									
+									<select id="ref-small-select" name="name-small-select" required="required">
+										<option disabled="disabled" selected="selected" value="">Please choose:</option>
+										<option value="option 1">option 1</option>
+										<option value="option 2">option 2</option>
+										<option value="option 3">option 3</option>
+									</select>
+									
+									<div class="error" hidden="hidden">
+										<small>Error message</small>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</fieldset>
+		
+		<fieldset class="section">
+			<legend>Section 2</legend>
+			
+			<p class="intro">Some optional section-intro-text …</p>
+			
+			<fieldset class="subsection">
+				<legend>Extra Form Components and Options</legend>
+				
+				<div class="row">
+					<div class="box size-100">
+						<div class="field text">
+							<label for="ref-input-with-note">Input with note</label>
+							
+							<input id="ref-input-with-note" type="text" name="name-input-with-note" placeholder="placeholder-text" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+					
+					<p class="note">An optional note where you can give extra information …</p>
+				</div>
+				
+				<div class="row">
+					<div class="box size-50">
+						<div class="field text">
+							<label for="ref-input-with-addon-before">Input with addon before</label>
+							
+							<span class="addon-before">$</span>
+							
+							<input id="ref-input-with-addon-before" type="text" name="input-with-addon-before" placeholder="placeholder-text" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+					
+					<div class="box size-50">
+						<div class="field text">
+							<label for="ref-input-with-addon-after">Input with addon after</label>
+							
+							<span class="addon-after">€</span>
+							
+							<input id="ref-input-with-addon-after" type="text" name="input-with-addon-after" placeholder="placeholder-text" required="required" />
+							
+							<div class="error" hidden="hidden">
+								<small>Error message</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row" role="group" aria-labelledby="ref-form-group-disabled">
+					<strong id="ref-form-group-disabled" class="group-label">Form group with disabled fields</strong>
+					
+					<div class="group">
+						<div class="group-row">
+							<div class="box size-100">
+								<div class="field radio" role="group" aria-labelledby="ref-salutation">
+									<strong id="ref-salutation" class="group-label">Salutation</strong>
+									
+									<div class="group-inline">
+										<label>
+											<input type="radio" name="radio-salutation" value="Mr." checked="checked" disabled="disabled" />
+											<span class="label">Mr.</span>
+										</label>
+										
+										<input type="hidden" name="radio-salutation" value="Mr." />
+										
+										<label>
+											<input type="radio" name="radio-salutation" value="Mrs." disabled="disabled" />
+											<span class="label">Mrs.</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="group-row">
+							<div class="box size-50">
+								<div class="field text">
+									<label for="ref-first-name">First name</label>
+									<input id="ref-first-name" type="text" name="first-name" value="Steve" disabled="disabled" />
+									<input type="hidden" name="first-name" value="Steve" />
+								</div>
+							</div>
+							
+							<div class="box size-50">
+								<div class="field text">
+									<label for="ref-last-name">Last name</label>
+									<input id="ref-last-name" type="text" name="last-name" value="Stevenson" disabled="disabled" />
+									<input type="hidden" name="last-name" value="Stevenson" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row" role="group" aria-labelledby="ref-form-group-readonly">
+					<strong id="ref-form-group-readonly" class="group-label">Form group with readonly fields</strong>
+					
+					<div class="group">
+						<div class="group-row">
+							<div class="box size-50">
+								<div class="field text">
+									<label for="ref-job">Job</label>
+									<input id="ref-job" type="text" name="job" value="Webdeveloper" readonly="readonly" />
+								</div>
+							</div>
+							
+							<div class="box size-50">
+								<div class="field text">
+									<label for="ref-job-level">Job-Level</label>
+									<input id="ref-job-level" type="text" name="job-level" value="Senior" readonly="readonly" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</fieldset>
+	</div>
+	
+	<footer class="footer">
+		<button class="btn" type="submit">Submit</button>
+	</footer>
+</form>

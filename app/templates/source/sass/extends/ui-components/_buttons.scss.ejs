@@ -1,0 +1,64 @@
+// Button-UI-Component
+
+/**
+ * Button-Element
+ */
+ 
+button::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+button {
+	@extend %btn;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	overflow: visible;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	text-transform: none;
+	background-color: transparent;
+}
+
+
+// Standard Button-Placeholder
+%btn {
+	display: inline-block;
+	position: relative;
+	font-family: $base-font;
+	text-align: center;
+	text-decoration: none;
+	@include font-smoothing(on);
+	cursor: pointer;
+	transition: all 0.4s ease-out;
+}
+
+%btn:focus,
+%btn:hover {
+	outline: none; // don't forget to define an alternative styling! 
+}
+
+%btn[disabled] {
+	cursor: not-allowed;
+}
+
+
+// Button – V.1
+%btn-1 {
+	border: 1px solid $line-color-06;
+	padding: 5px 20px;
+	@include rem(font-size, 16px);
+	@include rem(line-height, 22px);
+	text-transform: uppercase;
+	color: $text-color-01;
+	background-color: $bg-color-06;
+	
+	.no-touch &:focus,
+	.no-touch &:hover,
+	.no-touch &:active {
+		border: 1px solid $line-color-02;
+		color: $text-color-02;
+		background-color: $transparent;
+	}
+}
