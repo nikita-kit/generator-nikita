@@ -1,5 +1,6 @@
 # Development version
 
+* moved reports into extra folder
 * made photobox and phantomas configurable
 * moved photobox directory to root
 * moved phantoms directory to root

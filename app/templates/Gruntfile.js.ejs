@@ -473,24 +473,24 @@ module.exports = function(grunt) {
 					threshold: 80
 				}
 			}
-		},<% if (config.get('features').indexOf('phantomas') != -1) { %>
+		},<% if (config.get('features').indexOf('measurePerformance') != -1) { %>
 		
 		// Configuration for measuring frontend performance
 		phantomas: {
 			all : {
 				options : {
-					indexPath: 'phantomas/',
+					indexPath: 'reports/performance/',
 					numberOfRuns: 10,
 					url: 'http://0.0.0.0:9002/'
 				}
 			}
-		},<% } %><% if (config.get('features').indexOf('photoBox') != -1) { %>
+		},<% } %><% if (config.get('features').indexOf('takeScreenshots') != -1) { %>
 		
 		// Configuration for photobox
 		photobox: {
 			all: {
 				options: {
-					indexPath: 'photobox/',
+					indexPath: 'reports/screenshots/',
 					screenSizes: [ '320', '568', '768', '1024', '1280' ],
 					urls: [ 'http://0.0.0.0:9002/index.html' ]
 				}
@@ -928,7 +928,7 @@ module.exports = function(grunt) {
 		'pagespeed'
 	]);
 
-<% if (config.get('features').indexOf('phantomas') != -1) { %>
+<% if (config.get('features').indexOf('measurePerformance') != -1) { %>
 	// Phantomas task
 	grunt.registerTask('measure-performance', [
         'dev',
@@ -937,10 +937,10 @@ module.exports = function(grunt) {
 	]);
 <% } %>
 
-<% if (config.get('features').indexOf('photoBox') != -1) { %>
+<% if (config.get('features').indexOf('takeScreenshots') != -1) { %>
 	// Photobox task
 	grunt.registerTask('take-screenshots', [
-        'build',
+        'dev',
 		'connect:livereload',
 		'photobox'
 	]);

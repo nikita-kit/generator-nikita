@@ -55,8 +55,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
             promptCheckbox('features',  'Which features do you want to use?', [
                 "cssStyleGuide",
                 "jsDoc",
-                "photoBox",
-                "phantomas"
+                "takeScreenshots",
+                "measurePerformance"
             ]),
             promptCheckbox('nikitaCssMixins',  'Which nikita.css mixins do you want to use?', [
                 "centering",
@@ -155,12 +155,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
                 delete packageJsonData['devDependencies']['grunt-jsdoc'];
             }
 
-            if (this.config.get('features').indexOf('phantomas') == -1)
+            if (this.config.get('features').indexOf('measurePerformance') == -1)
             {
                 delete packageJsonData['devDependencies']['grunt-phantomas'];
             }
 
-            if (this.config.get('features').indexOf('photoBox') == -1)
+            if (this.config.get('features').indexOf('takeScreenshots') == -1)
             {
                 delete packageJsonData['devDependencies']['grunt-photobox'];
             }
