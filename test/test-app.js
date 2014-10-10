@@ -15,7 +15,8 @@ describe('nikita:app', function () {
         private: true,
         name: "testrun" + (new Date()).getTime(),
         nikitaCssMixins: [],
-        nikitaCssExtends: []
+        nikitaCssExtends: [],
+        features: []
       })
       .on('end', done);
   });
