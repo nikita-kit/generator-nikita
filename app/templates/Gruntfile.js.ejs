@@ -92,10 +92,10 @@ module.exports = function(grunt) {
 						src: ['dist']
 					}
 				]
-			},
+			},<% if (config.get('features').indexOf('jsDoc') != -1) { %>
 			docs: {
 				dist: ['jsdocs/**/*']
-			},
+			},<% } %>
 			tmp: {
 				files: [
 					{
@@ -207,7 +207,7 @@ module.exports = function(grunt) {
 				dest: 'dist/js/',
 				expand: true,
 				src: ['**/*']
-			},
+			}<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>,
 			styleguide: {
 				cwd: 'build/css/',
 				dest: 'styleguide/css/',
@@ -215,7 +215,7 @@ module.exports = function(grunt) {
 				filter: 'isFile',
 				flatten: true,
 				src: ['**/*.css']
-			}
+			}<% } %>
 		},
 		
 		// Configuration for minifying css-files
@@ -314,7 +314,7 @@ module.exports = function(grunt) {
 				'tagname-lowercase': true
 			},
 			all: {
-				src: ['*/*.html', '!jsdocs/**/*.html', '!styleguide/**/*.html']
+				src: ['*/*.html'<% if (config.get('features').indexOf('jsDoc') != -1) { %>, '!jsdocs/**/*.html'<% } %><% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>, '!styleguide/**/*.html'<% } %>]
 			}
 		},
 		
@@ -374,7 +374,7 @@ module.exports = function(grunt) {
 					}
 				]
 			}
-		},
+		},<% if (config.get('features').indexOf('jsDoc') != -1) { %>
 		
 		// Configuration for documenting js-files
 		jsdoc : {
@@ -384,7 +384,7 @@ module.exports = function(grunt) {
 				},
 				src: ['source/js/modules/**/*.js', 'source/js/README.md']
 			}
-		},
+		},<% } %>
 		
 		// Configuration for validating js-files
 		jshint: {
@@ -594,8 +594,8 @@ module.exports = function(grunt) {
 					}]
 				}
 			}
-		},
-		
+		},<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
+
 		// Configuration for the styleguide output
 		styleguide: {
 			options: {
@@ -614,8 +614,8 @@ module.exports = function(grunt) {
 					}
 				]
 			}
-		},
-		
+		},<% } %>
+
 		// Configuration for optimizing SVG-files
 		svgmin: {
 			options: {
@@ -876,8 +876,8 @@ module.exports = function(grunt) {
 	// Distributing task
 	grunt.registerTask('dist', [
 		'clean:dist',
-		'clean:tmp',
-		'clean:docs',
+		'clean:tmp',<% if (config.get('features').indexOf('jsDoc') != -1) { %>
+		'clean:docs',<% } %>
 		'svgmin:dist_bg',
 		'svgmin:dist_ico',
 		'svgstore:dist',
@@ -928,22 +928,24 @@ module.exports = function(grunt) {
 		'connect:livereload',
 		'phantomas'
 	]);
-	
+
 	// Photobox task
 	grunt.registerTask('take-screenshots', [
 		'connect:livereload',
 		'photobox'
 	]);
-	
+<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
 	// Styleguide task
 	grunt.registerTask('build-styleguide', [
 		'styleguide',
 		'copy:styleguide'
 	]);
-	
+<% } %>
+<% if (config.get('features').indexOf('jsDoc') != -1) { %>
 	// JSDoc task
 	grunt.registerTask('build-jsdoc', [
 		'jsdoc'
 	]);
-	
+<% } %>
+
 };

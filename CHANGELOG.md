@@ -1,5 +1,6 @@
 # Development version
 
+* made jsDoc and styleGuide configurable
 * register partials helper for assemble in gruntfile
 * appicons, touchicons and favicons are now located in source/img/appicons
 * performance optimization

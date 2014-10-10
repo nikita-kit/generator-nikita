@@ -52,6 +52,10 @@ var NikitaGenerator = yeoman.generators.Base.extend({
             },
             promptConfirm('private', 'Is this project private?', true),
             promptConfirm('svgBackgrounds', 'Use svg-backgrounds?', true),
+            promptCheckbox('features',  'Which features do you want to use?', [
+                "cssStyleGuide",
+                "jsDoc"
+            ]),
             promptCheckbox('nikitaCssMixins',  'Which nikita.css mixins do you want to use?', [
                 "centering",
                 "fixed-ratiobox",
@@ -94,10 +98,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
             packageJsonData['private'] = this.config.get('private');
 
-            this.dest.write('package.json', JSON.stringify(packageJsonData, null, 4));
-            this.dest.write('bower.json', JSON.stringify(bowerJsonData, null, 4));
-
-
             if (this.config.get('nikitaCssMixins').indexOf('respond-to') != -1)
             {
                 this.template('source/sass/variables/_breakpoints.scss.ejs', 'source/sass/variables/_breakpoints.scss');
@@ -137,7 +137,21 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
             this.template('source/sass/blocks/_forms.scss.ejs', 'source/sass/blocks/_forms.scss');
             this.template('source/sass/blocks/_rwd-testing.scss.ejs', 'source/sass/blocks/_rwd-testing.scss');
-            this.template('source/sass/blocks/styleguide.md.ejs', 'source/sass/blocks/styleguide.md');
+
+            if (this.config.get('features').indexOf('cssStyleGuide') == -1)
+            {
+                delete packageJsonData['devDependencies']['grunt-styleguide'];
+            }
+            else
+            {
+                this.template('source/sass/blocks/styleguide.md.ejs', 'source/sass/blocks/styleguide.md');
+                this.directory('source/styleguide-template', 'source/styleguide-template');
+            }
+
+            if (this.config.get('features').indexOf('jsDoc') == -1)
+            {
+                delete packageJsonData['devDependencies']['grunt-jsdoc'];
+            }
 
             this.template('source/sass/extends/ui-components/_buttons.scss.ejs', 'source/sass/extends/ui-components/_buttons.scss');
 
@@ -155,6 +169,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
             }
 
             this.directory('source/img/appicons', 'source/img/appicons');
+
+            this.dest.write('package.json', JSON.stringify(packageJsonData, null, 4));
+            this.dest.write('bower.json', JSON.stringify(bowerJsonData, null, 4));
         },
 
         projectfiles: function ()
