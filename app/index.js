@@ -117,14 +117,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
             this.template('source/sass/variables/_z-layers.scss.ejs', 'source/sass/variables/_z-layers.scss');
 
             this.dest.mkdir('source/img');
-            this.dest.mkdir('source/img/bgs'); // svg-background extend
             this.dest.mkdir('source/img/icons'); // svgstore
             this.dest.mkdir('source/fonts');
             this.dest.mkdir('source/sass/mixins');
 
             this.template('source/assemble/pages/index.hbs.ejs', 'source/assemble/pages/index.hbs');
             this.template('source/assemble/pages/rwd-testing.hbs.ejs', 'source/assemble/pages/rwd-testing.hbs');
-            this.template('source/assemble/pages/forms.hbs.ejs', 'source/assemble/pages/forms.hbs');
             this.template('source/assemble/layouts/lyt-default.hbs.ejs', 'source/assemble/layouts/lyt-default.hbs');
 
             this.dest.mkdir('source/assemble/layouts');
@@ -134,10 +132,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
             this.template('source/img/temp/README.md.ejs', 'source/img/temp/README.md');
             this.template('source/img/dev/README.md.ejs', 'source/img/dev/README.md');
             this.template('source/img/icons/README.md.ejs', 'source/img/icons/README.md');
-            this.template('source/img/bgs/README.md.ejs', 'source/img/bgs/README.md');
-            this.src.copy('source/img/bgs/form-select-arrow-down.svg', 'source/img/bgs/form-select-arrow-down.svg');
 
-            this.template('source/sass/blocks/_forms.scss.ejs', 'source/sass/blocks/_forms.scss');
             this.template('source/sass/blocks/_rwd-testing.scss.ejs', 'source/sass/blocks/_rwd-testing.scss');
 
             if (this.config.get('features').indexOf('cssStyleGuide') == -1)
@@ -177,7 +172,17 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
             if (this.config.get('svgBackgrounds'))
             {
+                this.template('source/img/bgs/README.md.ejs', 'source/img/bgs/README.md');
+                this.src.copy('source/img/bgs/form-select-arrow-down.svg', 'source/img/bgs/form-select-arrow-down.svg');
                 this.template('source/sass/mixins/_svg-background.scss.ejs', 'source/sass/mixins/_svg-background.scss');
+                this.template('source/sass/blocks/_forms.scss.ejs', 'source/sass/blocks/_forms.scss');
+                this.template('source/assemble/pages/forms.hbs.ejs', 'source/assemble/pages/forms.hbs');
+                this.dest.mkdir('source/img/bgs'); // svg-background extend
+            }
+            else
+            {
+                delete packageJsonData['devDependencies']['grunt-grunticon'];
+                delete packageJsonData['devDependencies']['grunt-string-replace'];
             }
 
             this.directory('source/img/appicons', 'source/img/appicons');

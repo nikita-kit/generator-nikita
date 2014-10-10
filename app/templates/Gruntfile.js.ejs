@@ -147,9 +147,9 @@ module.exports = function(grunt) {
 		
 		// Configuration for run tasks concurrently
 		concurrent: {
-			dev1: ['grunticon:dev', 'imagemin:dev'],
+			dev1: [<% if (config.get('svgBackgrounds')) { %>'grunticon:dev', <% } %>'imagemin:dev'],
 			dev2: ['compass:dev', 'assemble:dev', 'modernizr'],
-			dist1: ['grunticon:dist', 'imagemin:dist'],
+			dist1: [<% if (config.get('svgBackgrounds')) { %>'grunticon:dist', <% } %>'imagemin:dist'],
 			dist2: ['compass:dist', 'assemble:dist', 'modernizr']
 		},
 		
@@ -251,8 +251,8 @@ module.exports = function(grunt) {
 					'dist/css/styles.css': ['dist/css/styles.css']
 				}
 			}
-		},
-		
+		},<% if (config.get('svgBackgrounds')) { %>
+
 		// Configuration for managing SVG-icons
 		grunticon: {
 			options: {
@@ -292,7 +292,7 @@ module.exports = function(grunt) {
 					}
 				]
 			}
-		},
+		},<% } %>
 		
 		// Configuration for validating html-files
 		htmlhint: {
@@ -557,7 +557,7 @@ module.exports = function(grunt) {
 				config: '.scss-lint.yml',
 				force: true
 			}
-		},
+		},<% if (config.get('svgBackgrounds')) { %>
 		
 		// Configuration for string-replacing the grunticon output
 		'string-replace': {
@@ -594,7 +594,7 @@ module.exports = function(grunt) {
 					}]
 				}
 			}
-		},<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
+		},<% } %><% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
 
 		// Configuration for the styleguide output
 		styleguide: {
@@ -652,7 +652,7 @@ module.exports = function(grunt) {
 					{ sortAttrs: true },
 					{ transformsWithOnePath: false } // Enabling this breaks Illustrator SVGs with complex text
 				]
-			},
+			},<% if (config.get('svgBackgrounds')) { %>
 			dev_bg: {
 				files: [
 					{
@@ -663,7 +663,7 @@ module.exports = function(grunt) {
 						src: ['*.svg']
 					}
 				]
-			},
+			},<% } %>
 			dev_ico: {
 				files: [
 					{
@@ -674,7 +674,7 @@ module.exports = function(grunt) {
 						src: ['*.svg']
 					}
 				]
-			},
+			},<% if (config.get('svgBackgrounds')) { %>
 			dist_bg: {
 				files: [
 					{
@@ -685,7 +685,7 @@ module.exports = function(grunt) {
 						src: ['*.svg']
 					}
 				]
-			},
+			},<% } %>
 			dist_ico: {
 				files: [
 					{
@@ -811,11 +811,11 @@ module.exports = function(grunt) {
 			images: {
 				files: ['source/img/*', 'source/img/**/*.{jpg,png,gif}', '!source/img/dev/*'],
 				tasks: ['newer:imagemin:dev']
-			},
+			},<% if (config.get('svgBackgrounds')) { %>
 			svg_bgs: {
 				files: ['source/img/bgs/*.svg'],
 				tasks: ['newer:svgmin:dev_bg', 'grunticon:dev', 'string-replace']
-			},
+			},<% } %>
 			svg_icons: {
 				files: ['source/img/icons/*.svg'],
 				tasks: ['newer:svgmin:dev_ico', 'svgstore:dev', 'newer:assemble:dev']
@@ -856,12 +856,12 @@ module.exports = function(grunt) {
     // Development task
     grunt.registerTask('dev', [
         'clean:dev',
-        'clean:tmp',
-        'svgmin:dev_bg',
+        'clean:tmp',<% if (config.get('svgBackgrounds')) { %>
+        'svgmin:dev_bg',<% } %>
         'svgmin:dev_ico',
         'svgstore:dev',
-        'concurrent:dev1',
-        'string-replace',
+        'concurrent:dev1',<% if (config.get('svgBackgrounds')) { %>
+        'string-replace',<% } %>
         'concurrent:dev2',
         'autoprefixer:dev',
         'csssplit:dev',
@@ -882,12 +882,12 @@ module.exports = function(grunt) {
 	grunt.registerTask('dist', [
 		'clean:dist',
 		'clean:tmp',<% if (config.get('features').indexOf('jsDoc') != -1) { %>
-		'clean:docs',<% } %>
-		'svgmin:dist_bg',
+		'clean:docs',<% } %><% if (config.get('svgBackgrounds')) { %>
+		'svgmin:dist_bg',<% } %>
 		'svgmin:dist_ico',
 		'svgstore:dist',
-		'concurrent:dist1',
-		'string-replace',
+		'concurrent:dist1',<% if (config.get('svgBackgrounds')) { %>
+		'string-replace',<% } %>
 		'concurrent:dist2',
 		'autoprefixer:dist',
 		'csssplit:dist',

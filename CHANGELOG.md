@@ -1,5 +1,6 @@
 # Development version
 
+* do not add grunticon dependency if svgBackgrounds are disabled
 * moved reports into extra folder
 * made photobox and phantomas configurable
 * moved photobox directory to root
