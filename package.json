@@ -1,0 +1,35 @@
+{
+  "name": "generator-nikita",
+  "description": "The official yeoman generator for nikita.kit",
+  "license": "CC0",
+  "main": "app/index.js",
+  "repository": "nikita-kit/generator-nikita",
+  "author": {
+    "name": "",
+    "email": "",
+    "url": "https://github.com/nikita-kit"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^0.17.0",
+    "chalk": "^0.5.0",
+    "yosay": "^0.3.0"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0"
+  }
+}
