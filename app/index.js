@@ -87,6 +87,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					that.config.set(key, props[key]);
 				}
 			}
+
+			if (!that.config.get('svgBackgrounds') && that.config.get('formFramework'))
+			{
+				console.info('You need svgBackgrounds to enable formFramework. Activiating svgBackgrounds.');
+				that.config.set('svgBackgrounds', true);
+			}
+
 			done();
 		});
 	},
