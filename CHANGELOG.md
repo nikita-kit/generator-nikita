@@ -1,5 +1,7 @@
 # Development version
 
+* made Browser Reset and Webfonts SASS-partial configurable
+* do not add `_z-layers.scss` if layering-mixin isn't included
 * made CSS Split configurable
 * added clickable links after webserver is started
 * fixed port for livereload
