@@ -1,12 +1,14 @@
 # Development version
 
+* structured index.js
+* made form-framework configurable
+* made respond-to-mixin configurable
+* made svgBackgrounds configurable
 * do not add grunticon dependency if svgBackgrounds are disabled
-* moved reports into extra folder
-* made photobox and phantomas configurable
-* moved photobox directory to root
-* moved phantoms directory to root
-* added photobox and phantomas to gitignore
-* made jsDoc and styleGuide configurable
+* moved photobox and phantomas directory to reports-folder
+* added reports-folder
+* made photobox, phantomas and pagespeed configurable
+* made jsDoc and cssStyleGuide configurable
 * register partials helper for assemble in gruntfile
 * appicons, touchicons and favicons are now located in source/img/appicons
 * performance optimization
