@@ -153,9 +153,10 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.dest.mkdir('source/assemble/helpers');
 			
 			// Image README Files
-			this.template('source/img/temp/README.md.ejs', 'source/img/temp/README.md');
+			this.template('source/img/bgs/README.md.ejs', 'source/img/bgs/README.md');
 			this.template('source/img/dev/README.md.ejs', 'source/img/dev/README.md');
 			this.template('source/img/icons/README.md.ejs', 'source/img/icons/README.md');
+			this.template('source/img/temp/README.md.ejs', 'source/img/temp/README.md');
 			
 			// Optional Browser Reset SASS-Partial
 			if (this.config.get('browserReset'))
@@ -166,7 +167,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Optional Webfonts SASS-Partial
 			if (this.config.get('webfonts'))
 			{
-				this.template('source/sass/_webfonts.scss.ejs', 'source/sass/_webftons.scss');
+				this.template('source/sass/_webfonts.scss.ejs', 'source/sass/_webfonts.scss');
 			}
 			
 			// Optional Layering-Mixin
@@ -184,7 +185,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Optional SVG Backgrounds
 			if (this.config.get('svgBackgrounds'))
 			{
-				this.template('source/img/bgs/README.md.ejs', 'source/img/bgs/README.md');
+				this.template('source/sass/grunticon/.gitignore.ejs', 'source/sass/grunticon/.gitignore');
+				this.template('source/sass/svg-bg-extends/.gitignore.ejs', 'source/sass/svg-bg-extends/.gitignore');
 				this.template('source/sass/mixins/_svg-background.scss.ejs', 'source/sass/mixins/_svg-background.scss');
 			}
 			else

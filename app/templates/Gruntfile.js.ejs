@@ -578,34 +578,34 @@ module.exports = function(grunt) {
 		'string-replace': {
 			'grunticon-datasvg': {
 				files: {
-					'source/sass/icons/_icons-data-svg.scss': 'source/sass/grunticon/_icons-data-svg.scss'
+					'source/sass/svg-bg-extends/_bg-data-svg.scss': 'source/sass/grunticon/_icons-data-svg.scss'
 				},
 				options: {
 					replacements: [{
 						pattern: /%icon-/g,
-						replacement: '%icon-data-svg-'
+						replacement: '%bg-data-svg-'
 					}]
 				}
 			},
 			'grunticon-datapng': {
 				files: {
-					'source/sass/icons/_icons-data-png.scss': 'source/sass/grunticon/_icons-data-png.scss'
+					'source/sass/svg-bg-extends/_bg-data-png.scss': 'source/sass/grunticon/_icons-data-png.scss'
 				},
 				options: {
 					replacements: [{
 						pattern: /%icon-/g,
-						replacement: '%icon-data-png-'
+						replacement: '%bg-data-png-'
 					}]
 				}
 			},
 			'grunticon-fallback': {
 				files: {
-					'source/sass/icons/_icons-fallback.scss': 'source/sass/grunticon/_icons-fallback.scss'
+					'source/sass/svg-bg-extends/_bg-fallback.scss': 'source/sass/grunticon/_icons-fallback.scss'
 				},
 				options: {
 					replacements: [{
 						pattern: /%icon-/g,
-						replacement: '%icon-fallback-'
+						replacement: '%bg-fallback-'
 					}]
 				}
 			}

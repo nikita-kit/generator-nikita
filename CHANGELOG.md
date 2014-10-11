@@ -1,5 +1,8 @@
 # Development version
 
+* adjusted output in string-replace-task and syntax in svg-background-mixin for a better matching
+* added `.gitignore` files to folders sass/svg-bg-extends and sass/grunticon to ignore generated scss-files
+* renamed sass/icons to sass/svg-bg-extends
 * made Browser Reset and Webfonts SASS-partial configurable
 * do not add `_z-layers.scss` if layering-mixin isn't included
 * made CSS Split configurable

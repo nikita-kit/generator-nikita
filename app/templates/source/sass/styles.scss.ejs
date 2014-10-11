@@ -1,18 +1,27 @@
 /**
+ * ---------------------------------------------------------------------------------------------------- #
+ *
  * Main Stylesheet
  *
- * Screen Layout
  */
 
 // Compass
 @import "compass";
 
-// Webfonts
+<% if (config.get('webfonts'))
+{
+%>// Webfonts
 @import "webfonts";
-
-// Browser-Reset
+<%
+}
+%>
+<% if (config.get('browserReset'))
+{
+%>// Browser-Reset
 @import "reset";
-
+<%
+}
+%>
 // Variables
 @import "variables/**/*";
 
@@ -20,12 +29,12 @@
 {
 %>// nikita.css Mixins
 <%
-    var nikitaCssMixins = config.get('nikitaCssMixins');
-    for (var i = 0; i < nikitaCssMixins.length; i++)
-    {
+	var nikitaCssMixins = config.get('nikitaCssMixins');
+	for (var i = 0; i < nikitaCssMixins.length; i++)
+	{
 %>@import "../../bower_components/nikita.css/mixins/_<%= nikitaCssMixins[i] %>.scss";
 <%
-    }
+	}
 }
 %>
 // Mixins
@@ -35,23 +44,26 @@
 {
 %>// nikita.css Extends
 <%
-    var nikitaCssExtends = config.get('nikitaCssExtends');
-        for (var i = 0; i < nikitaCssExtends.length; i++)
-{
+	var nikitaCssExtends = config.get('nikitaCssExtends');
+	for (var i = 0; i < nikitaCssExtends.length; i++)
+	{
 %>@import "../../bower_components/nikita.css/extends/_<%= nikitaCssExtends[i] %>.scss";
 <%
-}
+	}
 }
 %>
-
 // Extends
 @import "extends/**/*";
 
+<% if (config.get('svgBackgrounds'))
+{
+%>// SVG Background Extends
+@import "svg-bg-extends/**/*";
+<%
+}
+%>
 // Basic Formatting
 @import "basics";
-
-// Icons
-@import "icons/**/*";
 
 // All Components
 @import "blocks/**/*";
