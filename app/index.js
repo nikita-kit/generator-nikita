@@ -51,9 +51,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				default: that.config.get('name', this.appname)
 			},
 			promptConfirm('private', 'Is this project private?', true),
-			promptConfirm('svgBackgrounds', 'Use svg-backgrounds?', true),
-			promptConfirm('formFramework', 'Use a form framework?', true),
-			promptCheckbox('features',  'Which features do you want to use?', [
+			promptConfirm('svgBackgrounds', 'Do you want to use background SVG files as base64 encoded dataURIs with placeholder extends?', true),
+			promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true),
+			promptCheckbox('features',  'Which other features do you want to use?', [
 				"cssSplit",
 				"cssStyleGuide",
 				"jsDoc",
@@ -91,7 +91,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 			if (!that.config.get('svgBackgrounds') && that.config.get('formFramework'))
 			{
-				console.info('You need svgBackgrounds to enable formFramework. Activiating svgBackgrounds.');
+				console.info('You need svgBackgrounds to enable formFramework. Activating svgBackgrounds.');
 				that.config.set('svgBackgrounds', true);
 			}
 
@@ -150,7 +150,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/assemble/layouts/lyt-default.hbs.ejs', 'source/assemble/layouts/lyt-default.hbs');
 
 			// Assemble Folders
-			this.dest.mkdir('source/assemble/layouts');
 			this.dest.mkdir('source/assemble/data');
 			this.dest.mkdir('source/assemble/helpers');
 
