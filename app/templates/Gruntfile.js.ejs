@@ -6,15 +6,15 @@ module.exports = function(grunt) {
 	});
 	require('time-grunt')(grunt);
 
-    if (!grunt.option('port'))
-    {
-        grunt.option('port', 9002);
-    }
+	if (!grunt.option('port'))
+	{
+		grunt.option('port', 9002);
+	}
 
-    if (!grunt.option('livereload-port'))
-    {
-        grunt.option('livereload-port', grunt.option('port') + 1);
-    }
+	if (!grunt.option('livereload-port'))
+	{
+		grunt.option('livereload-port', grunt.option('port') + 1);
+	}
 	
 	// All configuration goes here 
 	grunt.initConfig({
@@ -241,7 +241,7 @@ module.exports = function(grunt) {
 				expand: true,
 				src: ['*.css']
 			}
-		},
+		},<% if (config.get('features').indexOf('cssSplit') != -1) { %>
 		
 		// Configuration for splitting css-files (e.g. IE9)
 		csssplit: {
@@ -257,7 +257,7 @@ module.exports = function(grunt) {
 				dest: 'dist/css',
 				src: 'dist/css/styles.css'
 			}
-		},
+		},<% } %>
 		
 		// Configuration for grouping media queries
 		group_css_media_queries: {
@@ -817,7 +817,7 @@ module.exports = function(grunt) {
 			},
 			scss: {
 				files: ['source/sass/**/*.scss'],
-				tasks: ['compass:dev', 'autoprefixer:dev', 'csssplit:dev'],
+				tasks: ['compass:dev', 'autoprefixer:dev'<% if (config.get('features').indexOf('cssSplit') != -1) { %>, 'csssplit:dev'<% } %>],
 				options: {
 					debounceDelay: 0,
 					livereload: false
@@ -878,8 +878,8 @@ module.exports = function(grunt) {
 		'concurrent:dev1',<% if (config.get('svgBackgrounds')) { %>
 		'string-replace',<% } %>
 		'concurrent:dev2',
-		'autoprefixer:dev',
-		'csssplit:dev',
+		'autoprefixer:dev',<% if (config.get('features').indexOf('cssSplit') != -1) { %>
+		'csssplit:dev',<% } %>
 		'symlink:dev',
 		'sync',
 		'includes:dev',
@@ -904,8 +904,8 @@ module.exports = function(grunt) {
 		'concurrent:dist1',<% if (config.get('svgBackgrounds')) { %>
 		'string-replace',<% } %>
 		'concurrent:dist2',
-		'autoprefixer:dist',
-		'csssplit:dist',
+		'autoprefixer:dist',<% if (config.get('features').indexOf('cssSplit') != -1) { %>
+		'csssplit:dist',<% } %>
 		'group_css_media_queries',
 		'cssmin',
 		'copy:ajax',

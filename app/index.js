@@ -54,6 +54,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			promptConfirm('svgBackgrounds', 'Use svg-backgrounds?', true),
 			promptConfirm('formFramework', 'Use a form framework?', true),
 			promptCheckbox('features',  'Which features do you want to use?', [
+				"cssSplit",
 				"cssStyleGuide",
 				"jsDoc",
 				"measurePagespeed",
@@ -182,6 +183,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('source/assemble/pages/forms.hbs.ejs', 'source/assemble/pages/forms.hbs');
 				this.template('source/sass/blocks/_forms.scss.ejs', 'source/sass/blocks/_forms.scss');
 				this.src.copy('source/img/bgs/form-select-arrow-down.svg', 'source/img/bgs/form-select-arrow-down.svg');
+			}
+
+			// Optional CSS Splitting for IE9 and lower
+			if (this.config.get('features').indexOf('cssSplit') == -1)
+			{
+				delete packageJsonData['devDependencies']['grunt-csssplit'];
 			}
 
 			// Optional CSS Styleguide

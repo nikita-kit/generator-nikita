@@ -1,5 +1,6 @@
 # Development version
 
+* made CSS Split configurable
 * added clickable links after webserver is started
 * fixed port for livereload
 * automatically enabling `svgBackgrounds` feature if the `formFramework` is enabled
