@@ -5,6 +5,16 @@ module.exports = function(grunt) {
 		scsslint: 'grunt-scss-lint'
 	});
 	require('time-grunt')(grunt);
+
+    if (!grunt.option('port'))
+    {
+        grunt.option('port', 9002);
+    }
+
+    if (!grunt.option('livereload-port'))
+    {
+        grunt.option('livereload-port', grunt.option('port') + 1);
+    }
 	
 	// All configuration goes here 
 	grunt.initConfig({
@@ -159,11 +169,11 @@ module.exports = function(grunt) {
 				options: {
 					base: 'build',
 					hostname: '0.0.0.0',
-					port: 9002,
+					port: grunt.option('port'),
 					middleware: function(connect, options) {
 						return [
 							require('connect-livereload')({
-								port: 35730
+								port: grunt.option('livereload-port')
 							}),
 							connect.static(options.base),
 							connect.directory(options.base)
@@ -481,7 +491,7 @@ module.exports = function(grunt) {
 				options : {
 					indexPath: 'reports/performance/',
 					numberOfRuns: 10,
-					url: 'http://0.0.0.0:9002/'
+					url: 'http://0.0.0.0:' + grunt.option('port') + '/'
 				}
 			}
 		},<% } %><% if (config.get('features').indexOf('takeScreenshots') != -1) { %>
@@ -492,7 +502,7 @@ module.exports = function(grunt) {
 				options: {
 					indexPath: 'reports/screenshots/',
 					screenSizes: [ '320', '568', '768', '1024', '1280' ],
-					urls: [ 'http://0.0.0.0:9002/index.html' ]
+					urls: [ 'http://0.0.0.0:' + grunt.option('port') + '/index.html' ]
 				}
 			}
 		},<% } %>

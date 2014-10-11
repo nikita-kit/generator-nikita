@@ -1,5 +1,7 @@
 # Development version
 
+* added `--port` parameter to override default port 9002
+* added `--livereload-port` parameter to override the default port assignment to `--port + 1`
 * do not add grunticon dependency if svgBackgrounds are disabled
 * moved reports into extra folder
 * made photobox and phantomas configurable

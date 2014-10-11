@@ -63,9 +63,12 @@ Either use `./setup-dev-env.sh`. This will start a shell script to check require
 Or use `npm install` and `bower install` if your are on Windows (you have to check the requirements manually). This will install Grunt and [Grunt plugins](#grunt-plugins-used) required for the build script.
 
 1. `grunt` or `grunt build` – start build script
-2. [http://localhost:9002/](http://localhost:9002/) or [http://0.0.0.0:9002/](http://0.0.0.0:9002/) – watch your build-directory in the browser (livereload is running on port 9002)
+2. [http://localhost:9002/](http://localhost:9002/) or [http://0.0.0.0:9002/](http://0.0.0.0:9002/) – watch your build-directory in the browser (livereload is connected on port 9003)
 3. `grunt dist` – start distribution build script
 
+If you want to specify a different port, you can start the script with the `--port` option:
+
+1. `grunt --port=9010` will launch the webserver on [http://0.0.0.0:9010/](http://0.0.0.0:9010/)
 
 ## Grunt-Devtools
 
