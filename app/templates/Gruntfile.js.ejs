@@ -262,7 +262,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},<% if (config.get('svgBackgrounds')) { %>
-
+		
 		// Configuration for managing SVG-icons
 		grunticon: {
 			options: {
@@ -459,7 +459,7 @@ module.exports = function(grunt) {
 				outputFile: 'source/js/vendor/_modernizr.js',
 				uglify: false
 			}
-		},
+		},<% if (config.get('features').indexOf('measurePagespeed') != -1) { %>
 		
 		// Configuration for pagespeed
 		pagespeed: {
@@ -483,7 +483,7 @@ module.exports = function(grunt) {
 					threshold: 80
 				}
 			}
-		},<% if (config.get('features').indexOf('measurePerformance') != -1) { %>
+		},<% } %><% if (config.get('features').indexOf('measurePerformance') != -1) { %>
 		
 		// Configuration for measuring frontend performance
 		phantomas: {
@@ -605,7 +605,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},<% } %><% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
-
+		
 		// Configuration for the styleguide output
 		styleguide: {
 			options: {
@@ -625,7 +625,7 @@ module.exports = function(grunt) {
 				]
 			}
 		},<% } %>
-
+		
 		// Configuration for optimizing SVG-files
 		svgmin: {
 			options: {
@@ -862,24 +862,24 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [
 		'build'
 	]);
-
-    // Development task
-    grunt.registerTask('dev', [
-        'clean:dev',
-        'clean:tmp',<% if (config.get('svgBackgrounds')) { %>
-        'svgmin:dev_bg',<% } %>
-        'svgmin:dev_ico',
-        'svgstore:dev',
-        'concurrent:dev1',<% if (config.get('svgBackgrounds')) { %>
-        'string-replace',<% } %>
-        'concurrent:dev2',
-        'autoprefixer:dev',
-        'csssplit:dev',
-        'symlink:dev',
-        'sync',
-        'includes:dev',
-        'prettify:dev'
-    ]);
+	
+	// Development task
+	grunt.registerTask('dev', [
+		'clean:dev',
+		'clean:tmp',<% if (config.get('svgBackgrounds')) { %>
+		'svgmin:dev_bg',<% } %>
+		'svgmin:dev_ico',
+		'svgstore:dev',
+		'concurrent:dev1',<% if (config.get('svgBackgrounds')) { %>
+		'string-replace',<% } %>
+		'concurrent:dev2',
+		'autoprefixer:dev',
+		'csssplit:dev',
+		'symlink:dev',
+		'sync',
+		'includes:dev',
+		'prettify:dev'
+	]);
 	
 	// Build task
 	grunt.registerTask('build', [
@@ -933,28 +933,31 @@ module.exports = function(grunt) {
 		'accessibility'
 	]);
 	
+<% if (config.get('features').indexOf('measurePagespeed') != -1) { %>
 	// Pagespeed task
 	grunt.registerTask('measure-pagespeed', [
 		'pagespeed'
 	]);
-
+<% } %>
+	
 <% if (config.get('features').indexOf('measurePerformance') != -1) { %>
 	// Phantomas task
 	grunt.registerTask('measure-performance', [
-        'dev',
+		'dev',
 		'connect:livereload',
 		'phantomas'
 	]);
 <% } %>
-
+	
 <% if (config.get('features').indexOf('takeScreenshots') != -1) { %>
 	// Photobox task
 	grunt.registerTask('take-screenshots', [
-        'dev',
+		'dev',
 		'connect:livereload',
 		'photobox'
 	]);
 <% } %>
+	
 <% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
 	// Styleguide task
 	grunt.registerTask('build-styleguide', [
@@ -962,6 +965,7 @@ module.exports = function(grunt) {
 		'copy:styleguide'
 	]);
 <% } %>
+	
 <% if (config.get('features').indexOf('jsDoc') != -1) { %>
 	// JSDoc task
 	grunt.registerTask('build-jsdoc', [
