@@ -807,7 +807,7 @@ module.exports = function(grunt) {
 		// Configuration for watching changes
 		watch: {
 			options: {
-				livereload: 35730,
+				livereload: grunt.option('livereload-port'),
 				spawn: true
 			},
 			scss: {

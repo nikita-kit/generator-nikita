@@ -1,5 +1,6 @@
 # Development version
 
+* fixed port for livereload
 * automatically enabling `svgBackgrounds` feature if the `formFramework` is enabled
 * added `--port` parameter to override default port 9002
 * added `--livereload-port` parameter to override the default port assignment to `--port + 1`
