@@ -1,5 +1,6 @@
 # Development version
 
+* added clickable links after webserver is started
 * fixed port for livereload
 * automatically enabling `svgBackgrounds` feature if the `formFramework` is enabled
 * added `--port` parameter to override default port 9002

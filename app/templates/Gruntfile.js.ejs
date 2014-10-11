@@ -171,6 +171,11 @@ module.exports = function(grunt) {
 					hostname: '0.0.0.0',
 					port: grunt.option('port'),
 					middleware: function(connect, options) {
+						grunt.log.writeln('');
+						grunt.log.writeln('Launching webserver now:');
+						grunt.log.writeln(' - index at http://0.0.0.0:' + grunt.option('port') + '/');
+						grunt.log.writeln(' - rwd-testing at http://0.0.0.0:' + grunt.option('port') + '/rwd-testing.html');
+						grunt.log.writeln('');
 						return [
 							require('connect-livereload')({
 								port: grunt.option('livereload-port')
