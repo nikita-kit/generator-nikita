@@ -51,34 +51,79 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				default: that.config.get('name', this.appname)
 			},
 			promptConfirm('private', 'Is this project private?', true),
-			promptConfirm('browserReset', 'Do you want to use Browser Reset Styles?', true),
-			promptConfirm('webfonts', 'Do you want to use self hosted webfonts?', true),
-			promptConfirm('svgBackgrounds', 'Do you want to use background SVG files as base64 encoded dataURIs with placeholder extends?', true),
-			promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true),
-			promptCheckbox('features',  'Which other features do you want to use?', [
-				"cssSplit",
-				"cssStyleGuide",
-				"jsDoc",
-				"measurePagespeed",
-				"measurePerformance",
-				"takeScreenshots"
+			promptCheckbox('features',  'Which features do you want to use?', [
+				{
+					name: 'Self hosted webfonts, a fonts-folder will be added to your project',
+					value: 'webfonts'
+				}, {
+					name: 'Browser Reset Styles, a _reset.scss will be added to your project',
+					value: 'browserReset'
+				}, {
+					name: 'Use background SVG files as base64 encoded dataURIs with placeholder extends (grunt-grunticon + grunt-string-replace + svg-background-mixin)',
+					value: 'svgBackgrounds'
+				}, {
+					name: 'Split your main CSS-file into several small ones to support IE9 and lower (grunt-csssplit)',
+					value: 'cssSplit'
+				}, {
+					name: 'Create a CSS Styleguide (grunt-styleguide)',
+					value: 'cssStyleGuide'
+				}, {
+					name: 'Create a JS Documentation (grunt-jsdoc)',
+					value: 'jsDoc'
+				}, {
+					name: 'Measure Pagespeed (grunt-pagespeed)',
+					value: 'measurePagespeed'
+				}, {
+					name: 'Measure Frontend-Performance (grunt-phantomas)',
+					value: 'measurePerformance'
+				}, {
+					name: 'Take screenshots to diff your changes (grunt-photobox)',
+					value: 'takeScreenshots'
+				}
 			]),
 			promptCheckbox('nikitaCssMixins',  'Which nikita.css mixins do you want to use?', [
-				"centering",
-				"fixed-ratiobox",
-				"font-smoothing",
-				"layering",
-				"px-to-rem",
-				"respond-to",
-				"triangle"
+				{
+					name: 'Centering: Horizontally and/or vertically centering elements with the translate-method (IE9+)',
+					value: 'centering'
+				}, {
+					name: 'Fixed-Ratiobox: Use intrinsic ratio to force child elements like images, videos or frames to fluidly scale at a given ratio',
+					value: 'fixed-ratiobox'
+				}, {
+					name: 'Font-Smoothing: Turn font-smoothing on/off for a better font-rendering on OS X',
+					value: 'font-smoothing'
+				}, {
+					name: 'Layering: A function for managing z-index layers within a Sass map',
+					value: 'layering'
+				}, {
+					name: 'PX-to-REM: Convert pixel values to rem values',
+					value: 'px-to-rem'
+				}, {
+					name: 'Respond-To: Easy managing your media queries',
+					value: 'respond-to'
+				}, {
+					name: 'Triangle: Easy generating arrow-like triangles with the border-method',
+					value: 'triangle'
+				}
 			]),
 			promptCheckbox('nikitaCssExtends',  'Which nikita.css extends do you want to use?', [
-				"a11y",
-				"cf",
-				"ellipsis",
-				"hide-text",
-				"ib"
-			])
+				{
+					name: 'a11y: Hide elements in sake of accessibility',
+					value: 'a11y'
+				}, {
+					name: 'cf: Micro clearfix',
+					value: 'cf'
+				}, {
+					name: 'ellipsis: Ellipsis to point out text',
+					value: 'ellipsis'
+				}, {
+					name: 'hide-text: Hide text on elements in sake of accessibility',
+					value: 'hide-text'
+				}, {
+					name: 'ib: Use the inline-block method as an alternative to float elements',
+					value: 'ib'
+				}
+			]),
+			promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true)
 		];
 		
 		this.prompt(prompts, function (props)
