@@ -4,4 +4,11 @@ node_js:
 before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'generator-nikita' ]; then cd .. && eval "mv $currentfolder generator-nikita" && cd generator-nikita; fi
-
+deploy:
+  provider: npm
+  email: JanS@DracoBlue.de
+  api_key:
+    secure: fKf8t75RLkTDhAT0lxelHzoF8Vov9lH52RshQ4StIWnEBVOwfcHSmg58Xr2Ehk1O+5lrKtDgqC4ck68AXsbGGvR4r4Ft/vRd0ZyC7gi3YBWWNtNyGIPJAVsxorRqOP6Wc4ooaeIs4Ra6/DP7KmzgBpXkndDzR75sFe7Wp0yZnqg=
+  on:
+    tags: true
+    repo: nikita-kit/generator-nikita
