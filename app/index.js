@@ -173,7 +173,10 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.dest.mkdir('source/fonts');
 			this.dest.mkdir('source/sass/mixins');
 			this.directory('source/img/appicons', 'source/img/appicons');
-			
+
+			// JS Files
+			this.directory('source/js', 'source/js');
+
 			// SASS Basic Files
 			this.template('source/sass/styles.scss.ejs', 'source/sass/styles.scss');
 			this.template('source/sass/universal.scss.ejs', 'source/sass/universal.scss');

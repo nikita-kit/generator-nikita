@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
-	
+
 	// Require it at the top and pass in the grunt instance
 	require('jit-grunt')(grunt, {
 		scsslint: 'grunt-scss-lint'
@@ -15,11 +15,11 @@ module.exports = function(grunt) {
 	{
 		grunt.option('livereload-port', grunt.option('port') + 1);
 	}
-	
-	// All configuration goes here 
+
+	// All configuration goes here
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		
+
 		// Accessibility Configuration
 		accessibility: {
 			options : {
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		
+
 		// Configuration for assemble
 		assemble: {
 			options: {
@@ -70,7 +70,7 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		
+
 		// Configuration for autoprefixer
 		autoprefixer: {
 			options: {
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
 				src: 'dist/css/*.css'
 			}
 		},
-		
+
 		// Configuration for deleting files
 		clean: {
 			dev: {
@@ -114,7 +114,7 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		
+
 		// Configuration for compass
 		compass: {
 			options: {
@@ -154,7 +154,21 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		
+
+		concat: {
+			options: {
+				separator: ';',
+			},
+			dev: {
+				src: ['bower_components/requirejs/require.js', 'source/js/_requireconfig.js'],
+				dest: 'build/js/main.js',
+			},
+			dist: {
+				src: ['bower_components/requirejs/require.js', 'source/js/_requireconfig.js', 'tmp/main.js'],
+				dest: 'dist/js/main.js',
+			}
+		},
+
 		// Configuration for run tasks concurrently
 		concurrent: {
 			dev1: [<% if (config.get('svgBackgrounds')) { %>'grunticon:dev', <% } %>'imagemin:dev'],
@@ -162,7 +176,7 @@ module.exports = function(grunt) {
 			dist1: [<% if (config.get('svgBackgrounds')) { %>'grunticon:dist', <% } %>'imagemin:dist'],
 			dist2: ['compass:dist', 'assemble:dist', 'modernizr']
 		},
-		
+
 		// Configuration for livereload
 		connect: {
 			livereload: {
@@ -190,7 +204,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		
+
 		// Configuration for copying files
 		copy: {
 			ajax: {
@@ -217,6 +231,12 @@ module.exports = function(grunt) {
 				expand: true,
 				src: ['**/*']
 			},
+			modernizr: {
+				cwd: 'tmp/',
+				dest: 'dist/js/',
+				expand: true,
+				src: ['modernizr.js']
+			},
 			js: {
 				cwd: 'source/js/',
 				dest: 'dist/js/',
@@ -232,7 +252,7 @@ module.exports = function(grunt) {
 				src: ['**/*.css']
 			}<% } %>
 		},
-		
+
 		// Configuration for minifying css-files
 		cssmin: {
 			dist: {
@@ -242,7 +262,7 @@ module.exports = function(grunt) {
 				src: ['*.css']
 			}
 		},<% if (config.get('features').indexOf('cssSplit') != -1) { %>
-		
+
 		// Configuration for splitting css-files (e.g. IE9)
 		csssplit: {
 			options: {
@@ -258,7 +278,7 @@ module.exports = function(grunt) {
 				src: 'dist/css/styles.css'
 			}
 		},<% } %>
-		
+
 		// Configuration for grouping media queries
 		group_css_media_queries: {
 			dist: {
@@ -267,7 +287,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},<% if (config.get('svgBackgrounds')) { %>
-		
+
 		// Configuration for managing SVG-icons
 		grunticon: {
 			options: {
@@ -308,7 +328,7 @@ module.exports = function(grunt) {
 				]
 			}
 		},<% } %>
-		
+
 		// Configuration for validating html-files
 		htmlhint: {
 			options: {
@@ -332,7 +352,7 @@ module.exports = function(grunt) {
 				src: ['*/*.html'<% if (config.get('features').indexOf('jsDoc') != -1) { %>, '!jsdocs/**/*.html'<% } %><% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>, '!styleguide/**/*.html'<% } %>]
 			}
 		},
-		
+
 		// Configuration for optimizing image-files
 		imagemin: {
 			options: {
@@ -358,39 +378,8 @@ module.exports = function(grunt) {
 					}
 				]
 			}
-		},
-		
-		// Configuration for file includes
-		includes: {
-			options: {
-				duplicates: false,
-				flatten: true,
-				includeRegexp: /^\/\/\s*import\s+['"]?([^'"]+)['"]?\s*$/
-			},
-			dev: {
-				files: [
-					{
-						cwd: 'source/js',
-						dest: 'build/js',
-						expand: true,
-						ext: '.js',
-						src: ['**/*.js']
-					}
-				]
-			},
-			dist: {
-				files: [
-					{
-						cwd: 'source/js',
-						dest: 'dist/js',
-						expand: true,
-						ext: '.js',
-						src: ['**/*.js']
-					}
-				]
-			}
 		},<% if (config.get('features').indexOf('jsDoc') != -1) { %>
-		
+
 		// Configuration for documenting js-files
 		jsdoc : {
 			all: {
@@ -400,7 +389,7 @@ module.exports = function(grunt) {
 				src: ['source/js/modules/**/*.js', 'source/js/README.md']
 			}
 		},<% } %>
-		
+
 		// Configuration for validating js-files
 		jshint: {
 			options: {
@@ -432,40 +421,30 @@ module.exports = function(grunt) {
 				'strict': false,
 				'white': false
 			},
-			own: {
-				options: {
-					'-W015': true
-				},
-				src: [
-					'source/js/init/*.js',
-					'source/js/modules/**/*.js'
-				]
-			},
 			all: {
 				options: {
 					'-W015': true,
 					'-W089': true
 				},
 				src: [
-					'source/js/**/*.js',
-					'!source/js/vendor/**/*.js'
+					'source/js/**/*.js'
 				]
 			}
 		},
-		
+
 		// Modernizr configuration
 		modernizr: {
 			all: {
-				customTests: ['source/js/vendor/plugins/_positionsticky.js', 'source/js/vendor/plugins/_csschecked.js'],
+				customTests: ['source/js/modernizr/*.js'],
 				devFile: 'remote',
 				files: {
-					src: ['source/**/*.js', 'source/**/*.scss', '!source/js/vendor/*.js']
+					src: ['source/**/*.js', 'source/**/*.scss']
 				},
-				outputFile: 'source/js/vendor/_modernizr.js',
+				outputFile: 'tmp/modernizr.js',
 				uglify: false
 			}
 		},<% if (config.get('features').indexOf('measurePagespeed') != -1) { %>
-		
+
 		// Configuration for pagespeed
 		pagespeed: {
 			options: {
@@ -489,7 +468,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},<% } %><% if (config.get('features').indexOf('measurePerformance') != -1) { %>
-		
+
 		// Configuration for measuring frontend performance
 		phantomas: {
 			all : {
@@ -500,7 +479,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},<% } %><% if (config.get('features').indexOf('takeScreenshots') != -1) { %>
-		
+
 		// Configuration for photobox
 		photobox: {
 			all: {
@@ -511,7 +490,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},<% } %>
-		
+
 		// Configuration for prettifying the html-code generated by assemble
 		prettify: {
 			options: {
@@ -560,7 +539,17 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		
+
+		requirejs: {
+			compile: {
+				options: {
+					baseUrl: "source/js/",
+					mainConfigFile: "source/js/_requireconfig.js",
+					out: "tmp/main.js"
+				}
+			}
+		},
+
 		// Configuration for SCSS linting
 		scsslint: {
 			allFiles: [
@@ -573,7 +562,7 @@ module.exports = function(grunt) {
 				force: true
 			}
 		},<% if (config.get('svgBackgrounds')) { %>
-		
+
 		// Configuration for string-replacing the grunticon output
 		'string-replace': {
 			'grunticon-datasvg': {
@@ -610,7 +599,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},<% } %><% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
-		
+
 		// Configuration for the styleguide output
 		styleguide: {
 			options: {
@@ -630,7 +619,7 @@ module.exports = function(grunt) {
 				]
 			}
 		},<% } %>
-		
+
 		// Configuration for optimizing SVG-files
 		svgmin: {
 			options: {
@@ -713,7 +702,7 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		
+
 		// Configuration for building the SVG-sprite
 		svgstore: {
 			options: {
@@ -737,7 +726,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		
+
 		// Configuration for syncing files
 		// Task does not remove any files and directories in 'dest' that are no longer in 'cwd'. :'(
 		sync: {
@@ -773,12 +762,21 @@ module.exports = function(grunt) {
 					{
 						cwd: 'source/js/',
 						dest: 'build/js/',
-						src: '**/*'
+						src: ['**/*', '!_requireconfig.js']
+					}
+				]
+			},
+			modernizr: {
+ 				files: [
+					{
+						cwd: 'tmp/',
+						dest: 'build/js/',
+						src: 'modernizr.js'
 					}
 				]
 			}
 		},
-		
+
 		// Configuration for uglifying JS
 		uglify: {
 			dist: {
@@ -797,7 +795,7 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		
+
 		// Configuration for symlink files
 		symlink: {
 			options: {
@@ -808,7 +806,7 @@ module.exports = function(grunt) {
 				dest: 'build/bower_components/'
 			}
 		},
-		
+
 		// Configuration for watching changes
 		watch: {
 			options: {
@@ -844,8 +842,12 @@ module.exports = function(grunt) {
 				tasks: ['sync:fonts']
 			},
 			sync_js: {
-				files: ['source/js/**/*'],
-				tasks: ['modernizr', 'sync:js', 'includes:dev']
+				files: ['source/js/**/*', '!source/js/_requireconfig.js'],
+				tasks: ['modernizr', 'sync:js']
+			},
+			sync_requirejs: {
+				files: ['source/js/_requireconfig.js'],
+				tasks: ['modernizr', 'requirejs', 'concat:dev']
 			},
 			tmplates: {
 				files: ['source/assemble/**/*.{json,hbs}'],
@@ -856,18 +858,18 @@ module.exports = function(grunt) {
 			}
 		}
 	});
-	
+
 	// Where we tell Grunt we plan to use this plug-in.
 	// done by jit-grunt plugin loader
-	
-	
+
+
 	// Where we tell Grunt what to do when we type "grunt" into the terminal.
-	
+
 	// Default -> Standard Build task
 	grunt.registerTask('default', [
 		'build'
 	]);
-	
+
 	// Development task
 	grunt.registerTask('dev', [
 		'clean:dev',
@@ -881,18 +883,18 @@ module.exports = function(grunt) {
 		'autoprefixer:dev',<% if (config.get('features').indexOf('cssSplit') != -1) { %>
 		'csssplit:dev',<% } %>
 		'symlink:dev',
+		'concat:dev',
 		'sync',
-		'includes:dev',
 		'prettify:dev'
 	]);
-	
+
 	// Build task
 	grunt.registerTask('build', [
 		'dev',
 		'connect:livereload',
 		'watch'
 	]);
-	
+
 	// Distributing task
 	grunt.registerTask('dist', [
 		'clean:dist',
@@ -908,43 +910,45 @@ module.exports = function(grunt) {
 		'csssplit:dist',<% } %>
 		'group_css_media_queries',
 		'cssmin',
+		'requirejs',
+		'concat:dist',
+		'copy:modernizr',
 		'copy:ajax',
 		'copy:favicon',
 		'copy:fonts',
 		'copy:js',
 		'copy:bower_components',
-		'includes:dist',
 		'uglify',
 		'prettify:dist'
 	]);
-	
+
 	// HTMLHint task
 	grunt.registerTask('check-html', [
 		'htmlhint'
 	]);
-	
+
 	// SCSSLint task
 	grunt.registerTask('check-scss', [
 		'scsslint'
 	]);
-	
+
 	// JSHint task
 	grunt.registerTask('check-js', [
 		'jshint'
 	]);
-	
+
 	// Accessibility task
 	grunt.registerTask('check-wcag2', [
 		'accessibility'
 	]);
-	
+
 <% if (config.get('features').indexOf('measurePagespeed') != -1) { %>
 	// Pagespeed task
 	grunt.registerTask('measure-pagespeed', [
 		'pagespeed'
 	]);
 <% } %>
-	
+
 <% if (config.get('features').indexOf('measurePerformance') != -1) { %>
 	// Phantomas task
 	grunt.registerTask('measure-performance', [
@@ -953,7 +957,7 @@ module.exports = function(grunt) {
 		'phantomas'
 	]);
 <% } %>
-	
+
 <% if (config.get('features').indexOf('takeScreenshots') != -1) { %>
 	// Photobox task
 	grunt.registerTask('take-screenshots', [
@@ -962,7 +966,7 @@ module.exports = function(grunt) {
 		'photobox'
 	]);
 <% } %>
-	
+
 <% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
 	// Styleguide task
 	grunt.registerTask('build-styleguide', [
@@ -970,7 +974,7 @@ module.exports = function(grunt) {
 		'copy:styleguide'
 	]);
 <% } %>
-	
+
 <% if (config.get('features').indexOf('jsDoc') != -1) { %>
 	// JSDoc task
 	grunt.registerTask('build-jsdoc', [

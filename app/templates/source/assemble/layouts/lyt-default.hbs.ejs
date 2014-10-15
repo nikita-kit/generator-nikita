@@ -27,12 +27,8 @@
 	<!--[if lte IE 8]>
 	<link href="css/universal.css" rel="stylesheet" />
 	<![endif]-->
-	
-	<script> 
-		var requireBaseUrl = 'js/modules/common';
-	</script>
-	
-	<script src="js/main.js"></script>
+
+	<script src="js/modernizr.js"></script>
 	
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="img/appicons/favicon.ico" />
@@ -73,6 +69,8 @@
 <body>
 	{{partial 'icon-sprite'}}
 	{{> body }}
+
+	<script data-main="app" src="js/main.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 # Development version
 
+* added initial requirejs workflow
 * made generator prompts more meaningful
 * adjusted output in string-replace-task and syntax in svg-background-mixin for a better matching
 * added `.gitignore` files to folders sass/svg-bg-extends and sass/grunticon to ignore generated scss-files
