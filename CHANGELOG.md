@@ -1,5 +1,8 @@
 # Development version
 
+* `button`-normalizing migrates from `_buttons.scss` to `_basics.scss`
+* empty folders like `fonts` will be copied with a .gitkeep file
+* automatically enabling `nikita.css extends` and `nikita.css mixins` if the `formFramework` is enabled
 * added explanation for the javascript part
 * properly return App instance when returning app.js module
 * added initial requirejs workflow

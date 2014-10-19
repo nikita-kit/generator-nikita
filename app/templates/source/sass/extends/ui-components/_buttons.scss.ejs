@@ -1,35 +1,12 @@
 // Button-UI-Component
 
-/**
- * Button-Element
- */
- 
-button::-moz-focus-inner {
-	border: 0;
-	padding: 0;
-}
-
-button {
-	@extend %btn;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	overflow: visible;
-	margin: 0;
-	border: 0;
-	padding: 0;
-	text-transform: none;
-	background-color: transparent;
-}
-
-
-// Standard Button-Placeholder
 %btn {
 	display: inline-block;
 	position: relative;
 	font-family: $base-font;
 	text-align: center;
-	text-decoration: none;
-	@include font-smoothing(on);
+	text-decoration: none;<% if (config.get('nikitaCssMixins').indexOf('font-smoothing') != -1) { %>
+	@include font-smoothing(on);<%}%>
 	cursor: pointer;
 	transition: all 0.4s ease-out;
 }
@@ -43,9 +20,10 @@ button {
 	cursor: not-allowed;
 }
 
-
-// Button – V.1
-%btn-1 {
+<% if (config.get('formFramework'))
+{
+%>// Form-Button
+%btn-form {
 	border: 1px solid $line-color-06;
 	padding: 5px 20px;
 	@include rem(font-size, 16px);
@@ -62,3 +40,6 @@ button {
 		background-color: $transparent;
 	}
 }
+<%
+}
+%>

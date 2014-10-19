@@ -51,7 +51,6 @@ h5,
 h6 {
 	font-family: $headline-font;
 	font-weight: 400;
-	@include font-smoothing(on);
 }
 
 
@@ -159,4 +158,26 @@ var {
 img {
 	display: block;
 	max-width: 100%;
+}
+
+
+/**
+ * Buttons
+ */
+
+button::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+button {
+	@extend %btn;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	overflow: visible;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	text-transform: none;
+	background-color: transparent;
 }

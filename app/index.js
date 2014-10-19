@@ -19,8 +19,18 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 		
 		// Have Yeoman greet the user.
 		this.log(yosay(
-			'Welcome to the Nikita Project generator!'
+			'Welcome to the Nikita Project Generator!'
 		));
+		
+		var promptInput = function (name, question, defaultValue)
+		{
+			return {
+				type: 'input',
+				name: name,
+				message: question,
+				default: that.config.get(name, defaultValue)
+			};
+		};
 		
 		var promptConfirm = function (name, question, defaultValue)
 		{
@@ -44,14 +54,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 		};
 		
 		var prompts = [
-			{
-				type: 'input',
-				name: 'name',
-				message: 'Your project name',
-				default: that.config.get('name', this.appname)
-			},
+			promptInput('name', 'Your project name', this.appname),
 			promptConfirm('private', 'Is this project private?', true),
-			promptCheckbox('features',  'Which features do you want to use?', [
+			promptCheckbox('features', 'Which features do you want to use?', [
 				{
 					name: 'Self hosted webfonts, a fonts-folder will be added to your project',
 					value: 'webfonts'
@@ -81,7 +86,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					value: 'takeScreenshots'
 				}
 			]),
-			promptCheckbox('nikitaCssMixins',  'Which nikita.css mixins do you want to use?', [
+			promptCheckbox('nikitaCssMixins', 'Which nikita.css mixins do you want to use?', [
 				{
 					name: 'Centering: Horizontally and/or vertically centering elements with the translate-method (IE9+)',
 					value: 'centering'
@@ -105,7 +110,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					value: 'triangle'
 				}
 			]),
-			promptCheckbox('nikitaCssExtends',  'Which nikita.css extends do you want to use?', [
+			promptCheckbox('nikitaCssExtends', 'Which nikita.css extends do you want to use?', [
 				{
 					name: 'a11y: Hide elements in sake of accessibility',
 					value: 'a11y'
@@ -138,8 +143,28 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			
 			if (!that.config.get('svgBackgrounds') && that.config.get('formFramework'))
 			{
-				console.info('You need svgBackgrounds to enable formFramework. Activating svgBackgrounds.');
+				console.info('You need the SVG backgrounds feature to enable the nikita form framework. Activating this option now.');
 				that.config.set('svgBackgrounds', true);
+			}
+			
+			var hasExtend = function (extend) {
+				return that.config.get('nikitaCssExtends') && that.config.get('nikitaCssExtends').indexOf(extend) !== -1 ? true : false;
+			}
+			
+			if ((!hasExtend('a11y') || !hasExtend('cf') || !hasExtend('ellipsis')) && that.config.get('formFramework'))
+			{
+				console.info('You need the nikita.css mixins to enable the nikita form framework. Activating this option now.');
+				that.config.set('nikitaCssExtends', ['a11y', 'cf', 'ellipsis', 'hide-text', 'ib']);
+			}
+			
+			var hasMixin = function (mixin) {
+				return that.config.get('nikitaCssMixins') && that.config.get('nikitaCssMixins').indexOf(mixin) !== -1 ? true : false;
+			}
+			
+			if ((!hasMixin('px-to-rem') || !hasMixin('respond-to')) && that.config.get('formFramework'))
+			{
+				console.info('You need the nikita.css mixins to enable the nikita form framework. Activating this option now.');
+				that.config.set('nikitaCssMixins', ['centering', 'fixed-ratiobox', 'font-smoothing', 'layering', 'px-to-rem', 'respond-to', 'triangle']);
 			}
 			
 			done();
@@ -170,13 +195,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.dest.mkdir('source/img');
 			this.dest.mkdir('source/img/bgs'); // svg-background-extend
 			this.dest.mkdir('source/img/icons'); // svgstore-task
-			this.dest.mkdir('source/fonts');
 			this.dest.mkdir('source/sass/mixins');
 			this.directory('source/img/appicons', 'source/img/appicons');
-
-			// JS Files
-			this.directory('source/js', 'source/js');
-
+			
 			// SASS Basic Files
 			this.template('source/sass/styles.scss.ejs', 'source/sass/styles.scss');
 			this.template('source/sass/universal.scss.ejs', 'source/sass/universal.scss');
@@ -197,8 +218,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/assemble/layouts/lyt-default.hbs.ejs', 'source/assemble/layouts/lyt-default.hbs');
 			
 			// Assemble Folders
-			this.dest.mkdir('source/assemble/data');
-			this.dest.mkdir('source/assemble/helpers');
+			this.directory('source/assemble/data', 'source/assemble/data');
+			this.directory('source/assemble/helpers', 'source/assemble/helpers');
 			
 			// Image README Files
 			this.template('source/img/bgs/README.md.ejs', 'source/img/bgs/README.md');
@@ -212,9 +233,10 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('source/sass/_reset.scss.ejs', 'source/sass/_reset.scss');
 			}
 			
-			// Optional Webfonts SASS-Partial
-			if (this.config.get('webfonts'))
+			// Optional Webfonts folder and SASS-Partial
+			if (this.config.get('features').indexOf('webfonts') != -1)
 			{
+				this.directory('source/fonts', 'source/fonts');
 				this.template('source/sass/_webfonts.scss.ejs', 'source/sass/_webfonts.scss');
 			}
 			
