@@ -1,5 +1,6 @@
 # Development version
 
+* added explanation for the javascript part
 * properly return App instance when returning app.js module
 * added initial requirejs workflow
 * made generator prompts more meaningful
