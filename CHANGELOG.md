@@ -1,5 +1,6 @@
 # Development version
 
+* properly return App instance when returning app.js module
 * added initial requirejs workflow
 * made generator prompts more meaningful
 * adjusted output in string-replace-task and syntax in svg-background-mixin for a better matching

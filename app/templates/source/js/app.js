@@ -12,5 +12,5 @@ define('app', ['logging'], function(logging)
 
 	};
 
-	new App();
+	return new App();
 });
