@@ -228,7 +228,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/img/temp/README.md.ejs', 'source/img/temp/README.md');
 			
 			// Optional Browser Reset SASS-Partial
-			if (this.config.get('browserReset'))
+			if (this.config.get('features').indexOf('browserReset') != -1)
 			{
 				this.template('source/sass/_reset.scss.ejs', 'source/sass/_reset.scss');
 			}
