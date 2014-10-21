@@ -8,14 +8,14 @@
 // Compass
 @import "compass";
 
-<% if (config.get('webfonts'))
+<% if (config.get('features').indexOf('webfonts') != -1)
 {
 %>// Webfonts
 @import "webfonts";
 <%
 }
 %>
-<% if (config.get('browserReset'))
+<% if (config.get('features').indexOf('browserReset') != -1)
 {
 %>// Browser-Reset
 @import "reset";
@@ -55,7 +55,7 @@
 // Extends
 @import "extends/**/*";
 
-<% if (config.get('svgBackgrounds'))
+<% if (config.get('features').indexOf('svgBackgrounds') != -1)
 {
 %>// SVG Background Extends
 @import "svg-bg-extends/**/*";
