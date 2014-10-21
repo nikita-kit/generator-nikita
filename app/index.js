@@ -53,9 +53,29 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			};
 		};
 		
+		var promptList = function(name, question, choices, defaultChoices)
+		{
+			return {
+				type: 'list',
+				name: name,
+				message: question,
+				choices: choices,
+				default: that.config.get(name, defaultChoices || choices)
+			};
+		};
+		
 		var prompts = [
 			promptInput('name', 'Your project name', this.appname),
 			promptConfirm('private', 'Is this project private?', true),
+			promptList('sassCompiler', 'Which Sass Compiler do you want to use?', [
+				{
+					name: 'libSass, lightning fast but not all Sass features',
+					value: 'libSass'
+				}, {
+					name: 'Compass + Sass, slower but with all latest Sass features, based on Ruby',
+					value: 'compass'
+				}
+			]),
 			promptCheckbox('features', 'Which features do you want to use?', [
 				{
 					name: 'Self hosted webfonts, a fonts-folder will be added to your project',
@@ -193,8 +213,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			
 			// Basic Project Folders
 			this.dest.mkdir('source/img');
-			this.dest.mkdir('source/img/bgs'); // svg-background-extend
-			this.dest.mkdir('source/img/icons'); // svgstore-task
+			this.dest.mkdir('source/img/bgs');
+			this.dest.mkdir('source/img/icons');
 			this.dest.mkdir('source/sass/mixins');
 			this.directory('source/img/appicons', 'source/img/appicons');
 			
@@ -227,6 +247,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/img/icons/README.md.ejs', 'source/img/icons/README.md');
 			this.template('source/img/temp/README.md.ejs', 'source/img/temp/README.md');
 			
+			// Libsass
+			if (this.config.get('sassCompiler').indexOf('libSass') == -1)
+			{
+				delete packageJsonData['devDependencies']['fileindex'];
+				delete packageJsonData['devDependencies']['grunt-sass'];
+			}
+			
 			// Optional Browser Reset SASS-Partial
 			if (this.config.get('features').indexOf('browserReset') != -1)
 			{
@@ -240,20 +267,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('source/sass/_webfonts.scss.ejs', 'source/sass/_webfonts.scss');
 			}
 			
-			// Optional Layering-Mixin
-			if (this.config.get('nikitaCssMixins').indexOf('layering') != -1)
-			{
-				this.template('source/sass/variables/_z-layers.scss.ejs', 'source/sass/variables/_z-layers.scss');
-			}
-			
-			// Optional Respond-To-Mixin
-			if (this.config.get('nikitaCssMixins').indexOf('respond-to') != -1)
-			{
-				this.template('source/sass/variables/_breakpoints.scss.ejs', 'source/sass/variables/_breakpoints.scss');
-			}
-			
 			// Optional SVG Backgrounds
-			if (this.config.get('svgBackgrounds'))
+			if (this.config.get('features').indexOf('svgBackgrounds') != -1)
 			{
 				this.template('source/sass/grunticon/.gitignore.ejs', 'source/sass/grunticon/.gitignore');
 				this.template('source/sass/svg-bg-extends/.gitignore.ejs', 'source/sass/svg-bg-extends/.gitignore');
@@ -263,14 +278,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			{
 				delete packageJsonData['devDependencies']['grunt-grunticon'];
 				delete packageJsonData['devDependencies']['grunt-string-replace'];
-			}
-			
-			// Optional Form Framework
-			if (this.config.get('formFramework'))
-			{
-				this.template('source/assemble/pages/forms.hbs.ejs', 'source/assemble/pages/forms.hbs');
-				this.template('source/sass/blocks/_forms.scss.ejs', 'source/sass/blocks/_forms.scss');
-				this.src.copy('source/img/bgs/form-select-arrow-down.svg', 'source/img/bgs/form-select-arrow-down.svg');
 			}
 			
 			// Optional CSS Splitting for IE9 and lower
@@ -312,6 +319,26 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			if (this.config.get('features').indexOf('takeScreenshots') == -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-photobox'];
+			}
+			
+			// Optional Layering-Mixin
+			if (this.config.get('nikitaCssMixins').indexOf('layering') != -1)
+			{
+				this.template('source/sass/variables/_z-layers.scss.ejs', 'source/sass/variables/_z-layers.scss');
+			}
+			
+			// Optional Respond-To-Mixin
+			if (this.config.get('nikitaCssMixins').indexOf('respond-to') != -1)
+			{
+				this.template('source/sass/variables/_breakpoints.scss.ejs', 'source/sass/variables/_breakpoints.scss');
+			}
+			
+			// Optional Form Framework
+			if (this.config.get('formFramework'))
+			{
+				this.template('source/assemble/pages/forms.hbs.ejs', 'source/assemble/pages/forms.hbs');
+				this.template('source/sass/blocks/_forms.scss.ejs', 'source/sass/blocks/_forms.scss');
+				this.src.copy('source/img/bgs/form-select-arrow-down.svg', 'source/img/bgs/form-select-arrow-down.svg');
 			}
 			
 			this.dest.write('package.json', JSON.stringify(packageJsonData, null, 4));

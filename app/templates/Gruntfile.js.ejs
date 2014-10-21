@@ -113,7 +113,7 @@ module.exports = function(grunt) {
 					}
 				]
 			}
-		},
+		},<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
 
 		// Configuration for compass
 		compass: {
@@ -153,28 +153,29 @@ module.exports = function(grunt) {
 					].join("\n"),
 				}
 			}
-		},
+		},<% } %>
 
+		// Configuration for concatenating js files
 		concat: {
 			options: {
-				separator: ';',
+				separator: ';'
 			},
 			dev: {
-				src: ['bower_components/requirejs/require.js', 'source/js/_requireconfig.js'],
 				dest: 'build/js/main.js',
+				src: ['bower_components/requirejs/require.js', 'source/js/_requireconfig.js']
 			},
 			dist: {
-				src: ['bower_components/requirejs/require.js', 'source/js/_requireconfig.js', 'tmp/main.js'],
 				dest: 'dist/js/main.js',
+				src: ['bower_components/requirejs/require.js', 'source/js/_requireconfig.js', 'tmp/main.js']
 			}
 		},
 
 		// Configuration for run tasks concurrently
 		concurrent: {
-			dev1: [<% if (config.get('svgBackgrounds')) { %>'grunticon:dev', <% } %>'imagemin:dev'],
-			dev2: ['compass:dev', 'assemble:dev', 'modernizr'],
-			dist1: [<% if (config.get('svgBackgrounds')) { %>'grunticon:dist', <% } %>'imagemin:dist'],
-			dist2: ['compass:dist', 'assemble:dist', 'modernizr']
+			dev1: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'grunticon:dev', <% } %>'imagemin:dev'],
+			dev2: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:dev', <% } %>'assemble:dev', 'modernizr'],
+			dist1: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'grunticon:dist', <% } %>'imagemin:dist'],
+			dist2: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dist', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:dist', <% } %>'assemble:dist', 'modernizr']
 		},
 
 		// Configuration for livereload
@@ -277,6 +278,70 @@ module.exports = function(grunt) {
 				dest: 'dist/css',
 				src: 'dist/css/styles.css'
 			}
+		},<% } %><% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
+
+		// Configuration for writing index files of directory contents (sass-globbing alernative for libsass)
+		fileindex: {
+			globbing: {
+				options: {
+					format: function (list, options, dest) {
+						var i = 0;
+						var imports = [];
+						
+						for (i; i < list.length; i++) {
+							var listEl = list[i];
+							var listElName = listEl.replace(/_([^_]*)$/, ""+'$1').replace(/\.scss|\.sass/gi, "");
+							imports += '@import "' + listElName + '";\n';
+						}
+						
+						return '/**\n * List of all SASS imports\n * (automatically created by fileindex)\n * \n * No need to add your sass partials manually! ;)\n */\n\n' + imports;
+					}
+				},
+				files: [
+					{
+						cwd: 'source/sass/',
+						dest: 'source/sass/styles.scss',
+						src: [
+							<% if (config.get('features').indexOf('webfonts') != -1) { %>// Webfonts
+							'_webfonts.scss',
+							
+							<% } %><% if (config.get('features').indexOf('browserReset') != -1) { %>// Browser-Reset
+							'_reset.scss',
+							
+							<% } %>// SASS Variables
+							'variables/**/*.scss',
+							
+							<% if (config.get('nikitaCssMixins').length) { %>// nikita.css Mixins
+							<% var nikitaCssMixins = config.get('nikitaCssMixins');
+							for (var i = 0; i < nikitaCssMixins.length; i++) { %>
+							'../../bower_components/nikita.css/mixins/_<%= nikitaCssMixins[i] %>.scss',<% } } %>
+							
+							// SASS Mixins
+							'mixins/**/*.scss',
+							
+							<% if (config.get('nikitaCssExtends').length) { %>// nikita.css Extends
+							<% var nikitaCssExtends = config.get('nikitaCssExtends');
+							for (var i = 0; i < nikitaCssExtends.length; i++) { %>
+							'../../bower_components/nikita.css/extends/_<%= nikitaCssExtends[i] %>.scss',<% } } %>
+							
+							// SASS Extends
+							'extends/**/*.scss',
+							
+							<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>// SVG Background Extends
+							'svg-bg-extends/**/*',
+							
+							<% } %>// Basic Formatting
+							'_basics.scss',
+							
+							// Icons (as placeholder extends)
+							'icons/**/*.scss',
+							
+							// Blocks
+							'blocks/**/*.scss'
+						]
+					}
+				]
+			}
 		},<% } %>
 
 		// Configuration for grouping media queries
@@ -286,7 +351,7 @@ module.exports = function(grunt) {
 					'dist/css/styles.css': ['dist/css/styles.css']
 				}
 			}
-		},<% if (config.get('svgBackgrounds')) { %>
+		},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 
 		// Configuration for managing SVG-icons
 		grunticon: {
@@ -548,7 +613,31 @@ module.exports = function(grunt) {
 					out: "tmp/main.js"
 				}
 			}
-		},
+		},<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
+		
+		// Configuration for SASS
+		sass: {
+			dev: {
+				options: {
+					outputStyle: 'nested',
+					sourceMap: true
+				},
+				files: {
+					'build/css/styles.css': 'source/sass/styles.scss',
+					'build/css/universal.css': 'source/sass/universal.scss'
+				}
+			},
+			dist: {
+				options: {
+					outputStyle: 'nested', // minifying by cssmin-task
+					sourceMap: false
+				},
+				files: {
+					'dist/css/styles.css': 'source/sass/styles.scss',
+					'dist/css/universal.css': 'source/sass/universal.scss'
+				}
+			}
+		},<% } %>
 
 		// Configuration for SCSS linting
 		scsslint: {
@@ -561,7 +650,7 @@ module.exports = function(grunt) {
 				config: '.scss-lint.yml',
 				force: true
 			}
-		},<% if (config.get('svgBackgrounds')) { %>
+		},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 
 		// Configuration for string-replacing the grunticon output
 		'string-replace': {
@@ -656,7 +745,7 @@ module.exports = function(grunt) {
 					{ sortAttrs: true },
 					{ transformsWithOnePath: false } // Enabling this breaks Illustrator SVGs with complex text
 				]
-			},<% if (config.get('svgBackgrounds')) { %>
+			},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 			dev_bg: {
 				files: [
 					{
@@ -678,7 +767,7 @@ module.exports = function(grunt) {
 						src: ['*.svg']
 					}
 				]
-			},<% if (config.get('svgBackgrounds')) { %>
+			},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 			dist_bg: {
 				files: [
 					{
@@ -815,7 +904,7 @@ module.exports = function(grunt) {
 			},
 			scss: {
 				files: ['source/sass/**/*.scss'],
-				tasks: ['compass:dev', 'autoprefixer:dev'<% if (config.get('features').indexOf('cssSplit') != -1) { %>, 'csssplit:dev'<% } %>],
+				tasks: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:dev', <% } %>'autoprefixer:dev'<% if (config.get('features').indexOf('cssSplit') != -1) { %>, 'csssplit:dev'<% } %>],
 				options: {
 					debounceDelay: 0,
 					livereload: false
@@ -824,7 +913,7 @@ module.exports = function(grunt) {
 			images: {
 				files: ['source/img/*', 'source/img/**/*.{jpg,png,gif}', '!source/img/dev/*'],
 				tasks: ['newer:imagemin:dev']
-			},<% if (config.get('svgBackgrounds')) { %>
+			},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 			svg_bgs: {
 				files: ['source/img/bgs/*.svg'],
 				tasks: ['newer:svgmin:dev_bg', 'grunticon:dev', 'string-replace']
@@ -873,12 +962,13 @@ module.exports = function(grunt) {
 	// Development task
 	grunt.registerTask('dev', [
 		'clean:dev',
-		'clean:tmp',<% if (config.get('svgBackgrounds')) { %>
+		'clean:tmp',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'svgmin:dev_bg',<% } %>
 		'svgmin:dev_ico',
 		'svgstore:dev',
-		'concurrent:dev1',<% if (config.get('svgBackgrounds')) { %>
-		'string-replace',<% } %>
+		'concurrent:dev1',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+		'string-replace',<% } %><% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
+		'fileindex',<% } %>
 		'concurrent:dev2',
 		'autoprefixer:dev',<% if (config.get('features').indexOf('cssSplit') != -1) { %>
 		'csssplit:dev',<% } %>
@@ -899,12 +989,13 @@ module.exports = function(grunt) {
 	grunt.registerTask('dist', [
 		'clean:dist',
 		'clean:tmp',<% if (config.get('features').indexOf('jsDoc') != -1) { %>
-		'clean:docs',<% } %><% if (config.get('svgBackgrounds')) { %>
+		'clean:docs',<% } %><% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'svgmin:dist_bg',<% } %>
 		'svgmin:dist_ico',
 		'svgstore:dist',
-		'concurrent:dist1',<% if (config.get('svgBackgrounds')) { %>
-		'string-replace',<% } %>
+		'concurrent:dist1',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+		'string-replace',<% } %><% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
+		'fileindex',<% } %>
 		'concurrent:dist2',
 		'autoprefixer:dist',<% if (config.get('features').indexOf('cssSplit') != -1) { %>
 		'csssplit:dist',<% } %>

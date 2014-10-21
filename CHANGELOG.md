@@ -1,5 +1,7 @@
 # Development version
 
+* added libSass option, now you can choose between libSass and Compass/Sass
+* updated autoprefixer to 1.0.1
 * `button`-normalizing migrates from `_buttons.scss` to `_basics.scss`
 * empty folders like `fonts` will be copied with a .gitkeep file
 * automatically enabling `nikita.css extends` and `nikita.css mixins` if the `formFramework` is enabled

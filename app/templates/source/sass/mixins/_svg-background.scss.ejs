@@ -20,11 +20,11 @@
 @mixin svg-background($name) {
 	@extend %bg-data-svg-#{$name};
 	
-	@at-root .ie8 & {
+	.ie8 & {
 		@extend %bg-data-png-#{$name};
 	}
 	
-	@at-root .lt-ie8 & {
+	.lt-ie8 & {
 		@extend %bg-fallback-#{$name};
 	}
 }
