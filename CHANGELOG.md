@@ -1,5 +1,6 @@
 # Development version
 
+* added {{autolink}} handlebars helper
 * added libSass option, now you can choose between libSass and Compass/Sass
 * updated autoprefixer to 1.0.1
 * `button`-normalizing migrates from `_buttons.scss` to `_basics.scss`
