@@ -12,7 +12,7 @@ If you want to write efficient and scalable (S)CSS-code for big websites, try [n
 
 - [__Grunt__](http://gruntjs.com/) – js task runner
 - [__Assemble__](http://assemble.io/) – static site generator
-- [__SASS__](http://sass-lang.com/) / [__Compass__](http://compass-style.org/) – css preprocessing
+- [__SASS__](http://sass-lang.com/) + [__Compass__](http://compass-style.org/) or [__LibSass__](http://libsass.org/) – css preprocessing
 - [__nikita.html__](https://github.com/nikita-kit/nikita-html) – HTML conventions and coding guidelines
 - [__nikita.css__](https://github.com/nikita-kit/nikita-css) – (S)CSS conventions and coding guidelines
 - [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines
@@ -30,14 +30,15 @@ These are the minimum requirements for my project setup:
 - [__Node.js & Node Package Manager__](http://nodejs.org)
 - [__Grunt Command Line Interface__](http://gruntjs.com/getting-started) – `sudo npm install -g grunt-cli`
 - [__Bower__](http://bower.io) – `sudo npm install -g bower`
+- [__SCSS Lint 0.28__](http://rubygems.org/gems/scss-lint/versions) – `sudo gem install scss-lint`
+
+Additionally if you choose to use Compass + Sass + Sass Globbing:
+
+- [__Compass 1.0__](http://rubygems.org/gems/compass/versions) – `sudo gem install compass`
 - [__SASS 3.4__](http://rubygems.org/gems/sass/versions/) – `sudo gem install sass`
 - [__SASS Globbing 1.1__](http://rubygems.org/gems/sass-globbing/versions) – `sudo gem install sass-globbing`
-- [__SCSS Lint 0.28__](http://rubygems.org/gems/scss-lint/versions) – `sudo gem install scss-lint`
-- [__Compass 1.0__](http://rubygems.org/gems/compass/versions) – `sudo gem install compass`
 
-It's mandatory to use the latest versions of SASS and Compass if you want to work with [__CSS Source Maps__](https://developers.google.com/chrome-developer-tools/docs/css-preprocessors) in Google Chrome.
-
-Here's an example of my working configuration:
+Here's an example of a complete working configuration:
 
 ```
 $ gem list
@@ -69,7 +70,8 @@ Or use `npm install` and `bower install` if your are on Windows (you have to che
 
 If you want to specify a different port, you can start the script with the `--port` option:
 
-1. `grunt --port=9010` will launch the webserver on [http://0.0.0.0:9010/](http://0.0.0.0:9010/)
+`grunt --port=9010` will launch the webserver on [http://0.0.0.0:9010/](http://0.0.0.0:9010/)
+
 
 ## Grunt-Devtools
 
@@ -101,6 +103,7 @@ If you dont't like the command line you can use an alternative called [grunt-dev
 - [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify)
 - [grunt-contrib-watch](https://github.com/gruntjs/grunt-contrib-watch)
 - [grunt-csssplit](https://github.com/project-collins/grunt-csssplit)
+- [grunt-fileindex](https://github.com/Bartvds/grunt-fileindex)
 - [grunt-group-css-media-queries](https://github.com/Se7enSky/grunt-group-css-media-queries)
 - [grunt-htmlhint](https://github.com/yaniswang/grunt-htmlhint)
 - [grunt-includes](https://github.com/vanetix/grunt-includes)
@@ -118,6 +121,7 @@ If you dont't like the command line you can use an alternative called [grunt-dev
 - [grunt-svgstore](https://github.com/FWeinb/grunt-svgstore)
 - [grunt-sync](https://github.com/tomusdrw/grunt-sync)
 - [grunticon](https://github.com/filamentgroup/grunticon)
+- [handlebars-helper-autolink](https://github.com/helpers/handlebars-helper-autolink)
 - [handlebars-helper-partial](https://github.com/helpers/handlebars-helper-partial)
 - [handlebars-helpers](https://github.com/assemble/handlebars-helpers)
 - [jit-grunt](https://github.com/shootaroo/jit-grunt)
@@ -146,10 +150,6 @@ $ tree -d -I node_modules
 │   │   └── bgs
 │   │       └── png-fallback
 │   └── js
-│       ├── modules
-│       ├── templates
-│       └── vendor
-│           └── plugins
 ├── dist
 │   ├── ajax-content
 │   ├── bower_components
@@ -159,10 +159,6 @@ $ tree -d -I node_modules
 │   │   └── bgs
 │   │       └── png-fallback
 │   └── js
-│       ├── modules
-│       ├── templates
-│       └── vendor
-│           └── plugins
 └── source
     ├── ajax-content
     ├── assemble
@@ -173,21 +169,20 @@ $ tree -d -I node_modules
     │   └── partials
     ├── fonts
     ├── img
+    │   ├── appicons
     │   ├── bgs
     │   ├── dev
     │   ├── icons
     │   └── temp
     ├── js
-    │   ├── modernizr
-    │   ├── app.js
-    │   └── _requireconfig.js
+    │   └── modernizr
     ├── sass
     │   ├── blocks
     │   ├── extends
     │   │   └── ui-components
     │   ├── grunticon
-    │   ├── icons
     │   ├── mixins
+    │   ├── svg-bg-extends
     │   └── variables
     └── styleguide-template
         └── public
