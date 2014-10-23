@@ -294,7 +294,7 @@ module.exports = function(grunt) {
 							imports += '@import "' + listElName + '";\n';
 						}
 						
-						return '/**\n * List of all SASS imports\n * (automatically created by fileindex)\n * \n * No need to add your sass partials manually! ;)\n */\n\n' + imports;
+						return '//\n// List of all SASS imports\n// (automatically created by fileindex)\n// \n// No need to add your sass partials manually! ;)\n// \n\n' + imports;
 					}
 				},
 				files: [
@@ -328,7 +328,7 @@ module.exports = function(grunt) {
 							'extends/**/*.scss',
 							
 							<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>// SVG Background Extends
-							'svg-bg-extends/**/*',
+							'svg-bg-extends/**/*.scss',
 							
 							<% } %>// Basic Formatting
 							'_basics.scss',
