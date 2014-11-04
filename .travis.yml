@@ -4,6 +4,9 @@ node_js:
 before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'generator-nikita' ]; then cd .. && eval "mv $currentfolder generator-nikita" && cd generator-nikita; fi
+before_deploy:
+  - npm install json
+  - node_modules/.bin/json -E "this.version='$TRAVIS_TAG'" -f package.json -I
 deploy:
   provider: npm
   email: JanS@DracoBlue.de
