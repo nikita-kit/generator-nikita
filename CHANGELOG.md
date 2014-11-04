@@ -1,4 +1,4 @@
-# Development version
+# 0.3.0
 
 * added {{autolink}} handlebars helper
 * added libSass option, now you can choose between libSass and Compass/Sass
