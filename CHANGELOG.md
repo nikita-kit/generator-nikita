@@ -1,3 +1,8 @@
+# Development version
+
+* test for compass is now simple string test
+* disable sass in Gemfile if not necessary (if compass is disabled)
+
 # 0.3.0
 
 * added {{autolink}} handlebars helper
