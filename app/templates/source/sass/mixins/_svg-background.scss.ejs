@@ -1,6 +1,6 @@
 // 
 // svg-background mixin
-// ---------------
+// --------------------
 // 
 // This mixin is used for delivering grunticon-generated background-images to different browsers after being string-replaced.
 // 
@@ -20,11 +20,11 @@
 @mixin svg-background($name) {
 	@extend %bg-data-svg-#{$name};
 	
-	.ie8 & {
-		@extend %bg-data-png-#{$name};
-	}
+	// .ie8 & {
+	// 	@extend %bg-data-png-#{$name};
+	// }
 	
-	.lt-ie8 & {
-		@extend %bg-fallback-#{$name};
-	}
+	// .lt-ie8 & {
+	// 	@extend %bg-fallback-#{$name};
+	// }
 }

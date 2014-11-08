@@ -1,5 +1,8 @@
 # Development version
 
+* disabled data-png and png-fallback in svg-background mixin (discontinued IE8 and lower support)
+* updated grunt-modernizr to 0.6.0
+* updated grunt-sass to 0.16.1
 * test for compass is now simple string test
 * disable sass in Gemfile if not necessary (if compass is disabled)
 

@@ -221,8 +221,8 @@ module.exports = function(grunt) {
 				src: ['**/*']
 			},
 			favicon: {
-				cwd: 'source/img/',
-				dest: 'dist/img/',
+				cwd: 'source/img/appicons/',
+				dest: 'dist/img/appicons/',
 				expand: true,
 				src: ['**/*.ico']
 			},
@@ -232,17 +232,17 @@ module.exports = function(grunt) {
 				expand: true,
 				src: ['**/*']
 			},
-			modernizr: {
-				cwd: 'tmp/',
-				dest: 'dist/js/',
-				expand: true,
-				src: ['modernizr.js']
-			},
 			js: {
 				cwd: 'source/js/',
 				dest: 'dist/js/',
 				expand: true,
 				src: ['**/*']
+			},
+			modernizr: {
+				cwd: 'tmp/',
+				dest: 'dist/js/',
+				expand: true,
+				src: ['modernizr.js']
 			}<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>,
 			styleguide: {
 				cwd: 'build/css/',
@@ -694,7 +694,7 @@ module.exports = function(grunt) {
 				},
 				name: 'Style Guide',
 				tmplate: {
-					src: 'source/styleguide-tmplate/'
+					src: 'source/styleguide-template/'
 				}
 			},
 			all: {
@@ -935,12 +935,9 @@ module.exports = function(grunt) {
 				files: ['source/js/_requireconfig.js'],
 				tasks: ['modernizr', 'requirejs', 'concat:dev']
 			},
-			tmplates: {
+			templates: {
 				files: ['source/assemble/**/*.{json,hbs}'],
-				tasks: ['newer:assemble:dev', 'prettify:dev'],
-				options: {
-					spawn: false
-				}
+				tasks: ['newer:assemble:dev', 'prettify:dev']
 			}
 		}
 	});
@@ -1000,12 +997,12 @@ module.exports = function(grunt) {
 		'cssmin',
 		'requirejs',
 		'concat:dist',
-		'copy:modernizr',
 		'copy:ajax',
+		'copy:bower_components',
 		'copy:favicon',
 		'copy:fonts',
 		'copy:js',
-		'copy:bower_components',
+		'copy:modernizr',
 		'uglify',
 		'prettify:dist'
 	]);

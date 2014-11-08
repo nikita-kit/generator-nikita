@@ -251,8 +251,14 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Libsass
 			if (this.config.get('sassCompiler').indexOf('libSass') == -1)
 			{
-				delete packageJsonData['devDependencies']['fileindex'];
+				delete packageJsonData['devDependencies']['grunt-fileindex'];
 				delete packageJsonData['devDependencies']['grunt-sass'];
+			}
+			
+			// Compass
+			if (this.config.get('sassCompiler').indexOf('compass') == -1)
+			{
+				delete packageJsonData['devDependencies']['grunt-contrib-compass'];
 			}
 			
 			// Optional Browser Reset SASS-Partial
