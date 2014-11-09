@@ -104,6 +104,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				}, {
 					name: 'Take screenshots to diff your changes (grunt-photobox)',
 					value: 'takeScreenshots'
+				}, {
+					name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
+					value: 'gitinfos'
 				}
 			]),
 			promptCheckbox('nikitaCssMixins', 'Which nikita.css mixins do you want to use?', [
@@ -225,12 +228,18 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			
 			// SASS Extra Files
 			this.template('source/sass/blocks/_rwd-testing.scss.ejs', 'source/sass/blocks/_rwd-testing.scss');
-			this.template('source/sass/extends/ui-components/_buttons.scss.ejs', 'source/sass/extends/ui-components/_buttons.scss');
+			this.template('source/sass/extends/_buttons.scss.ejs', 'source/sass/extends/_buttons.scss');
 			
 			// SASS Variables
 			this.template('source/sass/variables/_color.scss.ejs', 'source/sass/variables/_color.scss');
 			this.template('source/sass/variables/_timing.scss.ejs', 'source/sass/variables/_timing.scss');
 			this.template('source/sass/variables/_typography.scss.ejs', 'source/sass/variables/_typography.scss');
+			
+			// JS Files
+			this.template('source/js/_requireconfig.js.ejs', 'source/js/_requireconfig.js');
+			this.template('source/js/app.js.ejs', 'source/js/app.js');
+			this.template('source/js/modernizr/cssCheckedTest.js.ejs', 'source/js/modernizr/cssCheckedTest.js');
+			this.template('source/js/modernizr/positionStickyTest.js.ejs', 'source/js/modernizr/positionStickyTest.js');
 			
 			// Assemble Files
 			this.template('source/assemble/pages/index.hbs.ejs', 'source/assemble/pages/index.hbs');
@@ -326,6 +335,16 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			if (this.config.get('features').indexOf('takeScreenshots') == -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-photobox'];
+			}
+			
+			// Optional Gitinfos
+			if (this.config.get('features').indexOf('gitinfos') == -1)
+			{
+				delete packageJsonData['devDependencies']['grunt-gitinfos'];
+			}
+			else
+			{
+				this.template('source/assemble/partials/gitinfos.hbs.ejs', 'source/assemble/partials/gitinfos.hbs');
 			}
 			
 			// Optional Layering-Mixin

@@ -66,6 +66,12 @@
 	</head>
 
 	<body>
+<% if (config.get('features').indexOf('gitinfos') != -1) { %>
+		{{#if production}}
+		{{partial 'gitinfos'}}
+		{{/if}}
+<% } %>
+		
 		{{partial 'icon-sprite'}}
 		
 		{{> body }}

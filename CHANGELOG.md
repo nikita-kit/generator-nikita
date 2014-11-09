@@ -1,5 +1,7 @@
-# Development version
+# 0.4.0
 
+* added optional gitinfos for the dist-task via grunt-gitinfo
+* fixed requirejs yeoman setup
 * disabled data-png and png-fallback in svg-background mixin (discontinued IE8 and lower support)
 * updated grunt-modernizr to 0.6.0
 * updated grunt-sass to 0.16.1
