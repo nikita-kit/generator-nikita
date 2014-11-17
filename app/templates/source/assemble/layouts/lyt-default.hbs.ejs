@@ -16,18 +16,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		
 		<!--[if ! lte IE 9]><!-->
-		<link href="css/styles.css" rel="stylesheet"  />
+		<link href="css/styles.css?cb={{ currentTimestamp }}" rel="stylesheet"  />
 		<!--<![endif]-->
 		
 		<!--[if IE 9]>
-		<link href="css/styles-part1.css" rel="stylesheet" />
+		<link href="css/styles-part1.css?cb={{ currentTimestamp }}" rel="stylesheet" />
 		<![endif]-->
 		
 		<!--[if lte IE 8]>
-		<link href="css/universal.css" rel="stylesheet" />
+		<link href="css/universal.css?cb={{ currentTimestamp }}" rel="stylesheet" />
 		<![endif]-->
 
-		<script src="js/modernizr.js"></script>
+		<script src="js/modernizr.js?cb={{ currentTimestamp }}"></script>
 		
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="img/appicons/favicon.ico" />
@@ -76,7 +76,7 @@
 		
 		{{> body }}
 		
-		<script data-main="app" src="js/main.js"></script>
+		<script data-main="app" src="js/main.js?cb={{ currentTimestamp }}"></script>
 	</body>
 	
 </html>

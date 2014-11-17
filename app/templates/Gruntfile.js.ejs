@@ -45,7 +45,8 @@ module.exports = function(grunt) {
 				data: 'source/assemble/data/**/*.{json,yml}',
 				helpers: ['handlebars-helper-partial', 'source/assemble/helpers/**/*.js'],
 				layoutdir: 'source/assemble/layouts/',
-				partials: ['source/assemble/partials/**/*.hbs', 'tmp/icon-sprite.svg']
+				partials: ['source/assemble/partials/**/*.hbs', 'tmp/icon-sprite.svg'],
+				currentTimestamp: (new Date()).getTime()
 			},
 			dev: {
 				options: {
@@ -165,7 +166,17 @@ module.exports = function(grunt) {
 		// Configuration for concatenating js files
 		concat: {
 			options: {
-				separator: ';'
+				separator: ';',
+				process: function(src, filepath)
+				{
+					// Add cachebuster for every required file
+					if (filepath == 'source/js/_requireconfig.js')
+					{
+						return 'require({"urlArgs": "cb=' + (new Date()).getTime()+ '"});' + "\n\n" + src;
+					}
+
+					return src;
+				}
 			},
 			dev: {
 				dest: 'build/js/main.js',

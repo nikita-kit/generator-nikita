@@ -1,3 +1,7 @@
+# Development Version
+
+* added cachebuster for .css and .js files (+ requirejs modules!)
+
 # 0.4.0
 
 * added optional gitinfos for the dist-task via grunt-gitinfo
