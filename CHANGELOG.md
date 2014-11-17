@@ -1,5 +1,6 @@
 # Development Version
 
+* moved tmp files of grunticon/svg-backgrounds into tmp folder
 * added cachebuster for .css and .js files (+ requirejs modules!)
 
 # 0.4.0

@@ -345,7 +345,7 @@ module.exports = function(grunt) {
 							'extends/**/*.scss',
 							
 							<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>// SVG Background Extends
-							'svg-bg-extends/**/*.scss',
+							'../../tmp/svg-bg-extends/*.scss',
 							
 							<% } %>// Basic Formatting
 							'_basics.scss',
@@ -390,7 +390,7 @@ module.exports = function(grunt) {
 				files: [
 					{
 						cwd: 'tmp/svgmin/bgs',
-						dest: 'source/sass/grunticon',
+						dest: 'tmp/grunticon',
 						expand: true,
 						src: ['*.svg']
 					}
@@ -405,7 +405,7 @@ module.exports = function(grunt) {
 				files: [
 					{
 						cwd: 'tmp/svgmin/bgs',
-						dest: 'source/sass/grunticon',
+						dest: 'tmp/grunticon',
 						expand: true,
 						src: ['*.svg']
 					}
@@ -677,7 +677,7 @@ module.exports = function(grunt) {
 		'string-replace': {
 			'grunticon-datasvg': {
 				files: {
-					'source/sass/svg-bg-extends/_bg-data-svg.scss': 'source/sass/grunticon/_icons-data-svg.scss'
+					'tmp/svg-bg-extends/_bg-data-svg.scss': 'tmp/grunticon/_icons-data-svg.scss'
 				},
 				options: {
 					replacements: [{
@@ -688,7 +688,7 @@ module.exports = function(grunt) {
 			},
 			'grunticon-datapng': {
 				files: {
-					'source/sass/svg-bg-extends/_bg-data-png.scss': 'source/sass/grunticon/_icons-data-png.scss'
+					'tmp/svg-bg-extends/_bg-data-png.scss': 'tmp/grunticon/_icons-data-png.scss'
 				},
 				options: {
 					replacements: [{
@@ -699,7 +699,7 @@ module.exports = function(grunt) {
 			},
 			'grunticon-fallback': {
 				files: {
-					'source/sass/svg-bg-extends/_bg-fallback.scss': 'source/sass/grunticon/_icons-fallback.scss'
+					'tmp/svg-bg-extends/_bg-fallback.scss': 'tmp/grunticon/_icons-fallback.scss'
 				},
 				options: {
 					replacements: [{

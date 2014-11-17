@@ -286,8 +286,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Optional SVG Backgrounds
 			if (this.config.get('features').indexOf('svgBackgrounds') != -1)
 			{
-				this.template('source/sass/grunticon/.gitignore.ejs', 'source/sass/grunticon/.gitignore');
-				this.template('source/sass/svg-bg-extends/.gitignore.ejs', 'source/sass/svg-bg-extends/.gitignore');
 				this.template('source/sass/mixins/_svg-background.scss.ejs', 'source/sass/mixins/_svg-background.scss');
 			}
 			else
