@@ -249,8 +249,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Assemble Folders
 			this.directory('source/assemble/data', 'source/assemble/data');
 			this.directory('source/assemble/helpers', 'source/assemble/helpers');
-			this.directory('source/assemble/partials', 'source/assemble/partials');
-			
+			this.template('source/assemble/partials/.gitkeep', 'source/assemble/partials/.gitkeep');
+
 			// Image README Files
 			this.template('source/img/bgs/README.md.ejs', 'source/img/bgs/README.md');
 			this.template('source/img/dev/README.md.ejs', 'source/img/dev/README.md');
