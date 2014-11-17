@@ -260,7 +260,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Libsass
 			if (this.config.get('sassCompiler').indexOf('libSass') == -1)
 			{
-				delete packageJsonData['devDependencies']['grunt-fileindex'];
 				delete packageJsonData['devDependencies']['grunt-sass'];
 			}
 			

@@ -1,5 +1,6 @@
 # Development Version
 
+* removed sass-globbing (+ fileindex) dependency
 * do not copy gitinfos.hbs.ejs
 * moved tmp files of grunticon/svg-backgrounds into tmp folder
 * added cachebuster for .css and .js files (+ requirejs modules!)

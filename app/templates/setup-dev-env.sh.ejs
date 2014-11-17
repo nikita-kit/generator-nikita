@@ -13,6 +13,7 @@ then
 	echo "Please run 'sudo npm install -g grunt-cli'"
 	exit 1;
 fi
+<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
 
 if [ -z "`which compass`" ]
 then
@@ -27,13 +28,7 @@ then
 	echo "Please run 'sudo gem install sass'"
 	exit 1;
 fi
-
-if [ -z "`sass -r sass-globbing -v 2>/dev/null`" ]
-then
-	echo "ERROR: sass-globbing is missing"
-	echo "Please run 'sudo gem install sass-globbing'"
-	exit 1
-fi
+<% } %>
 
 if [ -z "`scss-lint --version 2>/dev/null`" ]
 then
