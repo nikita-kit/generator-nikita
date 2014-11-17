@@ -1,4 +1,4 @@
-# Development Version
+# 0.5.0
 
 * removed sass-globbing (+ fileindex) dependency
 * do not copy gitinfos.hbs.ejs
