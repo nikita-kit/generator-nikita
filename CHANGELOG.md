@@ -1,5 +1,8 @@
-# Development Version
+# 0.5.0
 
+* added paths variables for `source, build, dist, tmp` to easily configure changing folders
+* grunt-contrib-clean: added `force: true` option to allow cleaning folders outside cwd
+* escaping gitinfos
 * removed sass-globbing (+ fileindex) dependency
 * do not copy gitinfos.hbs.ejs
 * moved tmp files of grunticon/svg-backgrounds into tmp folder
