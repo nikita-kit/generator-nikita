@@ -147,57 +147,58 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 
 ## Project structure
 
-My kickstart-setup provides the three main folders `source/`, `build/` and `dist/`. All source-files will be put to the `source`-folder like templates, fonts, images, js- and sass-files. These files will be processed by several grunt tasks – e.g. compass: sass -> css – and then stored in the `build`-folder. From there you can view the generated html-files in the browser. The `dist`-folder is built up like the `build`-folder. The main difference between `build/` and `dist/` is, that `dist/` has combined and minified css/js files, no unnecessary files or code-comments. The `build`-folder is for debugging your files, the `dist-`folder should be used for production.
+The kickstart-setup provides the three main folders `source/`, `build/` and `dist/` plus a `tmp/`-folder. All source-files will be put to the `source`-folder like templates, fonts, images, js- and sass-files. These files will be processed by several grunt tasks – e.g. grunt-sass: sass -> css – and then stored in the `build`-folder. From there you can view the generated html-files in the browser. The `dist`-folder is built up like the `build`-folder. The main difference between `build/` and `dist/` is, that `dist/` has combined and minified css/js files and no unnecessary files or code-comments. The `build`-folder is for debugging your files, the `dist-`folder should be used for production.
 
 ```
 $ tree -d -I node_modules
 .
 ├── bower_components
 ├── build
-│   ├── ajax-content
 │   ├── bower_components
 │   ├── css
 │   ├── fonts
 │   ├── img
+│   │   ├── appicons
 │   │   └── bgs
-│   │       └── png-fallback
 │   └── js
+│       └── modernizr
 ├── dist
-│   ├── ajax-content
 │   ├── bower_components
 │   ├── css
 │   ├── fonts
 │   ├── img
+│   │   ├── appicons
 │   │   └── bgs
-│   │       └── png-fallback
 │   └── js
-└── source
-    ├── ajax-content
-    ├── assemble
-    │   ├── data
-    │   ├── helpers
-    │   ├── layouts
-    │   ├── pages
-    │   └── partials
-    ├── fonts
-    ├── img
-    │   ├── appicons
-    │   ├── bgs
-    │   ├── dev
-    │   ├── icons
-    │   └── temp
-    ├── js
-    │   └── modernizr
-    ├── sass
-    │   ├── blocks
-    │   ├── extends
-    │   │   └── ui-components
-    │   ├── grunticon
-    │   ├── mixins
-    │   ├── svg-bg-extends
-    │   └── variables
-    └── styleguide-template
-        └── public
+│       └── modernizr
+├── source
+│   ├── assemble
+│   │   ├── data
+│   │   ├── helpers
+│   │   ├── layouts
+│   │   ├── pages
+│   │   └── partials
+│   ├── fonts
+│   ├── img
+│   │   ├── appicons
+│   │   ├── bgs
+│   │   ├── dev
+│   │   ├── icons
+│   │   └── temp
+│   ├── js
+│   │   └── modernizr
+│   ├── sass
+│   │   ├── blocks
+│   │   ├── extends
+│   │   ├── mixins
+│   │   └── variables
+│   └── styleguide-template
+│       └── public
+└── tmp
+    ├── grunticon
+    ├── svg-bg-extends
+    └── svgmin
+        └── bgs
 ```
 
 
