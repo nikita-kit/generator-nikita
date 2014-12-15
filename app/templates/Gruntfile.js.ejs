@@ -264,8 +264,8 @@ module.exports = function(grunt) {
 							require('connect-livereload')({
 								port: grunt.option('livereload-port')
 							}),
-							connect.static(options.base),
-							connect.directory(options.base)
+							connect.static(options.base[0]),
+							connect.directory(options.base[0])
 						]
 					}
 				},
@@ -1059,7 +1059,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('write-gitinfos', 'Write gitinfos to a temp. file', function () {
 		grunt.task.requires('gitinfo');
 		
-		grunt.file.write('<%%= paths.tmp %>/gitinfos.json', JSON.stringify({
+		grunt.file.write(paths.tmp+'/gitinfos.json', JSON.stringify({
 			gitinfo: grunt.config('gitinfo')
 		}));
 	});

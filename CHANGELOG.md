@@ -1,3 +1,16 @@
+# 0.7.0
+
+* updated grunt-sass to 0.17.0
+* updated grunt-autoprefixer to 2.0.0
+* updated grunt-concurrent to 1.0.0
+* updated grunt-contrib-clean to 0.6.0
+* updated grunt-contrib-copy to 0.7.0
+* updated grunt-contrib-cssmin to 0.10.0
+* updated grunt-contrib-imagemin to 0.9.2
+* updated grunt-contrib-jshint to 0.10.0
+* updated grunt-contrib-uglify to 0.6.0
+* updated grunt-contrib-watch to 0.6.1
+
 # 0.6.0
 
 * added paths variables for `source, build, dist, tmp` to easily configure changing folders
