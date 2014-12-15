@@ -251,7 +251,7 @@ module.exports = function(grunt) {
 		connect: {
 			livereload: {
 				options: {
-					base: '<%%= paths.dev %>',
+					base: ['', '<%%= paths.dev %>'],
 					hostname: '0.0.0.0',
 					port: grunt.option('port'),
 					middleware: function(connect, options) {
@@ -265,7 +265,8 @@ module.exports = function(grunt) {
 								port: grunt.option('livereload-port')
 							}),
 							connect.static(options.base[0]),
-							connect.directory(options.base[0])
+							connect.static(options.base[1]),
+							connect.directory(options.base[1])
 						]
 					}
 				},
@@ -280,12 +281,6 @@ module.exports = function(grunt) {
 			ajax: {
 				cwd: '<%%= paths.src %>/ajax-content/',
 				dest: '<%%= paths.dist %>/ajax-content/',
-				expand: true,
-				src: ['**/*']
-			},
-			bower_components: {
-				cwd: 'bower_components/',
-				dest: '<%%= paths.dist %>/bower_components/',
 				expand: true,
 				src: ['**/*']
 			},
@@ -921,17 +916,6 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// Configuration for symlink files
-		symlink: {
-			options: {
-				overwrite: false
-			},
-			dev: {
-				src: 'bower_components/',
-				dest: '<%%= paths.dev %>/bower_components/'
-			}
-		},
-
 		// Configuration for watching changes
 		watch: {
 			options: {
@@ -1006,7 +990,6 @@ module.exports = function(grunt) {
 		'concurrent:dev2',
 		'autoprefixer:dev',<% if (config.get('features').indexOf('cssSplit') != -1) { %>
 		'csssplit:dev',<% } %>
-		'symlink:dev',
 		'concat:dev',
 		'sync',
 		'prettify:dev'
@@ -1045,7 +1028,6 @@ module.exports = function(grunt) {
 		'requirejs',
 		'concat:dist',
 		'copy:ajax',
-		'copy:bower_components',
 		'copy:favicon',
 		'copy:fonts',
 		'copy:js',

@@ -1,3 +1,10 @@
+# Development Version
+
+* removed dependency to `grunt-symlink`
+* `bower_components` is now always located at `/` and not at `source/bower_components` as symlink
+* removed `copy:bower_components` from dist. If you need it: depend on the things in `_requireconfig.js`
+  or `@import` them to your `styles.scss`
+
 # 0.7.0
 
 * updated grunt-sass to 0.17.0
