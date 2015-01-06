@@ -1,4 +1,4 @@
-# Development Version
+# 0.8.0
 
 * removed dependency to `grunt-symlink`
 * `bower_components` is now always located at `/` and not at `source/bower_components` as symlink
