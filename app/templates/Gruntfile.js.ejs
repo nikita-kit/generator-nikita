@@ -829,7 +829,7 @@ module.exports = function(grunt) {
 					}
 				]
 			}
-		},
+		},<% if (config.get('features').indexOf('svgSprite') != -1) { %>
 
 		// Configuration for building the SVG-sprite
 		svgstore: {
@@ -853,7 +853,7 @@ module.exports = function(grunt) {
 					'<%%= paths.dist %>/img/icons/icon-sprite.svg': ['<%%= paths.tmp %>/svgmin/icons/*.svg']
 				}
 			}
-		},
+		},<% } %>
 
 		// Configuration for syncing files
 		// Task does not remove any files and directories in 'dest' that are no longer in 'cwd'. :'(
@@ -948,7 +948,7 @@ module.exports = function(grunt) {
 			},
 			svg_icons: {
 				files: ['<%%= paths.src %>/img/icons/*.svg'],
-				tasks: ['newer:svgmin:dev_ico', 'svgstore:dev', 'newer:assemble:dev']
+				tasks: ['newer:svgmin:dev_ico',<% if (config.get('features').indexOf('svgSprite') != -1) { %> 'svgstore:dev',<% } %> 'newer:assemble:dev']
 			},
 			sync_ajax: {
 				files: ['<%%= paths.src %>/ajax-content/**/*'],
@@ -990,8 +990,8 @@ module.exports = function(grunt) {
 		'clean:tmp',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'svgmin:dev_bg',<% } %>
 		'svgmin:dev_file',
-		'svgmin:dev_ico',
-		'svgstore:dev',
+		'svgmin:dev_ico',<% if (config.get('features').indexOf('svgSprite') != -1) { %>
+		'svgstore:dev',<% } %>
 		'concurrent:dev1',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'string-replace',<% } %>
 		'generate-tmp-styles-scss',
@@ -1017,8 +1017,8 @@ module.exports = function(grunt) {
 		'clean:docs',<% } %><% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'svgmin:dist_bg',<% } %>
 		'svgmin:dist_file',
-		'svgmin:dist_ico',
-		'svgstore:dist',
+		'svgmin:dist_ico',<% if (config.get('features').indexOf('svgSprite') != -1) { %>
+		'svgstore:dist',<% } %>
 		'concurrent:dist',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'string-replace',<% } %>
 		'generate-tmp-styles-scss',<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>

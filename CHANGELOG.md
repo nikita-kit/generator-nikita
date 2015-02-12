@@ -1,5 +1,6 @@
 # dev
 
+* made activation of SVG Sprites configurable
 * load `svg-sprite.svg` from svgstore with ajax #13
 * made the `--target` of `grunt build` and `grunt dist` configurable #10
 * added `useBuildFolders` and `sourceFolder` to configure where to put source files

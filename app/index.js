@@ -87,6 +87,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					name: 'Use background SVG files as base64 encoded dataURIs with placeholder extends (grunt-grunticon + grunt-string-replace + svg-background-mixin)',
 					value: 'svgBackgrounds'
 				}, {
+					name: 'Use SVG Sprite to include icons with svg\'s <use> tag',
+					value: 'svgSprite'
+				}, {
 					name: 'Split your main CSS-file into several small ones to support IE9 and lower (grunt-csssplit)',
 					value: 'cssSplit'
 				}, {
@@ -286,7 +289,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Image README Files
 			this.template('source/img/bgs/README.md.ejs', sourceFolder + '/img/bgs/README.md');
 			this.template('source/img/dev/README.md.ejs', sourceFolder + '/img/dev/README.md');
-			this.template('source/img/icons/README.md.ejs', sourceFolder + '/img/icons/README.md');
 			this.template('source/img/temp/README.md.ejs', sourceFolder + '/img/temp/README.md');
 			
 			// Libsass
@@ -324,7 +326,17 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				delete packageJsonData['devDependencies']['grunt-grunticon'];
 				delete packageJsonData['devDependencies']['grunt-string-replace'];
 			}
-			
+
+			// Optional SVG Sprite
+			if (this.config.get('features').indexOf('svgSprite') == -1)
+			{
+				delete packageJsonData['devDependencies']['grunt-svgstore'];
+			}
+			else
+			{
+				this.template('source/img/icons/README.md.ejs', sourceFolder + '/img/icons/README.md');
+			}
+
 			// Optional CSS Splitting for IE9 and lower
 			if (this.config.get('features').indexOf('cssSplit') == -1)
 			{

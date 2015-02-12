@@ -241,21 +241,27 @@ The `data-main` attribute ensures, that the app.js will be loaded (as soon as ma
 
 ## Icon-Workflow
 
+<% if (config.get('features').indexOf('svgSprite') != -1 && config.get('features').indexOf('svgBackgrounds') != -1) { %>
+
 There're two possible ways to use icons.
 
+<% } %>
 
+<% if (config.get('features').indexOf('svgSprite') != -1) { %>
 ### SVG-Sprite
 
 You'd like to edit your icons with CSS, e.g. to change the fill-color or you have one and the same icon in different colors? Then this is your choice.
 
 1. Just put your SVG-icons into `source/img/icons`.
 2. All icons will be processed with the svgmin-task and put into the `tmp/svgmin/icons` folder.
-3. Afterwards the svgstore-task uses these icons to put together an icon-sprite which will be copied to the `assemble/partials` folder. It must be included directly after the opening `<body>` element at the top of the document (have a look at the file `lyt-default.hbs` in the `layouts` folder).
+3. Afterwards the svgstore-task uses these icons to put together an `icon-sprite.svg` which will be copied to the `img/icons` folder. It must be injected with ajax directly after the opening `<body>` element at the top of the document (have a look at the file `lyt-default.hbs` in the `layouts` folder).
 4. To include a SVG-icon use `<svg class="your-class-name"><use xlink:href="#filename" /></svg>` in your .hbs-files. Make sure you use a class name on the SVG to size it.
 5. Now you can use `.your-class-name { fill: #f30; }` to color your icon.
 
 For further infos read the article [Icon System with SVG sprites](http://css-tricks.com/svg-sprites-use-better-icon-fonts/) by Chris Coyier.
+<% } %>
 
+<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 
 ### Data-URIs
 
@@ -270,6 +276,8 @@ If you have to include your icon as a background-image, e.g. because you can't s
 5. Now you can include your icons by using the `_svg-background.scss` mixin. Just type `@include svg-background(name-of-your-icon);`.
 
 __Attention:__ Grunticon also produces icons as png-data-uris, mainly for ie8 and older android browsers. If you use lots of icons in your project, remove `@extend %icon-data-png-#{$name};` from the mixin and only extend the svg and fallback version. Otherwise it could really hurt performance because of CSS-bloat!
+
+<% } %>
 
 ## Use `source+build+dist` or one custom folder
 

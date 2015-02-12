@@ -71,7 +71,7 @@
 		{{partial 'gitinfos'}}
 		{{/if}}
 <% } %>
-
+<% if (config.get('features').indexOf('svgSprite') != -1) { %>
 		<script>
 			/* lazy load icon-sprite, to avoid including it */
 			var ajax = new XMLHttpRequest();
@@ -84,6 +84,7 @@
 			}
 		</script>
 
+<% } %>
 		{{> body }}
 		
 		<script data-main="app" src="js/main.js?cb={{ currentTimestamp }}"></script>
