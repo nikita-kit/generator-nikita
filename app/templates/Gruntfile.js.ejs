@@ -19,8 +19,8 @@ module.exports = function(grunt) {
 <% if (config.get('useBuildFolders')) { %>
 	var paths = {
 		src: 'source',
-		dev: 'build',
-		dist: 'dist',
+		dev: grunt.option('target') || 'build',
+		dist: grunt.option('target') || 'dist',
 		tmp: 'tmp'
 	};
 <% } else { %>
