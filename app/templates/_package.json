@@ -6,6 +6,7 @@
         "connect-livereload": "~0.3.2",
         "css-parse": "~1.5.3",
         "grunt": "~0.4.5",
+        "grunt-cli": "^0.1.13",
         "grunt-accessibility": "~1.2.1",
         "grunt-autoprefixer": "~2.0.0",
         "grunt-concurrent": "~1.0.0",

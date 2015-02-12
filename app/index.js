@@ -108,6 +108,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					name: 'Take screenshots to diff your changes (grunt-photobox)',
 					value: 'takeScreenshots'
 				}, {
+					name: 'Use local grunt and bower binaries',
+					value: 'useLocalGruntAndBower'
+				}, {
 					name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
 					value: 'gitinfos'
 				}
@@ -290,7 +293,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/img/bgs/README.md.ejs', sourceFolder + '/img/bgs/README.md');
 			this.template('source/img/dev/README.md.ejs', sourceFolder + '/img/dev/README.md');
 			this.template('source/img/temp/README.md.ejs', sourceFolder + '/img/temp/README.md');
-			
+
+			if (this.config.get('features').indexOf('useLocalGruntAndBower') == -1)
+			{
+				delete packageJsonData['devDependencies']['grunt-cli'];
+				delete packageJsonData['devDependencies']['bower'];
+			}
+
 			// Libsass
 			if (this.config.get('sassCompiler').indexOf('libSass') == -1)
 			{
