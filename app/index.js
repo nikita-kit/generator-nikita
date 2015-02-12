@@ -151,7 +151,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					value: 'ib'
 				}
 			]),
-			promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true)
+			promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true),
+			promptConfirm('useBuildFolders', 'Do you want to use "build/source and dist" folder?', true)
 		];
 		
 		this.prompt(prompts, function (props)
@@ -189,8 +190,32 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				console.info('You need the nikita.css mixins to enable the nikita form framework. Activating this option now.');
 				that.config.set('nikitaCssMixins', ['centering', 'fixed-ratiobox', 'font-smoothing', 'layering', 'px-to-rem', 'respond-to', 'triangle']);
 			}
-			
-			done();
+
+			if (!that.config.get('useBuildFolders'))
+			{
+				that.config.set('cleanBuildFolders', false);
+
+				that.prompt(promptInput('sourceFolder', 'Which source folder do you want to use?', 'source'), function(props)
+				{
+					for (var key in props)
+					{
+						if (props.hasOwnProperty(key))
+						{
+							that.config.set(key, props[key]);
+						}
+					}
+
+					that.config.set('requirejsPathToBowerComponents', (Array(2 + that.config.get('sourceFolder').split("/", -1).length).join("../")) + 'bower_components/');
+
+					done();
+				});
+			}
+			else
+			{
+				that.config.set('cleanBuildFolders', true);
+				that.config.set('requirejsPathToBowerComponents', '../../bower_components/');
+				done();
+			}
 		});
 	},
 	
@@ -213,49 +238,56 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('NIKITA-LICENSE.md.ejs', 'NIKITA-LICENSE.md');
 			this.template('README.md.ejs', 'README.md');
 			this.template('setup-dev-env.sh.ejs', 'setup-dev-env.sh');
+
+			var sourceFolder = 'source';
+
+			if (!this.config.get('useBuildFolders'))
+			{
+				sourceFolder = this.config.get('sourceFolder');
+			}
 			
 			// Basic Project Folders
-			this.dest.mkdir('source/img');
-			this.dest.mkdir('source/img/bgs');
-			this.dest.mkdir('source/img/icons');
-			this.dest.mkdir('source/sass/mixins');
-			this.directory('source/img/appicons', 'source/img/appicons');
+			this.dest.mkdir(sourceFolder + '/img');
+			this.dest.mkdir(sourceFolder + '/img/bgs');
+			this.dest.mkdir(sourceFolder + '/img/icons');
+			this.dest.mkdir(sourceFolder + '/sass/mixins');
+			this.directory('source/img/appicons', sourceFolder + '/img/appicons');
 			
 			// SASS Basic Files
-			this.template('source/sass/styles.scss.ejs', 'source/sass/styles.scss');
-			this.template('source/sass/universal.scss.ejs', 'source/sass/universal.scss');
-			this.template('source/sass/_basics.scss.ejs', 'source/sass/_basics.scss');
+			this.template('source/sass/styles.scss.ejs', sourceFolder + '/sass/styles.scss');
+			this.template('source/sass/universal.scss.ejs', sourceFolder + '/sass/universal.scss');
+			this.template('source/sass/_basics.scss.ejs', sourceFolder + '/sass/_basics.scss');
 			
 			// SASS Extra Files
-			this.template('source/sass/blocks/_rwd-testing.scss.ejs', 'source/sass/blocks/_rwd-testing.scss');
-			this.template('source/sass/extends/_buttons.scss.ejs', 'source/sass/extends/_buttons.scss');
+			this.template('source/sass/blocks/_rwd-testing.scss.ejs', sourceFolder + '/sass/blocks/_rwd-testing.scss');
+			this.template('source/sass/extends/_buttons.scss.ejs', sourceFolder + '/sass/extends/_buttons.scss');
 			
 			// SASS Variables
-			this.template('source/sass/variables/_color.scss.ejs', 'source/sass/variables/_color.scss');
-			this.template('source/sass/variables/_timing.scss.ejs', 'source/sass/variables/_timing.scss');
-			this.template('source/sass/variables/_typography.scss.ejs', 'source/sass/variables/_typography.scss');
+			this.template('source/sass/variables/_color.scss.ejs', sourceFolder + '/sass/variables/_color.scss');
+			this.template('source/sass/variables/_timing.scss.ejs', sourceFolder + '/sass/variables/_timing.scss');
+			this.template('source/sass/variables/_typography.scss.ejs', sourceFolder + '/sass/variables/_typography.scss');
 			
 			// JS Files
-			this.template('source/js/_requireconfig.js.ejs', 'source/js/_requireconfig.js');
-			this.template('source/js/app.js.ejs', 'source/js/app.js');
-			this.template('source/js/modernizr/cssCheckedTest.js.ejs', 'source/js/modernizr/cssCheckedTest.js');
-			this.template('source/js/modernizr/positionStickyTest.js.ejs', 'source/js/modernizr/positionStickyTest.js');
+			this.template('source/js/_requireconfig.js.ejs', sourceFolder + '/js/_requireconfig.js');
+			this.template('source/js/app.js.ejs', sourceFolder + '/js/app.js');
+			this.template('source/js/modernizr/cssCheckedTest.js.ejs', sourceFolder + '/js/modernizr/cssCheckedTest.js');
+			this.template('source/js/modernizr/positionStickyTest.js.ejs', sourceFolder + '/js/modernizr/positionStickyTest.js');
 			
 			// Assemble Files
-			this.template('source/assemble/pages/index.hbs.ejs', 'source/assemble/pages/index.hbs');
-			this.template('source/assemble/pages/rwd-testing.hbs.ejs', 'source/assemble/pages/rwd-testing.hbs');
-			this.template('source/assemble/layouts/lyt-default.hbs.ejs', 'source/assemble/layouts/lyt-default.hbs');
+			this.template('source/assemble/pages/index.hbs.ejs', sourceFolder + '/assemble/pages/index.hbs');
+			this.template('source/assemble/pages/rwd-testing.hbs.ejs', sourceFolder + '/assemble/pages/rwd-testing.hbs');
+			this.template('source/assemble/layouts/lyt-default.hbs.ejs', sourceFolder + '/assemble/layouts/lyt-default.hbs');
 			
 			// Assemble Folders
-			this.directory('source/assemble/data', 'source/assemble/data');
-			this.directory('source/assemble/helpers', 'source/assemble/helpers');
-			this.template('source/assemble/partials/.gitkeep', 'source/assemble/partials/.gitkeep');
+			this.directory('source/assemble/data', sourceFolder + '/assemble/data');
+			this.directory('source/assemble/helpers', sourceFolder + '/assemble/helpers');
+			this.template('source/assemble/partials/.gitkeep', sourceFolder + '/assemble/partials/.gitkeep');
 
 			// Image README Files
-			this.template('source/img/bgs/README.md.ejs', 'source/img/bgs/README.md');
-			this.template('source/img/dev/README.md.ejs', 'source/img/dev/README.md');
-			this.template('source/img/icons/README.md.ejs', 'source/img/icons/README.md');
-			this.template('source/img/temp/README.md.ejs', 'source/img/temp/README.md');
+			this.template('source/img/bgs/README.md.ejs', sourceFolder + '/img/bgs/README.md');
+			this.template('source/img/dev/README.md.ejs', sourceFolder + '/img/dev/README.md');
+			this.template('source/img/icons/README.md.ejs', sourceFolder + '/img/icons/README.md');
+			this.template('source/img/temp/README.md.ejs', sourceFolder + '/img/temp/README.md');
 			
 			// Libsass
 			if (this.config.get('sassCompiler').indexOf('libSass') == -1)
@@ -272,20 +304,20 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Optional Browser Reset SASS-Partial
 			if (this.config.get('features').indexOf('browserReset') != -1)
 			{
-				this.template('source/sass/_reset.scss.ejs', 'source/sass/_reset.scss');
+				this.template('source/sass/_reset.scss.ejs', sourceFolder + '/sass/_reset.scss');
 			}
 			
 			// Optional Webfonts folder and SASS-Partial
 			if (this.config.get('features').indexOf('webfonts') != -1)
 			{
-				this.directory('source/fonts', 'source/fonts');
-				this.template('source/sass/_webfonts.scss.ejs', 'source/sass/_webfonts.scss');
+				this.directory('source/fonts', sourceFolder + '/fonts');
+				this.template('source/sass/_webfonts.scss.ejs', sourceFolder + '/sass/_webfonts.scss');
 			}
 			
 			// Optional SVG Backgrounds
 			if (this.config.get('features').indexOf('svgBackgrounds') != -1)
 			{
-				this.template('source/sass/mixins/_svg-background.scss.ejs', 'source/sass/mixins/_svg-background.scss');
+				this.template('source/sass/mixins/_svg-background.scss.ejs', sourceFolder + '/sass/mixins/_svg-background.scss');
 			}
 			else
 			{
@@ -306,8 +338,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			else
 			{
-				this.template('source/sass/blocks/styleguide.md.ejs', 'source/sass/blocks/styleguide.md');
-				this.directory('source/styleguide-template', 'source/styleguide-template');
+				this.template('source/sass/blocks/styleguide.md.ejs', sourceFolder + '/sass/blocks/styleguide.md');
+				this.directory('source/styleguide-template', sourceFolder + '/styleguide-template');
 			}
 			
 			// Optional JS Documentation
@@ -341,27 +373,27 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			else
 			{
-				this.template('source/assemble/partials/gitinfos.hbs.ejs', 'source/assemble/partials/gitinfos.hbs');
+				this.template('source/assemble/partials/gitinfos.hbs.ejs', sourceFolder + '/assemble/partials/gitinfos.hbs');
 			}
 			
 			// Optional Layering-Mixin
 			if (this.config.get('nikitaCssMixins').indexOf('layering') != -1)
 			{
-				this.template('source/sass/variables/_z-layers.scss.ejs', 'source/sass/variables/_z-layers.scss');
+				this.template('source/sass/variables/_z-layers.scss.ejs', sourceFolder + '/sass/variables/_z-layers.scss');
 			}
 			
 			// Optional Respond-To-Mixin
 			if (this.config.get('nikitaCssMixins').indexOf('respond-to') != -1)
 			{
-				this.template('source/sass/variables/_breakpoints.scss.ejs', 'source/sass/variables/_breakpoints.scss');
+				this.template('source/sass/variables/_breakpoints.scss.ejs', sourceFolder + '/sass/variables/_breakpoints.scss');
 			}
 			
 			// Optional Form Framework
 			if (this.config.get('formFramework'))
 			{
-				this.template('source/assemble/pages/forms.hbs.ejs', 'source/assemble/pages/forms.hbs');
-				this.template('source/sass/blocks/_forms.scss.ejs', 'source/sass/blocks/_forms.scss');
-				this.src.copy('source/img/bgs/form-select-arrow-down.svg', 'source/img/bgs/form-select-arrow-down.svg');
+				this.template('source/assemble/pages/forms.hbs.ejs', sourceFolder + '/assemble/pages/forms.hbs');
+				this.template('source/sass/blocks/_forms.scss.ejs', sourceFolder + '/sass/blocks/_forms.scss');
+				this.src.copy('source/img/bgs/form-select-arrow-down.svg', sourceFolder + '/img/bgs/form-select-arrow-down.svg');
 			}
 			
 			this.dest.write('package.json', JSON.stringify(packageJsonData, null, 4));

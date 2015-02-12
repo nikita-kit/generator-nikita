@@ -16,13 +16,21 @@ module.exports = function(grunt) {
 		grunt.option('livereload-port', grunt.option('port') + 1);
 	}
 
+<% if (config.get('useBuildFolders')) { %>
 	var paths = {
 		src: 'source',
 		dev: 'build',
 		dist: 'dist',
 		tmp: 'tmp'
 	};
-
+<% } else { %>
+	var paths = {
+		src: '<%= config.get('sourceFolder') %>',
+		dev: '<%= config.get('sourceFolder') %>',
+		dist: '<%= config.get('sourceFolder') %>',
+		tmp: 'tmp'
+	};
+<% }%>
 	// All configuration goes here
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -108,7 +116,7 @@ module.exports = function(grunt) {
 		clean: {
 			options: {
 				force: true
-			},
+			},<% if (config.get('cleanBuildFolders')) { %>
 			dev: {
 				files: [
 					{
@@ -122,7 +130,7 @@ module.exports = function(grunt) {
 						src: ['<%%= paths.dist %>']
 					}
 				]
-			},<% if (config.get('features').indexOf('jsDoc') != -1) { %>
+			},<% } %><% if (config.get('features').indexOf('jsDoc') != -1) { %>
 			docs: {
 				dist: ['jsdocs/**/*']
 			},<% } %>
@@ -977,8 +985,8 @@ module.exports = function(grunt) {
 	]);
 
 	// Development task
-	grunt.registerTask('dev', [
-		'clean:dev',
+	grunt.registerTask('dev', [<% if (config.get('cleanBuildFolders')) { %>
+		'clean:dev',<% } %>
 		'clean:tmp',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'svgmin:dev_bg',<% } %>
 		'svgmin:dev_file',
@@ -1003,8 +1011,8 @@ module.exports = function(grunt) {
 	]);
 
 	// Distributing task
-	grunt.registerTask('dist', [
-		'clean:dist',
+	grunt.registerTask('dist', [<% if (config.get('cleanBuildFolders')) { %>
+		'clean:dist',<% } %>
 		'clean:tmp',<% if (config.get('features').indexOf('jsDoc') != -1) { %>
 		'clean:docs',<% } %><% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'svgmin:dist_bg',<% } %>

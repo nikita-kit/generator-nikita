@@ -269,6 +269,31 @@ If you have to include your icon as a background-image, e.g. because you can't s
 
 __Attention:__ Grunticon also produces icons as png-data-uris, mainly for ie8 and older android browsers. If you use lots of icons in your project, remove `@extend %icon-data-png-#{$name};` from the mixin and only extend the svg and fallback version. Otherwise it could really hurt performance because of CSS-bloat!
 
+## Use `source+build+dist` or one custom folder
+
+Since 0.9.0 it's possible to decide whether you want to use the default structure:
+
+```
+source
+dist
+build
+```
+
+or if you want to use a custom folder (e.g. for symfony2):
+
+```
+src/AppBundle/Resources/public
+```
+
+To decide between those, you will be asked:
+
+``` console
+? Do you want to use "build/source and dist" folder? No
+? Which source folder do you want to use? (src/AppBundle/Resources/public)
+```
+
+You can choose `Y` to keep the default logic (using source-folder to generate dist+build folder depending on the grunt
+task you choose).
 
 ## Questions?
 

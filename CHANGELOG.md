@@ -1,5 +1,6 @@
 # dev
 
+* added `useBuildFolders` and `sourceFolder` to configure where to put source files
 * isFile filter for grunt expand added #14
 * updated cssmin version
 * removed unecessary trailing `,` in js arrays

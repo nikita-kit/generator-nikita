@@ -2,7 +2,7 @@ requirejs({
 	"baseUrl": "./js/",
 	"noGlobal": true,
 	"paths": {
-		"logging": "../../bower_components/logging.js/logging"
+		"logging": "<%= config.get('requirejsPathToBowerComponents') %>logging.js/logging"
 	},
 	"shim": {
 	},
