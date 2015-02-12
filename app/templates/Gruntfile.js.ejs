@@ -784,7 +784,7 @@ module.exports = function(grunt) {
 						src: ['*.svg', 'temp/*.svg']
 					}
 				]
-			},
+			},<% if (config.get('features').indexOf('svgSprite') != -1) { %>
 			dev_ico: {
 				files: [
 					{
@@ -795,7 +795,7 @@ module.exports = function(grunt) {
 						src: ['*.svg']
 					}
 				]
-			},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+			},<% } %><% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 			dist_bg: {
 				files: [
 					{
@@ -817,7 +817,7 @@ module.exports = function(grunt) {
 						src: ['*.svg', 'temp/*.svg']
 					}
 				]
-			},
+			}<% if (config.get('features').indexOf('svgSprite') != -1) { %>,
 			dist_ico: {
 				files: [
 					{
@@ -828,7 +828,7 @@ module.exports = function(grunt) {
 						src: ['*.svg']
 					}
 				]
-			}
+			}<% } %>
 		},<% if (config.get('features').indexOf('svgSprite') != -1) { %>
 
 		// Configuration for building the SVG-sprite
@@ -945,11 +945,11 @@ module.exports = function(grunt) {
 			svg_files: {
 				files: ['<%%= paths.src %>/img/*.svg'],
 				tasks: ['newer:svgmin:dev_file']
-			},
+			},<% if (config.get('features').indexOf('svgSprite') != -1) { %>
 			svg_icons: {
 				files: ['<%%= paths.src %>/img/icons/*.svg'],
-				tasks: ['newer:svgmin:dev_ico',<% if (config.get('features').indexOf('svgSprite') != -1) { %> 'svgstore:dev',<% } %> 'newer:assemble:dev']
-			},
+				tasks: ['newer:svgmin:dev_ico', 'svgstore:dev']
+			},<% } %>
 			sync_ajax: {
 				files: ['<%%= paths.src %>/ajax-content/**/*'],
 				tasks: ['sync:ajax']
@@ -989,8 +989,8 @@ module.exports = function(grunt) {
 		'clean:dev',<% } %>
 		'clean:tmp',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'svgmin:dev_bg',<% } %>
-		'svgmin:dev_file',
-		'svgmin:dev_ico',<% if (config.get('features').indexOf('svgSprite') != -1) { %>
+		'svgmin:dev_file',<% if (config.get('features').indexOf('svgSprite') != -1) { %>
+		'svgmin:dev_ico',
 		'svgstore:dev',<% } %>
 		'concurrent:dev1',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'string-replace',<% } %>
@@ -1016,8 +1016,8 @@ module.exports = function(grunt) {
 		'clean:tmp',<% if (config.get('features').indexOf('jsDoc') != -1) { %>
 		'clean:docs',<% } %><% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'svgmin:dist_bg',<% } %>
-		'svgmin:dist_file',
-		'svgmin:dist_ico',<% if (config.get('features').indexOf('svgSprite') != -1) { %>
+		'svgmin:dist_file',<% if (config.get('features').indexOf('svgSprite') != -1) { %>
+		'svgmin:dist_ico',
 		'svgstore:dist',<% } %>
 		'concurrent:dist',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'string-replace',<% } %>
