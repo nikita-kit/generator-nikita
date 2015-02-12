@@ -1,3 +1,8 @@
+# dev
+
+* updated cssmin version
+* removed unecessary trailing `,` in js arrays
+
 # 0.8.0
 
 * removed dependency to `grunt-symlink`
