@@ -71,9 +71,19 @@
 		{{partial 'gitinfos'}}
 		{{/if}}
 <% } %>
-		
-		{{partial 'icon-sprite'}}
-		
+
+		<script>
+			/* lazy load icon-sprite, to avoid including it */
+			var ajax = new XMLHttpRequest();
+			ajax.open("GET", "img/icons/icon-sprite.svg", true);
+			ajax.send();
+			ajax.onload = function(e) {
+				var div = document.createElement("div");
+				div.innerHTML = ajax.responseText;
+				document.body.insertBefore(div, document.body.childNodes[0]);
+			}
+		</script>
+
 		{{> body }}
 		
 		<script data-main="app" src="js/main.js?cb={{ currentTimestamp }}"></script>

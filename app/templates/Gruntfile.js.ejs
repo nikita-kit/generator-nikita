@@ -62,7 +62,7 @@ module.exports = function(grunt) {
 				data: '<%%= paths.src %>/assemble/data/**/*.{json,yml}',
 				helpers: ['handlebars-helper-partial', '<%%= paths.src %>/assemble/helpers/**/*.js'],
 				layoutdir: '<%%= paths.src %>/assemble/layouts/',
-				partials: ['<%%= paths.src %>/assemble/partials/**/*.hbs', '<%%= paths.tmp %>/icon-sprite.svg'],
+				partials: ['<%%= paths.src %>/assemble/partials/**/*.hbs'],
 				currentTimestamp: (new Date()).getTime()
 			},
 			dev: {
@@ -845,12 +845,12 @@ module.exports = function(grunt) {
 			},
 			dev: {
 				files: {
-					'<%%= paths.tmp %>/icon-sprite.svg': ['<%%= paths.tmp %>/svgmin/icons/*.svg']
+					'<%%= paths.dev %>/img/icons/icon-sprite.svg': ['<%%= paths.tmp %>/svgmin/icons/*.svg']
 				}
 			},
 			dist: {
 				files: {
-					'<%%= paths.tmp %>/icon-sprite.svg': ['<%%= paths.tmp %>/svgmin/icons/*.svg']
+					'<%%= paths.dist %>/img/icons/icon-sprite.svg': ['<%%= paths.tmp %>/svgmin/icons/*.svg']
 				}
 			}
 		},
