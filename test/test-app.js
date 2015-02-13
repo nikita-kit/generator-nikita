@@ -16,6 +16,7 @@ describe('nikita:app', function () {
         private: true,
         name: "testrun" + (new Date()).getTime(),
         nikitaCssMixins: [],
+        useBuildFolders: true,
         nikitaCssExtends: [],
         features: []
       })
