@@ -129,9 +129,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					name: 'Layering: A function for managing z-index layers within a Sass map',
 					value: 'layering'
 				}, {
-					name: 'PX-to-REM: Convert pixel values to rem values',
-					value: 'px-to-rem'
-				}, {
 					name: 'Respond-To: Easy managing your media queries',
 					value: 'respond-to'
 				}, {
@@ -191,10 +188,10 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				return that.config.get('nikitaCssMixins') && that.config.get('nikitaCssMixins').indexOf(mixin) !== -1 ? true : false;
 			}
 			
-			if ((!hasMixin('px-to-rem') || !hasMixin('respond-to')) && that.config.get('formFramework'))
+			if ((!hasMixin('respond-to')) && that.config.get('formFramework'))
 			{
 				console.info('You need the nikita.css mixins to enable the nikita form framework. Activating this option now.');
-				that.config.set('nikitaCssMixins', ['centering', 'fixed-ratiobox', 'font-smoothing', 'layering', 'px-to-rem', 'respond-to', 'triangle']);
+				that.config.set('nikitaCssMixins', ['centering', 'fixed-ratiobox', 'font-smoothing', 'layering', 'respond-to', 'triangle']);
 			}
 
 			if (!that.config.get('useBuildFolders'))
