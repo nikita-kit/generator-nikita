@@ -1,4 +1,4 @@
-# DEV
+# 1.0.0 (2015/03/18)
 
 * added templates for nikita configuration (default, slim, custom) - saves you from lots of decisions when bootstraping
   a simple project
