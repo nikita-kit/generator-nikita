@@ -1,5 +1,6 @@
 # DEV
 
+* fixed issue, when there are no .svgs in the img/bgs folder #19
 * removed px-to-rem mixin
 * set `attr-value-double-quotes` and `attr-value-not-empty` to false and added `space-tab-mixed-disabled` in htmlhint options
 * pinned handlebars-helper-partial in package.json to version 0.1.2 (there are conficts with 0.2.0)
