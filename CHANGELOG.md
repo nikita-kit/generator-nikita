@@ -1,5 +1,7 @@
 # DEV
 
+* added templates for nikita configuration (default, slim, custom) - saves you from lots of decisions when bootstraping
+  a simple project
 * removed grunticon and replaced it with svgcss #20
   * dropped PNG-fallback support!
 * fixed tmpPath for grunticon #18

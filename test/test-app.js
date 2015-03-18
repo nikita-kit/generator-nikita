@@ -12,6 +12,7 @@ describe('nikita:app', function () {
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
       .withPrompt({
+		template: "custom",
         sassCompiler: "compass",
         private: true,
         name: "testrun" + (new Date()).getTime(),

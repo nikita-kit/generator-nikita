@@ -63,102 +63,91 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				default: that.config.get(name, defaultChoices || choices)
 			};
 		};
-		
-		var prompts = [
+
+		var templatePrompts = [
 			promptInput('name', 'Your project name', this.appname),
 			promptConfirm('private', 'Is this project private?', true),
-			promptList('sassCompiler', 'Which Sass Compiler do you want to use?', [
+			promptList('template', 'Which configuration template do you want to use?', [
 				{
-					name: 'libSass, lightning fast but not all Sass features',
-					value: 'libSass'
-				}, {
-					name: 'Compass + Sass, slower but with all latest Sass features, based on Ruby',
-					value: 'compass'
-				}
-			]),
-			promptCheckbox('features', 'Which features do you want to use?', [
+					name: 'Default setup',
+					value: 'default'
+				},
 				{
-					name: 'Self hosted webfonts, a fonts-folder will be added to your project',
-					value: 'webfonts'
-				}, {
-					name: 'Browser Reset Styles, a _reset.scss will be added to your project',
-					value: 'browserReset'
-				}, {
-					name: 'Use background SVG files as base64 encoded dataURIs with placeholder extends (grunt-grunticon + grunt-string-replace + svg-background-mixin)',
-					value: 'svgBackgrounds'
-				}, {
-					name: 'Use SVG Sprite to include icons with svg\'s <use> tag',
-					value: 'svgSprite'
-				}, {
-					name: 'Split your main CSS-file into several small ones to support IE9 and lower (grunt-csssplit)',
-					value: 'cssSplit'
-				}, {
-					name: 'Create a CSS Styleguide (grunt-styleguide)',
-					value: 'cssStyleGuide'
-				}, {
-					name: 'Create a JS Documentation (grunt-jsdoc)',
-					value: 'jsDoc'
-				}, {
-					name: 'Measure Pagespeed (grunt-pagespeed)',
-					value: 'measurePagespeed'
-				}, {
-					name: 'Measure Frontend-Performance (grunt-phantomas)',
-					value: 'measurePerformance'
-				}, {
-					name: 'Take screenshots to diff your changes (grunt-photobox)',
-					value: 'takeScreenshots'
-				}, {
-					name: 'Use local grunt and bower binaries',
-					value: 'useLocalGruntAndBower'
-				}, {
-					name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
-					value: 'gitinfos'
-				}
-			]),
-			promptCheckbox('nikitaCssMixins', 'Which nikita.css mixins do you want to use?', [
+					name: 'Slim setup',
+					value: 'slim'
+				},
 				{
-					name: 'Centering: Horizontally and/or vertically centering elements with the translate-method (IE9+)',
-					value: 'centering'
-				}, {
-					name: 'Fixed-Ratiobox: Use intrinsic ratio to force child elements like images, videos or frames to fluidly scale at a given ratio',
-					value: 'fixed-ratiobox'
-				}, {
-					name: 'Font-Smoothing: Turn font-smoothing on/off for a better font-rendering on OS X',
-					value: 'font-smoothing'
-				}, {
-					name: 'Layering: A function for managing z-index layers within a Sass map',
-					value: 'layering'
-				}, {
-					name: 'Respond-To: Easy managing your media queries',
-					value: 'respond-to'
-				}, {
-					name: 'Triangle: Easy generating arrow-like triangles with the border-method',
-					value: 'triangle'
+					name: 'Build a completely custom version on your own',
+					value: 'custom'
 				}
-			]),
-			promptCheckbox('nikitaCssExtends', 'Which nikita.css extends do you want to use?', [
-				{
-					name: 'a11y: Hide elements in sake of accessibility',
-					value: 'a11y'
-				}, {
-					name: 'cf: Micro clearfix',
-					value: 'cf'
-				}, {
-					name: 'ellipsis: Ellipsis to point out text',
-					value: 'ellipsis'
-				}, {
-					name: 'hide-text: Hide text on elements in sake of accessibility',
-					value: 'hide-text'
-				}, {
-					name: 'ib: Use the inline-block method as an alternative to float elements',
-					value: 'ib'
-				}
-			]),
-			promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true),
-			promptConfirm('useBuildFolders', 'Do you want to use "build/source and dist" folder?', true)
+			])
 		];
 		
-		this.prompt(prompts, function (props)
+		var handleSetup = function() {
+			that.prompt([
+				promptConfirm('useBuildFolders', 'Do you want to use "build/source and dist" folder?', true)
+			], function (props) {
+				for (var key in props) {
+					if (props.hasOwnProperty(key)) {
+						that.config.set(key, props[key]);
+					}
+				}
+
+				if (!that.config.get('svgBackgrounds') && that.config.get('formFramework'))
+				{
+					console.info('You need the SVG backgrounds feature to enable the nikita form framework. Activating this option now.');
+					that.config.set('svgBackgrounds', true);
+				}
+
+				var hasExtend = function (extend) {
+					return that.config.get('nikitaCssExtends') && that.config.get('nikitaCssExtends').indexOf(extend) !== -1 ? true : false;
+				}
+
+				if ((!hasExtend('a11y') || !hasExtend('cf') || !hasExtend('ellipsis')) && that.config.get('formFramework'))
+				{
+					console.info('You need the nikita.css mixins to enable the nikita form framework. Activating this option now.');
+					that.config.set('nikitaCssExtends', ['a11y', 'cf', 'ellipsis', 'hide-text', 'ib']);
+				}
+
+				var hasMixin = function (mixin) {
+					return that.config.get('nikitaCssMixins') && that.config.get('nikitaCssMixins').indexOf(mixin) !== -1 ? true : false;
+				}
+
+				if ((!hasMixin('respond-to')) && that.config.get('formFramework'))
+				{
+					console.info('You need the nikita.css mixins to enable the nikita form framework. Activating this option now.');
+					that.config.set('nikitaCssMixins', ['centering', 'fixed-ratiobox', 'font-smoothing', 'layering', 'respond-to', 'triangle']);
+				}
+
+				if (!that.config.get('useBuildFolders'))
+				{
+					that.config.set('cleanBuildFolders', false);
+
+					that.prompt(promptInput('sourceFolder', 'Which source folder do you want to use?', 'source'), function(props)
+					{
+						for (var key in props)
+						{
+							if (props.hasOwnProperty(key))
+							{
+								that.config.set(key, props[key]);
+							}
+						}
+
+						that.config.set('requirejsPathToBowerComponents', (Array(2 + that.config.get('sourceFolder').split("/", -1).length).join("../")) + 'bower_components/');
+
+						done();
+					});
+				}
+				else
+				{
+					that.config.set('cleanBuildFolders', true);
+					that.config.set('requirejsPathToBowerComponents', '../../bower_components/');
+					done();
+				}
+			});
+		};
+
+		that.prompt(templatePrompts, function (props)
 		{
 			for (var key in props)
 			{
@@ -167,38 +156,154 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					that.config.set(key, props[key]);
 				}
 			}
-			
-			if (!that.config.get('svgBackgrounds') && that.config.get('formFramework'))
-			{
-				console.info('You need the SVG backgrounds feature to enable the nikita form framework. Activating this option now.');
-				that.config.set('svgBackgrounds', true);
-			}
-			
-			var hasExtend = function (extend) {
-				return that.config.get('nikitaCssExtends') && that.config.get('nikitaCssExtends').indexOf(extend) !== -1 ? true : false;
-			}
-			
-			if ((!hasExtend('a11y') || !hasExtend('cf') || !hasExtend('ellipsis')) && that.config.get('formFramework'))
-			{
-				console.info('You need the nikita.css mixins to enable the nikita form framework. Activating this option now.');
-				that.config.set('nikitaCssExtends', ['a11y', 'cf', 'ellipsis', 'hide-text', 'ib']);
-			}
-			
-			var hasMixin = function (mixin) {
-				return that.config.get('nikitaCssMixins') && that.config.get('nikitaCssMixins').indexOf(mixin) !== -1 ? true : false;
-			}
-			
-			if ((!hasMixin('respond-to')) && that.config.get('formFramework'))
-			{
-				console.info('You need the nikita.css mixins to enable the nikita form framework. Activating this option now.');
-				that.config.set('nikitaCssMixins', ['centering', 'fixed-ratiobox', 'font-smoothing', 'layering', 'respond-to', 'triangle']);
-			}
 
-			if (!that.config.get('useBuildFolders'))
+			if (that.config.get('template') == 'default')
 			{
-				that.config.set('cleanBuildFolders', false);
+				that.config.set('sassCompiler', 'libSass');
+				that.config.set('features', [
+					'webfonts',
+					'browserReset',
+					'svgBackgrounds',
+					'svgSprite',
+					'gitinfos'
+				]);
+				that.config.set('nikitaCssMixins', [
+					'centering',
+					'fixed-ratiobox',
+					'font-smoothing',
+					'layering',
+					'respond-to',
+					'triangle'
+				]);
 
-				that.prompt(promptInput('sourceFolder', 'Which source folder do you want to use?', 'source'), function(props)
+				that.config.set('nikitaCssExtends', [
+					'a11y',
+					'cf',
+					'ellipsis',
+					'hide-text',
+					'ib'
+				]);
+
+				that.config.set('formFramework', true);
+				that.config.set('useBuildFolders', true);
+
+				handleSetup();
+			}
+			else if (that.config.get('template') == 'slim')
+			{
+				that.config.set('sassCompiler', 'libSass');
+				that.config.set('features', [
+					'webfonts',
+					'svgBackgrounds',
+					'gitinfos'
+				]);
+				that.config.set('nikitaCssMixins', [
+					'respond-to'
+				]);
+
+				that.config.set('nikitaCssExtends', [
+					'cf'
+				]);
+
+				that.config.set('formFramework', false);
+				that.config.set('useBuildFolders', true);
+
+				handleSetup();
+			}
+			else if (that.config.get('template') == 'custom')
+			{
+				var prompts = [
+					promptList('sassCompiler', 'Which Sass Compiler do you want to use?', [
+						{
+							name: 'libSass, lightning fast but not all Sass features',
+							value: 'libSass'
+						}, {
+							name: 'Compass + Sass, slower but with all latest Sass features, based on Ruby',
+							value: 'compass'
+						}
+					]),
+					promptCheckbox('features', 'Which features do you want to use?', [
+						{
+							name: 'Self hosted webfonts, a fonts-folder will be added to your project',
+							value: 'webfonts'
+						}, {
+							name: 'Browser Reset Styles, a _reset.scss will be added to your project',
+							value: 'browserReset'
+						}, {
+							name: 'Use background SVG files as base64 encoded dataURIs with placeholder extends (grunt-grunticon + grunt-string-replace + svg-background-mixin)',
+							value: 'svgBackgrounds'
+						}, {
+							name: 'Use SVG Sprite to include icons with svg\'s <use> tag',
+							value: 'svgSprite'
+						}, {
+							name: 'Split your main CSS-file into several small ones to support IE9 and lower (grunt-csssplit)',
+							value: 'cssSplit'
+						}, {
+							name: 'Create a CSS Styleguide (grunt-styleguide)',
+							value: 'cssStyleGuide'
+						}, {
+							name: 'Create a JS Documentation (grunt-jsdoc)',
+							value: 'jsDoc'
+						}, {
+							name: 'Measure Pagespeed (grunt-pagespeed)',
+							value: 'measurePagespeed'
+						}, {
+							name: 'Measure Frontend-Performance (grunt-phantomas)',
+							value: 'measurePerformance'
+						}, {
+							name: 'Take screenshots to diff your changes (grunt-photobox)',
+							value: 'takeScreenshots'
+						}, {
+							name: 'Use local grunt and bower binaries',
+							value: 'useLocalGruntAndBower'
+						}, {
+							name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
+							value: 'gitinfos'
+						}
+					]),
+					promptCheckbox('nikitaCssMixins', 'Which nikita.css mixins do you want to use?', [
+						{
+							name: 'Centering: Horizontally and/or vertically centering elements with the translate-method (IE9+)',
+							value: 'centering'
+						}, {
+							name: 'Fixed-Ratiobox: Use intrinsic ratio to force child elements like images, videos or frames to fluidly scale at a given ratio',
+							value: 'fixed-ratiobox'
+						}, {
+							name: 'Font-Smoothing: Turn font-smoothing on/off for a better font-rendering on OS X',
+							value: 'font-smoothing'
+						}, {
+							name: 'Layering: A function for managing z-index layers within a Sass map',
+							value: 'layering'
+						}, {
+							name: 'Respond-To: Easy managing your media queries',
+							value: 'respond-to'
+						}, {
+							name: 'Triangle: Easy generating arrow-like triangles with the border-method',
+							value: 'triangle'
+						}
+					]),
+					promptCheckbox('nikitaCssExtends', 'Which nikita.css extends do you want to use?', [
+						{
+							name: 'a11y: Hide elements in sake of accessibility',
+							value: 'a11y'
+						}, {
+							name: 'cf: Micro clearfix',
+							value: 'cf'
+						}, {
+							name: 'ellipsis: Ellipsis to point out text',
+							value: 'ellipsis'
+						}, {
+							name: 'hide-text: Hide text on elements in sake of accessibility',
+							value: 'hide-text'
+						}, {
+							name: 'ib: Use the inline-block method as an alternative to float elements',
+							value: 'ib'
+						}
+					]),
+					promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true),
+				];
+
+				that.prompt(prompts, function (props)
 				{
 					for (var key in props)
 					{
@@ -208,16 +313,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}
 					}
 
-					that.config.set('requirejsPathToBowerComponents', (Array(2 + that.config.get('sourceFolder').split("/", -1).length).join("../")) + 'bower_components/');
-
-					done();
+					handleSetup();
 				});
-			}
-			else
-			{
-				that.config.set('cleanBuildFolders', true);
-				that.config.set('requirejsPathToBowerComponents', '../../bower_components/');
-				done();
 			}
 		});
 	},
