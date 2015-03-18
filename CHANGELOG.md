@@ -1,5 +1,7 @@
 # DEV
 
+* removed grunticon and replaced it with svgcss #20
+  * dropped PNG-fallback support!
 * fixed tmpPath for grunticon #18
 * upgraded to grunticon 2.1.6
 * fixed issue, when there are no .svgs in the img/bgs folder #19

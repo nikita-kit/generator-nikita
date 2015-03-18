@@ -329,7 +329,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			else
 			{
-				delete packageJsonData['devDependencies']['grunt-grunticon'];
+				delete packageJsonData['devDependencies']['grunt-svg-css'];
 				delete packageJsonData['devDependencies']['grunt-string-replace'];
 			}
 
