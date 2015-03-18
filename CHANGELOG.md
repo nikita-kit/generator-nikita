@@ -1,5 +1,6 @@
 # DEV
 
+* removed px-to-rem-usage from _rwd-testing.scss and _buttons.scss #16
 * removed px-to-rem-usage from _forms.scss #17
 
 # 0.9.0 (2015/03/10)
