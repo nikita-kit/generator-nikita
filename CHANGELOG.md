@@ -1,5 +1,7 @@
 # DEV
 
+* fixed tmpPath for grunticon #18
+* upgraded to grunticon 2.1.6
 * fixed issue, when there are no .svgs in the img/bgs folder #19
 * removed px-to-rem mixin
 * set `attr-value-double-quotes` and `attr-value-not-empty` to false and added `space-tab-mixed-disabled` in htmlhint options

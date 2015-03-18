@@ -24,7 +24,7 @@
         "grunt-csssplit": "~0.2.0",
         "grunt-gitinfo": "^0.1.7",
         "grunt-group-css-media-queries": "~1.0.1",
-        "grunt-grunticon": "~1.2.13",
+        "grunt-grunticon": "~2.1.6",
         "grunt-htmlhint": "~0.4.1",
         "grunt-jsdoc": "~0.5.6",
         "grunt-modernizr": "~0.6.0",
