@@ -1,5 +1,6 @@
 # dev
 
+* removed px-to-rem-usage from _forms.scss #17
 * updated to grunt-sass 0.18.0 to get node-sass 2.0.0 (to fix 32bit compatibility issue) #15
 * decide whether you want to use local bower/grunt or the global version (saves up to 55MB!)
 * made activation of SVG Sprites configurable

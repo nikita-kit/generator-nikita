@@ -7,7 +7,6 @@
  *   <!-- your form content here -->
  * </form>
  *
- * Styleguide Forms
  */
 
 .b-forms {
@@ -197,9 +196,9 @@
 		h2 {
 			margin-bottom: 12px;
 			font-family: $base-font;
-			@include rem(font-size, 24px);
+			font-size: 24px;
 			font-weight: 700;
-			@include rem(line-height, 28px);
+			line-height: 28px;
 			text-transform: uppercase;
 		}
 	}
@@ -313,8 +312,8 @@
 	
 	legend {
 		margin-bottom: 10px;
-		@include rem(font-size, 20px);
-		@include rem(line-height, 24px);
+		font-size: 20px;
+		line-height: 24px;
 		text-transform: uppercase;
 	}
 	
@@ -352,9 +351,9 @@
 	label,
 	.group-label {
 		display: block;
-		@include rem(font-size, 16px);
+		font-size: 16px;
 		font-weight: 400;
-		@include rem(line-height, 18px);
+		line-height: 18px;
 	}
 	
 	// Inputs, Select, Textarea
@@ -369,8 +368,8 @@
 		border: 1px solid $line-color-02;
 		padding: 5px 10px;
 		font-family: $base-font;
-		@include rem(font-size, 16px); // 16px is a must for iOS not zooming into the form
-		@include rem(line-height, 18px);
+		font-size: 16px; // 16px is a must for iOS not zooming into the form
+		line-height: 18px;
 		color: $text-color-02;
 		background-color: $bg-color-01;
 		transition: border-color linear $form-animation-duration, box-shadow linear $form-animation-duration, background-color linear $form-animation-duration;
@@ -421,9 +420,9 @@
 	
 	select {
 		@extend %ellipsis;
+		@include svg-background(select-arrow-down);
 		position: relative;
 		padding: 5px 30px 5px 10px;
-		@include svg-background(form-select-arrow-down);
 		background-position: right 10px top 50%;
 		cursor: pointer;
 		
@@ -433,19 +432,6 @@
 			background-color: $bg-color-01;
 		}
 	}
-	
-	// temp. fix for FF 30 – https://gist.github.com/joaocunha/6273016
-	// @-moz-document url-prefix() {
-	// 	select {
-	// 		padding-right: 0;
-	// 		background-image: none;
-			
-	// 		&:focus,
-	// 		&:hover {
-	// 			background-image: none;
-	// 		}
-	// 	}
-	// }
 	
 	select::-ms-expand {
 		display: none;
@@ -611,8 +597,8 @@
 	.note {
 		clear: both;
 		padding-top: 8px;
-		@include rem(font-size, 14px);
-		@include rem(line-height, 16px);
+		font-size: 14px;
+		line-height: 16px;
 		color: $text-color-02;
 	}
 	
