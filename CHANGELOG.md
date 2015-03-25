@@ -1,7 +1,10 @@
+# DEV
+
+* fixed string-replace-task #22
+
 # 1.0.0 (2015/03/18)
 
-* added templates for nikita configuration (default, slim, custom) - saves you from lots of decisions when bootstraping
-  a simple project
+* added templates for nikita configuration (default, slim, custom) - saves you from lots of decisions when bootstraping a simple project
 * removed grunticon and replaced it with svgcss #20
   * dropped PNG-fallback support!
 * fixed tmpPath for grunticon #18
@@ -29,8 +32,7 @@
 
 * removed dependency to `grunt-symlink`
 * `bower_components` is now always located at `/` and not at `source/bower_components` as symlink
-* removed `copy:bower_components` from dist. If you need it: depend on the things in `_requireconfig.js`
-  or `@import` them to your `styles.scss`
+* removed `copy:bower_components` from dist. If you need it: depend on the things in `_requireconfig.js` or `@import` them to your `styles.scss`
 
 # 0.7.0
 
