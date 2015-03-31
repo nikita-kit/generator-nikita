@@ -1,5 +1,6 @@
 # DEV
 
+* updated grunt-autoprefixer to 2.2.0
 * fixed string-replace-task #22
 
 # 1.0.0 (2015/03/18)
