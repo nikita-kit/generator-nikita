@@ -360,6 +360,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			
 			// SASS Extra Files
 			this.template('source/sass/blocks/_rwd-testing.scss.ejs', sourceFolder + '/sass/blocks/_rwd-testing.scss');
+			this.template('source/sass/extends/.gitkeep', sourceFolder + '/sass/extends/.gitkeep');
 			this.template('source/sass/extends/_buttons.scss.ejs', sourceFolder + '/sass/extends/_buttons.scss');
 			
 			// SASS Variables

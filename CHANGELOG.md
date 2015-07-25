@@ -1,5 +1,6 @@
 # DEV
 
+* .gitkeep for sass extends folder added
 * updated grunt-svgmin to 2.0.1
 
 # 1.0.1 (2015/03/31)
