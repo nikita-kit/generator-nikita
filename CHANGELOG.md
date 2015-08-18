@@ -1,5 +1,6 @@
 # DEV
 
+* replaced grunt-autoprefixer by grunt-postcss and autoprefixer-core
 * .gitkeep for sass extends folder added
 * updated grunt-svgmin to 2.0.1
 
