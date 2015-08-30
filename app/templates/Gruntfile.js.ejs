@@ -251,7 +251,7 @@ module.exports = function(grunt) {
 
 		// Configuration for run tasks concurrently
 		concurrent: {
-			dev1: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss', <% } %>'imagemin:dev'],
+			dev1: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss'<% } %>],
 			dev2: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:devStyles', 'compass:devUniversal', <% } %>'assemble:dev', 'modernizr'],
 			dist: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss', <% } %>'imagemin:dist'],
 		},
@@ -397,23 +397,13 @@ module.exports = function(grunt) {
 			options: {
 				optimizationLevel: 7
 			},
-			dev: {
-				files: [
-					{
-						cwd: '<%%= paths.src %>/img/',
-						dest: '<%%= paths.dev %>/img/',
-						expand: true,
-						src: ['**/*.{jpg,png,gif}']
-					}
-				]
-			},
 			dist: {
 				files: [
 					{
 						cwd: '<%%= paths.src %>/img/',
 						dest: '<%%= paths.dist %>/img/',
 						expand: true,
-						src: ['**/*.{jpg,png,gif}']
+						src: ['**/*.{jpg,jpeg,png,gif}']
 					}
 				]
 			}
@@ -840,6 +830,15 @@ module.exports = function(grunt) {
 					}
 				]
 			},
+			images: {
+				files: [
+					{
+						cwd: '<%= paths.src %>/img/',
+						dest: '<%= paths.dev %>/img/',
+						src: '**/*.{jpg,jpeg,png,gif}'
+					}
+				]
+			},
 			js: {
 				files: [
 					{
@@ -888,10 +887,6 @@ module.exports = function(grunt) {
 			scss: {
 				files: ['<%%= paths.src %>/sass/**/*.scss'],
 				tasks: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:devStyles', 'compass:devUniversal', <% } %>'autoprefixer:dev'<% if (config.get('features').indexOf('cssSplit') != -1) { %>, 'csssplit:dev'<% } %>]
-			},
-			images: {
-				files: ['<%%= paths.src %>/img/*', '<%%= paths.src %>/img/**/*.{jpg,png,gif}', '!<%%= paths.src %>/img/dev/*'],
-				tasks: ['newer:imagemin:dev']
 			},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 			svg_bgs: {
 				files: ['<%%= paths.src %>/img/bgs/*.svg'],
@@ -908,6 +903,10 @@ module.exports = function(grunt) {
 			sync_ajax: {
 				files: ['<%%= paths.src %>/ajax-content/**/*'],
 				tasks: ['sync:ajax']
+			},
+			sync_images: {
+				files: ['<%= paths.src %>/img/*', '<%= paths.src %>/img/**/*.{jpg,jpeg,png,gif}', '!<%= paths.src %>/img/dev/*'],
+				tasks: ['sync:images']
 			},
 			sync_fonts: {
 				files: ['<%%= paths.src %>/fonts/**/*'],
