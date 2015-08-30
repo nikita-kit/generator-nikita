@@ -833,8 +833,8 @@ module.exports = function(grunt) {
 			images: {
 				files: [
 					{
-						cwd: '<%= paths.src %>/img/',
-						dest: '<%= paths.dev %>/img/',
+						cwd: '<%%= paths.src %>/img/',
+						dest: '<%%= paths.dev %>/img/',
 						src: '**/*.{jpg,jpeg,png,gif}'
 					}
 				]
@@ -905,7 +905,7 @@ module.exports = function(grunt) {
 				tasks: ['sync:ajax']
 			},
 			sync_images: {
-				files: ['<%= paths.src %>/img/*', '<%= paths.src %>/img/**/*.{jpg,jpeg,png,gif}', '!<%= paths.src %>/img/dev/*'],
+				files: ['<%%= paths.src %>/img/*', '<%%= paths.src %>/img/**/*.{jpg,jpeg,png,gif}', '!<%%= paths.src %>/img/dev/*'],
 				tasks: ['sync:images']
 			},
 			sync_fonts: {
