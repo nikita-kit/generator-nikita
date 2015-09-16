@@ -231,7 +231,7 @@ module.exports = function(grunt) {
 				process: function(src, filepath)
 				{
 					// Add cachebuster for every required file
-					if (filepath == '<%%= paths.src %>/js/_requireconfig.js')
+					if (filepath == paths.src + '/js/_requireconfig.js')
 					{
 						return 'require({"urlArgs": "cb=' + (new Date()).getTime()+ '"});' + "\n\n" + src;
 					}
