@@ -165,6 +165,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					'browserReset',
 					'svgBackgrounds',
 					'svgSprite',
+					'universalCss',
 					'gitinfos'
 				]);
 				that.config.set('nikitaCssMixins', [
@@ -253,6 +254,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}, {
 							name: 'Take screenshots to diff your changes (grunt-photobox)',
 							value: 'takeScreenshots'
+                        }, {
+							name: "Add a universal css as fallback for old browsers",
+							value: "universalCss"
 						}, {
 							name: 'Use local grunt and bower binaries',
 							value: 'useLocalGruntAndBower'
@@ -355,7 +359,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			
 			// SASS Basic Files
 			this.template('source/sass/styles.scss.ejs', sourceFolder + '/sass/styles.scss');
-			this.template('source/sass/universal.scss.ejs', sourceFolder + '/sass/universal.scss');
+
+			if (this.config.get('features').indexOf('universalCss') !== -1)
+			{
+				this.template('source/sass/universal.scss.ejs', sourceFolder + '/sass/universal.scss');
+			}
+
 			this.template('source/sass/_basics.scss.ejs', sourceFolder + '/sass/_basics.scss');
 			
 			// SASS Extra Files

@@ -1,5 +1,6 @@
 # DEV
 
+* added feature switch for universal stylesheet
 * .gitkeep for sass extends folder added
 * updated grunt-svgmin to 2.0.1
 
