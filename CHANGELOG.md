@@ -1,6 +1,13 @@
 # DEV
 
-* replaced grunt-autoprefixer by grunt-postcss and autoprefixer-core
+* generate setup-dev-env.sh depending on the local grunt/bower setting
+* fixed README for projects without compass
+* travis builds don't require sudo anymore: faster CI
+* replaced grunt-autoprefixer by grunt-postcss and autoprefixer
+
+# 1.0.2 (2015/09/02)
+
+>>>>>>> Stashed changes
 * .gitkeep for sass extends folder added
 * updated grunt-svgmin to 2.0.1
 
