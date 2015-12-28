@@ -1,6 +1,7 @@
 # DEV
 
 * added grunt-real-favicon for dynamic favicon generating, using only one png file (yet img/appicons/tile-large.png), obselete images removed
+* fixed skip-install option in generator
 * pinned npm package versions
 * uglify disabled for one-folder-build
 * fix license entry to be SPDX conform
