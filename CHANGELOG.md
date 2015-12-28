@@ -1,5 +1,6 @@
 # DEV
 
+* replaced grunt-autoprefixer by grunt-postcss and autoprefixer
 * requirejs uglify disabled
 * updated grunt-contrib-imagemin package
 * updated grunt-sass package
