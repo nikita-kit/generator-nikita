@@ -1,5 +1,6 @@
 # DEV
 
+* updated grunt-contrib-imagemin package
 * updated grunt-sass package
 * fixed require js cachebusting
 * added tests for custom:libass, custom:compass, slim and default template
