@@ -7,33 +7,35 @@ var helpers = require('yeoman-generator').test;
 var os = require('os');
 
 describe('nikita:app:custom-libsass', function () {
-  before(function (done) {
-    helpers.run(path.join(__dirname, '../app'))
-      .inDir(path.join(os.tmpdir(), './temp-test'))
-      .withOptions({ 'skipInstall': true })
-      .withPrompt({
-		template: "custom",
-        sassCompiler: "libsass",
-        private: true,
-        name: "testrun" + (new Date()).getTime(),
-        nikitaCssMixins: [],
-        useBuildFolders: true,
-        nikitaCssExtends: [],
-        features: []
-      })
-      .on('end', done);
-  });
+	this.timeout(5000);
+	before(function (done) {
+		helpers.run(path.join(__dirname, '../app'))
+			.inDir(path.join(os.tmpdir(), './temp-test'))
+			.withOptions({ 'skipInstall': true })
+			.withPrompt({
+				template: "custom",
+				sassCompiler: "libsass",
+				private: true,
+				name: "testrun" + (new Date()).getTime(),
+				nikitaCssMixins: [],
+				useBuildFolders: true,
+				nikitaCssExtends: [],
+				features: []
+			})
+			.on('end', done);
+	});
 
-  it('creates files', function () {
-    assert.file([
-      'bower.json',
-      'package.json',
-      'source/sass/styles.scss'
-    ]);
-  });
+	it('creates files', function () {
+		assert.file([
+			'bower.json',
+			'package.json',
+			'source/sass/styles.scss'
+		]);
+	});
 });
 
 describe('nikita:app:custom-compass', function () {
+	this.timeout(5000);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -61,6 +63,7 @@ describe('nikita:app:custom-compass', function () {
 });
 
 describe('nikita:app:slim', function () {
+	this.timeout(5000);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -84,6 +87,7 @@ describe('nikita:app:slim', function () {
 });
 
 describe('nikita:app:default', function () {
+	this.timeout(5000);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -107,6 +111,7 @@ describe('nikita:app:default', function () {
 });
 
 describe('nikita:app:slim-no-build-folder', function () {
+	this.timeout(5000);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
