@@ -7,6 +7,17 @@ var chalk = require('chalk');
 
 var NikitaGenerator = yeoman.generators.Base.extend({
 
+	constructor: function ()
+	{
+		yeoman.generators.Base.apply(this, arguments);
+
+		this.option('skip-install',
+			{
+				desc: 'Will skip the installation of npm and bower packages',
+				type: 'boolean'
+			});
+	},
+
 	initializing: function ()
 	{
 		this.pkg = require('../package.json');
