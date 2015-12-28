@@ -63,7 +63,7 @@ module.exports = function(grunt) {
 				data: '<%%= paths.src %>/assemble/data/**/*.{json,yml}',
 				helpers: ['handlebars-helper-partial', '<%%= paths.src %>/assemble/helpers/**/*.js'],
 				layoutdir: '<%%= paths.src %>/assemble/layouts/',
-				partials: ['<%%= paths.src %>/assemble/partials/**/*.hbs'],
+				partials: ['<%%= paths.src %>/assemble/partials/**/*.hbs', '<%%= paths.tmp %>/partials/**/*.hbs'],
 				currentTimestamp: (new Date()).getTime()
 			},
 			dev: {
@@ -581,7 +581,7 @@ module.exports = function(grunt) {
 				dest: '<%%= paths.dev %>/img/appicons',
 				options: {
 					iconsPath: 'img/appicons',
-					html: ['<%%= paths.tmp %>/partials/favico.hbs'],
+					html: ['<%%= paths.tmp %>/partials/favicons.hbs'],
 					design: {
 						androidChrome: {
 							pictureAspect: 'no_change',
@@ -614,7 +614,7 @@ module.exports = function(grunt) {
 				dest: '<%%= paths.dist %>/img/appicons',
 				options: {
 					iconsPath: 'img/appicons',
-					html: ['<%%= paths.tmp %>/partials/favico.hbs'],
+					html: ['<%%= paths.tmp %>/partials/favicons.hbs'],
 					design: {
 						androidChrome: {
 							pictureAspect: 'no_change',
