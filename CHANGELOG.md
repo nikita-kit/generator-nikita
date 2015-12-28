@@ -1,5 +1,6 @@
 # DEV
 
+* fixed README for projects without compass
 * travis builds don't require sudo anymore: faster CI
 
 # 1.0.2 (2015/09/02)
