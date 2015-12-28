@@ -1,5 +1,6 @@
 # DEV
 
+* added feature switch for universal stylesheet
 * generate setup-dev-env.sh depending on the local grunt/bower setting
 * fixed README for projects without compass
 * travis builds don't require sudo anymore: faster CI

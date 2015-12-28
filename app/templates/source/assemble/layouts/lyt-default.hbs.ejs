@@ -22,10 +22,12 @@
 		<!--[if IE 9]>
 		<link href="css/styles-part1.css?cb={{ currentTimestamp }}" rel="stylesheet" />
 		<![endif]-->
-		
+		<% if (config.get('features').indexOf('universalCss') != -1) { %>
+
 		<!--[if lte IE 8]>
 		<link href="css/universal.css?cb={{ currentTimestamp }}" rel="stylesheet" />
 		<![endif]-->
+		<% } %>
 
 		<script src="js/modernizr.js?cb={{ currentTimestamp }}"></script>
 		
