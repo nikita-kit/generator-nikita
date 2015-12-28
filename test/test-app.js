@@ -115,7 +115,7 @@ describe('nikita:app:slim-no-build-folder', function () {
 				template: "slim",
 				private: true,
 				useBuildFolders: false,
-				sourceFolder: "src/App/Resources/public/source",
+				sourceFolder: "src/App/Resources/public",
 				name: "testrun" + (new Date()).getTime()
 			})
 			.on('end', done);
@@ -125,7 +125,7 @@ describe('nikita:app:slim-no-build-folder', function () {
 		assert.file([
 			'bower.json',
 			'package.json',
-			'src/App/Resources/public/source/sass/styles.scss'
+			'src/App/Resources/public/sass/styles.scss'
 		]);
 	});
 });
