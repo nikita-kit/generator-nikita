@@ -1,5 +1,6 @@
 # DEV
 
+* requirejs uglify disabled
 * fixed require js cachebusting
 * added tests for custom:libass, custom:compass, slim and default template
 * added feature switch for universal stylesheet

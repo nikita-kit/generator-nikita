@@ -576,7 +576,8 @@ module.exports = function(grunt) {
 				options: {
 					baseUrl: "<%%= paths.src %>/js/",
 					mainConfigFile: "<%%= paths.src %>/js/_requireconfig.js",
-					out: "<%%= paths.tmp %>/main.js"
+					out: "<%%= paths.tmp %>/main.js",
+					optimize: "none"
 				}
 			}
 		},<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
