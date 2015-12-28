@@ -1,5 +1,6 @@
 # DEV
 
+* requirejs uglify disabled
 * updated grunt-contrib-imagemin package
 * updated grunt-sass package
 * fix trailing slash in source folder path
