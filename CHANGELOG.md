@@ -1,5 +1,6 @@
 # DEV
 
+* fix license entry to be SPDX conform
 * depend on version >= 4.x and < 5 of nodejs
 * replaced grunt-autoprefixer by grunt-postcss and autoprefixer
 * requirejs uglify disabled

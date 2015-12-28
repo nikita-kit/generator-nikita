@@ -1,7 +1,7 @@
 {
   "name": "generator-nikita",
   "description": "The official yeoman generator for nikita.kit",
-  "license": "CC0",
+  "license": "CC0-1.0",
   "main": "app/index.js",
   "repository": "nikita-kit/generator-nikita",
   "author": {
