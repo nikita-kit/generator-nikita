@@ -1,5 +1,6 @@
 # DEV
 
+* moved nikita-css, jsb, logging.js to npm
 * pinned npm package versions
 * uglify disabled for one-folder-build
 * fix license entry to be SPDX conform
