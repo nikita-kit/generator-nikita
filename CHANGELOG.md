@@ -1,5 +1,6 @@
 # DEV
 
+* depend on version >= 4.x and < 5 of nodejs
 * replaced grunt-autoprefixer by grunt-postcss and autoprefixer
 * requirejs uglify disabled
 * updated grunt-contrib-imagemin package
