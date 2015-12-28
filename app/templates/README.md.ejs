@@ -11,8 +11,9 @@ If you want to write efficient and scalable (S)CSS-code for big websites, try [n
 ## Project-Setup
 
 - [__Grunt__](http://gruntjs.com/) – js task runner
-- [__Assemble__](http://assemble.io/) – static site generator
-- [__SASS__](http://sass-lang.com/) with [__Compass__](http://compass-style.org/) or [__LibSass__](http://libsass.org/) – css preprocessing
+- [__Assemble__](http://assemble.io/) – static site generator<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
+- [__SASS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – css preprocessing<% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
+- [__SASS__](http://sass-lang.com/) with [__Compass__](http://compass-style.org/) – css preprocessing<% } %>
 - [__nikita.html__](https://github.com/nikita-kit/nikita-html) – HTML conventions and coding guidelines
 - [__nikita.css__](https://github.com/nikita-kit/nikita-css) – (S)CSS conventions and coding guidelines
 - [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines
@@ -21,8 +22,7 @@ If you want to write efficient and scalable (S)CSS-code for big websites, try [n
 - [__Livereload__](http://livereload.com/) – browser auto refresh
 - [__KSS__](http://warpspire.com/kss/) – living styleguide
 
-Grunt depends on [node.js](http://nodejs.org), Sass, Compass and SCSS-Lint depend on [Ruby](http://www.ruby-lang.org). Some of the [Grunt plugins](#grunt-plugins-used) depend on command line tools to be installed on your (build) system.
-
+Grunt depends on [node.js](http://nodejs.org)<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>, Sass, Compass and SCSS-Lint depend on [Ruby](http://www.ruby-lang.org)<% } %>. Some of the [Grunt plugins](#grunt-plugins-used) depend on command line tools to be installed on your (build) system.
 
 ## Requirements
 
@@ -32,10 +32,10 @@ These are the minimum requirements for the project setup:
 - [__Grunt Command Line Interface__](http://gruntjs.com/getting-started) – `sudo npm install -g grunt-cli`
 - [__Bower__](http://bower.io) – `sudo npm install -g bower`
 
-Additionally if you choose to use Compass + Sass based on Ruby:
+Additionally we have the following ruby dependencies:
 
-- [__Compass 1.0__](http://rubygems.org/gems/compass/versions) – `sudo gem install compass`
-- [__SASS 3.4__](http://rubygems.org/gems/sass/versions/) – `sudo gem install sass`
+<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>- [__Compass 1.0__](http://rubygems.org/gems/compass/versions) – `sudo gem install compass`
+- [__SASS 3.4__](http://rubygems.org/gems/sass/versions/) – `sudo gem install sass`<% } %>
 - [__SCSS Lint 0.28__](http://rubygems.org/gems/scss-lint/versions) – `sudo gem install scss-lint`
 
 Here's an example of a complete working configuration:
@@ -43,10 +43,10 @@ Here's an example of a complete working configuration:
 ```
 $ gem list
 
-compass (1.0.1)
+<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>compass (1.0.1)
 compass-core (1.0.1)
 compass-import-once (1.0.5)
-sass (3.4.4)
+sass (3.4.4)<% } %>
 scss-lint (0.28.0)
 ```
 
@@ -97,8 +97,8 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 - [grunt](https://github.com/gruntjs/grunt)
 - [grunt-accessibility](https://github.com/yargalot/grunt-accessibility)
 - [grunt-concurrent](https://github.com/sindresorhus/grunt-concurrent)
-- [grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean)
-- [grunt-contrib-compass](https://github.com/gruntjs/grunt-contrib-compass)
+- [grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean)<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
+- [grunt-contrib-compass](https://github.com/gruntjs/grunt-contrib-compass)<% } %>
 - [grunt-contrib-concat](https://github.com/gruntjs/grunt-contrib-concat)
 - [grunt-contrib-connect](https://github.com/gruntjs/grunt-contrib-connect)
 - [grunt-contrib-copy](https://github.com/gruntjs/grunt-contrib-copy)

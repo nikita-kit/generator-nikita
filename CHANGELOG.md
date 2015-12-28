@@ -1,14 +1,18 @@
 # DEV
 
+* replaced grunt-autoprefixer by grunt-postcss and autoprefixer
+* fixed require js cachebusting
+* added tests for custom:libass, custom:compass, slim and default template
+* added feature switch for universal stylesheet
 * generate setup-dev-env.sh depending on the local grunt/bower setting
 * fixed README for projects without compass
 * travis builds don't require sudo anymore: faster CI
-* replaced grunt-autoprefixer by grunt-postcss and autoprefixer
 
 # 1.0.2 (2015/09/02)
 
 * .gitkeep for sass extends folder added
 * updated grunt-svgmin to 2.0.1
+* updated grunt-contrib-uglify to 0.9.2
 
 # 1.0.1 (2015/03/31)
 
