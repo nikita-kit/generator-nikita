@@ -2,6 +2,7 @@
 
 * updated grunt-contrib-imagemin package
 * updated grunt-sass package
+* fix trailing slash in source folder path
 * fixed require js cachebusting
 * added tests for custom:libass, custom:compass, slim and default template
 * added feature switch for universal stylesheet
