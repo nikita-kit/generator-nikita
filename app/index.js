@@ -86,7 +86,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 		
 		var handleSetup = function() {
 			that.prompt([
-				promptConfirm('useBuildFolders', 'Do you want to use "build/source and dist" folder?', true)
+				promptConfirm('useBuildFolders', 'Do you want to use "build/source and dist" folder?', that.config.get('useBuildFolders', true))
 			], function (props) {
 				for (var key in props) {
 					if (props.hasOwnProperty(key)) {
@@ -133,7 +133,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 								that.config.set(key, props[key]);
 							}
 						}
-
+						
+						/* remove trailing slash */
+						that.config.set('sourceFolder', (that.config.get('sourceFolder') || "").replace(/\/$/, ""));
 						that.config.set('requirejsPathToBowerComponents', (Array(2 + that.config.get('sourceFolder').split("/", -1).length).join("../")) + 'bower_components/');
 
 						done();

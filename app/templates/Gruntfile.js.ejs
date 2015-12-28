@@ -888,7 +888,6 @@ module.exports = function(grunt) {
 			scss: {
 				files: ['<%%= paths.src %>/sass/**/*.scss'],
 				tasks: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:devStyles', <% if (config.get('sassCompiler').indexOf('universalCss') != -1) { %>'compass:devUniversal', <% } %><% } %>'autoprefixer:dev'<% if (config.get('features').indexOf('cssSplit') != -1) { %>, 'csssplit:dev'<% } %>]
-			},
 			},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 			svg_bgs: {
 				files: ['<%%= paths.src %>/img/bgs/*.svg'],
