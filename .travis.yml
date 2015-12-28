@@ -11,6 +11,14 @@ before_install:
 before_deploy:
   - npm install json
   - node_modules/.bin/json -E "this.version='$TRAVIS_TAG'" -f package.json -I
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 deploy:
   provider: npm
   email: JanS@DracoBlue.de
