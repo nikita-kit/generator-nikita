@@ -105,3 +105,27 @@ describe('nikita:app:default', function () {
 		]);
 	});
 });
+
+describe('nikita:app:slim-no-build-folder', function () {
+	before(function (done) {
+		helpers.run(path.join(__dirname, '../app'))
+			.inDir(path.join(os.tmpdir(), './temp-test'))
+			.withOptions({ 'skipInstall': true })
+			.withPrompt({
+				template: "slim",
+				private: true,
+				useBuildFolders: false,
+				sourceFolder: "src/App/Resources/public/source",
+				name: "testrun" + (new Date()).getTime()
+			})
+			.on('end', done);
+	});
+
+	it('creates files', function () {
+		assert.file([
+			'bower.json',
+			'package.json',
+			'src/App/Resources/public/source/sass/styles.scss'
+		]);
+	});
+});
