@@ -1,11 +1,11 @@
 # DEV
 
+* updated grunt-sass package
 * fixed require js cachebusting
 * added tests for custom:libass, custom:compass, slim and default template
 * added feature switch for universal stylesheet
 * generate setup-dev-env.sh depending on the local grunt/bower setting
 * fixed README for projects without compass
->>>>>>> master
 * travis builds don't require sudo anymore: faster CI
 
 # 1.0.2 (2015/09/02)

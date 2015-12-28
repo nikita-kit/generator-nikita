@@ -32,7 +32,7 @@
         "grunt-phantomas": "~0.5.3",
         "grunt-photobox": "~0.6.0",
         "grunt-prettify": "~0.3.5",
-        "grunt-sass": "^0.18.0",
+        "grunt-sass": "^1.1.0",
         "grunt-scss-lint": "~0.3.3",
         "grunt-string-replace": "~0.2.7",
         "grunt-styleguide": "~0.2.15",
