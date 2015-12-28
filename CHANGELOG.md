@@ -7,7 +7,6 @@
 
 # 1.0.2 (2015/09/02)
 
->>>>>>> Stashed changes
 * .gitkeep for sass extends folder added
 * updated grunt-svgmin to 2.0.1
 
