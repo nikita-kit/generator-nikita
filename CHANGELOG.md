@@ -1,13 +1,18 @@
 # DEV
 
 * uglify disabled for one-folder-build
+* fix license entry to be SPDX conform
+* depend on version >= 4.x and < 5 of nodejs
+* replaced grunt-autoprefixer by grunt-postcss and autoprefixer
+* requirejs uglify disabled
+* updated grunt-contrib-imagemin package
+* updated grunt-sass package
 * fix trailing slash in source folder path
 * fixed require js cachebusting
 * added tests for custom:libass, custom:compass, slim and default template
 * added feature switch for universal stylesheet
 * generate setup-dev-env.sh depending on the local grunt/bower setting
 * fixed README for projects without compass
->>>>>>> master
 * travis builds don't require sudo anymore: faster CI
 
 # 1.0.2 (2015/09/02)
