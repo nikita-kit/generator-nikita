@@ -3,6 +3,7 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
+var chalk = require('chalk');
 
 var NikitaGenerator = yeoman.generators.Base.extend({
 
@@ -85,7 +86,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 		
 		var handleSetup = function() {
 			that.prompt([
-				promptConfirm('useBuildFolders', 'Do you want to use "build/source and dist" folder?', true)
+				promptConfirm('useBuildFolders', 'Do you want to use "build/source and dist" folder?', that.config.get('useBuildFolders', true))
 			], function (props) {
 				for (var key in props) {
 					if (props.hasOwnProperty(key)) {
@@ -132,7 +133,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 								that.config.set(key, props[key]);
 							}
 						}
-
+						
+						/* remove trailing slash */
+						that.config.set('sourceFolder', (that.config.get('sourceFolder') || "").replace(/\/$/, ""));
 						that.config.set('requirejsPathToBowerComponents', (Array(2 + that.config.get('sourceFolder').split("/", -1).length).join("../")) + 'bower_components/');
 
 						done();
@@ -165,6 +168,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					'browserReset',
 					'svgBackgrounds',
 					'svgSprite',
+					'universalCss',
 					'gitinfos'
 				]);
 				that.config.set('nikitaCssMixins', [
@@ -253,6 +257,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}, {
 							name: 'Take screenshots to diff your changes (grunt-photobox)',
 							value: 'takeScreenshots'
+                        }, {
+							name: "Add a universal css as fallback for old browsers",
+							value: "universalCss"
 						}, {
 							name: 'Use local grunt and bower binaries',
 							value: 'useLocalGruntAndBower'
@@ -355,7 +362,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			
 			// SASS Basic Files
 			this.template('source/sass/styles.scss.ejs', sourceFolder + '/sass/styles.scss');
-			this.template('source/sass/universal.scss.ejs', sourceFolder + '/sass/universal.scss');
+
+			if (this.config.get('features').indexOf('universalCss') !== -1)
+			{
+				this.template('source/sass/universal.scss.ejs', sourceFolder + '/sass/universal.scss');
+			}
+
 			this.template('source/sass/_basics.scss.ejs', sourceFolder + '/sass/_basics.scss');
 			
 			// SASS Extra Files
@@ -523,6 +535,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 	
 	end: function ()
 	{
+		if (this.options['skip-install']) {
+			this.log('\nRun ' +
+			chalk.yellow.bold('npm install & bower install') +
+			' to install your frontend dependencies.\n');
+			return;
+		}
+		
 		this.installDependencies();
 	}
 });
