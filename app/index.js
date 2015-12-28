@@ -3,6 +3,7 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
+var chalk = require('chalk');
 
 var NikitaGenerator = yeoman.generators.Base.extend({
 
@@ -532,6 +533,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 	
 	end: function ()
 	{
+		if (this.options['skip-install']) {
+			this.log('\nRun ' +
+			chalk.yellow.bold('npm install & bower install') +
+			' to install your frontend dependencies.\n');
+			return;
+		}
+		
 		this.installDependencies();
 	}
 });
