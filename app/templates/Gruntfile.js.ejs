@@ -255,9 +255,9 @@ module.exports = function(grunt) {
 
 		// Configuration for run tasks concurrently
 		concurrent: {
-			dev1: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss'<% } %>],
+			dev1: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss', <% } %>'realFavicon:dev'],
 			dev2: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:devStyles', <% if (config.get('sassCompiler').indexOf('universalCss') != -1) { %>'compass:devUniversal', <% } %><% } %>'assemble:dev', 'modernizr'],
-			dist: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss', <% } %>'imagemin:dist'],
+			dist: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss', <% } %>'realFavicon:dist', 'imagemin:dist'],
 		},
 
 		// Configuration for livereload
@@ -574,6 +574,76 @@ module.exports = function(grunt) {
 			}
 		},
 		
+		// Configuration for real-favicon
+		realFavicon: {
+			dev: {
+				src: '<%%= paths.src %>/img/appicons/tile-large.png',
+				dest: '<%%= paths.dev %>/img/appicons',
+				options: {
+					iconsPath: 'img/appicons',
+					html: ['<%%= paths.tmp %>/partials/favico.hbs'],
+					design: {
+						androidChrome: {
+							pictureAspect: 'no_change',
+							manifest: {
+								name: '<% config.get('name') %>',
+								display: 'browser',
+								onConflict: 'override'
+							}
+						},
+						desktopBrowser: {},
+						ios: {
+							pictureAspect: 'no_change'
+						},
+						safariPinnedTab: {
+							pictureAspect: 'silhouette'
+						},
+						windows: {
+							pictureAspect: 'no_change',
+							backgroundColor: '#55ddff',
+							onConflict: 'override'
+						}
+					},
+					settings: {
+						errorOnImageToSmall: false
+					}
+				}
+			},
+			dist: {
+				src: '<%%= paths.src %>/img/appicons/tile-large.png',
+				dest: '<%%= paths.dist %>/img/appicons',
+				options: {
+					iconsPath: 'img/appicons',
+					html: ['<%%= paths.tmp %>/partials/favico.hbs'],
+					design: {
+						androidChrome: {
+							pictureAspect: 'no_change',
+							manifest: {
+								name: '<% config.get('name') %>',
+								display: 'browser',
+								onConflict: 'override'
+							}
+						},
+						desktopBrowser: {},
+						ios: {
+							pictureAspect: 'no_change'
+						},
+						safariPinnedTab: {
+							pictureAspect: 'silhouette'
+						},
+						windows: {
+							pictureAspect: 'no_change',
+							backgroundColor: '#55ddff',
+							onConflict: 'override'
+						}
+					},
+					settings: {
+						errorOnImageToSmall: false
+					}
+				}
+			}
+		},
+
 		// Configuration for requirejs
 		requirejs: {
 			compile: {
