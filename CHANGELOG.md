@@ -1,5 +1,6 @@
 # DEV
 
+* added tests for custom:libass, custom:compass, slim and default template
 * added feature switch for universal stylesheet
 * generate setup-dev-env.sh depending on the local grunt/bower setting
 * fixed README for projects without compass
