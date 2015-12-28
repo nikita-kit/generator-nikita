@@ -872,7 +872,7 @@ module.exports = function(grunt) {
 						cwd: '<%%= paths.dist %>/js',
 						dest: '<%%= paths.dist %>/js',
 						expand: true,
-						src: ['**/*.js', '!**/_*.js']
+						src: [<% if (config.get('useBuildFolders')) { %>'**/*.js', '!**/_*.js'<% } else { %>'main.js'<% } %>]
 					}
 				]
 			}

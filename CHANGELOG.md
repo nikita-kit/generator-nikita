@@ -1,5 +1,6 @@
 # DEV
 
+* uglify disabled for one-folder-build
 * fix trailing slash in source folder path
 * fixed require js cachebusting
 * added tests for custom:libass, custom:compass, slim and default template
