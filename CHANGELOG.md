@@ -1,5 +1,11 @@
 # DEV
 
+* reworked whole css: added new extended reset, move some stuff from basics, remove global box-sizing
+* added new mixins, removed a11y extend call and added include visually hidden instead
+* updated variables for breakpoints, colors, and typography
+* nikita css loads now from node
+* forms (hidden labels) need to extend to new visuallyhidden when ready
+
 * fixed skip-install option in generator
 * pinned npm package versions
 * uglify disabled for one-folder-build
