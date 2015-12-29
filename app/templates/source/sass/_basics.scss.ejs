@@ -15,47 +15,24 @@ html {
 	box-sizing: inherit;
 }
 
-[hidden] {
-	display: none !important;
-}
-
-
 /**
- * Body
+ * body
  */
 
 body {
-	overflow-y: scroll;
 	font-family: $base-font;
 	font-size: $base-fontsize;
 	font-weight: 400;
 	line-height: $base-lineheight;
 	text-align: left;
+	color: $text-color;
+	background-color: $white;
 	text-rendering: optimizeLegibility;
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
-	color: $text-color-02;
-	background: $bg-color-01;
 }
 
-
 /**
- * Headlines
- */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: $headline-font;
-	font-weight: 400;
-}
-
-
-/**
- * General Text Formattings
+ * General text renderings
+ *
  */
 
 b,
@@ -73,111 +50,67 @@ address {
 	font-style: normal;
 }
 
-abbr {
-	border-bottom: 1px dotted $line-color-03;
-	font-variant: small-caps;
-	letter-spacing: 1px;
-	cursor: help;
-}
-
-sub,
-sup {
-	position: relative;
-	font-size: 10px;
-	line-height: 10px;
-}
-
-sub {
-	top: 4px;
-}
-
-sup {
-	top: -6px;
-}
-
-q,
-cite,
-blockquote {
-	font-family: $blockquote-font;
-	font-style: italic;
-}
-
-pre,
-code {
-	background-color: $bg-color-04;
-}
-
-hr {
-	height: 1px;
-	margin: 0;
-	border: 0;
-	padding: 0;
-	background-color: $bg-color-03;
-}
-
-mark {
-	color: $text-color-02;
-	background-color: $bg-color-05;
-}
-
-
 /**
  * Textselection
  */
 
 ::-moz-selection {
 	text-shadow: none;
-	color: #fff;
-	background-color: rgba($bg-color-02, 0.99); // rgba to adjust Chrome-Firefox differences
+	color: $white;
+	background-color: rgba($brand-green, 0.99); // rgba to adjust Chrome-Firefox differences
 }
 
 ::selection {
 	text-shadow: none;
 	color: #fff;
-	background-color: rgba($bg-color-02, 0.99); // rgba to adjust Chrome-Firefox differences
+	background-color: rgba($brand-green, 0.99); // rgba to adjust Chrome-Firefox differences
 }
-
 
 /**
- * Monospaced Text
+ *
+ * Hyperlinks
+ *
  */
 
-pre,
-code,
-kbd,
-samp,
-var {
-	font-family: $monospaced-font;
+a,
+a:visited {
+	text-decoration: none;
 }
 
+a:hover,
+a:active,
+a:focus {
+	outline: 0 none;
+	text-decoration: underline;
+}
 
 /**
- * Images
+ * Standards & Helpers
  */
 
-img {
-	display: block;
-	max-width: 100%;
+<% if (config.get('nikitaCssMixins').indexOf('clearfix') != -1) { %>
+.clearfix {
+    @include clearfix;
+}<%}%>
+<% if (config.get('nikitaCssMixins').indexOf('visuallyhidden') != -1) { %>
+.visuallyhidden {
+    @include visuallyhidden;
 }
-
+<%}%>
 
 /**
  * Buttons
  */
 
-button::-moz-focus-inner {
-	border: 0;
-	padding: 0;
-}
-
 button {
-	@extend %btn;
+	overflow: visible;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	overflow: visible;
+	display: inline-block;
 	margin: 0;
-	border: 0;
+	border: 0 none;
 	padding: 0;
+	font-family: $base-font;
 	text-transform: none;
 	background-color: transparent;
 }

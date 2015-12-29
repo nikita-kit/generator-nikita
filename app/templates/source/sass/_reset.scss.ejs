@@ -1,8 +1,12 @@
 /**
  * ---------------------------------------------------------------------------------------------------- #
  *
- * Browser Reset
+ * Extended Reset
  *
+ */
+
+/**
+ * Global Browser Reset by Eric Meyer
  */
 
 html,
@@ -87,12 +91,12 @@ time,
 mark,
 audio,
 video {
-	margin: 0;
-	border: 0;
-	padding: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
 }
 
 article,
@@ -102,61 +106,137 @@ figcaption,
 figure,
 footer,
 header,
+hgroup,
 main,
 menu,
 nav,
-section,
-summary {
-	display: block;
-}
-
-audio,
-canvas,
-progress,
-video {
-	display: inline-block;
-	vertical-align: baseline;
-}
-
-audio:not([controls]) {
-	display: none;
-	height: 0;
+section {
+    display: block;
 }
 
 body {
-	line-height: 1;
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
 }
 
 blockquote,
-q {
-	quotes: none;
+q,
+cite {
+    font-family: $monospaced-font;
+    quotes: none;
 }
 
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-	content: none;
-}
-
-img {
-	border: 0;
-}
-
-ol,
-ul {
-	list-style: none;
-}
-
-pre {
-	overflow: auto;
-}
-
-svg:not(:root) {
-	overflow: hidden;
+    content: "";
+    content: none;
 }
 
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+
+/**
+ *
+ * Additional Browser Bugfixes
+ *
+ * @section fixes
+ */
+
+
+/* Prevent iOS text size adjust after orientation change, without disabling user zoom. */
+html {
+        -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* force scrollbars to avoid visual jumping */
+body {
+    overflow-y: scroll;
+}
+
+/* remove extra inner padding on buttons in firefox */
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+button,
+input {
+    line-height: normal;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+img {
+    border: 0;
+    vertical-align: middle;
+    -ms-interpolation-mode: bicubic;
+}
+
+nav ul,
+nav ol {
+    list-style: none;
+    list-style-image: none;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+
+    *overflow: visible;
+}
+
+textarea {
+    overflow: auto;
+    vertical-align: top;
+}
+
+/* control over ie10/11 input features */
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
+
+
+/* print setup */
+@media print {
+    body {
+        overflow: visible;
+        font-size: 10pt;
+        background: transparent none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        page-break-after: avoid;
+    }
+
+    .print {
+        position: static;
+        left: 0;
+    }
 }

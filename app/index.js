@@ -115,10 +115,10 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					return that.config.get('nikitaCssExtends') && that.config.get('nikitaCssExtends').indexOf(extend) !== -1 ? true : false;
 				}
 
-				if ((!hasExtend('a11y') || !hasExtend('cf') || !hasExtend('ellipsis')) && that.config.get('formFramework'))
+				if ((!hasExtend('cf') || !hasExtend('ellipsis')) && that.config.get('formFramework'))
 				{
 					console.info('You need the nikita.css mixins to enable the nikita form framework. Activating this option now.');
-					that.config.set('nikitaCssExtends', ['a11y', 'cf', 'ellipsis', 'hide-text', 'ib']);
+					that.config.set('nikitaCssExtends', ['cf', 'ellipsis', 'hide-text', 'ib']);
 				}
 
 				var hasMixin = function (mixin) {
@@ -184,15 +184,16 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				]);
 				that.config.set('nikitaCssMixins', [
 					'centering',
+					'clearfix',
 					'fixed-ratiobox',
 					'font-smoothing',
 					'layering',
 					'respond-to',
-					'triangle'
+					'triangle',
+					'visuallyhidden'
 				]);
 
 				that.config.set('nikitaCssExtends', [
-					'a11y',
 					'cf',
 					'ellipsis',
 					'hide-text',
@@ -207,13 +208,18 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			else if (that.config.get('template') == 'slim')
 			{
 				that.config.set('sassCompiler', 'libSass');
+
 				that.config.set('features', [
 					'webfonts',
+                    'browserReset',
 					'svgBackgrounds',
 					'gitinfos'
 				]);
+
 				that.config.set('nikitaCssMixins', [
-					'respond-to'
+					'respond-to',
+                    'clearfix',
+                    'visuallyhidden'
 				]);
 
 				that.config.set('nikitaCssExtends', [
@@ -284,6 +290,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							name: 'Centering: Horizontally and/or vertically centering elements with the translate-method (IE9+)',
 							value: 'centering'
 						}, {
+                            name: 'Clearfix: Clear floats without cutting the overflow',
+                            value: 'clearfix'
+                        }, {
 							name: 'Fixed-Ratiobox: Use intrinsic ratio to force child elements like images, videos or frames to fluidly scale at a given ratio',
 							value: 'fixed-ratiobox'
 						}, {
@@ -298,13 +307,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}, {
 							name: 'Triangle: Easy generating arrow-like triangles with the border-method',
 							value: 'triangle'
-						}
+						}, {
+                            name: 'Visually-Hidden: Hide an element visually but leave it accessible for screen readers',
+                            value: 'visuallyhidden'
+                        }
 					]),
 					promptCheckbox('nikitaCssExtends', 'Which nikita.css extends do you want to use?', [
 						{
-							name: 'a11y: Hide elements in sake of accessibility',
-							value: 'a11y'
-						}, {
 							name: 'cf: Micro clearfix',
 							value: 'cf'
 						}, {

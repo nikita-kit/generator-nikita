@@ -18,6 +18,9 @@
 <%
 }
 %>
+// Variables
+@import "variables/**/*.scss";
+
 <% if (config.get('features').indexOf('browserReset') != -1)
 {
 %>// Browser-Reset
@@ -25,8 +28,6 @@
 <%
 }
 %>
-// Variables
-@import "variables/**/*.scss";
 
 <% if (config.get('nikitaCssMixins').length)
 {
@@ -35,7 +36,7 @@
 	var nikitaCssMixins = config.get('nikitaCssMixins');
 	for (var i = 0; i < nikitaCssMixins.length; i++)
 	{
-%>@import "../../bower_components/nikita.css/mixins/_<%= nikitaCssMixins[i] %>.scss";
+%>@import "../../node_modules/nikita-css/mixins/_<%= nikitaCssMixins[i] %>.scss";
 <%
 	}
 }
@@ -50,7 +51,7 @@
 	var nikitaCssExtends = config.get('nikitaCssExtends');
 	for (var i = 0; i < nikitaCssExtends.length; i++)
 	{
-%>@import "../../bower_components/nikita.css/extends/_<%= nikitaCssExtends[i] %>.scss";
+%>@import "../../node_modules/nikita-css/extends/_<%= nikitaCssExtends[i] %>.scss";
 <%
 	}
 }

@@ -4,7 +4,6 @@
     "jquery": "2.1.1",
     "jsb": "2.0.x",
     "logging.js": "1.0.1",
-    "nikita.css": "~0.10.0",
     "requirejs": "2.1.14",
     "requirejs-text": "2.0.12",
     "underscore": "1.6.0"
