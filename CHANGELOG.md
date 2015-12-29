@@ -1,5 +1,7 @@
 # DEV
 
+* fixed skip-install option in generator
+* pinned npm package versions
 * uglify disabled for one-folder-build
 * fix license entry to be SPDX conform
 * depend on version >= 4.x and < 5 of nodejs
