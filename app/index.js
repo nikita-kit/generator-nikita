@@ -181,7 +181,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					'svgBackgrounds',
 					'svgSprite',
 					'universalCss',
-					'gitinfos'
+					'gitinfos',
+					'bower'
 				]);
 				that.config.set('nikitaCssMixins', [
 					'centering',
@@ -276,6 +277,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}, {
 							name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
 							value: 'gitinfos'
+						}, {
+							name: 'Use bower for frontend package management',
+							value: 'bower'
 						}
 					]),
 					promptCheckbox('nikitaCssMixins', 'Which nikita.css mixins do you want to use?', [
@@ -417,6 +421,11 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				delete packageJsonData['devDependencies']['bower'];
 			}
 
+			if (this.config.get('features').indexOf('bower') === -1)
+			{
+				delete packageJsonData['devDependencies']['bower'];
+			}
+
 			// Libsass
 			if (this.config.get('sassCompiler').indexOf('libSass') == -1)
 			{
@@ -535,7 +544,11 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			
 			this.dest.write('package.json', JSON.stringify(packageJsonData, null, 4));
-			this.dest.write('bower.json', JSON.stringify(bowerJsonData, null, 4));
+
+			if (this.config.get('features').indexOf('bower') !== -1)
+			{
+				this.dest.write('bower.json', JSON.stringify(bowerJsonData, null, 4));
+			}
 		},
 		
 		projectfiles: function ()
@@ -546,9 +559,18 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 	end: function ()
 	{
 		if (this.options['skip-install']) {
-			this.log('\nRun ' +
-			chalk.yellow.bold('npm install & bower install') +
-			' to install your frontend dependencies.\n');
+			if (this.config.get('features').indexOf('bower') === -1)
+			{
+				this.log('\nRun ' +
+				chalk.yellow.bold('npm install') +
+				' to install your frontend dependencies.\n');
+			}
+			else
+			{
+				this.log('\nRun ' +
+				chalk.yellow.bold('npm install & bower install') +
+				' to install your frontend dependencies.\n');
+			}
 			return;
 		}
 		

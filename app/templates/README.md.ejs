@@ -16,8 +16,8 @@ If you want to write efficient and scalable (S)CSS-code for big websites, try [n
 - [__SASS__](http://sass-lang.com/) with [__Compass__](http://compass-style.org/) – css preprocessing<% } %>
 - [__nikita.html__](https://github.com/nikita-kit/nikita-html) – HTML conventions and coding guidelines
 - [__nikita.css__](https://github.com/nikita-kit/nikita-css) – (S)CSS conventions and coding guidelines
-- [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines
-- [__Bower__](http://bower.io/) – package manager for frontend libraries
+- [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines<% if (config.get('features').indexOf('bower') != -1) { %>
+- [__Bower__](http://bower.io/) – package manager for frontend libraries<% } %>
 - [__SCSS-Lint__](http://rubygems.org/gems/scss-lint/versions) – linter for SCSS files
 - [__Livereload__](http://livereload.com/) – browser auto refresh
 - [__KSS__](http://warpspire.com/kss/) – living styleguide
@@ -29,8 +29,8 @@ Grunt depends on [node.js](http://nodejs.org)<% if (config.get('sassCompiler').i
 These are the minimum requirements for the project setup:  
  
 - [__Node.js & Node Package Manager__](http://nodejs.org)
-- [__Grunt Command Line Interface__](http://gruntjs.com/getting-started) – `sudo npm install -g grunt-cli`
-- [__Bower__](http://bower.io) – `sudo npm install -g bower`
+- [__Grunt Command Line Interface__](http://gruntjs.com/getting-started) – `sudo npm install -g grunt-cli`<% if (config.get('features').indexOf('bower') != -1) { %>
+- [__Bower__](http://bower.io) – `sudo npm install -g bower`<% } %>
 
 Additionally we have the following ruby dependencies:
 
@@ -59,9 +59,9 @@ If you want to use the browser-auto-refresh-feature, get [__LiveReload.js__](htt
 
 Open your preferred command line tool and choose your project directory.  
 
-Either use `./setup-dev-env.sh`. This will start a shell script to check requirements, then runs `npm install` and `bower install` automatically to install Grunt and [Grunt plugins](#grunt-plugins-used) required for the build script plus Bower and [Bower packages](#bower-packages-used). 
+Either use `./setup-dev-env.sh`. This will start a shell script to check requirements, then runs `npm install` <% if (config.get('features').indexOf('bower') != -1) { %>and `bower install`<% } %> automatically to install Grunt and [Grunt plugins](#grunt-plugins-used) required for the build script plus Bower and [Bower packages](#bower-packages-used). 
 
-Or use `npm install` and `bower install` if your are on Windows (you have to check the requirements manually). This will install Grunt and [Grunt plugins](#grunt-plugins-used) required for the build script plus Bower and [Bower packages](#bower-packages-used).
+Or use `npm install` <% if (config.get('features').indexOf('bower') != -1) { %>and `bower install` <% } %>if your are on Windows (you have to check the requirements manually). This will install Grunt and [Grunt plugins](#grunt-plugins-used) required for the build script<% if (config.get('features').indexOf('bower') != -1) { %> plus Bower and [Bower packages](#bower-packages-used)<% } %>.
 
 1. `grunt` or `grunt build` – start build script
 2. [http://localhost:9002/](http://localhost:9002/) or [http://0.0.0.0:9002/](http://0.0.0.0:9002/) – watch your build-directory in the browser (livereload is connected on port 9003)
@@ -91,8 +91,8 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 ## Grunt-Plugins used
 
 - [assemble](https://github.com/assemble/assemble)
-- [autoprefixer-core](https://github.com/postcss/autoprefixer-core)
-- [bower](https://github.com/bower/bower)
+- [autoprefixer-core](https://github.com/postcss/autoprefixer-core)<% if (config.get('features').indexOf('bower') != -1) { %>
+- [bower](https://github.com/bower/bower)<% } %>
 - [connect-livereload](https://github.com/intesso/connect-livereload)
 - [grunt](https://github.com/gruntjs/grunt)
 - [grunt-accessibility](https://github.com/yargalot/grunt-accessibility)
@@ -134,7 +134,7 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 - [jit-grunt](https://github.com/shootaroo/jit-grunt)
 - [time-grunt](https://github.com/sindresorhus/time-grunt)
 
-
+<% if (config.get('features').indexOf('bower') != -1) { %>
 ## Bower-Packages used
 
 - [backbone](https://github.com/components/backbone)
@@ -145,7 +145,7 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 - [requirejs](https://github.com/jrburke/requirejs)
 - [requirejs-text](https://github.com/requirejs/text)
 - [underscore](https://github.com/jashkenas/underscore)
-
+<% } %>
 
 ## Project structure
 
@@ -153,10 +153,10 @@ The kickstart-setup provides the three main folders `source/`, `build/` and `dis
 
 ```
 $ tree -d -I node_modules
-.
-├── bower_components
-├── build
-│   ├── bower_components
+.<% if (config.get('features').indexOf('bower') != -1) { %>
+├── bower_components<% } %>
+├── build<% if (config.get('features').indexOf('bower') != -1) { %>
+│   ├── bower_components<% } %>
 │   ├── css
 │   ├── fonts
 │   ├── img
@@ -164,8 +164,8 @@ $ tree -d -I node_modules
 │   │   └── bgs
 │   └── js
 │       └── modernizr
-├── dist
-│   ├── bower_components
+├── dist<% if (config.get('features').indexOf('bower') != -1) { %>
+│   ├── bower_components<% } %>
 │   ├── css
 │   ├── fonts
 │   ├── img
@@ -237,7 +237,7 @@ The second part is at the end of the file (before the closing `</body>` tag:
 <script data-main="app" src="js/main.js"></script>
 ```
 
-The `data-main` attribute ensures, that the app.js will be loaded (as soon as main.js is ready). The `js/main.js` file is generated by using the project specific `js/_requireconfig.js` and the generic requirejs.js from bower components. For dist mode the main.js file contains everything, which is `require`d or `include`d in the `js/_requireconfig.js`.
+The `data-main` attribute ensures, that the app.js will be loaded (as soon as main.js is ready). The `js/main.js` file is generated by using the project specific `js/_requireconfig.js` and the generic requirejs.js from npm. For dist mode the main.js file contains everything, which is `require`d or `include`d in the `js/_requireconfig.js`.
 
 
 ## Icon-Workflow
