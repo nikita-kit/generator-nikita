@@ -1,5 +1,8 @@
 # DEV
 
+* updated lots of lots of npm dependencies
+  * we cannot use grunt 1.0.x, yet (since most peer dependencies rely on 0.4.x)
+  * we cannot use modernizr > 0.6.1, yet (since custom tests with addTests don't work)
 * replaced scss-lint with sass-lint
 * fixed possible Modernizr.testStyles or Modernizr.prefixes is undefined (if no css/js available)
 * upgrade to grunt-modernizr 0.6.1
