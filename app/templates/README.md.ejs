@@ -37,19 +37,19 @@ Additionally we have the following ruby dependencies:
 
 - [__Compass 1.0__](http://rubygems.org/gems/compass/versions) – `sudo gem install compass`
 - [__SASS 3.4__](http://rubygems.org/gems/sass/versions/) – `sudo gem install sass`
-<% } %>
+
 Here's an example of a complete working configuration:
 
 ```
 $ gem list
 
-<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>compass (1.0.1)
+compass (1.0.1)
 compass-core (1.0.1)
 compass-import-once (1.0.5)
-sass (3.4.4)<% } %>
+sass (3.4.4)
 ```
 
-For those RubyGems we included a Gemfile, so you can use [__Bundler__](http://bundler.io/) to get a consistent environment. Just type `gem install bundler` to install Bundler itself and then you can use `bundle install` to get the exact Gems.
+For those RubyGems we included a Gemfile, so you can use [__Bundler__](http://bundler.io/) to get a consistent environment. Just type `gem install bundler` to install Bundler itself and then you can use `bundle install` to get the exact Gems.<% } %>
 
 If you want to use the browser-auto-refresh-feature, get [__LiveReload.js__](https://github.com/livereload/livereload-js) and install it to the root-folder of localhost.
 
