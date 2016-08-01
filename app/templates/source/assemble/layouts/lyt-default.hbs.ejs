@@ -70,7 +70,7 @@
 	<body>
 <% if (config.get('features').indexOf('gitinfos') != -1) { %>
 		{{#if production}}
-		{{partial 'gitinfos'}}
+		{{> 'gitinfos'}}
 		{{/if}}
 <% } %>
 <% if (config.get('features').indexOf('svgSprite') != -1) { %>

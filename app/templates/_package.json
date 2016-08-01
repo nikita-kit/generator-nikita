@@ -46,7 +46,6 @@
         "grunt-svgstore": "0.3.3",
 		"grunt-sync": "0.5.2",
 		"handlebars-helper-autolink": "0.1.1",
-		"handlebars-helper-partial": "0.2.0",
 		"handlebars-helpers": "0.7.3",
 		"nikita-css": "0.11.0",
 		"node-logging-js": "1.2.0",
