@@ -201,7 +201,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				]);
 
 				that.config.set('formFramework', true);
-				that.config.set('useBuildFolders', true);
 
 				handleSetup();
 			}
@@ -222,7 +221,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				]);
 
 				that.config.set('formFramework', false);
-				that.config.set('useBuildFolders', true);
 
 				handleSetup();
 			}

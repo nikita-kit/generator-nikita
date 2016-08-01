@@ -1,5 +1,6 @@
 # DEV
 
+* don't aways override the useBuildFolders option when choosing a template
 * fixed skip-install option in generator
 * moved nikita-css, jsb, logging.js to npm
 * pinned npm package versions
