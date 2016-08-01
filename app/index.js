@@ -353,7 +353,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			
 			// Standard Files & Folders
 			this.template('.gitignore.ejs', '.gitignore');
-			this.template('.scss-lint.yml.ejs', '.scss-lint.yml');
+			this.template('.sass-lint.yml.ejs', '.sass-lint.yml');
 			this.template('Gemfile.ejs', 'Gemfile');
 			this.template('Gruntfile.js.ejs', 'Gruntfile.js');
 			this.template('NIKITA-LICENSE.md.ejs', 'NIKITA-LICENSE.md');
