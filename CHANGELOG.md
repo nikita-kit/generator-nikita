@@ -1,3 +1,9 @@
+# DEV
+
+* updated lots of lots of npm dependencies
+  * we cannot use grunt 1.0.x, yet (since most peer dependencies rely on 0.4.x)
+  * we cannot use modernizr > 0.6.1, yet (since custom tests with addTests don't work)
+
 # 1.1.0 (2016/08/01)
 
 * replaced scss-lint with sass-lint
