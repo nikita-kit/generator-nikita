@@ -27,7 +27,6 @@ describe('nikita:app:custom-libsass', function () {
 
 	it('creates files', function () {
 		assert.file([
-			'bower.json',
 			'package.json',
 			'source/sass/styles.scss'
 		]);
@@ -55,7 +54,6 @@ describe('nikita:app:custom-compass', function () {
 
 	it('creates files', function () {
 		assert.file([
-			'bower.json',
 			'package.json',
 			'source/sass/styles.scss'
 		]);
@@ -79,7 +77,6 @@ describe('nikita:app:slim', function () {
 
 	it('creates files', function () {
 		assert.file([
-			'bower.json',
 			'package.json',
 			'source/sass/styles.scss'
 		]);
@@ -128,7 +125,6 @@ describe('nikita:app:slim-no-build-folder', function () {
 
 	it('creates files', function () {
 		assert.file([
-			'bower.json',
 			'package.json',
 			'src/App/Resources/public/sass/styles.scss'
 		]);
