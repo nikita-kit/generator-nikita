@@ -1,4 +1,4 @@
-# DEV
+# 1.1.0 (2016/08/01)
 
 * replaced scss-lint with sass-lint
 * fixed possible Modernizr.testStyles or Modernizr.prefixes is undefined (if no css/js available)
