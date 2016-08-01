@@ -245,11 +245,11 @@ module.exports = function(grunt) {
 			},
 			dev: {
 				dest: '<%%= paths.dev %>/js/main.js',
-				src: ['bower_components/requirejs/require.js', '<%%= paths.src %>/js/_requireconfig.js']
+				src: ['node_modules/requirejs/require.js', '<%%= paths.src %>/js/_requireconfig.js']
 			},
 			dist: {
 				dest: '<%%= paths.dist %>/js/main.js',
-				src: ['bower_components/requirejs/require.js', '<%%= paths.src %>/js/_requireconfig.js', '<%%= paths.tmp %>/main.js']
+				src: ['node_modules/requirejs/require.js', '<%%= paths.src %>/js/_requireconfig.js', '<%%= paths.tmp %>/main.js']
 			}
 		},
 
