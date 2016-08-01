@@ -1,5 +1,6 @@
 # DEV
 
+* fixed possible Modernizr.testStyles or Modernizr.prefixes is undefined (if no css/js available)
 * upgrade to grunt-modernizr 0.6.1
 * made bower configurable
 * don't aways override the useBuildFolders option when choosing a template

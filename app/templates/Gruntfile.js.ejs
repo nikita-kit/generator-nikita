@@ -474,6 +474,7 @@ module.exports = function(grunt) {
 					src: ['<%%= paths.src %>/**/*.js', '<%%= paths.src %>/**/*.scss']
 				},
 				outputFile: '<%%= paths.tmp %>/modernizr.js',
+				extensibility: { teststyles: true, prefixes: true },
 				uglify: false
 			}
 		},<% if (config.get('features').indexOf('measurePagespeed') != -1) { %>
