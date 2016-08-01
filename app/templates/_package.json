@@ -29,7 +29,7 @@
         "grunt-group-css-media-queries": "1.0.1",
         "grunt-htmlhint": "0.4.1",
         "grunt-jsdoc": "0.5.6",
-        "grunt-modernizr": "0.6.0",
+        "grunt-modernizr": "0.6.1",
         "grunt-newer": "0.6.1",
         "grunt-postcss": "0.7.1",
         "grunt-pagespeed": "0.3.0",

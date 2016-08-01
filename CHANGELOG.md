@@ -1,5 +1,6 @@
 # DEV
 
+* upgrade to grunt-modernizr 0.6.1
 * made bower configurable
 * don't aways override the useBuildFolders option when choosing a template
 * fixed skip-install option in generator
