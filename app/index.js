@@ -148,7 +148,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						/* remove trailing slash */
 						that.config.set('sourceFolder', (that.config.get('sourceFolder') || "").replace(/\/$/, ""));
 						that.config.set('requirejsPathToBowerComponents', (Array(2 + that.config.get('sourceFolder').split("/", -1).length).join("../")) + 'bower_components/');
-
+						that.config.set('requirejsPathToNodeModules', (Array(2 + that.config.get('sourceFolder').split("/", -1).length).join("../")) + 'node_modules/');
 						done();
 					});
 				}
@@ -156,6 +156,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				{
 					that.config.set('cleanBuildFolders', true);
 					that.config.set('requirejsPathToBowerComponents', '../../bower_components/');
+					that.config.set('requirejsPathToNodeModules', '../../node_modules/');
 					done();
 				}
 			});
