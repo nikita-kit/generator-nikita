@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
 	// Require it at the top and pass in the grunt instance
 	require('jit-grunt')(grunt, {
-		scsslint: 'grunt-scss-lint',
+		sasslint: 'grunt-sass-lint',
 		svgcss: 'grunt-svg-css'
 	});
 	require('time-grunt')(grunt);
@@ -613,16 +613,13 @@ module.exports = function(grunt) {
 			}
 		},<% } %>
 
-		// Configuration for SCSS linting
-		scsslint: {
+		// Configuration for SASS/SCSS linting
+		sasslint: {
 			allFiles: [
 				'<%%= paths.src %>/sass/{blocks,extends,mixins,variables,styles.scss,_*.scss}'
 			],
 			options: {
-				colorizeOutput: true,
-				compact: true,
-				config: '.scss-lint.yml',
-				force: true
+				configFile: '.sass-lint.yml'
 			}
 		},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 
@@ -1065,9 +1062,9 @@ module.exports = function(grunt) {
 		'htmlhint'
 	]);
 
-	// SCSSLint task
+	// SASSLint/SCSSLint task
 	grunt.registerTask('check-scss', [
-		'scsslint'
+		'sasslint'
 	]);
 
 	// JSHint task

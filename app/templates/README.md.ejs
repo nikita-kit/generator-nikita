@@ -18,11 +18,11 @@ If you want to write efficient and scalable (S)CSS-code for big websites, try [n
 - [__nikita.css__](https://github.com/nikita-kit/nikita-css) – (S)CSS conventions and coding guidelines
 - [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines<% if (config.get('features').indexOf('bower') != -1) { %>
 - [__Bower__](http://bower.io/) – package manager for frontend libraries<% } %>
-- [__SCSS-Lint__](http://rubygems.org/gems/scss-lint/versions) – linter for SCSS files
+- [__SASS-Lint__](https://github.com/sasstools/sass-lint) – linter for SCSS files
 - [__Livereload__](http://livereload.com/) – browser auto refresh
 - [__KSS__](http://warpspire.com/kss/) – living styleguide
 
-Grunt depends on [node.js](http://nodejs.org)<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>, Sass, Compass and SCSS-Lint depend on [Ruby](http://www.ruby-lang.org)<% } %>. Some of the [Grunt plugins](#grunt-plugins-used) depend on command line tools to be installed on your (build) system.
+Grunt depends on [node.js](http://nodejs.org)<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>, Sass and Compass depend on [Ruby](http://www.ruby-lang.org)<% } %>. Some of the [Grunt plugins](#grunt-plugins-used) depend on command line tools to be installed on your (build) system.
 
 ## Requirements
 
@@ -31,13 +31,13 @@ These are the minimum requirements for the project setup:
 - [__Node.js & Node Package Manager__](http://nodejs.org)
 - [__Grunt Command Line Interface__](http://gruntjs.com/getting-started) – `sudo npm install -g grunt-cli`<% if (config.get('features').indexOf('bower') != -1) { %>
 - [__Bower__](http://bower.io) – `sudo npm install -g bower`<% } %>
+<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
 
 Additionally we have the following ruby dependencies:
 
-<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>- [__Compass 1.0__](http://rubygems.org/gems/compass/versions) – `sudo gem install compass`
-- [__SASS 3.4__](http://rubygems.org/gems/sass/versions/) – `sudo gem install sass`<% } %>
-- [__SCSS Lint 0.28__](http://rubygems.org/gems/scss-lint/versions) – `sudo gem install scss-lint`
-
+- [__Compass 1.0__](http://rubygems.org/gems/compass/versions) – `sudo gem install compass`
+- [__SASS 3.4__](http://rubygems.org/gems/sass/versions/) – `sudo gem install sass`
+<% } %>
 Here's an example of a complete working configuration:
 
 ```
@@ -47,7 +47,6 @@ $ gem list
 compass-core (1.0.1)
 compass-import-once (1.0.5)
 sass (3.4.4)<% } %>
-scss-lint (0.28.0)
 ```
 
 For those RubyGems we included a Gemfile, so you can use [__Bundler__](http://bundler.io/) to get a consistent environment. Just type `gem install bundler` to install Bundler itself and then you can use `bundle install` to get the exact Gems.
@@ -121,7 +120,7 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 - [grunt-postcss](https://github.com/nDmitry/grunt-postcss)
 - [grunt-prettify](https://github.com/jonschlinkert/grunt-prettify)
 - [grunt-sass](https://github.com/sindresorhus/grunt-sass)
-- [grunt-scss-lint](https://github.com/ahmednuaman/grunt-scss-lint)
+- [grunt-sass-lint](https://github.com/sasstools/grunt-sass-lint)
 - [grunt-string-replace](https://github.com/erickrdch/grunt-string-replace)
 - [grunt-styleguide](https://github.com/indieisaconcept/grunt-styleguide)
 - [grunt-svg-css](https://github.com/psyrendust/grunt-svg-css)
