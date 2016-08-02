@@ -1,4 +1,4 @@
-# DEV
+# 2.0.0 (2016/08/02)
 
 * updated lots of lots of npm dependencies
   * we cannot use grunt 1.0.x, yet (since most peer dependencies rely on 0.4.x)
