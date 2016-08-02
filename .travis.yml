@@ -23,7 +23,7 @@ deploy:
   provider: npm
   email: JanS@DracoBlue.de
   api_key:
-    secure: fKf8t75RLkTDhAT0lxelHzoF8Vov9lH52RshQ4StIWnEBVOwfcHSmg58Xr2Ehk1O+5lrKtDgqC4ck68AXsbGGvR4r4Ft/vRd0ZyC7gi3YBWWNtNyGIPJAVsxorRqOP6Wc4ooaeIs4Ra6/DP7KmzgBpXkndDzR75sFe7Wp0yZnqg=
+    secure: UqlkX1JFSs224a/dSHWdnIfUARg4onn2C5nk76KWqTJu9un4ewcVZez7uEYUPyYMU9VQigqaakm2SP5/dfAY1wbI2aUT7Ry/co0LHaLLwLmEjzZLo1jI6q9imZz/SPuswEJi1UTipdb9W5TLaGxIkcxidiCCrHlsHsyjx31Kxg4=
   on:
     tags: true
     repo: nikita-kit/generator-nikita
