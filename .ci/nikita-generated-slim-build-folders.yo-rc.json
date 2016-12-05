@@ -1,0 +1,24 @@
+{
+  "generator-nikita": {
+    "name": "nikita-generated-slim-build-folders",
+    "private": true,
+    "template": "slim",
+    "sassCompiler": "libSass",
+    "features": [
+      "webfonts",
+      "svgBackgrounds",
+      "gitinfos"
+    ],
+    "nikitaCssMixins": [
+      "respond-to"
+    ],
+    "nikitaCssExtends": [
+      "cf"
+    ],
+    "formFramework": false,
+    "useBuildFolders": true,
+    "cleanBuildFolders": true,
+    "requirejsPathToBowerComponents": "../../bower_components/",
+    "requirejsPathToNodeModules": "../../node_modules/"
+  }
+}
