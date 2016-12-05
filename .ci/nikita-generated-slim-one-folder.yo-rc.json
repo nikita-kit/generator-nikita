@@ -16,8 +16,8 @@
       "cf"
     ],
     "formFramework": false,
-    "useBuildFolders": true,
-    "cleanBuildFolders": true,
+    "useBuildFolders": false,
+    "cleanBuildFolders": false,
     "sourceFolder": "src/AppBundle/Resources/public",
     "requirejsPathToBowerComponents": "../../bower_components/"
   }
