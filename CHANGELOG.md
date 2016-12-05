@@ -1,4 +1,8 @@
-# DEV
+# dev
+
+* added script to run non-interactive-generator for builds
+
+# 2.0.0
 
 * updated lots of lots of npm dependencies
   * we cannot use grunt 1.0.x, yet (since most peer dependencies rely on 0.4.x)
