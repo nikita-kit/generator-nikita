@@ -14,6 +14,7 @@ describe('nikita:app:custom-libsass', function () {
 			.withOptions({ 'skipInstall': true })
 			.withPrompt({
 				template: "custom",
+				staticPageGenerator: "twigRender",
 				sassCompiler: "libsass",
 				private: true,
 				name: "testrun" + (new Date()).getTime(),
@@ -41,6 +42,7 @@ describe('nikita:app:custom-compass', function () {
 			.withOptions({ 'skipInstall': true })
 			.withPrompt({
 				template: "custom",
+				staticPageGenerator: "assemble",
 				sassCompiler: "compass",
 				private: true,
 				name: "testrun" + (new Date()).getTime(),
