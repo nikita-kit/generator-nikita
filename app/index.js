@@ -438,12 +438,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// twigRender
 			if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
 			{
-				this.template('source/static/README.md.ejs', sourceFolder + '/static/README.md');
-				this.template('source/static/data/.gitkeep', sourceFolder + '/static/data/.gitkeep');
-				this.template('source/static/layouts/master.twig.ejs', sourceFolder + '/static/layouts/master.twig');
-				this.template('source/static/macros/.gitkeep', sourceFolder + '/static/macros/.gitkeep');
-				this.template('source/static/pages/index.twig.ejs', sourceFolder + '/static/pages/index.twig');
-				this.template('source/static/pages/rwd-testing.twig.ejs', sourceFolder + '/static/pages/rwd-testing.twig');
+				this.template('source/html/README.md.ejs', sourceFolder + '/html/README.md');
+				this.template('source/html/data/.gitkeep', sourceFolder + '/html/data/.gitkeep');
+				this.template('source/html/layouts/master.twig.ejs', sourceFolder + '/html/layouts/master.twig');
+				this.template('source/html/macros/.gitkeep', sourceFolder + '/html/macros/.gitkeep');
+				this.template('source/html/pages/index.twig.ejs', sourceFolder + '/html/pages/index.twig');
+				this.template('source/html/pages/rwd-testing.twig.ejs', sourceFolder + '/html/pages/rwd-testing.twig');
 			}
 			else
 			{
@@ -566,7 +566,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				}
 				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
 				{
-					this.template('source/static/partials/gitinfos.twig.ejs', sourceFolder + '/static/partials/gitinfos.twig');
+					this.template('source/html/partials/gitinfos.twig.ejs', sourceFolder + '/html/partials/gitinfos.twig');
 				}
 			}
 
@@ -591,7 +591,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				}
 				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
 				{
-					this.template('source/static/pages/forms.twig.ejs', sourceFolder + '/static/pages/forms.twig');
+					this.template('source/html/pages/forms.twig.ejs', sourceFolder + '/html/pages/forms.twig');
 				}
 
 				this.template('source/sass/blocks/_forms.scss.ejs', sourceFolder + '/sass/blocks/_forms.scss');
