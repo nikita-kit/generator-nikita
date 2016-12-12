@@ -10,8 +10,9 @@ If you want to write efficient and scalable (S)CSS-code for big websites, try [n
 
 ## Project-Setup
 
-- [__Grunt__](http://gruntjs.com/) – js task runner
-- [__Assemble__](http://assemble.io/) – static site generator<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
+- [__Grunt__](http://gruntjs.com/) – js task runner<% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>
+- [__Assemble__](http://assemble.io/) – static site generator<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') != -1) { %>
+- [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) – static site generator<% } %><% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
 - [__SASS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – css preprocessing<% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
 - [__SASS__](http://sass-lang.com/) with [__Compass__](http://compass-style.org/) – css preprocessing<% } %>
 - [__nikita.html__](https://github.com/nikita-kit/nikita-html) – HTML conventions and coding guidelines
@@ -88,8 +89,8 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 
 
 ## Grunt-Plugins used
-
-- [assemble](https://github.com/assemble/assemble)
+<% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>
+- [assemble](https://github.com/assemble/assemble)<% } %>
 - [autoprefixer-core](https://github.com/postcss/autoprefixer-core)<% if (config.get('features').indexOf('bower') != -1) { %>
 - [bower](https://github.com/bower/bower)<% } %>
 - [connect-livereload](https://github.com/intesso/connect-livereload)
@@ -126,10 +127,11 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 - [grunt-svg-css](https://github.com/psyrendust/grunt-svg-css)
 - [grunt-svgmin](https://github.com/sindresorhus/grunt-svgmin)
 - [grunt-svgstore](https://github.com/FWeinb/grunt-svgstore)
-- [grunt-sync](https://github.com/tomusdrw/grunt-sync)
+- [grunt-sync](https://github.com/tomusdrw/grunt-sync)<% if (config.get('staticPageGenerator').indexOf('twigRender') != -1) { %>
+- [grunt-twig-render](https://github.com/stefanullinger/grunt-twig-render)<% } %><% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>
 - [handlebars-helper-autolink](https://github.com/helpers/handlebars-helper-autolink)
 - [handlebars-helper-partial](https://github.com/helpers/handlebars-helper-partial)
-- [handlebars-helpers](https://github.com/assemble/handlebars-helpers)
+- [handlebars-helpers](https://github.com/assemble/handlebars-helpers)<% } %>
 - [jit-grunt](https://github.com/shootaroo/jit-grunt)
 - [time-grunt](https://github.com/sindresorhus/time-grunt)
 
@@ -172,13 +174,19 @@ $ tree -d -I node_modules
 │   │   └── bgs
 │   └── js
 │       └── modernizr
-├── source
+├── source<% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>
 │   ├── assemble
 │   │   ├── data
 │   │   ├── helpers
 │   │   ├── layouts
 │   │   ├── pages
-│   │   └── partials
+│   │   └── partials<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') != -1) { %>
+│   ├── html
+│   │   ├── data
+│   │   ├── macros
+│   │   ├── layouts
+│   │   ├── pages
+│   │   └── partials<% } %>
 │   ├── fonts
 │   ├── img
 │   │   ├── appicons
@@ -222,7 +230,7 @@ describes the JS coding standards and conventions.
 
 The page will contain 2 parts of javascript.
 
-The first part is in `assemble/layouts/lyt-default.hbs` at the beginning:
+The first part is in <% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>`assemble/layouts/lyt-default.hbs`<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') != -1) { %>`html/layouts/master.twig`<% } %> at the beginning:
 
 ``` html
 <script src="js/modernizr.js"></script>
@@ -254,8 +262,8 @@ You'd like to edit your icons with CSS, e.g. to change the fill-color or you hav
 
 1. Just put your SVG-icons into `source/img/icons`.
 2. All icons will be processed with the svgmin-task and put into the `tmp/svgmin/icons` folder.
-3. Afterwards the svgstore-task uses these icons to put together an `icon-sprite.svg` which will be copied to the `img/icons` folder. It must be injected with ajax directly after the opening `<body>` element at the top of the document (have a look at the file `lyt-default.hbs` in the `layouts` folder).
-4. To include a SVG-icon use `<svg class="your-class-name"><use xlink:href="#filename" /></svg>` in your .hbs-files. Make sure you use a class name on the SVG to size it.
+3. Afterwards the svgstore-task uses these icons to put together an `icon-sprite.svg` which will be copied to the `img/icons` folder. It must be injected with ajax directly after the opening `<body>` element at the top of the document (have a look at the file <% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>`lyt-default.hbs`<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') != -1) { %>`master.twig`<% } %> in the `layouts` folder).
+4. To include a SVG-icon use `<svg class="your-class-name"><use xlink:href="#filename" /></svg>` in your <% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>`hbs`<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') != -1) { %>`twig`<% } %>-files. Make sure you use a class name on the SVG to size it.
 5. Now you can use `.your-class-name { fill: #f30; }` to color your icon.
 
 For further infos read the article [Icon System with SVG sprites](http://css-tricks.com/svg-sprites-use-better-icon-fonts/) by Chris Coyier.

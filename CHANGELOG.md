@@ -1,5 +1,6 @@
 # dev
 
+* added also twig as static page generator
 * added script to run non-interactive-generator for builds
 
 # 2.0.0 (2016/08/02)
