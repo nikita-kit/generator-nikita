@@ -174,6 +174,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 			if (that.config.get('template') == 'default')
 			{
+				that.config.set('staticPageGenerator', 'assemble');
 				that.config.set('sassCompiler', 'libSass');
 				that.config.set('features', [
 					'webfonts',
@@ -207,6 +208,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			else if (that.config.get('template') == 'slim')
 			{
+				that.config.set('staticPageGenerator', 'twigRender');
 				that.config.set('sassCompiler', 'libSass');
 				that.config.set('features', [
 					'webfonts',
@@ -228,6 +230,15 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			else if (that.config.get('template') == 'custom')
 			{
 				var prompts = [
+					promptList('staticPageGenerator', 'Which Static-Page-Generator do you want to use?', [
+						{
+							name: 'twigRender, Static-Page-Generator featuring twig templates',
+							value: 'twigRender'
+						}, {
+							name: 'assemble.io, Static-Page-Generator with handlebars templates',
+							value: 'assemble'
+						}
+					]),
 					promptList('sassCompiler', 'Which Sass Compiler do you want to use?', [
 						{
 							name: 'libSass, lightning fast but not all Sass features',
@@ -402,16 +413,42 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/js/app.js.ejs', sourceFolder + '/js/app.js');
 			this.template('source/js/modernizr/cssCheckedTest.js.ejs', sourceFolder + '/js/modernizr/cssCheckedTest.js');
 			this.template('source/js/modernizr/positionStickyTest.js.ejs', sourceFolder + '/js/modernizr/positionStickyTest.js');
-			
-			// Assemble Files
-			this.template('source/assemble/pages/index.hbs.ejs', sourceFolder + '/assemble/pages/index.hbs');
-			this.template('source/assemble/pages/rwd-testing.hbs.ejs', sourceFolder + '/assemble/pages/rwd-testing.hbs');
-			this.template('source/assemble/layouts/lyt-default.hbs.ejs', sourceFolder + '/assemble/layouts/lyt-default.hbs');
-			
-			// Assemble Folders
-			this.directory('source/assemble/data', sourceFolder + '/assemble/data');
-			this.directory('source/assemble/helpers', sourceFolder + '/assemble/helpers');
-			this.template('source/assemble/partials/.gitkeep', sourceFolder + '/assemble/partials/.gitkeep');
+
+			// Assemble
+			if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
+			{
+				// Assemble Files
+				this.template('source/assemble/pages/index.hbs.ejs', sourceFolder + '/assemble/pages/index.hbs');
+				this.template('source/assemble/pages/rwd-testing.hbs.ejs', sourceFolder + '/assemble/pages/rwd-testing.hbs');
+				this.template('source/assemble/layouts/lyt-default.hbs.ejs', sourceFolder + '/assemble/layouts/lyt-default.hbs');
+
+				// Assemble Folders
+				this.directory('source/assemble/data', sourceFolder + '/assemble/data');
+				this.directory('source/assemble/helpers', sourceFolder + '/assemble/helpers');
+				this.template('source/assemble/partials/.gitkeep', sourceFolder + '/assemble/partials/.gitkeep');
+			}
+			else
+			{
+				delete packageJsonData['devDependencies']['assemble'];
+				delete packageJsonData['devDependencies']['grunt-assemble'];
+				delete packageJsonData['devDependencies']['handlebars-helper-autolink'];
+				delete packageJsonData['devDependencies']['handlebars-helpers'];
+			}
+
+			// twigRender
+			if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
+			{
+				this.template('source/html/README.md.ejs', sourceFolder + '/html/README.md');
+				this.template('source/html/data/.gitkeep', sourceFolder + '/html/data/.gitkeep');
+				this.template('source/html/layouts/master.twig.ejs', sourceFolder + '/html/layouts/master.twig');
+				this.template('source/html/macros/.gitkeep', sourceFolder + '/html/macros/.gitkeep');
+				this.template('source/html/pages/index.twig.ejs', sourceFolder + '/html/pages/index.twig');
+				this.template('source/html/pages/rwd-testing.twig.ejs', sourceFolder + '/html/pages/rwd-testing.twig');
+			}
+			else
+			{
+				delete packageJsonData['devDependencies']['grunt-twig-render'];
+			}
 
 			// Image README Files
 			this.template('source/img/bgs/README.md.ejs', sourceFolder + '/img/bgs/README.md');
@@ -523,9 +560,16 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			else
 			{
-				this.template('source/assemble/partials/gitinfos.hbs.ejs', sourceFolder + '/assemble/partials/gitinfos.hbs');
+				if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
+				{
+					this.template('source/assemble/partials/gitinfos.hbs.ejs', sourceFolder + '/assemble/partials/gitinfos.hbs');
+				}
+				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
+				{
+					this.template('source/html/partials/gitinfos.twig.ejs', sourceFolder + '/html/partials/gitinfos.twig');
+				}
 			}
-			
+
 			// Optional Layering-Mixin
 			if (this.config.get('nikitaCssMixins').indexOf('layering') != -1)
 			{
@@ -537,11 +581,19 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			{
 				this.template('source/sass/variables/_breakpoints.scss.ejs', sourceFolder + '/sass/variables/_breakpoints.scss');
 			}
-			
+
 			// Optional Form Framework
 			if (this.config.get('formFramework'))
 			{
-				this.template('source/assemble/pages/forms.hbs.ejs', sourceFolder + '/assemble/pages/forms.hbs');
+				if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
+				{
+					this.template('source/assemble/pages/forms.hbs.ejs', sourceFolder + '/assemble/pages/forms.hbs');
+				}
+				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
+				{
+					this.template('source/html/pages/forms.twig.ejs', sourceFolder + '/html/pages/forms.twig');
+				}
+
 				this.template('source/sass/blocks/_forms.scss.ejs', sourceFolder + '/sass/blocks/_forms.scss');
 				this.src.copy('source/img/bgs/form-select-arrow-down.svg', sourceFolder + '/img/bgs/form-select-arrow-down.svg');
 			}
