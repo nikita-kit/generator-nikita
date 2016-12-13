@@ -1,0 +1,38 @@
+{
+  "generator-nikita": {
+    "name": "nikita-generated-default-build-folders",
+    "private": true,
+    "template": "default",
+    "sassCompiler": "libSass",
+    "features": [
+      "webfonts",
+      "browserReset",
+      "svgBackgrounds",
+      "svgSprite",
+      "universalCss",
+      "gitinfos",
+      "bower"
+    ],
+    "nikitaCssMixins": [
+      "centering",
+      "fixed-ratiobox",
+      "font-smoothing",
+      "layering",
+      "respond-to",
+      "triangle"
+    ],
+    "nikitaCssExtends": [
+      "a11y",
+      "cf",
+      "ellipsis",
+      "hide-text",
+      "ib"
+    ],
+    "formFramework": true,
+    "useBuildFolders": true,
+    "svgBackgrounds": true,
+    "cleanBuildFolders": true,
+    "requirejsPathToBowerComponents": "../../bower_components/",
+    "requirejsPathToNodeModules": "../../node_modules/"
+  }
+}
