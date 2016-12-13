@@ -360,7 +360,7 @@ module.exports = function(grunt) {
 		// Configuration for gitinfo (will be populated with values from Git)
 		gitinfo: {
 			
-		},<% } %>
+		},<% } %><% if (config.get('features').indexOf('groupMediaQueries') != -1) { %>
 
 		// Configuration for grouping media queries
 		group_css_media_queries: {
@@ -369,7 +369,7 @@ module.exports = function(grunt) {
 					'<%%= paths.dist %>/css/styles.css': ['<%%= paths.dist %>/css/styles.css']
 				}
 			}
-		},
+		},<% } %>
 
 		// Configuration for validating html-files
 		htmlhint: {
@@ -1047,8 +1047,8 @@ module.exports = function(grunt) {
 		'twigRender:dist',<% } %>
 		'modernizr',
 		'postcss:dist',<% if (config.get('features').indexOf('cssSplit') != -1) { %>
-		'csssplit:dist',<% } %>
-		'group_css_media_queries',
+		'csssplit:dist',<% } %><% if (config.get('features').indexOf('groupMediaQueries') != -1) { %>
+		'group_css_media_queries',<% } %>
 		'cssmin',
 		'requirejs',
 		'concat:dist',
