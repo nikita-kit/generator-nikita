@@ -11,6 +11,7 @@
       "svgSprite",
       "universalCss",
       "gitinfos",
+      "groupMediaQueries",
       "bower"
     ],
     "nikitaCssMixins": [
