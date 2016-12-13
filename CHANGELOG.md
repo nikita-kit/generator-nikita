@@ -1,5 +1,6 @@
 # dev
 
+* exclude group-css-media-queries from slim build
 * added also twig as static page generator
 * added script to run non-interactive-generator for builds
 
