@@ -87,12 +87,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				{
 					name: 'Slim setup',
 					value: 'slim'
-				},
-				{
-					name: 'Build a completely custom version on your own',
-					value: 'custom'
 				}
-			])
+			]),
+			promptConfirm('custom', 'Customize this template?', false),
 		];
 		
 		var handleSetup = function() {
@@ -204,8 +201,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				]);
 
 				that.config.set('formFramework', true);
-
-				handleSetup();
 			}
 			else if (that.config.get('template') == 'slim')
 			{
@@ -225,10 +220,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				]);
 
 				that.config.set('formFramework', false);
-
+			}
+			
+			if (!that.config.get('custom')) {
 				handleSetup();
 			}
-			else if (that.config.get('template') == 'custom')
+			else
 			{
 				var prompts = [
 					promptList('staticPageGenerator', 'Which Static-Page-Generator do you want to use?', [

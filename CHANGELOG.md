@@ -1,5 +1,6 @@
 # dev
 
+* all templates can be customized right after choosing the template
 * exclude group-css-media-queries from slim build
 * dont run bower when rerunning the generator and bower is not included
 * added also twig as static page generator
