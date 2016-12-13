@@ -182,6 +182,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					'svgBackgrounds',
 					'svgSprite',
 					'universalCss',
+					'groupMediaQueries',
 					'gitinfos',
 					'bower'
 				]);
@@ -264,6 +265,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}, {
 							name: 'Split your main CSS-file into several small ones to support IE9 and lower (grunt-csssplit)',
 							value: 'cssSplit'
+						}, {
+							name: 'group css media queries (grunt-group-css-media-queries)',
+							value: 'groupMediaQueries'
 						}, {
 							name: 'Create a CSS Styleguide (grunt-styleguide)',
 							value: 'cssStyleGuide'
@@ -517,7 +521,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			{
 				delete packageJsonData['devDependencies']['grunt-csssplit'];
 			}
-			
+
+			// Optional css media queries grouping
+			if (this.config.get('features').indexOf('groupMediaQueries') === -1)
+			{
+				delete packageJsonData['devDependencies']['grunt-group-css-media-queries'];
+			}
+
 			// Optional CSS Styleguide
 			if (this.config.get('features').indexOf('cssStyleGuide') == -1)
 			{
