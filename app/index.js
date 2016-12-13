@@ -639,7 +639,10 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			return;
 		}
 		
-		this.installDependencies();
+		this.installDependencies({
+			"bower": (this.config.get('features').indexOf('bower') !== -1),
+			"npm": true
+		});
 	}
 });
 
