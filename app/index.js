@@ -40,7 +40,14 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				type: 'input',
 				name: name,
 				message: question,
-				default: that.config.get(name, defaultValue)
+				default: that.config.get(name, defaultValue),
+				validate: function(value) {
+					if (value && value.length > 0) {
+						return true;
+					}
+					
+					return "Error! Please provide: " + name;
+				}
 			};
 		};
 		
