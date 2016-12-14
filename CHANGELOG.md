@@ -1,5 +1,6 @@
 # dev
 
+* replaced livereload by BrowserSync
 * exclude group-css-media-queries from slim build
 * dont run bower when rerunning the generator and bower is not included
 * added also twig as static page generator
