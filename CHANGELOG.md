@@ -1,5 +1,6 @@
 # dev
 
+* input prompts are always required fields
 * all templates can be customized right after choosing the template
 * exclude group-css-media-queries from slim build
 * dont run bower when rerunning the generator and bower is not included
