@@ -1,6 +1,7 @@
 # dev
 
 * added spring boot template
+* replaced livereload by BrowserSync
 * input prompts are always required fields
 * all templates can be customized right after choosing the template
 * exclude group-css-media-queries from slim build
