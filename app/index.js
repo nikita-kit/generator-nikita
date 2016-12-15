@@ -94,15 +94,22 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				{
 					name: 'Slim setup',
 					value: 'slim'
+				},
+				{
+					name: 'Spring Boot (slim)',
+					value: 'spring-boot'
 				}
 			]),
 			promptConfirm('custom', 'Customize this template?', false),
 		];
 		
 		var handleSetup = function() {
-			that.prompt([
-				promptConfirm('useBuildFolders', 'Do you want to use "build/source and dist" folder?', that.config.get('useBuildFolders', true))
-			], function (props) {
+			var prompts = [];
+			
+			if (that.config.get('askBuildFolders')) {
+				prompts.push(promptConfirm('useBuildFolders', 'Do you want to use "build/source and dist" folder?', that.config.get('useBuildFolders', true)));
+			}
+			that.prompt(prompts, function (props) {
 				for (var key in props) {
 					if (props.hasOwnProperty(key)) {
 						that.config.set(key, props[key]);
@@ -175,6 +182,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					that.config.set(key, props[key]);
 				}
 			}
+			
+			var templateSpecificPrompts = [];
 
 			if (that.config.get('template') == 'default')
 			{
@@ -209,7 +218,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 				that.config.set('formFramework', true);
 			}
-			else if (that.config.get('template') == 'slim')
+			else if (['slim', 'spring-boot'].indexOf(that.config.get('template')) !== -1)
 			{
 				that.config.set('staticPageGenerator', 'twigRender');
 				that.config.set('sassCompiler', 'libSass');
@@ -228,13 +237,21 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 				that.config.set('formFramework', false);
 			}
-			
-			if (!that.config.get('custom')) {
-				handleSetup();
+
+			that.config.set('askBuildFolders', true);
+
+			if (that.config.get('template') == 'spring-boot') {
+				templateSpecificPrompts.push(promptInput('javaGroupId', 'java groupId'));
+				templateSpecificPrompts.push(promptInput('javaVersion', 'java version', '1.8'));
+				templateSpecificPrompts.push(promptInput('springBootVersion', 'spring boot version', '1.4.2'));
+				that.config.set('sourceFolder', 'src/main/resources/static');
+				that.config.set('useBuildFolders', false);
+				that.config.set('cleanBuildFolders', false);
+				that.config.set('askBuildFolders', false);
 			}
-			else
-			{
-				var prompts = [
+			
+			if (that.config.get('custom')) {
+				[
 					promptList('staticPageGenerator', 'Which Static-Page-Generator do you want to use?', [
 						{
 							name: 'twigRender, Static-Page-Generator featuring twig templates',
@@ -287,7 +304,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}, {
 							name: 'Take screenshots to diff your changes (grunt-photobox)',
 							value: 'takeScreenshots'
-                        }, {
+						}, {
 							name: "Add a universal css as fallback for old browsers",
 							value: "universalCss"
 						}, {
@@ -341,9 +358,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}
 					]),
 					promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true),
-				];
-
-				that.prompt(prompts, function (props)
+				].forEach(function (prompt) {
+					templateSpecificPrompts.push(prompt);
+				});
+			}
+			
+			if (templateSpecificPrompts.length > 0) {
+				that.prompt(templateSpecificPrompts, function (props)
 				{
 					for (var key in props)
 					{
@@ -355,6 +376,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 					handleSetup();
 				});
+			} else {
+				handleSetup();
 			}
 		});
 	},
@@ -610,6 +633,20 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 				this.template('source/sass/blocks/_forms.scss.ejs', sourceFolder + '/sass/blocks/_forms.scss');
 				this.src.copy('source/img/bgs/form-select-arrow-down.svg', sourceFolder + '/img/bgs/form-select-arrow-down.svg');
+			}
+			
+			if (this.config.get('template') == 'spring-boot') {
+				var javaName = this.config.get("name").replace(/-/g, " ").toLowerCase().replace(/\b[a-z]/g, function(letter) {
+					return letter.toUpperCase();
+				}).replace(/ /g, "");
+				this.config.set('javaName', javaName);
+				var javaNameWithLowercaseFirstLetter = javaName.substr(0, 1).toLowerCase() + javaName.substr(1);
+				this.config.set('javaNameWithLowercaseFirstLetter', javaNameWithLowercaseFirstLetter);
+				var springRootJavaFolder = "src/main/java/" + this.config.get('javaGroupId').replace(/\./g, "/") + "/" + javaNameWithLowercaseFirstLetter;
+
+				this.template('spring-boot/pom.xml.ejs', 'pom.xml');
+				this.dest.mkdir(springRootJavaFolder);
+				this.template('spring-boot/Application.java.ejs', springRootJavaFolder + "/" + this.config.get("javaName") + "Application.java");
 			}
 			
 			this.dest.write('package.json', JSON.stringify(packageJsonData, null, 4));

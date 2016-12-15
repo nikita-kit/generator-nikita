@@ -1,0 +1,13 @@
+package <%= config.get('javaGroupId') %>.<%= config.get('javaNameWithLowercaseFirstLetter') %>;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class <%= config.get('javaName') %>Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(<%= config.get('javaName') %>Application.class, args);
+	}
+
+}

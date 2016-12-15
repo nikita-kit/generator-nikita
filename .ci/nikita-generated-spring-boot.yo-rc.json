@@ -1,0 +1,33 @@
+{
+  "generator-nikita": {
+    "name": "nikita-generated-spring-boot",
+    "private": true,
+    "template": "spring-boot",
+    "sassCompiler": "libSass",
+    "features": [
+      "webfonts",
+      "svgBackgrounds",
+      "gitinfos"
+    ],
+    "nikitaCssMixins": [
+      "respond-to"
+    ],
+    "nikitaCssExtends": [
+      "cf"
+    ],
+    "formFramework": false,
+    "useBuildFolders": false,
+    "cleanBuildFolders": false,
+    "sourceFolder": "src/main/resources/static",
+    "requirejsPathToBowerComponents": "../../../../../bower_components/",
+    "staticPageGenerator": "twigRender",
+    "requirejsPathToNodeModules": "../../../../../node_modules/",
+    "custom": false,
+    "javaName": "NikitaGeneratedSpringBoot",
+    "javaNameWithLowercaseFirstLetter": "nikitaGeneratedSpringBoot",
+    "askBuildFolders": false,
+    "javaGroupId": "net.dracoblue",
+    "javaVersion": "1.8",
+    "springBootVersion": "1.4.2"
+  }
+}
