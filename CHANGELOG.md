@@ -2,6 +2,7 @@
 
 * library upgrades:
   * autoprefixer 6.5.4
+  * requirejs 2.3.2
 * added spring boot template
 * replaced livereload by BrowserSync
 * input prompts are always required fields
