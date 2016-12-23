@@ -1,5 +1,6 @@
 # dev
 
+* removed drop console setting from uglify
 * replaced require.js by webpack and babel
 * added spring boot template
 * replaced livereload by BrowserSync
