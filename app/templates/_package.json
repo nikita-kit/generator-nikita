@@ -5,7 +5,7 @@
 	},
     "devDependencies": {
 		"assemble": "0.16.2",
-		"autoprefixer": "6.3.7",
+		"autoprefixer": "6.5.4",
         "bower": "1.7.1",
 		"babel-core": "6.20.0",
 		"babel-loader": "6.2.10",
