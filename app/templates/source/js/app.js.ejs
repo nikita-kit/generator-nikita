@@ -1,4 +1,4 @@
-define('app', ['logging'], function(logging)
+define('app', ['node-logging-js'], function(logging)
 {
 	var App = function()
 	{

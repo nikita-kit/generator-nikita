@@ -1,5 +1,6 @@
 # dev
 
+* replaced require.js by webpack and babel
 * added spring boot template
 * replaced livereload by BrowserSync
 * input prompts are always required fields
