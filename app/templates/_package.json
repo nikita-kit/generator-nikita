@@ -18,7 +18,7 @@
         "grunt-contrib-compass": "0.7.2",
 		"grunt-contrib-concat": "1.0.1",
 		"grunt-contrib-copy": "1.0.0",
-		"grunt-contrib-cssmin": "1.0.1",
+		"grunt-contrib-cssmin": "2.0.0",
 		"grunt-contrib-imagemin": "1.0.1",
 		"grunt-contrib-jshint": "1.0.0",
 		"grunt-contrib-requirejs": "1.0.0",
