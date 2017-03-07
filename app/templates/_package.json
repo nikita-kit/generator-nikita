@@ -43,7 +43,7 @@
 		"grunt-svg-css": "0.2.8",
 		"grunt-svgmin": "3.3.0",
         "grunt-svgstore": "0.3.3",
-		"grunt-sync": "0.5.2",
+		"grunt-sync": "0.6.2",
 		"grunt-twig-render": "1.8.0",
 		"handlebars-helper-autolink": "0.1.1",
 		"handlebars-helpers": "0.8.0",
