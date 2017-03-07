@@ -22,7 +22,7 @@
 		"grunt-contrib-imagemin": "1.0.1",
 		"grunt-contrib-jshint": "1.0.0",
 		"grunt-contrib-requirejs": "1.0.0",
-		"grunt-contrib-uglify": "2.0.0",
+		"grunt-contrib-uglify": "2.2.0",
 		"grunt-contrib-watch": "1.0.0",
         "grunt-csssplit": "0.2.0",
 		"grunt-gitinfo": "0.1.8",
