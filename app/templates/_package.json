@@ -5,7 +5,7 @@
 	},
     "devDependencies": {
 		"assemble": "0.16.2",
-		"autoprefixer": "6.5.4",
+		"autoprefixer": "6.7.6",
         "bower": "1.7.1",
 		"css-parse": "2.0.0",
         "grunt": "0.4.5",
