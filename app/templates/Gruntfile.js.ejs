@@ -931,13 +931,6 @@ module.exports = function(grunt) {
 		},
 
 		webpack: (function(){
-			var webpack = require('webpack');
-			var devPlugins = [
-				new webpack.optimize.DedupePlugin(),
-				new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/)
-			];
-			var productionPlugins = devPlugins.concat([
-			]);
 
 			return {
 				options: {
@@ -949,31 +942,39 @@ module.exports = function(grunt) {
 						chunkFilename: '[chunkhash].pkg.js'
 					},
 					module: {
-						preLoaders: [
+						rules: [
 							{
 								test: /\.js$/,
-								loader: 'import-glob'
+								enforce: 'pre',
+								loader: 'import-glob',
+								exclude: /node_modules/
 							},
 							{
 								test: /\.scss$/,
+								enforce: 'pre',
 								loader: 'import-glob'
-							}
-						],
-						loaders: [
+							},
 							{
 								test: /\.js$/,
+								loader: 'babel-loader',
 								exclude: /node_modules/,
-								loader: 'babel',
-								query: {
+								options: {
 									compact: true,
-									presets: ['latest'],
-									//plugins: ['transform-runtime']
+									cacheDirectory: true,
+									plugins: ['transform-runtime'],
+									presets: [['env', {
+										modules: false,
+										loose: true,
+										targets: {
+											browsers: 'last 2 versions, Android >= 4.4' // see http://browserl.ist/
+										}
+									}]]
 								}
 							},
 							{
 								test: /\.ejs$/,
-								loader: 'ejs-compiled',
-								query: {
+								loader: 'ejs-compiled-loader',
+								options: {
 									'htmlmin': true,
 									'htmlminOptions': {
 										removeComments: true
@@ -982,31 +983,26 @@ module.exports = function(grunt) {
 							},
 							{
 								test: /\.scss$/,
-								loaders: ['style', 'css', 'sass']
+								use: ['style-loader', 'css-loader', 'sass-loader']
 							}
 						]
 					},
 					resolve: {
-						alias: {},
-						modulesDirectories: ['<%%= paths.src %>/js', 'node_modules']
+						modules: ['<%= paths.src %>/js', 'node_modules']
 					}
 				},
 				dev: {
 					devtool: 'sourcemap',
-					debug: true,
-					watch: true,
 					output: {
 						filename: '[name].js',
 						path: '<%%= paths.dev %>/js/'
-					},
-					plugins: devPlugins
+					}
 				},
 				dist: {
 					output: {
 						filename: '[name].js',
 						path: '<%%= paths.dist %>/js/'
-					},
-					plugins: productionPlugins
+					}
 				}
 			};
 		})()

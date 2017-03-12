@@ -11,7 +11,7 @@ If you want to write efficient and scalable (S)CSS-code for big websites, try [n
 ## Project-Setup
 
 - [__Grunt__](http://gruntjs.com/) – js task runner
-- [__Webpack__](http://gruntjs.com/) – module bundler
+- [__Webpack__](https://webpack.js.org/) – module bundler
 - [__Babel__](https://babeljs.io/) – compiler for ES6 javascript<% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>
 - [__Assemble__](http://assemble.io/) – static site generator<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') != -1) { %>
 - [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) – static site generator<% } %><% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
@@ -95,7 +95,7 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 - [babel-core](https://github.com/babel/babel/tree/master/packages/babel-core)
 - [babel-loader](https://github.com/babel/babel-loader)
 - [babel-plugin-transform-runtime](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-runtime)
-- [babel-preset-latest](https://github.com/babel/babel/tree/master/packages/babel-preset-latest)<% if (config.get('features').indexOf('bower') != -1) { %>
+- [babel-preset-env](https://github.com/babel/babel-preset-env)<% if (config.get('features').indexOf('bower') != -1) { %>
 - [bower](https://github.com/bower/bower)<% } %>
 - [ejs-compiled-loader](https://github.com/bazilio91/ejs-compiled-loader)
 - [grunt](https://github.com/gruntjs/grunt)

@@ -7,10 +7,10 @@
 		"assemble": "0.16.2",
 		"autoprefixer": "6.3.7",
         "bower": "1.7.1",
-		"babel-core": "6.20.0",
-		"babel-loader": "6.2.10",
-		"babel-plugin-transform-runtime": "6.15.0",
-		"babel-preset-latest": "6.16.0",
+		"babel-core": "6.23.1",
+		"babel-loader": "6.4.0",
+		"babel-plugin-transform-runtime": "6.23.0",
+		"babel-preset-env": "1.2.1",
 		"css-parse": "2.0.0",
 		"ejs-compiled-loader": "2.2.0",
         "grunt": "0.4.5",
@@ -48,7 +48,7 @@
         "grunt-svgstore": "0.3.3",
 		"grunt-sync": "0.5.2",
 		"grunt-twig-render": "1.8.0",
-		"grunt-webpack": "1.0.18",
+		"grunt-webpack": "2.0.0",
 		"handlebars-helper-autolink": "0.1.1",
 		"handlebars-helpers": "0.7.3",
 		"nikita-css": "0.11.0",
@@ -57,7 +57,7 @@
 		"import-glob": "1.5.0",
 		"jit-grunt": "0.10.0",
 		"time-grunt": "1.4.0",
-		"webpack": "1.14.0",
-		"webpack-dev-server": "1.14.0"
+		"webpack": "2.2.1",
+		"webpack-dev-server": "2.4.1"
 	}
 }

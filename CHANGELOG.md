@@ -1,7 +1,7 @@
 # dev
 
 * removed drop console setting from uglify
-* replaced require.js by webpack and babel
+* replaced require.js by webpack2 and babel
 * added spring boot template
 * replaced livereload by BrowserSync
 * input prompts are always required fields
