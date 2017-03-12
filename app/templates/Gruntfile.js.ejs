@@ -932,6 +932,11 @@ module.exports = function(grunt) {
 
 		webpack: (function(){
 
+			var webpack = require('webpack');
+			var plugins = [
+				new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/)
+			];
+
 			return {
 				options: {
 					cache: true,
@@ -942,6 +947,7 @@ module.exports = function(grunt) {
 						chunkFilename: '[chunkhash].pkg.js'
 					},
 					module: {
+						exprContextCritical: false,
 						rules: [
 							{
 								test: /\.js$/,
@@ -996,13 +1002,15 @@ module.exports = function(grunt) {
 					output: {
 						filename: '[name].js',
 						path: '<%%= paths.dev %>/js/'
-					}
+					},
+					plugins: plugins
 				},
 				dist: {
 					output: {
 						filename: '[name].js',
 						path: '<%%= paths.dist %>/js/'
-					}
+					},
+					plugins: plugins
 				}
 			};
 		})()
