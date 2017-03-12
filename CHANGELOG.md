@@ -3,6 +3,7 @@
 * removed drop console setting from uglify
 * replaced require.js by webpack2 and babel
 * added spring boot template
+* upgrade to autoprefixer 6.5.4
 * replaced livereload by BrowserSync
 * input prompts are always required fields
 * all templates can be customized right after choosing the template
