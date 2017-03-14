@@ -90,7 +90,8 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 <% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>
 - [assemble](https://github.com/assemble/assemble)<% } %>
 - [autoprefixer-core](https://github.com/postcss/autoprefixer-core)<% if (config.get('features').indexOf('bower') != -1) { %>
-- [bower](https://github.com/bower/bower)<% } %>
+- [bower](https://github.com/bower/bower)<% } %><% if (config.get('features').indexOf('csscomb') != -1) { %>
+- [csscomb](https://github.com/csscomb/csscomb.js)<% } %>
 - [grunt](https://github.com/gruntjs/grunt)
 - [grunt-accessibility](https://github.com/yargalot/grunt-accessibility)
 - [grunt-browser-sync](https://github.com/BrowserSync/grunt-browser-sync)

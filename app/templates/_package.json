@@ -24,6 +24,7 @@
 		"grunt-contrib-requirejs": "1.0.0",
 		"grunt-contrib-uglify": "2.0.0",
 		"grunt-contrib-watch": "1.0.0",
+	  	"grunt-csscomb": "^3.1.0",
         "grunt-csssplit": "0.2.0",
 		"grunt-gitinfo": "0.1.8",
 		"grunt-group-css-media-queries": "1.0.1",
@@ -47,10 +48,10 @@
 		"grunt-twig-render": "1.8.0",
 		"handlebars-helper-autolink": "0.1.1",
 		"handlebars-helpers": "0.8.0",
+	  	"jit-grunt": "0.10.0",
 		"nikita-css": "0.11.0",
 		"node-logging-js": "1.2.0",
 		"node-jsb": "3.0.0",
-		"jit-grunt": "0.10.0",
 		"time-grunt": "1.4.0",
         "requirejs": "2.3.2"
 	}
