@@ -134,7 +134,20 @@ module.exports = function(grunt) {
 			dist: {
 				src: '<%%= paths.dist %>/css/*.css'
 			}
-		},
+		},<% if (config.get('features').indexOf('csscomb') != -1) { %>
+
+		// Configuration for csscomb
+		csscomb: {
+			options: {
+				config: '.csscomb.json'
+			},
+			dev: {
+				expand: true,
+				cwd: '<%%= paths.src %>/sass/',
+				src: ['**/_*.scss', '!mixins/*.scss', '!variables/*.scss'],
+				dest: '<%%= paths.src %>/sass/'
+			}
+		},<% } %>
 
 		// Configuration for deleting files
 		clean: {
@@ -1163,6 +1176,13 @@ module.exports = function(grunt) {
 	// JSDoc task
 	grunt.registerTask('build-jsdoc', [
 		'jsdoc'
+	]);
+<% } %>
+
+<% if (config.get('features').indexOf('csscomb') != -1) { %>
+	// Re-Order task
+	grunt.registerTask('reorder-scss', [
+		'csscomb'
 	]);
 <% } %>
 

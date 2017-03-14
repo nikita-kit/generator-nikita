@@ -197,7 +197,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					'universalCss',
 					'groupMediaQueries',
 					'gitinfos',
-					'bower'
+					'bower',
+					'csscomb'
 				]);
 				that.config.set('nikitaCssMixins', [
 					'centering',
@@ -316,6 +317,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}, {
 							name: 'Use bower for frontend package management',
 							value: 'bower'
+						} , {
+							name: 'Use csscomb for reorder and autoident your css-code',
+							value: 'csscomb'
 						}
 					]),
 					promptCheckbox('nikitaCssMixins', 'Which nikita.css mixins do you want to use?', [
@@ -396,6 +400,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Standard Files & Folders
 			this.template('.gitignore.ejs', '.gitignore');
 			this.template('.sass-lint.yml.ejs', '.sass-lint.yml');
+			this.template('.csscomb.json', '.csscomb.json');
 			if (this.config.get('sassCompiler').indexOf('compass') !== -1)
 			{
 				this.template('Gemfile.ejs', 'Gemfile');
@@ -501,6 +506,17 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			if (this.config.get('sassCompiler').indexOf('libSass') == -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-sass'];
+			}
+
+			// CSS-Comb
+			if (this.config.get('features').indexOf('csscomb') !== -1)
+			if (this.config.get('features').indexOf('csscomb') !== -1)
+			{
+				this.template('.csscomb.json', '.csscomb.json');
+			}
+			else
+			{
+				delete packageJsonData['devDependencies']['csscomb'];
 			}
 			
 			// Compass

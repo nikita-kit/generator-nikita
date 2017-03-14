@@ -1,0 +1,35 @@
+//
+// layout helpers
+// --------------------
+//
+//
+
+@mixin clearfix {
+  display: block;
+
+  &:after {
+    visibility: hidden;
+    display: block;
+    clear: both;
+    height: 0;
+    font-size: 0;
+    content: "";
+  }
+}
+
+@mixin ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; -o-text-overflow: ellipsis; }
+@mixin hyphens { hyphens: auto; -webkit-hyphens: auto; -moz-hyphens: auto; }
+
+@mixin show { display: block; }
+@mixin hide { display: none; }
+
+@mixin visuallyhidden {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+}
