@@ -3,12 +3,10 @@
 	"engines" : {
 		"node" : ">=4.0 <5.0"
 	},
-	"precommit" : {
-		"tasks" : [
-			"grunt check-js"
-		],
-		"onDirtyState": "fail"
+	"scripts": {
+		"check-js": "grunt check-js"
 	},
+	"pre-commit": "check-js",
     "devDependencies": {
 		"assemble": "0.16.2",
 		"autoprefixer": "6.5.4",
@@ -64,7 +62,7 @@
 		"node-jsb": "3.0.0",
 		"import-glob": "1.5.0",
 		"jit-grunt": "0.10.0",
-		"precommit": "1.2.2",
+		"pre-commit": "1.2.2",
 		"time-grunt": "1.4.0",
 		"webpack": "2.2.1",
 		"webpack-dev-server": "2.4.1"
