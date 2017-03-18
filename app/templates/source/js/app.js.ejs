@@ -1,16 +1,15 @@
-define('app', ['logging'], function(logging)
-{
-	var App = function()
-	{
-		logging.applyLogging(this, 'App');
+import logging from 'node-logging-js';
 
-		this.initializeEventListeners();
-	};
+class App {
+    constructor() {
+        logging.applyLogging(this, 'App');
 
-	App.prototype.initializeEventListeners = function()
-	{
+        this.initializeEventListeners();
+    }
 
-	};
+    initializeEventListeners(){
 
-	return new App();
-});
+    }
+}
+
+export default new App();

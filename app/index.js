@@ -440,8 +440,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/sass/variables/_typography.scss.ejs', sourceFolder + '/sass/variables/_typography.scss');
 			
 			// JS Files
-			this.template('source/js/_requireconfig.js.ejs', sourceFolder + '/js/_requireconfig.js');
+			this.template('source/js/_main.js.ejs', sourceFolder + '/js/_main.js');
 			this.template('source/js/app.js.ejs', sourceFolder + '/js/app.js');
+			this.template('source/js/Test.jsb.js.ejs', sourceFolder + '/js/Test.jsb.js');
 			this.template('source/js/modernizr/cssCheckedTest.js.ejs', sourceFolder + '/js/modernizr/cssCheckedTest.js');
 			this.template('source/js/modernizr/positionStickyTest.js.ejs', sourceFolder + '/js/modernizr/positionStickyTest.js');
 
