@@ -315,7 +315,40 @@ module.exports = function(grunt) {
 				src: '<%%= paths.dist %>/css/styles.css'
 			}
 		},<% } %><% if (config.get('features').indexOf('gitinfos') != -1) { %>
-		
+
+		eslint: {
+			options: {
+				fix: true,
+				"extends": [
+					"eslint:recommended",
+					"plugin:import/recommended",
+					"plugin:promise/recommended"
+				],
+				"plugins": [
+					"import",
+					"promise"
+				],
+				"env": {
+					"browser": true,
+					"es6": true
+				},
+				"parserOptions": {
+					"ecmaVersion": 8,
+					"sourceType": "module"
+				},
+				"rules": {
+					"indent": ["error", 4],
+					"curly": ["error", "all"],
+					"dot-notation": "error",
+					"no-eval": "error",
+					"no-implicit-globals": "error",
+					"no-console": "warn",
+					"arrow-body-style": ["error", "always"],
+				}
+			},
+			check: ['<%%= paths.src %>/js/**/*.js']
+		},
+
 		// Configuration for gitinfo (will be populated with values from Git)
 		gitinfo: {
 			
@@ -381,48 +414,6 @@ module.exports = function(grunt) {
 				src: ['<%%= paths.src %>/js/modules/**/*.js', '<%%= paths.src %>/js/README.md']
 			}
 		},<% } %>
-
-		// Configuration for validating js-files
-		jshint: {
-			options: {
-				force: true,
-				'asi': false,
-				'bitwise': false,
-				'boss': true,
-				'browser': true,
-				'curly': false,
-				'eqeqeq': false,
-				'eqnull': true,
-				'evil': false,
-				'forin': true,
-				'immed': false,
-				'indent': 4,
-				'jquery': true,
-				'laxbreak': true,
-				'maxerr': 50,
-				'newcap': false,
-				'noarg': true,
-				'noempty': false,
-				'nonew': false,
-				'nomen': false,
-				'onevar': false,
-				'plusplus': false,
-				'regexp': false,
-				'undef': false,
-				'sub': true,
-				'strict': false,
-				'white': false
-			},
-			all: {
-				options: {
-					'-W015': true,
-					'-W089': true
-				},
-				src: [
-					'<%%= paths.src %>/js/**/*.js'
-				]
-			}
-		},
 
 		// Modernizr configuration
 		modernizr: {
@@ -1153,9 +1144,9 @@ module.exports = function(grunt) {
 		'sasslint'
 	]);
 
-	// JSHint task
+	// ESlint task
 	grunt.registerTask('check-js', [
-		'jshint'
+		'eslint'
 	]);
 
 	// Accessibility task
