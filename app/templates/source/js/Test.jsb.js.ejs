@@ -1,6 +1,6 @@
-import app from 'app';
 import logging from 'node-logging-js';
 import jsb from 'node-jsb';
+import app from './app';
 
 class Test {
     constructor(element, options) {
@@ -9,6 +9,7 @@ class Test {
         this.element = element;
 
         this.initializeEventListeners();
+        app.doSomething();
     }
 
     initializeEventListeners() {

@@ -7,7 +7,11 @@ class App {
         this.initializeEventListeners();
     }
 
-    initializeEventListeners(){
+    initializeEventListeners() {
+
+    }
+
+    doSomething() {
 
     }
 }

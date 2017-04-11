@@ -3,6 +3,10 @@
 	"engines" : {
 		"node" : ">=4.0 <5.0"
 	},
+	"scripts": {
+		"check-js": "grunt check-js"
+	},
+	"pre-commit": "check-js",
     "devDependencies": {
 		"assemble": "0.16.2",
 		"autoprefixer": "6.7.6",
@@ -13,6 +17,9 @@
 		"babel-preset-env": "1.2.1",
 		"css-parse": "2.0.0",
 		"ejs-compiled-loader": "2.2.0",
+		"eslint-config-nikita": "1.0.0",
+		"eslint-plugin-import": "2.2.0",
+		"eslint-plugin-promise": "3.5.0",
         "grunt": "0.4.5",
         "grunt-cli": "0.1.13",
 		"grunt-accessibility": "4.2.0",
@@ -24,9 +31,9 @@
 		"grunt-contrib-copy": "1.0.0",
 		"grunt-contrib-cssmin": "1.0.1",
 		"grunt-contrib-imagemin": "1.0.1",
-		"grunt-contrib-jshint": "1.0.0",
 		"grunt-contrib-uglify": "2.0.0",
 		"grunt-contrib-watch": "1.0.0",
+		"grunt-eslint": "19.0.0",
         "grunt-csssplit": "0.2.0",
 		"grunt-gitinfo": "0.1.8",
 		"grunt-group-css-media-queries": "1.0.1",
@@ -56,6 +63,7 @@
 		"node-jsb": "3.0.0",
 		"import-glob": "1.5.0",
 		"jit-grunt": "0.10.0",
+		"pre-commit": "1.2.2",
 		"time-grunt": "1.4.0",
 		"webpack": "2.2.1",
 		"webpack-dev-server": "2.4.1"

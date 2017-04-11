@@ -2,6 +2,7 @@
 
 * removed drop console setting from uglify
 * replaced require.js by webpack2 and babel
+* replaced jshint by eslint with pre commit hook
 * added spring boot template
 * upgrade to autoprefixer 6.5.4
 * replaced livereload by BrowserSync
