@@ -17,6 +17,7 @@
 		"babel-preset-env": "1.2.1",
 		"css-parse": "2.0.0",
 		"ejs-compiled-loader": "2.2.0",
+		"eslint-config-nikita": "1.0.0",
 		"eslint-plugin-import": "2.2.0",
 		"eslint-plugin-promise": "3.5.0",
         "grunt": "0.4.5",

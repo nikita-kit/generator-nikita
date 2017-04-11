@@ -319,7 +319,8 @@ module.exports = function(grunt) {
 		eslint: {
 			options: {
 				fix: true,
-				configFile: '.eslintconf.js'
+				envs: ['browser'],
+				configFile: './node_modules/eslint-config-nikita/index.js'
 			},
 			check: ['<%%= paths.src %>/js/**/*.js']
 		},
