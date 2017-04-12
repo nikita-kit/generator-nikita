@@ -1,5 +1,6 @@
 # dev
 
+* removed modernizr, use @supports instead
 * removed drop console setting from uglify
 * replaced require.js by webpack2 and babel
 * replaced jshint by eslint with pre commit hook

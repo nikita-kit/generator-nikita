@@ -250,7 +250,7 @@ module.exports = function(grunt) {
 		// Configuration for run tasks concurrently
 		concurrent: {
 			dev1: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss'<% } %>],
-			dev2: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:devStyles', <% if (config.get('sassCompiler').indexOf('universalCss') != -1) { %>'compass:devUniversal', <% } %><% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>'assemble:dev', <% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>'twigRender:dev', <% } %>'modernizr'],
+			dev2: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:devStyles', <% if (config.get('sassCompiler').indexOf('universalCss') != -1) { %>'compass:devUniversal', <% } %><% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>'assemble:dev', <% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>'twigRender:dev'<% } %>],
 			dist: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss', <% } %>'imagemin:dist'],
 		},
 
@@ -273,12 +273,6 @@ module.exports = function(grunt) {
 				dest: '<%%= paths.dist %>/fonts/',
 				expand: true,
 				src: ['**/*']
-			},
-			modernizr: {
-				cwd: '<%%= paths.tmp %>/',
-				dest: '<%%= paths.dist %>/js/',
-				expand: true,
-				src: ['modernizr.js']
 			}<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>,
 			styleguide: {
 				cwd: '<%%= paths.dev %>/css/',
@@ -389,21 +383,7 @@ module.exports = function(grunt) {
 				},
 				src: ['<%%= paths.src %>/js/modules/**/*.js', '<%%= paths.src %>/js/README.md']
 			}
-		},<% } %>
-
-		// Modernizr configuration
-		modernizr: {
-			all: {
-				customTests: ['<%%= paths.src %>/js/modernizr/*.js'],
-				devFile: 'remote',
-				files: {
-					src: ['<%%= paths.src %>/**/*.js', '<%%= paths.src %>/**/*.scss']
-				},
-				outputFile: '<%%= paths.tmp %>/modernizr.js',
-				extensibility: { teststyles: true, prefixes: true },
-				uglify: false
-			}
-		},<% if (config.get('features').indexOf('measurePagespeed') != -1) { %>
+		},<% } %><% if (config.get('features').indexOf('measurePagespeed') != -1) { %>
 
 		// Configuration for pagespeed
 		pagespeed: {
@@ -768,15 +748,6 @@ module.exports = function(grunt) {
 					}
 				]
 			},
-			modernizr: {
- 				files: [
-					{
-						cwd: '<%%= paths.tmp %>/',
-						dest: '<%%= paths.dev %>/js/',
-						src: 'modernizr.js'
-					}
-				]
-			}
 		},<% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
 
 		twigRender: {
@@ -1040,7 +1011,6 @@ module.exports = function(grunt) {
 		'write-gitinfos',<% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
 		'assemble:dist',<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
 		'twigRender:dist',<% } %>
-		'modernizr',
 		'postcss:dist',<% if (config.get('features').indexOf('cssSplit') != -1) { %>
 		'csssplit:dist',<% } %><% if (config.get('features').indexOf('groupMediaQueries') != -1) { %>
 		'group_css_media_queries',<% } %>
@@ -1049,7 +1019,6 @@ module.exports = function(grunt) {
 		'copy:ajax',
 		'copy:favicon',
 		'copy:fonts',
-		'copy:modernizr',
 		'uglify',
 		'prettify:dist'
 	]);
