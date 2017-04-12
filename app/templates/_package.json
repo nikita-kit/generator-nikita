@@ -46,7 +46,7 @@
         "grunt-photobox": "0.6.0",
 		"grunt-prettify": "0.4.0",
 		"grunt-sass": "1.2.0",
-		"grunt-sass-lint": "0.2.0",
+		"grunt-sass-lint": "0.2.2",
 		"grunt-string-replace": "1.2.1",
         "grunt-styleguide": "0.2.15",
 		"grunt-svg-css": "0.2.8",
