@@ -88,17 +88,17 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			promptConfirm('private', 'Is this project private?', true),
 			promptList('template', 'Which configuration template do you want to use?', [
 				{
-					name: 'Default setup',
-					value: 'default'
-				},
-				{
-					name: 'Slim setup',
+					name: 'Web-App setup (old slim)',
 					value: 'slim'
 				},
 				{
-					name: 'Spring Boot (slim)',
+					name: 'Spring Boot setup',
 					value: 'spring-boot'
-				}
+				},
+				{
+					name: 'Kickstarter setup (old default)',
+					value: 'default'
+				},
 			]),
 			promptConfirm('custom', 'Customize this template?', false),
 		];

@@ -1,5 +1,6 @@
 # dev
 
+* renamed generator templates to be more clear what it is for
 * removed modernizr, use @supports instead
 * removed drop console setting from uglify
 * replaced require.js by webpack2 and babel
