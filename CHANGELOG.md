@@ -13,6 +13,7 @@
 * dont run bower when rerunning the generator and bower is not included
 * added also twig as static page generator
 * added script to run non-interactive-generator for builds
+* updated lots of npm dependencies
 
 # 2.0.0 (2016/08/02)
 
