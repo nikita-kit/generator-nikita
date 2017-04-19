@@ -25,7 +25,6 @@ Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerat
 </a>
 
 
-
 This is our generator to start a new project from scratch. It will generate a completely customized version of the [nikita.kickstarter](https://github.com/nikita-kit/nikita-kickstarter)
 for your project.
 
@@ -52,6 +51,11 @@ Finally, initiate the generator:
 ```bash
 yo nikita
 ```
+
+## Contributing
+
+We welcome contributions to generator nikita. See [CONTRIBUTING.md](CONTRIBUTING.md) for a small guide.
+
 
 ## License
 
