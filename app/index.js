@@ -395,7 +395,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			
 			// Standard Files & Folders
 			this.template('.gitignore.ejs', '.gitignore');
-			this.template('.sass-lint.yml.ejs', '.sass-lint.yml');
+			this.template('stylelint.config.js.ejs', 'stylelint.config.js');
 			if (this.config.get('sassCompiler').indexOf('compass') !== -1)
 			{
 				this.template('Gemfile.ejs', 'Gemfile');
