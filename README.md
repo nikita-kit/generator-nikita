@@ -3,25 +3,25 @@
 Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerator-nikita.png)](https://github.com/nikita-kit/generator-nikita/releases)
 
 <a href="http://gruntjs.com/">
-    <img height="75" src="https://cdn.rawgit.com/axten/generator-nikita/readme/img/grunt.svg" alt="grunt">
+    <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/grunt.svg" alt="grunt">
 </a>
 <a href="https://webpack.js.org/">
-    <img height="75" src="https://cdn.rawgit.com/axten/generator-nikita/readme/img/webpack.svg" alt="webpack">
+    <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/webpack.svg" alt="webpack">
 </a>
 <a href="https://babeljs.io/">
-    <img height="65" src="https://cdn.rawgit.com/axten/generator-nikita/readme/img/babel.svg" alt="babel">
+    <img height="65" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/babel.svg" alt="babel">
 </a>
 <a href="https://github.com/sass/node-sass">
-    <img height="75" src="https://cdn.rawgit.com/axten/generator-nikita/readme/img/node-sass.svg" alt="sass">
+    <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/node-sass.svg" alt="sass">
 </a>
 <a href="http://eslint.org/">
-    <img height="75" src="https://cdn.rawgit.com/axten/generator-nikita/readme/img/eslint.svg" alt="eslint">
+    <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/eslint.svg" alt="eslint">
 </a>
 <a href="https://stylelint.io/">
-    <img height="75" src="https://cdn.rawgit.com/axten/generator-nikita/readme/img/stylelint.svg" alt="stylelint">
+    <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/stylelint.svg" alt="stylelint">
 </a>
 <a href="https://browsersync.io/">
-    <img height="85" src="https://cdn.rawgit.com/axten/generator-nikita/readme/img/browsersync.svg" alt="browsersync">
+    <img height="85" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/browsersync.svg" alt="browsersync">
 </a>
 
 
