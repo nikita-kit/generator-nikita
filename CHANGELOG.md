@@ -17,6 +17,7 @@
 * added also twig as static page generator
 * added script to run non-interactive-generator for builds
 * updated lots of npm dependencies
+* removed universal.css for IE6
 
 # 2.0.0 (2016/08/02)
 
