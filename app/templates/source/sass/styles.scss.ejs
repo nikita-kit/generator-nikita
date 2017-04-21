@@ -32,12 +32,12 @@
 {
 %>// nikita.css Mixins
 <%
-	var nikitaCssMixins = config.get('nikitaCssMixins');
-	for (var i = 0; i < nikitaCssMixins.length; i++)
-	{
+    var nikitaCssMixins = config.get('nikitaCssMixins');
+    for (var i = 0; i < nikitaCssMixins.length; i++)
+    {
 %>@import "../../node_modules/nikita-css/mixins/_<%= nikitaCssMixins[i] %>.scss";
 <%
-	}
+    }
 }
 %>
 // Mixins
@@ -47,12 +47,12 @@
 {
 %>// nikita.css Extends
 <%
-	var nikitaCssExtends = config.get('nikitaCssExtends');
-	for (var i = 0; i < nikitaCssExtends.length; i++)
-	{
+    var nikitaCssExtends = config.get('nikitaCssExtends');
+    for (var i = 0; i < nikitaCssExtends.length; i++)
+    {
 %>@import "../../node_modules/nikita-css/extends/_<%= nikitaCssExtends[i] %>.scss";
 <%
-	}
+    }
 }
 %>
 // Extends
