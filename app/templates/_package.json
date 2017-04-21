@@ -9,12 +9,12 @@
 	"pre-commit": "check-js",
     "devDependencies": {
 		"assemble": "0.23.0",
-		"autoprefixer": "6.7.6",
+		"autoprefixer": "6.7.7",
         "bower": "1.7.1",
-		"babel-core": "6.23.1",
-		"babel-loader": "6.4.0",
+		"babel-core": "6.24.1",
+		"babel-loader": "7.0.0",
 		"babel-plugin-transform-runtime": "6.23.0",
-		"babel-preset-env": "1.2.1",
+		"babel-preset-env": "1.4.0",
 		"css-parse": "2.0.0",
 		"ejs-compiled-loader": "2.2.0",
 		"eslint-config-nikita": "1.0.0",
@@ -53,8 +53,8 @@
 		"grunt-svgmin": "4.0.0",
         "grunt-svgstore": "0.3.3",
 		"grunt-sync": "0.6.2",
-		"grunt-twig-render": "1.8.0",
-		"grunt-webpack": "2.0.0",
+		"grunt-twig-render": "1.8.1",
+		"grunt-webpack": "2.0.1",
 		"handlebars-helper-autolink": "0.1.1",
 		"handlebars-helpers": "0.8.0",
 		"nikita-css": "0.11.0",
@@ -64,7 +64,7 @@
 		"jit-grunt": "0.10.0",
 		"pre-commit": "1.2.2",
 		"time-grunt": "1.4.0",
-		"webpack": "2.2.1",
-		"webpack-dev-server": "2.4.1"
+		"webpack": "2.4.1",
+		"webpack-dev-server": "2.4.2"
 	}
 }
