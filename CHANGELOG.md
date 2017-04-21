@@ -1,5 +1,6 @@
 # dev
 
+* added contribution section and project icons to readme
 * renamed generator templates to be more clear what it is for
 * removed modernizr, use @supports instead
 * removed drop console setting from uglify
@@ -7,7 +8,7 @@
 * replaced jshint by eslint with pre commit hook
 * added spring boot template
 * upgrade to autoprefixer 6.5.4
-* replaced livereload by BrowserSync
+* replaced livereload by Browsersync
 * input prompts are always required fields
 * all templates can be customized right after choosing the template
 * exclude group-css-media-queries from slim build
