@@ -1,6 +1,7 @@
 # dev
 
 * added contribution section and project icons to readme
+* replaced sass-lint by stylelint
 * renamed generator templates to be more clear what it is for
 * removed modernizr, use @supports instead
 * removed drop console setting from uglify
