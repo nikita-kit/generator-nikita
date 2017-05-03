@@ -1,6 +1,8 @@
 # dev
 
+* replaced sass-lint by stylelint
 * added contribution section and project icons to readme
+* replaced sass-lint by stylelint
 * renamed generator templates to be more clear what it is for
 * removed modernizr, use @supports instead
 * removed drop console setting from uglify
@@ -16,6 +18,7 @@
 * added also twig as static page generator
 * added script to run non-interactive-generator for builds
 * updated lots of npm dependencies
+* removed universal.css for IE6
 
 # 2.0.0 (2016/08/02)
 

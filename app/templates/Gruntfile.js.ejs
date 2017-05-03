@@ -2,7 +2,6 @@ module.exports = function(grunt) {
 
 	// Require it at the top and pass in the grunt instance
 	require('jit-grunt')(grunt, {
-		sasslint: 'grunt-sass-lint',
 		svgcss: 'grunt-svg-css'
 	});
 	require('time-grunt')(grunt);
@@ -209,48 +208,13 @@ module.exports = function(grunt) {
 						'}'
 					].join("\n"),
 				}
-			}<% if (config.get('sassCompiler').indexOf('universalCss') != -1) { %>,
-			devUniversal: {
-				options: {
-					cssDir: '<%%= paths.dev %>/css',
-					environment: 'development',
-					sourcemap: true,
-					sassDir: '<%%= paths.src %>/sass',
-					specify: ['<%%= paths.src %>/sass/universal.scss'],
-					raw: [
-						'http_path = "/"',
-						'additional_import_paths = ["<%%= paths.src %>/sass", ""]',
-						'Sass::Script::Number.precision = 8',
-						'sass_options = {',
-						'  :cache => true,',
-						'}'
-					].join("\n")
-				}
-			},
-			distUniversal: {
-				options: {
-					cssDir: '<%%= paths.dist %>/css',
-					environment: 'production',
-					sourcemap: false,
-					sassDir: '<%%= paths.src %>/sass',
-					specify: ['<%%= paths.src %>/sass/universal.scss'],
-					raw: [
-						'http_path = "/"',
-						'additional_import_paths = ["<%%= paths.src %>/sass", ""]',
-						'Sass::Script::Number.precision = 8',
-						'sass_options = {',
-						'  :cache => false,',
-						'}'
-					].join("\n")
-				}
-			}<% } %>
-
+			}
 		},<% } %>
 
 		// Configuration for run tasks concurrently
 		concurrent: {
 			dev1: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss'<% } %>],
-			dev2: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:devStyles', <% if (config.get('sassCompiler').indexOf('universalCss') != -1) { %>'compass:devUniversal', <% } %><% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>'assemble:dev', <% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>'twigRender:dev'<% } %>],
+			dev2: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:devStyles', <% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>'assemble:dev', <% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>'twigRender:dev'<% } %>],
 			dist: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss', <% } %>'imagemin:dist'],
 		},
 
@@ -507,8 +471,7 @@ module.exports = function(grunt) {
 					includePaths: ['<%%= paths.src %>/sass', '']
 				},
 				files: {
-					'<%%= paths.dev %>/css/styles.css': '<%%= paths.tmp %>/styles.scss'<% if (config.get('sassCompiler').indexOf('universalCss') != -1) { %>,
-					'<%%= paths.dev %>/css/universal.css': '<%%= paths.src %>/sass/universal.scss'<% } %>
+					'<%%= paths.dev %>/css/styles.css': '<%%= paths.tmp %>/styles.scss'
 				}
 			},
 			dist: {
@@ -518,21 +481,10 @@ module.exports = function(grunt) {
 					includePaths: ['<%%= paths.src %>/sass', '']
 				},
 				files: {
-					'<%%= paths.dist %>/css/styles.css': '<%%= paths.tmp %>/styles.scss'<% if (config.get('sassCompiler').indexOf('universalCss') != -1) { %>,
-					'<%%= paths.dist %>/css/universal.css': '<%%= paths.src %>/sass/universal.scss'<% } %>
+					'<%%= paths.dist %>/css/styles.css': '<%%= paths.tmp %>/styles.scss'
 				}
 			}
-		},<% } %>
-
-		// Configuration for SASS/SCSS linting
-		sasslint: {
-			allFiles: [
-				'<%%= paths.src %>/sass/{blocks,extends,mixins,variables,styles.scss,_*.scss}'
-			],
-			options: {
-				configFile: '.sass-lint.yml'
-			}
-		},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+		},<% } %><% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 
 		// Configuration for string-replacing the svgcss output
 		'string-replace': {
@@ -547,7 +499,17 @@ module.exports = function(grunt) {
 					}]
 				}
 			}
-		},<% } %><% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
+		},<% } %>
+
+		// Configuration for linting SCSS
+		stylelint: {
+			options: {
+				configFile: 'stylelint.config.js',
+				formatter: 'string',
+				syntax: 'scss'
+			},
+			src: ['<%%= paths.src %>/sass/**/*.scss']
+		},<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
 
 		// Configuration for the styleguide output
 		styleguide: {
@@ -835,7 +797,7 @@ module.exports = function(grunt) {
 			},
 			scss: {
 				files: ['<%%= paths.src %>/sass/**/*.scss'],
-				tasks: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:devStyles', <% if (config.get('sassCompiler').indexOf('universalCss') != -1) { %>'compass:devUniversal', <% } %><% } %>'postcss:dev'<% if (config.get('features').indexOf('cssSplit') != -1) { %>, 'csssplit:dev'<% } %>]
+				tasks: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:devStyles', <% } %>'postcss:dev'<% if (config.get('features').indexOf('cssSplit') != -1) { %>, 'csssplit:dev'<% } %>]
 			},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 			svg_bgs: {
 				files: ['<%%= paths.src %>/img/bgs/*.svg'],
@@ -1011,8 +973,7 @@ module.exports = function(grunt) {
 		'string-replace',<% } %>
 		'generate-tmp-styles-scss',<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
 		'sass:dist',<% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
-		'compass:distStyles',<% if (config.get('sassCompiler').indexOf('universalCss') != -1) { %>
-		'compass:distUniversal', <% } %><% } %><% if (config.get('features').indexOf('gitinfos') != -1) { %>
+		'compass:distStyles',<% } %><% if (config.get('features').indexOf('gitinfos') != -1) { %>
 		'gitinfo',
 		'write-gitinfos',<% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
 		'assemble:dist',<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
@@ -1092,7 +1053,7 @@ module.exports = function(grunt) {
 
 	// SASSLint/SCSSLint task
 	grunt.registerTask('check-scss', [
-		'sasslint'
+		'stylelint'
 	]);
 
 	// ESlint tasks
