@@ -1,4 +1,4 @@
-# dev
+# 3.0.0 (2017/05/04)
 
 * replaced sass-lint by stylelint
 * added contribution section and project icons to readme
