@@ -1,3 +1,8 @@
+# dev
+
+* updated webpack and babel
+
+
 # 3.0.0 (2017/05/04)
 
 * replaced sass-lint by stylelint
