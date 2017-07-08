@@ -1,7 +1,7 @@
 # dev
 
 * updated webpack and babel
-
+* updated eslint
 
 # 3.0.0 (2017/05/04)
 
