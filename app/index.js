@@ -13,7 +13,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 		this.option('skip-install',
 			{
-				desc: 'Will skip the installation of npm and bower packages',
+				desc: 'Will skip the installation of npm packages',
 				type: 'boolean'
 			});
 	},
@@ -158,7 +158,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						
 						/* remove trailing slash */
 						that.config.set('sourceFolder', (that.config.get('sourceFolder') || "").replace(/\/$/, ""));
-						that.config.set('requirejsPathToBowerComponents', (Array(2 + that.config.get('sourceFolder').split("/", -1).length).join("../")) + 'bower_components/');
 						that.config.set('requirejsPathToNodeModules', (Array(2 + that.config.get('sourceFolder').split("/", -1).length).join("../")) + 'node_modules/');
 						done();
 					});
@@ -166,7 +165,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				else
 				{
 					that.config.set('cleanBuildFolders', true);
-					that.config.set('requirejsPathToBowerComponents', '../../bower_components/');
 					that.config.set('requirejsPathToNodeModules', '../../node_modules/');
 					done();
 				}
@@ -195,8 +193,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					'svgBackgrounds',
 					'svgSprite',
 					'groupMediaQueries',
-					'gitinfos',
-					'bower'
+					'gitinfos'
 				]);
 				that.config.set('nikitaCssMixins', [
 					'centering',
@@ -304,14 +301,11 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							name: 'Take screenshots to diff your changes (grunt-photobox)',
 							value: 'takeScreenshots'
 						}, {
-							name: 'Use local grunt and bower binaries',
-							value: 'useLocalGruntAndBower'
+							name: 'Use local grunt binary',
+							value: 'useLocalGrunt'
 						}, {
 							name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
 							value: 'gitinfos'
-						}, {
-							name: 'Use bower for frontend package management',
-							value: 'bower'
 						}
 					]),
 					promptCheckbox('nikitaCssMixins', 'Which nikita.css mixins do you want to use?', [
@@ -382,11 +376,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 		app: function ()
 		{
 			var packageJsonData = this.src.readJSON('_package.json');
-			var bowerJsonData = this.src.readJSON('_bower.json');
-			
+
 			packageJsonData['name'] = this.config.get('name');
-			bowerJsonData['name'] = this.config.get('name');
-			
 			packageJsonData['private'] = this.config.get('private');
 			
 			// Standard Files & Folders
@@ -475,15 +466,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/img/dev/README.md.ejs', sourceFolder + '/img/dev/README.md');
 			this.template('source/img/temp/README.md.ejs', sourceFolder + '/img/temp/README.md');
 
-			if (this.config.get('features').indexOf('useLocalGruntAndBower') == -1)
+			if (this.config.get('features').indexOf('useLocalGrunt') == -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-cli'];
-				delete packageJsonData['devDependencies']['bower'];
-			}
-
-			if (this.config.get('features').indexOf('bower') === -1)
-			{
-				delete packageJsonData['devDependencies']['bower'];
 			}
 
 			// Libsass
@@ -639,11 +624,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			
 			this.dest.write('package.json', JSON.stringify(packageJsonData, null, 4));
-
-			if (this.config.get('features').indexOf('bower') !== -1)
-			{
-				this.dest.write('bower.json', JSON.stringify(bowerJsonData, null, 4));
-			}
 		},
 		
 		projectfiles: function ()
@@ -654,25 +634,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 	end: function ()
 	{
 		if (this.options['skip-install']) {
-			if (this.config.get('features').indexOf('bower') === -1)
-			{
-				this.log('\nRun ' +
-				chalk.yellow.bold('npm install') +
-				' to install your frontend dependencies.\n');
-			}
-			else
-			{
-				this.log('\nRun ' +
-				chalk.yellow.bold('npm install & bower install') +
-				' to install your frontend dependencies.\n');
-			}
+			this.log('\nRun ' +
+			chalk.yellow.bold('npm install') +
+			' to install your frontend dependencies.\n');
 			return;
 		}
-		
-		this.installDependencies({
-			"bower": (this.config.get('features').indexOf('bower') !== -1),
-			"npm": true
-		});
+
+		this.npmInstall();
 	}
 });
 

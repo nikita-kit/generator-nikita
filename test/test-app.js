@@ -102,7 +102,6 @@ describe('nikita:app:default', function () {
 
 	it('creates files', function () {
 		assert.file([
-			'bower.json',
 			'package.json',
 			'source/sass/styles.scss'
 		]);

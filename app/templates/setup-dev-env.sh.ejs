@@ -7,21 +7,13 @@ then
 	exit 1;
 fi
 
-<% if (config.get('features').indexOf('useLocalGruntAndBower') == -1) { %>
+<% if (config.get('features').indexOf('useLocalGrunt') == -1) { %>
 if [ -z "`which grunt`" ]
 then
 	echo "ERROR: grunt-cli is missing!"
 	echo "Please run 'sudo npm install -g grunt-cli'"
 	exit 1;
 fi
-<% if (config.get('features').indexOf('bower') !== -1) { %>
-if [ -z "`which bower`" ]
-then
-	echo "ERROR: bower is missing!"
-	echo "Please run 'sudo npm install -g bower'"
-	exit 1;
-fi
-<% } %>
 <% } %>
 
 <% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
@@ -42,10 +34,3 @@ fi
 <% } %>
 
 npm install
-<% if (config.get('features').indexOf('bower') !== -1) { %>
-<% if (config.get('features').indexOf('useLocalGruntAndBower') == -1) { %>
-bower install --config.interactive=false # since we don't want to know if we might want to submit some statistics to the bower team!
-<% } else { %>
-node_modules/.bin/bower install --config.interactive=false # since we don't want to know if we might want to submit some statistics to the bower team!
-<% } %>
-<% } %>

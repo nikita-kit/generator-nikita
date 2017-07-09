@@ -10,7 +10,6 @@
     "devDependencies": {
 		"assemble": "0.23.0",
 		"autoprefixer": "6.7.7",
-        "bower": "1.7.1",
 		"babel-core": "6.25.0",
 		"babel-loader": "7.1.1",
 		"babel-plugin-transform-runtime": "6.23.0",

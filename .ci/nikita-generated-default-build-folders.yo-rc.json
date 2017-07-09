@@ -10,8 +10,7 @@
       "svgBackgrounds",
       "svgSprite",
       "gitinfos",
-      "groupMediaQueries",
-      "bower"
+      "groupMediaQueries"
     ],
     "nikitaCssMixins": [
       "centering",
@@ -32,7 +31,6 @@
     "useBuildFolders": true,
     "svgBackgrounds": true,
     "cleanBuildFolders": true,
-    "requirejsPathToBowerComponents": "../../bower_components/",
     "requirejsPathToNodeModules": "../../node_modules/"
   }
 }
