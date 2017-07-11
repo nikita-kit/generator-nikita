@@ -26,7 +26,6 @@
 		"grunt-assemble": "0.6.3",
 		"grunt-concurrent": "2.3.1",
 		"grunt-contrib-clean": "1.0.0",
-        "grunt-contrib-compass": "0.7.2",
 		"grunt-contrib-copy": "1.0.0",
 		"grunt-contrib-cssmin": "2.0.0",
 		"grunt-contrib-imagemin": "1.0.1",

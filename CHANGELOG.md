@@ -2,7 +2,7 @@
 
 * updated webpack and babel
 * updated eslint
-* removed bower
+* removed bower and ruby sass
 
 # 3.0.0 (2017/05/04)
 

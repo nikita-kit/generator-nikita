@@ -3,7 +3,6 @@
     "name": "nikita-generated-default-build-folders",
     "private": true,
     "template": "default",
-    "sassCompiler": "libSass",
     "features": [
       "webfonts",
       "browserReset",

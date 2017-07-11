@@ -186,7 +186,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			if (that.config.get('template') == 'default')
 			{
 				that.config.set('staticPageGenerator', 'assemble');
-				that.config.set('sassCompiler', 'libSass');
 				that.config.set('features', [
 					'webfonts',
 					'browserReset',
@@ -217,7 +216,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			else if (['slim', 'spring-boot'].indexOf(that.config.get('template')) !== -1)
 			{
 				that.config.set('staticPageGenerator', 'twigRender');
-				that.config.set('sassCompiler', 'libSass');
 				that.config.set('features', [
 					'webfonts',
 					'svgBackgrounds',
@@ -255,15 +253,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}, {
 							name: 'assemble.io, Static-Page-Generator with handlebars templates',
 							value: 'assemble'
-						}
-					]),
-					promptList('sassCompiler', 'Which Sass Compiler do you want to use?', [
-						{
-							name: 'libSass, lightning fast but not all Sass features',
-							value: 'libSass'
-						}, {
-							name: 'Compass + Sass, slower but with all latest Sass features, based on Ruby',
-							value: 'compass'
 						}
 					]),
 					promptCheckbox('features', 'Which features do you want to use?', [
@@ -379,14 +368,11 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 			packageJsonData['name'] = this.config.get('name');
 			packageJsonData['private'] = this.config.get('private');
-			
+
+
 			// Standard Files & Folders
 			this.template('.gitignore.ejs', '.gitignore');
 			this.template('stylelint.config.js.ejs', 'stylelint.config.js');
-			if (this.config.get('sassCompiler').indexOf('compass') !== -1)
-			{
-				this.template('Gemfile.ejs', 'Gemfile');
-			}
 			this.template('Gruntfile.js.ejs', 'Gruntfile.js');
 			this.template('NIKITA-LICENSE.md.ejs', 'NIKITA-LICENSE.md');
 			this.template('README.md.ejs', 'README.md');
@@ -471,18 +457,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				delete packageJsonData['devDependencies']['grunt-cli'];
 			}
 
-			// Libsass
-			if (this.config.get('sassCompiler').indexOf('libSass') == -1)
-			{
-				delete packageJsonData['devDependencies']['grunt-sass'];
-			}
-			
-			// Compass
-			if (this.config.get('sassCompiler').indexOf('compass') == -1)
-			{
-				delete packageJsonData['devDependencies']['grunt-contrib-compass'];
-			}
-			
 			// Optional Browser Reset SASS-Partial
 			if (this.config.get('features').indexOf('browserReset') != -1)
 			{

@@ -5,12 +5,6 @@
  *
  */
 
-<% if (config.get('sassCompiler').indexOf('compass') != -1)
-{ %>// Compass
-@import "compass";
-<%
-}
-%>
 <% if (config.get('features').indexOf('webfonts') != -1)
 {
 %>// Webfonts

@@ -3,7 +3,6 @@
     "name": "nikita-generated-slim-one-folder",
     "private": true,
     "template": "slim",
-    "sassCompiler": "libSass",
     "features": [
       "webfonts",
       "svgBackgrounds",

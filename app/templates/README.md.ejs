@@ -14,9 +14,8 @@ If you want to write efficient and scalable (S)CSS-code for big websites, try [n
 - [__Webpack__](https://webpack.js.org/) – module bundler
 - [__Babel__](https://babeljs.io/) – compiler for ES6 javascript<% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>
 - [__Assemble__](http://assemble.io/) – static site generator<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') != -1) { %>
-- [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) – static site generator<% } %><% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
-- [__SASS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – css preprocessing<% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
-- [__SASS__](http://sass-lang.com/) with [__Compass__](http://compass-style.org/) – css preprocessing<% } %>
+- [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) – static site generator<% } %>
+- [__SASS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – css preprocessing
 - [__nikita.html__](https://github.com/nikita-kit/nikita-html) – HTML conventions and coding guidelines
 - [__nikita.css__](https://github.com/nikita-kit/nikita-css) – (S)CSS conventions and coding guidelines
 - [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines
@@ -25,7 +24,7 @@ If you want to write efficient and scalable (S)CSS-code for big websites, try [n
 - [__Browsersync__](https://browsersync.io/) – synchronised browser testing<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
 - [__KSS__](http://warpspire.com/kss/) – living styleguide<% } %>
 
-Grunt depends on [node.js](http://nodejs.org)<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>, Sass and Compass depend on [Ruby](http://www.ruby-lang.org)<% } %>. Some of the [Grunt plugins](#grunt-plugins-used) depend on command line tools to be installed on your (build) system.
+Grunt depends on [node.js](http://nodejs.org). Some of the [Grunt plugins](#grunt-plugins-used) depend on command line tools to be installed on your (build) system.
 
 ## Requirements
 
@@ -33,25 +32,7 @@ These are the minimum requirements for the project setup:
  
 - [__Node.js & Node Package Manager__](http://nodejs.org)
 - [__Grunt Command Line Interface__](http://gruntjs.com/getting-started) – `sudo npm install -g grunt-cli`
-<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
 
-Additionally we have the following ruby dependencies:
-
-- [__Compass 1.0__](http://rubygems.org/gems/compass/versions) – `sudo gem install compass`
-- [__SASS 3.4__](http://rubygems.org/gems/sass/versions/) – `sudo gem install sass`
-
-Here's an example of a complete working configuration:
-
-```
-$ gem list
-
-compass (1.0.1)
-compass-core (1.0.1)
-compass-import-once (1.0.5)
-sass (3.4.4)
-```
-
-For those RubyGems we included a Gemfile, so you can use [__Bundler__](http://bundler.io/) to get a consistent environment. Just type `gem install bundler` to install Bundler itself and then you can use `bundle install` to get the exact Gems.<% } %>
 
 ## Getting started
 
@@ -103,8 +84,7 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 - [grunt-accessibility](https://github.com/yargalot/grunt-accessibility)
 - [grunt-browser-sync](https://github.com/BrowserSync/grunt-browser-sync)
 - [grunt-concurrent](https://github.com/sindresorhus/grunt-concurrent)
-- [grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean)<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
-- [grunt-contrib-compass](https://github.com/gruntjs/grunt-contrib-compass)<% } %>
+- [grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean)
 - [grunt-contrib-copy](https://github.com/gruntjs/grunt-contrib-copy)
 - [grunt-contrib-cssmin](https://github.com/gruntjs/grunt-contrib-cssmin)
 - [grunt-contrib-imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)

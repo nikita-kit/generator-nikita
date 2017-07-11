@@ -3,7 +3,6 @@
     "name": "nikita-generated-spring-boot",
     "private": true,
     "template": "spring-boot",
-    "sassCompiler": "libSass",
     "features": [
       "webfonts",
       "svgBackgrounds",

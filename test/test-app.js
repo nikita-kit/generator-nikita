@@ -6,7 +6,7 @@ var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
 var os = require('os');
 
-describe('nikita:app:custom-libsass', function () {
+describe('nikita:app:custom-twigRender', function () {
 	this.timeout(5000);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
@@ -15,7 +15,6 @@ describe('nikita:app:custom-libsass', function () {
 			.withPrompt({
 				template: "custom",
 				staticPageGenerator: "twigRender",
-				sassCompiler: "libsass",
 				private: true,
 				name: "testrun" + (new Date()).getTime(),
 				nikitaCssMixins: [],
@@ -29,12 +28,13 @@ describe('nikita:app:custom-libsass', function () {
 	it('creates files', function () {
 		assert.file([
 			'package.json',
-			'source/sass/styles.scss'
+			'source/sass/styles.scss',
+			'source/html/pages/index.twig'
 		]);
 	});
 });
 
-describe('nikita:app:custom-compass', function () {
+describe('nikita:app:custom-assemble', function () {
 	this.timeout(5000);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
@@ -43,7 +43,6 @@ describe('nikita:app:custom-compass', function () {
 			.withPrompt({
 				template: "custom",
 				staticPageGenerator: "assemble",
-				sassCompiler: "compass",
 				private: true,
 				name: "testrun" + (new Date()).getTime(),
 				nikitaCssMixins: [],
@@ -57,7 +56,8 @@ describe('nikita:app:custom-compass', function () {
 	it('creates files', function () {
 		assert.file([
 			'package.json',
-			'source/sass/styles.scss'
+			'source/sass/styles.scss',
+			'source/assemble/pages/index.hbs'
 		]);
 	});
 });
