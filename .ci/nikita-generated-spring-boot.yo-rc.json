@@ -19,7 +19,6 @@
     "useBuildFolders": false,
     "cleanBuildFolders": false,
     "sourceFolder": "src/main/resources/static",
-    "requirejsPathToBowerComponents": "../../../../../bower_components/",
     "staticPageGenerator": "twigRender",
     "requirejsPathToNodeModules": "../../../../../node_modules/",
     "custom": false,

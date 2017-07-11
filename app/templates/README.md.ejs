@@ -19,8 +19,7 @@ If you want to write efficient and scalable (S)CSS-code for big websites, try [n
 - [__SASS__](http://sass-lang.com/) with [__Compass__](http://compass-style.org/) – css preprocessing<% } %>
 - [__nikita.html__](https://github.com/nikita-kit/nikita-html) – HTML conventions and coding guidelines
 - [__nikita.css__](https://github.com/nikita-kit/nikita-css) – (S)CSS conventions and coding guidelines
-- [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines<% if (config.get('features').indexOf('bower') != -1) { %>
-- [__Bower__](http://bower.io/) – package manager for frontend libraries<% } %>
+- [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines
 - [__ESLint__](http://eslint.org/) – linter for JS files
 - [__stylelint__](https://stylelint.io/) – linter for SCSS files
 - [__Browsersync__](https://browsersync.io/) – synchronised browser testing<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
@@ -33,8 +32,7 @@ Grunt depends on [node.js](http://nodejs.org)<% if (config.get('sassCompiler').i
 These are the minimum requirements for the project setup:  
  
 - [__Node.js & Node Package Manager__](http://nodejs.org)
-- [__Grunt Command Line Interface__](http://gruntjs.com/getting-started) – `sudo npm install -g grunt-cli`<% if (config.get('features').indexOf('bower') != -1) { %>
-- [__Bower__](http://bower.io) – `sudo npm install -g bower`<% } %>
+- [__Grunt Command Line Interface__](http://gruntjs.com/getting-started) – `sudo npm install -g grunt-cli`
 <% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
 
 Additionally we have the following ruby dependencies:
@@ -59,9 +57,9 @@ For those RubyGems we included a Gemfile, so you can use [__Bundler__](http://bu
 
 Open your preferred command line tool and choose your project directory.  
 
-Either use `./setup-dev-env.sh`. This will start a shell script to check requirements, then runs `npm install` <% if (config.get('features').indexOf('bower') != -1) { %>and `bower install`<% } %> automatically to install Grunt and [Grunt plugins](#grunt-plugins-used) required for the build script plus Bower and [Bower packages](#bower-packages-used). 
+Either use `./setup-dev-env.sh`. This will start a shell script to check requirements, then runs `npm install` automatically to install Grunt and [Grunt plugins](#grunt-plugins-used) required for the build script.
 
-Or use `npm install` <% if (config.get('features').indexOf('bower') != -1) { %>and `bower install` <% } %>if your are on Windows (you have to check the requirements manually). This will install Grunt and [Grunt plugins](#grunt-plugins-used) required for the build script<% if (config.get('features').indexOf('bower') != -1) { %> plus Bower and [Bower packages](#bower-packages-used)<% } %>.
+Or use `npm install` if your are on Windows (you have to check the requirements manually). This will install Grunt and [Grunt plugins](#grunt-plugins-used) required for the build script.
 
 1. `grunt` or `grunt build` – start build script
 2. [http://localhost:3000/](http://localhost:3000/) or [http://0.0.0.0:3000/](http://0.0.0.0:3000/) – watch your build-directory in the browser
@@ -89,15 +87,14 @@ If you dont't like the command line you can use an alternative called [grunt-dev
 You don't like to stare permanently on your console? So wouldn’t it be great if your system could notify you when your fresh build is ready to consume or when anything bad happened? Meet [grunt-notify](https://github.com/dylang/grunt-notify), an automatic desktop notification service for Grunt using Growl for OS X or Windows, Mountain Lion and Mavericks Notification Center and Notify-Send. Just install this plugin via npm and load it in your Gruntfile.
 
 
-## Grunt-Plugins used
+## Dev-Packages used
 <% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>
 - [assemble](https://github.com/assemble/assemble)<% } %>
 - [autoprefixer-core](https://github.com/postcss/autoprefixer-core)
 - [babel-core](https://github.com/babel/babel/tree/master/packages/babel-core)
 - [babel-loader](https://github.com/babel/babel-loader)
 - [babel-plugin-transform-runtime](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-runtime)
-- [babel-preset-env](https://github.com/babel/babel-preset-env)<% if (config.get('features').indexOf('bower') != -1) { %>
-- [bower](https://github.com/bower/bower)<% } %>
+- [babel-preset-env](https://github.com/babel/babel-preset-env)
 - [ejs-compiled-loader](https://github.com/bazilio91/ejs-compiled-loader)
 - [eslint-config-nikita](https://github.com/nikita-kit/nikita-js)
 - [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import)
@@ -146,15 +143,13 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 - [webpack](https://github.com/webpack/webpack)
 - [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
 
-<% if (config.get('features').indexOf('bower') != -1) { %>
-## Bower-Packages used
+## Frontend-Packages used
 
 - [backbone](https://github.com/components/backbone)
 - [jquery](http://jquery.com/)
 - [jsb](https://github.com/DracoBlue/jsb)
 - [logging.js](https://github.com/DracoBlue/logging-js)
 - [underscore](https://github.com/jashkenas/underscore)
-<% } %>
 
 ## Project structure
 
@@ -162,18 +157,15 @@ The kickstart-setup provides the three main folders `source/`, `build/` and `dis
 
 ```
 $ tree -d -I node_modules
-.<% if (config.get('features').indexOf('bower') != -1) { %>
-├── bower_components<% } %>
-├── build<% if (config.get('features').indexOf('bower') != -1) { %>
-│   ├── bower_components<% } %>
+.
+├── build
 │   ├── css
 │   ├── fonts
 │   ├── img
 │   │   ├── appicons
 │   │   └── bgs
 │   └── js
-├── dist<% if (config.get('features').indexOf('bower') != -1) { %>
-│   ├── bower_components<% } %>
+├── dist
 │   ├── css
 │   ├── fonts
 │   ├── img
