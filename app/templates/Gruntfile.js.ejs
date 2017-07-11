@@ -164,57 +164,12 @@ module.exports = function(grunt) {
 					}
 				]
 			}
-		},<% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
-
-		// Configuration for compass
-		compass: {
-			options: {
-				debugInfo: false,
-				force: true,
-				noLineComments: true,
-				outputStyle: 'expanded', // minifying for dist will be done by grunt-contrib-cssmin
-				require: ['compass/import-once']
-			},
-			devStyles: {
-				options: {
-					cssDir: '<%%= paths.dev %>/css',
-					environment: 'development',
-					sourcemap: true,
-					sassDir: 'tmp',
-					specify: ['<%%= paths.tmp %>/styles.scss'],
-					raw: [
-						'http_path = "/"',
-						'additional_import_paths = ["<%%= paths.src %>/sass", ""]',
-						'Sass::Script::Number.precision = 8',
-						'sass_options = {',
-						'  :cache => true,',
-						'}'
-					].join("\n"),
-				}
-			},
-			distStyles: {
-				options: {
-					cssDir: '<%%= paths.dist %>/css',
-					environment: 'production',
-					sourcemap: false,
-					sassDir: 'tmp',
-					specify: ['<%%= paths.tmp %>/styles.scss'],
-					raw: [
-						'http_path = "/"',
-						'additional_import_paths = ["<%%= paths.src %>/sass", ""]',
-						'Sass::Script::Number.precision = 8',
-						'sass_options = {',
-						'  :cache => false,',
-						'}'
-					].join("\n"),
-				}
-			}
-		},<% } %>
+		},
 
 		// Configuration for run tasks concurrently
 		concurrent: {
 			dev1: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss'<% } %>],
-			dev2: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:devStyles', <% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>'assemble:dev', <% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>'twigRender:dev'<% } %>],
+			dev2: ['sass:dev', <% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>'assemble:dev', <% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>'twigRender:dev'<% } %>],
 			dist: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss', <% } %>'imagemin:dist'],
 		},
 
@@ -460,8 +415,8 @@ module.exports = function(grunt) {
 					optimize: "none"
 				}
 			}
-		},<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
-		
+		},
+
 		// Configuration for SASS
 		sass: {
 			dev: {
@@ -484,7 +439,7 @@ module.exports = function(grunt) {
 					'<%%= paths.dist %>/css/styles.css': '<%%= paths.tmp %>/styles.scss'
 				}
 			}
-		},<% } %><% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+		},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 
 		// Configuration for string-replacing the svgcss output
 		'string-replace': {
@@ -797,7 +752,7 @@ module.exports = function(grunt) {
 			},
 			scss: {
 				files: ['<%%= paths.src %>/sass/**/*.scss'],
-				tasks: [<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>'sass:dev', <% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>'compass:devStyles', <% } %>'postcss:dev'<% if (config.get('features').indexOf('cssSplit') != -1) { %>, 'csssplit:dev'<% } %>]
+				tasks: ['sass:dev', 'postcss:dev'<% if (config.get('features').indexOf('cssSplit') != -1) { %>, 'csssplit:dev'<% } %>]
 			},<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 			svg_bgs: {
 				files: ['<%%= paths.src %>/img/bgs/*.svg'],
@@ -972,9 +927,8 @@ module.exports = function(grunt) {
 		'svgstore:dist',<% } %>
 		'concurrent:dist',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 		'string-replace',<% } %>
-		'generate-tmp-styles-scss',<% if (config.get('sassCompiler').indexOf('libSass') != -1) { %>
-		'sass:dist',<% } %><% if (config.get('sassCompiler').indexOf('compass') != -1) { %>
-		'compass:distStyles',<% } %><% if (config.get('features').indexOf('gitinfos') != -1) { %>
+		'generate-tmp-styles-scss',
+		'sass:dist',<% if (config.get('features').indexOf('gitinfos') != -1) { %>
 		'gitinfo',
 		'write-gitinfos',<% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
 		'assemble:dist',<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
