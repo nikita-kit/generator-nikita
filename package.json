@@ -10,7 +10,7 @@
     "url": "https://github.com/nikita-kit"
   },
   "engines" : {
-    "node" : ">=0.10 <5.0"
+    "node" : ">=4.0"
   },
   "scripts": {
     "test": "mocha"
