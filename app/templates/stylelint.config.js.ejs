@@ -129,10 +129,13 @@ module.exports = {
         "value-list-comma-space-before": "never",
         "value-list-max-empty-lines": 0,
         "order/order": [
+            "at-rules",
+            "dollar-variables",
             "custom-properties",
-            "declarations"
+            "declarations",
+            "rules"
         ],
-        "order/properties-order": [
+        "order/properties-order": [[
             "content",
             "overflow",
             "overflow-x",
@@ -225,6 +228,10 @@ module.exports = {
             "border-bottom-right-image",
             "border-bottom-left-image",
             "padding",
+            "padding-top",
+            "padding-right",
+            "padding-bottom",
+            "padding-left",
             "clip",
             "list-style",
             "list-style-position",
@@ -258,6 +265,8 @@ module.exports = {
             "text-overflow",
             "text-overflow-ellipsis",
             "text-overflow-mode",
+            "text-rendering",
+            "text-size-adjust",
             "white-space",
             "word-spacing",
             "word-break",
@@ -283,6 +292,7 @@ module.exports = {
             "resize",
             "cursor",
             "pointer-events",
+            "tap-highlight-color",
             "quotes",
             "counter-increment",
             "counter-reset",
@@ -304,6 +314,8 @@ module.exports = {
             "perspective",
             "transform",
             "animation",
-        ]
+        ], {
+            unspecified: "bottomAlphabetical" // "ignore" is not supported with autofixing
+        }]
     },
 };

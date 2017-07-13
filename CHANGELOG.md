@@ -2,6 +2,7 @@
 
 * updated webpack and babel
 * updated eslint
+* updated stylelint and setup pre commit hook 
 * removed bower and ruby sass
 * check build with all node major versions in travis
 
