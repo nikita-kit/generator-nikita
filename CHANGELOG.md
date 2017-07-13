@@ -4,6 +4,7 @@
 * updated eslint
 * updated stylelint and setup pre commit hook 
 * removed bower and ruby sass
+* check build with all node major versions in travis
 
 # 3.0.0 (2017/05/04)
 
