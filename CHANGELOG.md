@@ -1,8 +1,11 @@
 # dev
 
+* added `webpack-bundle-analyzer` to analyze bundle size
+  * start analyzer with `grunt analyze-js`
 * updated webpack and babel
 * updated eslint
-* updated stylelint and setup pre commit hook 
+* updated stylelint and setup pre commit hook
+  * start autofixing with `grunt fix-scss`
 * removed bower and ruby sass
 * check build with all node major versions in travis
 
