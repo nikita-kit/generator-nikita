@@ -1,0 +1,56 @@
+module.exports = {
+    options: {
+        namespaces: {
+            'data': '<%%= paths.src %>/html/data/',
+            'layouts': '<%%= paths.src %>/html/layouts/',
+            'partials': '<%%= paths.src %>/html/partials/',
+            'macros': '<%%= paths.src %>/html/macros/'
+        },
+        extensions: [
+            function(Twig) {
+                Twig.exports.extendFunction('data', function(filename) {
+                    var namespacePath = Twig.path.parsePath.apply(this, [this, filename]);
+
+                    if (/\.yml$/i.test(namespacePath) || /\.yaml/i.test(namespacePath)) {
+                        return grunt.file.readYAML(namespacePath);
+                    } else {
+                        return grunt.file.readJSON(namespacePath);
+                    }
+                });
+            }
+        ]
+    },
+    dev: {
+        files: [
+            {
+                data: {
+                    production: false,
+                    currentTimestamp: (new Date()).getTime()
+                },
+                expand: true,
+                cwd: '<%%= paths.src %>/html/pages/',
+                src: ['**/*.twig'],
+                dest: '<%%= paths.dev %>/',
+                ext: '.html'
+            }
+        ]
+    },
+    dist: {
+        files: [
+            {
+                data: [
+                    <% if (config.get('features').indexOf('gitinfos') != -1) { %>'<%%= paths.tmp %>/gitinfos.json',<% } %>
+                    {
+                        production: true,
+                        currentTimestamp: (new Date()).getTime(),
+                    }
+                ],
+                expand: true,
+                cwd: '<%%= paths.src %>/html/pages/',
+                src: ['**/*.twig'],
+                dest: '<%%= paths.dist %>/',
+                ext: '.html'
+            }
+        ]
+    }
+};

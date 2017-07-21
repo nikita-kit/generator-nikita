@@ -1,0 +1,23 @@
+module.exports = {
+    options: {
+        force: true,
+        'attr-lowercase': false, // set to false because of svg-attribute 'viewBox'
+        'attr-value-double-quotes': false, // set to false because of json inside data-attributes
+        'attr-value-not-empty': false, // in HTML5 you don't need to set a value, e.g. itemscope
+        'doctype-first': true,
+        'doctype-html5': true,
+        'id-class-value': true,
+        'id-unique': true,
+        'img-alt-require': true,
+        'space-tab-mixed-disabled': true,
+        'spec-char-escape': true,
+        'src-not-empty': true,
+        'style-disabled': true,
+        'tag-pair': true,
+        'tag-self-close': true,
+        'tagname-lowercase': true
+    },
+    all: {
+        src: ['*/*.html'<% if (config.get('features').indexOf('jsDoc') != -1) { %>, '!jsdocs/**/*.html'<% } %><% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>, '!styleguide/**/*.html'<% } %>]
+    }
+};

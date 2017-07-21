@@ -1,0 +1,38 @@
+module.exports = {
+    options: {
+        data: '<%%= paths.src %>/assemble/data/**/*.{json,yml}',
+        helpers: ['<%%= paths.src %>/assemble/helpers/**/*.js'],
+        layoutdir: '<%%= paths.src %>/assemble/layouts/',
+        partials: ['<%%= paths.src %>/assemble/partials/**/*.hbs'],
+        currentTimestamp: (new Date()).getTime()
+    },
+    dev: {
+        options: {
+            production: false
+        },
+        files: [
+            {
+                cwd: '<%%= paths.src %>/assemble/pages/',
+                dest: '<%%= paths.dev %>/',
+                expand: true,
+                flatten: true,
+                src: ['**/*.hbs']
+            }
+        ]
+    },
+    dist: {
+        options: {
+            <% if (config.get('features').indexOf('gitinfos') != -1) { %>data: '<%%= paths.tmp %>/gitinfos.json',<% } %>
+            production: true
+        },
+        files: [
+            {
+                cwd: '<%%= paths.src %>/assemble/pages/',
+                dest: '<%%= paths.dist %>/',
+                expand: true,
+                flatten: true,
+                src: ['**/*.hbs']
+            }
+        ]
+    }
+};

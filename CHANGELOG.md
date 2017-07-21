@@ -1,5 +1,6 @@
 # dev
 
+* split gruntfile into separated config files
 * added `webpack-bundle-analyzer` to analyze bundle size
   * start analyzer with `grunt analyze-js`
 * updated webpack and babel

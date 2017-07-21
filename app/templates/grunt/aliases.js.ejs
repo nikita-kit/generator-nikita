@@ -1,0 +1,117 @@
+module.exports = {
+
+    // standard build task when calling grunt without arguments
+    'default': [
+        'build'
+    ],
+
+    // development build task
+    'dev': [<% if (config.get('cleanBuildFolders')) { %>
+        'clean:dev',<% } %>
+        'clean:tmp',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+        'svgmin:dev_bg',<% } %>
+        'svgmin:dev_file',<% if (config.get('features').indexOf('svgSprite') != -1) { %>
+        'svgmin:dev_ico',
+        'svgstore:dev',<% } %>
+        'concurrent:dev1',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+        'string-replace',<% } %>
+        'generate-tmp-styles-scss',
+        'concurrent:dev2',
+        'postcss:dev',<% if (config.get('features').indexOf('cssSplit') != -1) { %>
+        'csssplit:dev',<% } %>
+        'webpack:dev',
+        'sync',
+        'prettify:dev'
+    ],
+
+    // development build task including watch
+    'build': [
+        'dev',
+        'browserSync:dev',
+        'watch'
+    ],
+
+    // distribution task
+    'dist': [<% if (config.get('cleanBuildFolders')) { %>
+        'clean:dist',<% } %>
+        'clean:tmp',<% if (config.get('features').indexOf('jsDoc') != -1) { %>
+        'clean:docs',<% } %><% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+        'svgmin:dist_bg',<% } %>
+        'svgmin:dist_file',<% if (config.get('features').indexOf('svgSprite') != -1) { %>
+        'svgmin:dist_ico',
+        'svgstore:dist',<% } %>
+        'concurrent:dist',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+        'string-replace',<% } %>
+        'generate-tmp-styles-scss',
+        'sass:dist',<% if (config.get('features').indexOf('gitinfos') != -1) { %>
+        'gitinfo',
+        'write-gitinfos',<% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
+        'assemble:dist',<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
+        'twigRender:dist',<% } %>
+        'postcss:dist',<% if (config.get('features').indexOf('cssSplit') != -1) { %>
+        'csssplit:dist',<% } %><% if (config.get('features').indexOf('groupMediaQueries') != -1) { %>
+        'group_css_media_queries',<% } %>
+        'cssmin',
+        'webpack:dist',
+        'copy:ajax',
+        'copy:favicon',
+        'copy:fonts',
+        'uglify',
+        'prettify:dist'
+    ],
+
+    // linting, fixing and measuring tasks
+
+    'check-html': [
+        'htmlhint'
+    ],
+
+    'check-scss': [
+        'stylelint:check'
+    ],
+
+    'fix-scss': [
+        'stylelint:fix'
+    ],
+
+    'check-js': [
+        'eslint:check'
+    ],
+
+    'fix-js': [
+        'eslint:fix'
+    ],
+
+    'analyze-js': [
+        'webpack:analyze'
+    ],
+
+    'check-wcag2': [
+        'accessibility'
+    ],<% if (config.get('features').indexOf('measurePagespeed') != -1) { %>
+
+    'measure-pagespeed': [
+        'pagespeed'
+    ],<% } %><% if (config.get('features').indexOf('measurePerformance') != -1) { %>
+
+    'measure-performance': [
+        'dev',
+        'browserSync:dev',
+        'phantomas'
+    ],<% } %><% if (config.get('features').indexOf('takeScreenshots') != -1) { %>
+
+    'take-screenshots': [
+        'dev',
+        'browserSync:dev',
+        'photobox'
+    ],<% } %><% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
+
+    'build-styleguide': [
+        'styleguide',
+        'copy:styleguide'
+    ],<% } %><% if (config.get('features').indexOf('jsDoc') != -1) { %>
+
+    'build-jsdoc': [
+        'jsdoc'
+    ],<% } %>
+};

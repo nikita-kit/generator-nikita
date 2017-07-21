@@ -56,6 +56,7 @@
 		"grunt-webpack": "3.0.2",
 		"handlebars-helper-autolink": "0.1.1",
 		"handlebars-helpers": "0.8.0",
+		"load-grunt-config": "0.19.2",
 		"nikita-css": "0.11.0",
 		"node-logging-js": "1.2.0",
 		"node-jsb": "3.0.0",

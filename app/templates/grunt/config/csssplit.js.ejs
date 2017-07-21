@@ -1,0 +1,14 @@
+module.exports = {
+    options: {
+        maxSelectors: 4000,
+        suffix: '-part'
+    },
+    dev: {
+        dest: '<%%= paths.dev %>/css',
+        src: '<%%= paths.dev %>/css/styles.css'
+    },
+    dist: {
+        dest: '<%%= paths.dist %>/css',
+        src: '<%%= paths.dist %>/css/styles.css'
+    }
+};

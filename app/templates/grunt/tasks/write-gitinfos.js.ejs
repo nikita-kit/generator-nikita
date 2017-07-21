@@ -1,0 +1,10 @@
+module.exports = function(grunt) {
+    grunt.registerTask('write-gitinfos', 'Write gitinfos to a temp. file', function () {
+        var paths = grunt.config.get('paths');
+
+        grunt.task.requires('gitinfo');
+        grunt.file.write(paths.tmp + '/gitinfos.json', JSON.stringify({
+            gitinfo: grunt.config('gitinfo')
+        }));
+    });
+};
