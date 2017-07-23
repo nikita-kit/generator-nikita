@@ -36,11 +36,10 @@ module.exports = function (grunt) {
             /*
              * dynamic browser list for css autoprefixer and babel-preset-env
              * see https://github.com/ai/browserslist
-             * see http://browserl.ist/?q=last+2+versions%2C+not+OperaMobile+%3C+13%2C+not+OperaMini+all%2C+not+QQAndroid+%3E%3D+1%2C+not+UCAndroid+%3E%3D+1%2C+not+Baidu+%3E%3D+1%2C+not+FirefoxAndroid+%3E%3D1%2C+not+BlackBerry+%3E%3D+1
+             * see http://browserl.ist/?q=last+2+versions%2C+not+OperaMobile+%3C+13%2C+not+OperaMini+all%2C+not+QQAndroid+%3E%3D+1%2C+not+UCAndroid+%3E%3D+1%2C+not+Baidu+%3E%3D+1%2C+not+BlackBerry+%3E%3D+1
              */
             browserslist: [
                 'last 2 versions',
-                'not FirefoxAndroid >= 1',
                 'not BlackBerry >= 1',
                 'not OperaMini all',
                 'not OperaMobile < 13',
