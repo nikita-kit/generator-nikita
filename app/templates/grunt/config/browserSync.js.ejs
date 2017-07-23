@@ -1,0 +1,29 @@
+module.exports = function (grunt) {
+    return {
+        dev: {
+            bsFiles: {
+                src: [
+                    '<%%= paths.dev %>/img/**/*.{jpg,jpeg,png,gif,ico,svg}',
+                    '<%%= paths.dev %>/css/**/*.css',
+                    '<%%= paths.dev %>/js/**/*.js',
+                    '<%%= paths.dev %>/**/*.html'
+                ]
+            },
+            options: {
+                open: false,
+                online: false,
+                watchTask: true,
+                port: grunt.option('port') || 3000,
+                ui: {
+                    port: grunt.option('port') + 1 || 3001
+                },
+                server: {
+                    baseDir: ['<%%= paths.dev %>']
+                },
+                ghostMode: {
+                    scroll: false
+                }
+            }
+        }
+    };
+};

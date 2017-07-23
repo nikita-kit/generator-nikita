@@ -1,0 +1,14 @@
+module.exports = {
+    options: {
+        configFile: 'stylelint.config.js',
+        formatter: 'string',
+        syntax: 'scss'
+    },
+    check: ['<%%= paths.src %>/sass/**/*.scss'],
+    fix: {
+        options: {
+            fix: true,
+        },
+        src: ['<%%= paths.src %>/sass/**/*.scss'],
+    }
+};

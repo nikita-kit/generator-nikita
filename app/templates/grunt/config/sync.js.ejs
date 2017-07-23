@@ -1,0 +1,39 @@
+/* Task does not remove any files and directories in 'dest' */
+module.exports = {
+    ajax: {
+        files: [
+            {
+                cwd: '<%%= paths.src %>/ajax-content/',
+                dest: '<%%= paths.dev %>/ajax-content/',
+                src: '**/*'
+            }
+        ]
+    },
+    favicon: {
+        files: [
+            {
+                cwd: '<%%= paths.src %>/img/appicons/',
+                dest: '<%%= paths.dev %>/img/appicons/',
+                src: '**/*.ico'
+            }
+        ]
+    },
+    fonts: {
+        files: [
+            {
+                cwd: '<%%= paths.src %>/fonts/',
+                dest: '<%%= paths.dev %>/fonts/',
+                src: '**/*'
+            }
+        ]
+    },
+    images: {
+        files: [
+            {
+                cwd: '<%%= paths.src %>/img/',
+                dest: '<%%= paths.dev %>/img/',
+                src: '**/*.{jpg,jpeg,png,gif}'
+            }
+        ]
+    },
+};

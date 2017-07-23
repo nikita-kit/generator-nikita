@@ -1,0 +1,28 @@
+module.exports = {
+    ajax: {
+        cwd: '<%%= paths.src %>/ajax-content/',
+        dest: '<%%= paths.dist %>/ajax-content/',
+        expand: true,
+        src: ['**/*']
+    },
+    favicon: {
+        cwd: '<%%= paths.src %>/img/appicons/',
+        dest: '<%%= paths.dist %>/img/appicons/',
+        expand: true,
+        src: ['**/*.ico']
+    },
+    fonts: {
+        cwd: '<%%= paths.src %>/fonts/',
+        dest: '<%%= paths.dist %>/fonts/',
+        expand: true,
+        src: ['**/*']
+    }<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>,
+    styleguide: {
+        cwd: '<%%= paths.dev %>/css/',
+        dest: 'styleguide/css/',
+        expand: true,
+        filter: 'isFile',
+        flatten: true,
+        src: ['**/*.css']
+    }<% } %>
+};

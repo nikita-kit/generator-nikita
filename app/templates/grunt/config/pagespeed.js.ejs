@@ -1,0 +1,22 @@
+module.exports = {
+    options: {
+        nokey: true,
+        url: "http://yoursite.com"
+    },
+    prod: {
+        options: {
+            locale: "de_DE",
+            strategy: "desktop",
+            threshold: 80,
+            url: "http://yoursite.com"
+        }
+    },
+    paths: {
+        options: {
+            locale: "de_DE",
+            paths: ["/yourpage1.html", "/yourpage2.html"],
+            strategy: "desktop",
+            threshold: 80
+        }
+    }
+};

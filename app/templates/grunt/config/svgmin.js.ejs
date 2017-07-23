@@ -1,0 +1,106 @@
+module.exports = {
+    options: {
+        plugins: [
+            { cleanupAttrs: true },
+            { cleanupEnableBackground: true },
+            { cleanupIDs: true },
+            { cleanupListOfValues: true },
+            { cleanupNumericValues: true },
+            { collapseGroups: true },
+            { convertColors: true },
+            { convertPathData: true },
+            { convertShapeToPath: true },
+            { convertStyleToAttrs: true },
+            { convertTransform: true },
+            { mergePaths: true },
+            { moveElemsAttrsToGroup: true },
+            { moveGroupAttrsToElems: true },
+            { removeComments: true },
+            { removeDesc: true },
+            { removeDoctype: true },
+            { removeEditorsNSData: true },
+            { removeEmptyAttrs: true },
+            { removeEmptyContainers: true },
+            { removeEmptyText: true },
+            { removeHiddenElems: true },
+            { removeMetadata: true },
+            { removeNonInheritableGroupAttrs: true },
+            { removeRasterImages: true },
+            { removeTitle: true },
+            { removeUnknownsAndDefaults: true },
+            { removeUnusedNS: true },
+            { removeUselessDefs: true },
+            { removeUselessStrokeAndFill: false }, // Enabling this may cause small details to be removed
+            { removeViewBox: false }, // Keep the viewBox because that's where illustrator hides the SVG dimensions
+            { removeXMLProcInst: false }, // Enabling this breaks svgcss because it removes the XML header
+            { sortAttrs: true },
+            { transformsWithOnePath: false } // Enabling this breaks Illustrator SVGs with complex text
+        ]
+    },<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+    dev_bg: {
+        files: [
+            {
+                cwd: '<%%= paths.src %>/img/bgs/',
+                dest: '<%%= paths.tmp %>/svgmin/bgs/',
+                expand: true,
+                ext: '.svg',
+                src: ['*.svg']
+            }
+        ]
+    },<% } %>
+    dev_file: {
+        files: [
+            {
+                cwd: '<%%= paths.src %>/img/',
+                dest: '<%%= paths.dev %>/img/',
+                expand: true,
+                ext: '.svg',
+                src: ['*.svg', 'temp/*.svg']
+            }
+        ]
+    },<% if (config.get('features').indexOf('svgSprite') != -1) { %>
+    dev_ico: {
+        files: [
+            {
+                cwd: '<%%= paths.src %>/img/icons/',
+                dest: '<%%= paths.tmp %>/svgmin/icons/',
+                expand: true,
+                ext: '.svg',
+                src: ['*.svg']
+            }
+        ]
+    },<% } %><% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+    dist_bg: {
+        files: [
+            {
+                cwd: '<%%= paths.src %>/img/bgs/',
+                dest: '<%%= paths.tmp %>/svgmin/bgs/',
+                expand: true,
+                ext: '.svg',
+                src: ['*.svg']
+            }
+        ]
+    },<% } %>
+    dist_file: {
+        files: [
+            {
+                cwd: '<%%= paths.src %>/img/',
+                dest: '<%%= paths.dist %>/img/',
+                expand: true,
+                ext: '.svg',
+                src: ['*.svg', 'temp/*.svg']
+            }
+        ]
+    }<% if (config.get('features').indexOf('svgSprite') != -1) { %>,
+    dist_ico: {
+        files: [
+            {
+                cwd: '<%%= paths.src %>/img/icons/',
+                dest: '<%%= paths.tmp %>/svgmin/icons/',
+                expand: true,
+                ext: '.svg',
+                src: ['*.svg']
+            }
+        ]
+    }<% } %>
+};

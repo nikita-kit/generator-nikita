@@ -1,0 +1,26 @@
+module.exports = {
+    options: {
+        force: true
+    },
+    dev: {
+        files: [
+            {
+                src: ['<%%= paths.dev %>']
+            }
+        ]
+    },
+    dist: {
+        files: [
+            {
+                src: ['<%%= paths.dist %>']
+            }
+        ]
+    },
+    tmp: {
+        files: [
+            {
+                src: ['<%%= paths.tmp %>']
+            }
+        ]
+    }
+};

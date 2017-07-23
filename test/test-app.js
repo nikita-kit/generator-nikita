@@ -28,6 +28,9 @@ describe('nikita:app:custom-twigRender', function () {
 	it('creates files', function () {
 		assert.file([
 			'package.json',
+			'Gruntfile.js',
+			'grunt/aliases.js',
+			'grunt/config/twigRender.js',
 			'source/sass/styles.scss',
 			'source/html/pages/index.twig'
 		]);
@@ -56,6 +59,9 @@ describe('nikita:app:custom-assemble', function () {
 	it('creates files', function () {
 		assert.file([
 			'package.json',
+			'Gruntfile.js',
+			'grunt/aliases.js',
+			'grunt/config/assemble.js',
 			'source/sass/styles.scss',
 			'source/assemble/pages/index.hbs'
 		]);
@@ -80,6 +86,8 @@ describe('nikita:app:slim', function () {
 	it('creates files', function () {
 		assert.file([
 			'package.json',
+			'Gruntfile.js',
+			'grunt/aliases.js',
 			'source/sass/styles.scss'
 		]);
 	});
@@ -103,6 +111,8 @@ describe('nikita:app:default', function () {
 	it('creates files', function () {
 		assert.file([
 			'package.json',
+			'Gruntfile.js',
+			'grunt/aliases.js',
 			'source/sass/styles.scss'
 		]);
 	});
@@ -127,6 +137,8 @@ describe('nikita:app:slim-no-build-folder', function () {
 	it('creates files', function () {
 		assert.file([
 			'package.json',
+			'Gruntfile.js',
+			'grunt/aliases.js',
 			'src/App/Resources/public/sass/styles.scss'
 		]);
 	});

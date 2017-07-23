@@ -158,14 +158,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						
 						/* remove trailing slash */
 						that.config.set('sourceFolder', (that.config.get('sourceFolder') || "").replace(/\/$/, ""));
-						that.config.set('requirejsPathToNodeModules', (Array(2 + that.config.get('sourceFolder').split("/", -1).length).join("../")) + 'node_modules/');
 						done();
 					});
 				}
 				else
 				{
 					that.config.set('cleanBuildFolders', true);
-					that.config.set('requirejsPathToNodeModules', '../../node_modules/');
 					done();
 				}
 			});
@@ -183,7 +181,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			
 			var templateSpecificPrompts = [];
 
-			if (that.config.get('template') == 'default')
+			if (that.config.get('template') === 'default')
 			{
 				that.config.set('staticPageGenerator', 'assemble');
 				that.config.set('features', [
@@ -234,7 +232,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 			that.config.set('askBuildFolders', true);
 
-			if (that.config.get('template') == 'spring-boot') {
+			if (that.config.get('template') === 'spring-boot') {
 				templateSpecificPrompts.push(promptInput('javaGroupId', 'java groupId'));
 				templateSpecificPrompts.push(promptInput('javaVersion', 'java version', '1.8'));
 				templateSpecificPrompts.push(promptInput('springBootVersion', 'spring boot version', '1.4.2'));
@@ -369,7 +367,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			packageJsonData['name'] = this.config.get('name');
 			packageJsonData['private'] = this.config.get('private');
 
-
 			// Standard Files & Folders
 			this.template('.gitignore.ejs', '.gitignore');
 			this.template('stylelint.config.js.ejs', 'stylelint.config.js');
@@ -378,34 +375,62 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('README.md.ejs', 'README.md');
 			this.template('setup-dev-env.sh.ejs', 'setup-dev-env.sh');
 
+			// grunt Config Files
+			this.dest.mkdir('grunt');
+			this.dest.mkdir('grunt/config');
+			this.dest.mkdir('grunt/tasks');
+
+			this.template('grunt/aliases.js.ejs', 'grunt/aliases.js');
+			this.template('grunt/tasks/generate-tmp-styles-scss.js.ejs', 'grunt/tasks/generate-tmp-styles-scss.js');
+
+			this.template('grunt/config/accessibility.js.ejs', 'grunt/config/accessibility.js');
+			this.template('grunt/config/browserSync.js.ejs', 'grunt/config/browserSync.js');
+			this.template('grunt/config/clean.js.ejs', 'grunt/config/clean.js');
+			this.template('grunt/config/concurrent.js.ejs', 'grunt/config/concurrent.js');
+			this.template('grunt/config/copy.js.ejs', 'grunt/config/copy.js');
+			this.template('grunt/config/cssmin.js.ejs', 'grunt/config/cssmin.js');
+			this.template('grunt/config/eslint.js.ejs', 'grunt/config/eslint.js');
+			this.template('grunt/config/htmlhint.js.ejs', 'grunt/config/htmlhint.js');
+			this.template('grunt/config/imagemin.js.ejs', 'grunt/config/imagemin.js');
+			this.template('grunt/config/postcss.js.ejs', 'grunt/config/postcss.js');
+			this.template('grunt/config/prettify.js.ejs', 'grunt/config/prettify.js');
+			this.template('grunt/config/sass.js.ejs', 'grunt/config/sass.js');
+			this.template('grunt/config/stylelint.js.ejs', 'grunt/config/stylelint.js');
+			this.template('grunt/config/svgmin.js.ejs', 'grunt/config/svgmin.js');
+			this.template('grunt/config/sync.js.ejs', 'grunt/config/sync.js');
+			this.template('grunt/config/uglify.js.ejs', 'grunt/config/uglify.js');
+			this.template('grunt/config/watch.js.ejs', 'grunt/config/watch.js');
+			this.template('grunt/config/webpack.js.ejs', 'grunt/config/webpack.js');
+
+			// Source Folder
 			var sourceFolder = 'source';
 
 			if (!this.config.get('useBuildFolders'))
 			{
 				sourceFolder = this.config.get('sourceFolder');
 			}
-			
+
 			// Basic Project Folders
 			this.dest.mkdir(sourceFolder + '/img');
 			this.dest.mkdir(sourceFolder + '/img/bgs');
 			this.dest.mkdir(sourceFolder + '/img/icons');
 			this.dest.mkdir(sourceFolder + '/sass/mixins');
 			this.directory('source/img/appicons', sourceFolder + '/img/appicons');
-			
+
 			// SASS Basic Files
 			this.template('source/sass/styles.scss.ejs', sourceFolder + '/sass/styles.scss');
 			this.template('source/sass/_basics.scss.ejs', sourceFolder + '/sass/_basics.scss');
-			
+
 			// SASS Extra Files
 			this.template('source/sass/blocks/_rwd-testing.scss.ejs', sourceFolder + '/sass/blocks/_rwd-testing.scss');
 			this.template('source/sass/extends/.gitkeep', sourceFolder + '/sass/extends/.gitkeep');
 			this.template('source/sass/extends/_buttons.scss.ejs', sourceFolder + '/sass/extends/_buttons.scss');
-			
+
 			// SASS Variables
 			this.template('source/sass/variables/_color.scss.ejs', sourceFolder + '/sass/variables/_color.scss');
 			this.template('source/sass/variables/_timing.scss.ejs', sourceFolder + '/sass/variables/_timing.scss');
 			this.template('source/sass/variables/_typography.scss.ejs', sourceFolder + '/sass/variables/_typography.scss');
-			
+
 			// JS Files
 			this.template('source/js/_main.js.ejs', sourceFolder + '/js/_main.js');
 			this.template('source/js/app.js.ejs', sourceFolder + '/js/app.js');
@@ -414,6 +439,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Assemble
 			if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
 			{
+				this.template('grunt/config/assemble.js.ejs', 'grunt/config/assemble.js');
 				// Assemble Files
 				this.template('source/assemble/pages/index.hbs.ejs', sourceFolder + '/assemble/pages/index.hbs');
 				this.template('source/assemble/pages/rwd-testing.hbs.ejs', sourceFolder + '/assemble/pages/rwd-testing.hbs');
@@ -435,6 +461,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// twigRender
 			if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
 			{
+				this.template('grunt/config/twigRender.js.ejs', 'grunt/config/twigRender.js');
 				this.template('source/html/README.md.ejs', sourceFolder + '/html/README.md');
 				this.template('source/html/data/.gitkeep', sourceFolder + '/html/data/.gitkeep');
 				this.template('source/html/layouts/master.twig.ejs', sourceFolder + '/html/layouts/master.twig');
@@ -452,27 +479,29 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/img/dev/README.md.ejs', sourceFolder + '/img/dev/README.md');
 			this.template('source/img/temp/README.md.ejs', sourceFolder + '/img/temp/README.md');
 
-			if (this.config.get('features').indexOf('useLocalGrunt') == -1)
+			if (this.config.get('features').indexOf('useLocalGrunt') === -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-cli'];
 			}
 
 			// Optional Browser Reset SASS-Partial
-			if (this.config.get('features').indexOf('browserReset') != -1)
+			if (this.config.get('features').indexOf('browserReset') !== -1)
 			{
 				this.template('source/sass/_reset.scss.ejs', sourceFolder + '/sass/_reset.scss');
 			}
-			
+
 			// Optional Webfonts folder and SASS-Partial
-			if (this.config.get('features').indexOf('webfonts') != -1)
+			if (this.config.get('features').indexOf('webfonts') !== -1)
 			{
 				this.directory('source/fonts', sourceFolder + '/fonts');
 				this.template('source/sass/_webfonts.scss.ejs', sourceFolder + '/sass/_webfonts.scss');
 			}
-			
+
 			// Optional SVG Backgrounds
-			if (this.config.get('features').indexOf('svgBackgrounds') != -1)
+			if (this.config.get('features').indexOf('svgBackgrounds') !== -1)
 			{
+				this.template('grunt/config/string-replace.js.ejs', 'grunt/config/string-replace.js');
+				this.template('grunt/config/svgcss.js.ejs', 'grunt/config/svgcss.js');
 				this.template('source/sass/mixins/_svg-background.scss.ejs', sourceFolder + '/sass/mixins/_svg-background.scss');
 			}
 			else
@@ -482,19 +511,24 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 
 			// Optional SVG Sprite
-			if (this.config.get('features').indexOf('svgSprite') == -1)
+			if (this.config.get('features').indexOf('svgSprite') === -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-svgstore'];
 			}
 			else
 			{
+				this.template('grunt/config/svgstore.js.ejs', 'grunt/config/svgstore.js');
 				this.template('source/img/icons/README.md.ejs', sourceFolder + '/img/icons/README.md');
 			}
 
 			// Optional CSS Splitting for IE9 and lower
-			if (this.config.get('features').indexOf('cssSplit') == -1)
+			if (this.config.get('features').indexOf('cssSplit') === -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-csssplit'];
+			}
+			else
+			{
+				this.template('grunt/config/csssplit.js.ejs', 'grunt/config/csssplit.js');
 			}
 
 			// Optional css media queries grouping
@@ -502,49 +536,73 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			{
 				delete packageJsonData['devDependencies']['grunt-group-css-media-queries'];
 			}
+			else
+			{
+				this.template('grunt/config/group_css_media_queries.js.ejs', 'grunt/config/group_css_media_queries.js');
+			}
 
 			// Optional CSS Styleguide
-			if (this.config.get('features').indexOf('cssStyleGuide') == -1)
+			if (this.config.get('features').indexOf('cssStyleGuide') === -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-styleguide'];
 			}
 			else
 			{
+				this.template('grunt/config/styleguide.js.ejs', 'grunt/config/styleguide.js');
 				this.template('source/sass/blocks/styleguide.md.ejs', sourceFolder + '/sass/blocks/styleguide.md');
 				this.directory('source/styleguide-template', sourceFolder + '/styleguide-template');
 			}
-			
+
 			// Optional JS Documentation
-			if (this.config.get('features').indexOf('jsDoc') == -1)
+			if (this.config.get('features').indexOf('jsDoc') === -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-jsdoc'];
 			}
-			
+			else
+			{
+				this.template('grunt/config/jsdoc.js.ejs', 'grunt/config/jsdoc.js');
+			}
+
 			// Optional Pagespeed Measuring
-			if (this.config.get('features').indexOf('measurePagespeed') == -1)
+			if (this.config.get('features').indexOf('measurePagespeed') === -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-pagespeed'];
 			}
-			
+			else
+			{
+				this.template('grunt/config/pagespeed.js.ejs', 'grunt/config/pagespeed.js');
+			}
+
 			// Optional Performance Measuring
-			if (this.config.get('features').indexOf('measurePerformance') == -1)
+			if (this.config.get('features').indexOf('measurePerformance') === -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-phantomas'];
 			}
-			
+			else
+			{
+				this.template('grunt/config/phantomas.js.ejs', 'grunt/config/phantomas.js');
+			}
+
 			// Optional Screenshots Diffing
-			if (this.config.get('features').indexOf('takeScreenshots') == -1)
+			if (this.config.get('features').indexOf('takeScreenshots') === -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-photobox'];
 			}
-			
+			else
+			{
+				this.template('grunt/config/photobox.js.ejs', 'grunt/config/photobox.js');
+			}
+
 			// Optional Gitinfos
-			if (this.config.get('features').indexOf('gitinfos') == -1)
+			if (this.config.get('features').indexOf('gitinfos') === -1)
 			{
 				delete packageJsonData['devDependencies']['grunt-gitinfos'];
 			}
 			else
 			{
+				this.template('grunt/config/gitinfo.js.ejs', 'grunt/config/gitinfo.js');
+				this.template('grunt/tasks/write-gitinfos.js.ejs', 'grunt/tasks/write-gitinfos.js');
+
 				if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
 				{
 					this.template('source/assemble/partials/gitinfos.hbs.ejs', sourceFolder + '/assemble/partials/gitinfos.hbs');
@@ -556,13 +614,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 
 			// Optional Layering-Mixin
-			if (this.config.get('nikitaCssMixins').indexOf('layering') != -1)
+			if (this.config.get('nikitaCssMixins').indexOf('layering') !== -1)
 			{
 				this.template('source/sass/variables/_z-layers.scss.ejs', sourceFolder + '/sass/variables/_z-layers.scss');
 			}
 			
 			// Optional Respond-To-Mixin
-			if (this.config.get('nikitaCssMixins').indexOf('respond-to') != -1)
+			if (this.config.get('nikitaCssMixins').indexOf('respond-to') !== -1)
 			{
 				this.template('source/sass/variables/_breakpoints.scss.ejs', sourceFolder + '/sass/variables/_breakpoints.scss');
 			}
@@ -583,7 +641,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.src.copy('source/img/bgs/form-select-arrow-down.svg', sourceFolder + '/img/bgs/form-select-arrow-down.svg');
 			}
 			
-			if (this.config.get('template') == 'spring-boot') {
+			if (this.config.get('template') === 'spring-boot') {
 				var javaName = this.config.get("name").replace(/-/g, " ").toLowerCase().replace(/\b[a-z]/g, function(letter) {
 					return letter.toUpperCase();
 				}).replace(/ /g, "");

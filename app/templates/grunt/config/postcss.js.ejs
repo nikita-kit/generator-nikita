@@ -1,0 +1,20 @@
+module.exports = function (grunt, options) {
+    return {
+        options: {
+            processors: [
+                require('autoprefixer')({
+                    browsers: options.browserslist
+                })
+            ]
+        },
+        dev: {
+            options: {
+                map: true
+            },
+            src: '<%%= paths.dev %>/css/*.css'
+        },
+        dist: {
+            src: '<%%= paths.dist %>/css/*.css'
+        }
+    }
+};

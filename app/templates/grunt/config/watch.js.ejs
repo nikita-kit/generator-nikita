@@ -1,0 +1,43 @@
+module.exports = {
+    options: {
+        spawn: true
+    },
+    scss: {
+        files: ['<%%= paths.src %>/sass/**/*.scss'],
+        tasks: ['sass:dev', 'postcss:dev'<% if (config.get('features').indexOf('cssSplit') != -1) { %>, 'csssplit:dev'<% } %>]
+    },<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+    svg_bgs: {
+        files: ['<%%= paths.src %>/img/bgs/*.svg'],
+        tasks: ['newer:svgmin:dev_bg', 'svgcss', 'string-replace']
+    },<% } %>
+    svg_files: {
+        files: ['<%%= paths.src %>/img/*.svg'],
+        tasks: ['newer:svgmin:dev_file']
+    },<% if (config.get('features').indexOf('svgSprite') != -1) { %>
+    svg_icons: {
+        files: ['<%%= paths.src %>/img/icons/*.svg'],
+        tasks: ['newer:svgmin:dev_ico', 'svgstore:dev']
+    },<% } %>
+    sync_ajax: {
+        files: ['<%%= paths.src %>/ajax-content/**/*'],
+        tasks: ['sync:ajax']
+    },
+    sync_images: {
+        files: ['<%%= paths.src %>/img/*', '<%%= paths.src %>/img/**/*.{jpg,jpeg,png,gif}', '!<%%= paths.src %>/img/dev/*'],
+        tasks: ['sync:images']
+    },
+    sync_fonts: {
+        files: ['<%%= paths.src %>/fonts/**/*'],
+        tasks: ['sync:fonts']
+    },
+    sync_js: {
+        files: ['<%%= paths.src %>/js/**/*'],
+        tasks: ['webpack:dev']
+    },
+    templates: {<% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
+        files: ['<%%= paths.src %>/assemble/**/*.{json,hbs}'],
+        tasks: ['newer:assemble:dev', 'prettify:dev']<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
+        files: ['<%%= paths.src %>/html/**/*.{json,yml,yaml,twig}'],
+        tasks: ['newer:twigRender:dev', 'prettify:dev']<% } %>
+    }
+};

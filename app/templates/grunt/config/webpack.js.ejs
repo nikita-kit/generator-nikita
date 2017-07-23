@@ -1,0 +1,95 @@
+module.exports = function (grunt, options) {
+    return (function () {
+
+        const path = require('path');
+        const webpack = require('webpack');
+        const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+        const plugins = [
+            new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/),
+            new webpack.optimize.ModuleConcatenationPlugin(),
+        ];
+
+        return {
+            options: {
+                cache: true,
+                entry: {
+                    main: './<%%= paths.src %>/js/_main.js'
+                },
+                output: {
+                    filename: '[name].js',
+                    chunkFilename: '[chunkhash].pkg.js'
+                },
+                module: {
+                    exprContextCritical: false,
+                    rules: [
+                        {
+                            test: /\.js$/,
+                            enforce: 'pre',
+                            loader: 'import-glob',
+                            exclude: /node_modules/
+                        },
+                        {
+                            test: /\.scss$/,
+                            enforce: 'pre',
+                            loader: 'import-glob'
+                        },
+                        {
+                            test: /\.js$/,
+                            loader: 'babel-loader',
+                            exclude: /node_modules/,
+                            options: {
+                                compact: true,
+                                cacheDirectory: true,
+                                plugins: ['transform-runtime'],
+                                presets: [['env', {
+                                    modules: false,
+                                    loose: true,
+                                    targets: {
+                                        browsers: options.browserslist
+                                    }
+                                }]]
+                            }
+                        },
+                        {
+                            test: /\.ejs$/,
+                            loader: 'ejs-compiled-loader',
+                            options: {
+                                'htmlmin': true,
+                                'htmlminOptions': {
+                                    removeComments: true
+                                }
+                            }
+                        },
+                        {
+                            test: /\.scss$/,
+                            use: ['style-loader', 'css-loader', 'sass-loader']
+                        }
+                    ]
+                },
+                resolve: {
+                    modules: ['<%%= paths.src %>/js', 'node_modules']
+                }
+            },
+            analyze: {
+                watch: true,
+                output: {
+                    path: path.resolve('<%%= paths.tmp %>/js/')
+                },
+                plugins: plugins.concat([new BundleAnalyzerPlugin()])
+            },
+            dev: {
+                devtool: 'sourcemap',
+                output: {
+                    path: path.resolve('<%%= paths.dev %>/js/')
+                },
+                plugins: plugins
+            },
+            dist: {
+                output: {
+                    path: path.resolve('<%%= paths.dist %>/js/')
+                },
+                plugins: plugins
+            }
+        };
+    })()
+};

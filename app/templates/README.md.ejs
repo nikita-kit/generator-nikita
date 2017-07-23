@@ -110,11 +110,12 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 - [grunt-svgmin](https://github.com/sindresorhus/grunt-svgmin)
 - [grunt-svgstore](https://github.com/FWeinb/grunt-svgstore)
 - [grunt-sync](https://github.com/tomusdrw/grunt-sync)<% if (config.get('staticPageGenerator').indexOf('twigRender') != -1) { %>
-- [grunt-twig-render](https://github.com/stefanullinger/grunt-twig-render)<% } %><% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>
+- [grunt-twig-render](https://github.com/stefanullinger/grunt-twig-render)<% } %>
+- [grunt-webpack](https://github.com/webpack/grunt-webpack)<% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>
 - [handlebars-helper-autolink](https://github.com/helpers/handlebars-helper-autolink)
 - [handlebars-helper-partial](https://github.com/helpers/handlebars-helper-partial)
 - [handlebars-helpers](https://github.com/assemble/handlebars-helpers)<% } %>
-- [grunt-webpack](https://github.com/webpack/grunt-webpack)
+- [load-grunt-config](https://github.com/firstandthird/load-grunt-config)
 - [import-glob](https://github.com/terpiljenya/import-glob)
 - [jit-grunt](https://github.com/shootaroo/jit-grunt)
 - [pre-commit](https://github.com/observing/pre-commit)
@@ -154,6 +155,9 @@ $ tree -d -I node_modules
 │   │   ├── appicons
 │   │   └── bgs
 │   └── js
+├── grunt
+│   ├── config
+│   ├── tasks
 ├── source<% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>
 │   ├── assemble
 │   │   ├── data

@@ -1,0 +1,11 @@
+module.exports = {
+    options: {
+        previewhtml: null,
+        cssprefix: "%bg-data-svg-"
+    },
+    all: {
+        files: {
+            '<%%= paths.tmp %>/svgcss/_icons-data-svg.scss': ['<%%= paths.tmp %>/svgmin/bgs/*.svg']
+        }
+    }
+};

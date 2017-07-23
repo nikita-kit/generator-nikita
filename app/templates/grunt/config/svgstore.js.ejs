@@ -1,0 +1,22 @@
+module.exports = {
+    options: {
+        prefix : 'icon-',
+        formatting : {
+            indent_char: '	',
+            indent_size : 1
+        },
+        svg: {
+            style: "display: none;"
+        }
+    },
+    dev: {
+        files: {
+            '<%%= paths.dev %>/img/icons/icon-sprite.svg': ['<%%= paths.tmp %>/svgmin/icons/*.svg']
+        }
+    },
+    dist: {
+        files: {
+            '<%%= paths.dist %>/img/icons/icon-sprite.svg': ['<%%= paths.tmp %>/svgmin/icons/*.svg']
+        }
+    }
+};
