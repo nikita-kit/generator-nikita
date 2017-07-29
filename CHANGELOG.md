@@ -7,6 +7,7 @@
 * updated eslint
 * updated stylelint and setup pre commit hook
   * start autofixing with `grunt fix-scss`
+* updated browserslist for `autoprefixer` and `babel-preset-env` to exclude unimportant mobile browsers
 * removed bower and ruby sass
 * check build with all node major versions in travis
 

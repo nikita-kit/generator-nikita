@@ -10,7 +10,7 @@
     "pre-commit.silent": true,
     "devDependencies": {
 		"assemble": "0.23.0",
-		"autoprefixer": "6.7.7",
+		"autoprefixer": "7.1.2",
 		"babel-core": "6.25.0",
 		"babel-loader": "7.1.1",
 		"babel-plugin-transform-runtime": "6.23.0",
@@ -66,8 +66,8 @@
 		"stylelint": "7.13.0",
 		"stylelint-order": "0.5.0",
 		"time-grunt": "1.4.0",
-		"webpack": "3.0.0",
-		"webpack-bundle-analyzer": "2.8.2",
-		"webpack-dev-server": "2.5.1"
+		"webpack": "3.3.0",
+		"webpack-bundle-analyzer": "2.8.3",
+		"webpack-dev-server": "2.6.1"
 	}
 }
