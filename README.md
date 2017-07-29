@@ -14,6 +14,9 @@ Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerat
 <a href="https://github.com/sass/node-sass">
     <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/node-sass.svg" alt="sass">
 </a>
+<a href="https://facebook.github.io/jest/">
+    <img height="85" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/jest.svg" alt="jest">
+</a>
 <a href="http://eslint.org/">
     <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/eslint.svg" alt="eslint">
 </a>

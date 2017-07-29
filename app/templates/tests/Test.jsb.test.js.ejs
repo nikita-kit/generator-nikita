@@ -1,0 +1,11 @@
+import TestJsb from '../source/js/Test.jsb.js';
+import jsb from 'node-jsb';
+
+test('TestJsb loads correctly', () => {
+    document.body.innerHTML = '<div class="jsb_ jsb_Test" data-jsb="foo=bar"></div>';
+    jsb.applyBehaviour(document.body);
+
+    expect(console.log).toHaveBeenCalledWith("[Test]", "options:", {"foo": "bar"});
+    expect(console.log).toHaveBeenCalledWith('[Test.initializeEventListeners]');
+    expect(console.log).toHaveBeenLastCalledWith('[App.doSomething]');
+});

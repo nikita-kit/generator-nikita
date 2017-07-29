@@ -3,6 +3,10 @@
 * split gruntfile into separated config files
 * added `webpack-bundle-analyzer` to analyze bundle size
   * start analyzer with `grunt analyze-js`
+* add jest testing framework
+  * start tests with `grunt test`
+  * start jest in watch mode with `grunt test --watch`
+  * see test coverage with `grunt test-coverage`
 * updated webpack and babel
 * updated eslint
 * updated stylelint and setup pre commit hook

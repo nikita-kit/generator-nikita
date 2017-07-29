@@ -382,6 +382,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 			this.template('grunt/aliases.js.ejs', 'grunt/aliases.js');
 			this.template('grunt/tasks/generate-tmp-styles-scss.js.ejs', 'grunt/tasks/generate-tmp-styles-scss.js');
+			this.template('grunt/tasks/jest.js.ejs', 'grunt/tasks/jest.js');
 
 			this.template('grunt/config/accessibility.js.ejs', 'grunt/config/accessibility.js');
 			this.template('grunt/config/browserSync.js.ejs', 'grunt/config/browserSync.js');
@@ -392,6 +393,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('grunt/config/eslint.js.ejs', 'grunt/config/eslint.js');
 			this.template('grunt/config/htmlhint.js.ejs', 'grunt/config/htmlhint.js');
 			this.template('grunt/config/imagemin.js.ejs', 'grunt/config/imagemin.js');
+			this.template('grunt/config/jest.js.ejs', 'grunt/config/jest.js');
 			this.template('grunt/config/postcss.js.ejs', 'grunt/config/postcss.js');
 			this.template('grunt/config/prettify.js.ejs', 'grunt/config/prettify.js');
 			this.template('grunt/config/sass.js.ejs', 'grunt/config/sass.js');
@@ -401,6 +403,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('grunt/config/uglify.js.ejs', 'grunt/config/uglify.js');
 			this.template('grunt/config/watch.js.ejs', 'grunt/config/watch.js');
 			this.template('grunt/config/webpack.js.ejs', 'grunt/config/webpack.js');
+
+			//Test Files
+			this.dest.mkdir('tests');
+			this.template('tests/jest.setup.js.ejs', 'tests/jest.setup.js');
+			this.template('tests/jest.transform.js.ejs', 'tests/jest.transform.js');
+			this.template('tests/App.test.js.ejs', 'tests/App.test.js');
+			this.template('tests/Test.jsb.test.js.ejs', 'tests/Test.jsb.test.js');
 
 			// Source Folder
 			var sourceFolder = 'source';

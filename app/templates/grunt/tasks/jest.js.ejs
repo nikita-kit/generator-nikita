@@ -1,0 +1,11 @@
+module.exports = function (grunt) {
+    grunt.registerMultiTask('jest', 'Run tests with Jest.', function () {
+
+        const options = {
+            config: JSON.stringify(this.options()),
+            watch: !!grunt.option('watch')
+        };
+
+        require('jest-cli').runCLI(options, [process.cwd()], this.async());
+    });
+};
