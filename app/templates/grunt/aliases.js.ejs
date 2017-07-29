@@ -60,10 +60,22 @@ module.exports = {
         'prettify:dist'
     ],
 
-    // linting, fixing and measuring tasks
+    // testing, linting and fixing tasks
+
+    'test': [
+        'jest:test'
+    ],
+
+    'test-coverage': [
+        'jest:testCoverage'
+    ],
 
     'check-html': [
         'htmlhint'
+    ],
+
+    'check-wcag2': [
+        'accessibility'
     ],
 
     'check-scss': [
@@ -84,10 +96,6 @@ module.exports = {
 
     'analyze-js': [
         'webpack:analyze'
-    ],
-
-    'check-wcag2': [
-        'accessibility'
     ],<% if (config.get('features').indexOf('measurePagespeed') != -1) { %>
 
     'measure-pagespeed': [

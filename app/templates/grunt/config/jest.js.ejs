@@ -1,0 +1,24 @@
+module.exports = {
+    options: {
+        cache: false,
+        coverageDirectory: 'reports/coverage',
+        testMatch: [
+            '<rootDir>/tests/**/*.test.js?(x)',
+        ],
+        transform: {
+            '^.+\\.js$': '<rootDir>/tests/jest.transform.js',
+        },
+        setupTestFrameworkScriptFile: '<rootDir>/tests/jest.setup.js',
+        transformIgnorePatterns: ['/node_modules/'],
+    },
+    test: {
+        options: {
+            collectCoverage: false,
+        },
+    },
+    testCoverage: {
+        options: {
+            collectCoverage: true,
+        },
+    }
+};
