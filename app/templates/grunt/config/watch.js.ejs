@@ -4,7 +4,7 @@ module.exports = {
     },
     scss: {
         files: ['<%%= paths.src %>/sass/**/*.scss'],
-        tasks: ['sass:dev', 'postcss:dev'<% if (config.get('features').indexOf('cssSplit') != -1) { %>, 'csssplit:dev'<% } %>]
+        tasks: ['sass:dev', 'postcss:dev']
     },<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
     svg_bgs: {
         files: ['<%%= paths.src %>/img/bgs/*.svg'],
@@ -13,14 +13,6 @@ module.exports = {
     svg_files: {
         files: ['<%%= paths.src %>/img/*.svg'],
         tasks: ['newer:svgmin:dev_file']
-    },<% if (config.get('features').indexOf('svgSprite') != -1) { %>
-    svg_icons: {
-        files: ['<%%= paths.src %>/img/icons/*.svg'],
-        tasks: ['newer:svgmin:dev_ico', 'svgstore:dev']
-    },<% } %>
-    sync_ajax: {
-        files: ['<%%= paths.src %>/ajax-content/**/*'],
-        tasks: ['sync:ajax']
     },
     sync_images: {
         files: ['<%%= paths.src %>/img/*', '<%%= paths.src %>/img/**/*.{jpg,jpeg,png,gif}', '!<%%= paths.src %>/img/dev/*'],

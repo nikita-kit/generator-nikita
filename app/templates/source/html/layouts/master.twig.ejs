@@ -15,13 +15,7 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <!--[if ! lte IE 9]><!-->
         <link href="css/styles.css?cb={{ currentTimestamp }}" rel="stylesheet"  />
-        <!--<![endif]-->
-
-        <!--[if IE 9]>
-        <link href="css/styles-part1.css?cb={{ currentTimestamp }}" rel="stylesheet" />
-        <![endif]-->
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/appicons/favicon.ico" />
@@ -52,8 +46,6 @@
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="application-name" content="<%= config.get('name') %>" />
 
-
-
         <!-- IE11 tiles -->
         <meta name="msapplication-square70x70logo" content="img/appicons/tile-tiny.png" />
         <meta name="msapplication-square150x150logo" content="img/appicons/tile-square.png" />
@@ -62,24 +54,10 @@
     </head>
 
     <body>
-
         <% if (config.get('features').indexOf('gitinfos') != -1) { %>
             {% if production %}
                 {% include 'partials::gitinfos.twig' %}
             {% endif %}
-        <% } %>
-        <% if (config.get('features').indexOf('svgSprite') != -1) { %>
-            <script>
-                /* lazy load icon-sprite, to avoid including it */
-                var ajax = new XMLHttpRequest();
-                ajax.open("GET", "img/icons/icon-sprite.svg", true);
-                ajax.send();
-                ajax.onload = function(e) {
-                    var div = document.createElement("div");
-                    div.innerHTML = ajax.responseText;
-                    document.body.insertBefore(div, document.body.childNodes[0]);
-                }
-            </script>
         <% } %>
 
         {% block body %}{% endblock %}

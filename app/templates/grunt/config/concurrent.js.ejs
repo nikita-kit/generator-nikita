@@ -1,5 +1,4 @@
 module.exports = {
-    dev1: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss'<% } %>],
-    dev2: ['sass:dev', <% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>'assemble:dev', <% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>'twigRender:dev'<% } %>],
+    dev: ['sass:dev', <% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>'assemble:dev', <% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>'twigRender:dev'<% } %>],
     dist: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss', <% } %>'imagemin:dist'],
 };
