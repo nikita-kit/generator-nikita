@@ -102,6 +102,7 @@ npm run test
 14. if all tests are passing, commit your changes and push them
 
 ```bash
+git add <YOUR-CHANGES>
 git commit -m"added my feature"
 git push
 ```
