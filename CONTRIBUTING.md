@@ -38,9 +38,10 @@ git checkout -b myfeature
 git remote add upstream git@github.com:nikita-kit/generator-nikita.git
 ```
 
-4. make sure that all tests passing
+4. install npm and make sure that all tests passing
 
 ```bash
+npm install
 npm test
 ```
 
