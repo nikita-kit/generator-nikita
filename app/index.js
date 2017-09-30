@@ -432,6 +432,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 			// SASS Extra Files
 			this.template('source/sass/blocks/_rwd-testing.scss.ejs', sourceFolder + '/sass/blocks/_rwd-testing.scss');
+			this.template('source/sass/blocks/_header.scss.ejs', sourceFolder + '/sass/blocks/_header.scss');
+			this.template('source/sass/blocks/_footer.scss.ejs', sourceFolder + '/sass/blocks/_footer.scss');
 			this.template('source/sass/extends/.gitkeep', sourceFolder + '/sass/extends/.gitkeep');
 			this.template('source/sass/extends/_buttons.scss.ejs', sourceFolder + '/sass/extends/_buttons.scss');
 
@@ -453,6 +455,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('source/assemble/pages/index.hbs.ejs', sourceFolder + '/assemble/pages/index.hbs');
 				this.template('source/assemble/pages/rwd-testing.hbs.ejs', sourceFolder + '/assemble/pages/rwd-testing.hbs');
 				this.template('source/assemble/layouts/lyt-default.hbs.ejs', sourceFolder + '/assemble/layouts/lyt-default.hbs');
+				this.template('source/assemble/partials/header.hbs.ejs', sourceFolder + '/assemble/partials/header.hbs');
+				this.template('source/assemble/partials/footer.hbs.ejs', sourceFolder + '/assemble/partials/footer.hbs');
 
 				// Assemble Folders
 				this.directory('source/assemble/data', sourceFolder + '/assemble/data');
@@ -477,6 +481,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('source/html/macros/.gitkeep', sourceFolder + '/html/macros/.gitkeep');
 				this.template('source/html/pages/index.twig.ejs', sourceFolder + '/html/pages/index.twig');
 				this.template('source/html/pages/rwd-testing.twig.ejs', sourceFolder + '/html/pages/rwd-testing.twig');
+				this.template('source/html/partials/header.twig.ejs', sourceFolder + '/html/partials/header.twig');
+				this.template('source/html/partials/footer.twig.ejs', sourceFolder + '/html/partials/footer.twig');
 			}
 			else
 			{
