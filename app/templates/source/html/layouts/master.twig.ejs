@@ -4,7 +4,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=IE7" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 
         <title>{% block title %}{% endblock %}</title>
 
@@ -27,38 +27,38 @@
         <link rel="shortcut icon" href="img/appicons/favicon.ico" />
 
         <!-- non-retina iPhone pre iOS 7 -->
-        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/appicons/touch-icon-57-precomposed.png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="img/appicons/apple-icon-57x57.png" />
 
         <!-- non-retina iPad pre iOS 7 -->
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/appicons/touch-icon-72-precomposed.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="img/appicons/apple-icon-72x72.png" />
 
         <!-- non-retina iPad iOS 7 -->
-        <link rel="apple-touch-icon" sizes="76x76" href="img/appicons/touch-icon-76.png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="img/appicons/apple-icon-76x76.png" />
 
         <!-- retina iPhone pre iOS 7 -->
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/appicons/touch-icon-114-precomposed.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="img/appicons/apple-icon-114x114.png" />
 
         <!-- retina iPhone iOS 7 -->
-        <link rel="apple-touch-icon" sizes="120x120" href="img/appicons/touch-icon-120.png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="img/appicons/apple-icon-120x120.png" />
 
         <!-- retina iPad pre iOS 7 -->
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/appicons/touch-icon-144-precomposed.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/appicons/apple-icon-144x144.png" />
 
         <!-- retina iPad iOS 7 -->
-        <link rel="apple-touch-icon" sizes="152x152" href="img/appicons/touch-icon-152.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="img/appicons/apple-icon-152x152.png" />
 
         <!-- Win8 tile -->
-        <meta name="msapplication-TileImage" content="img/appicons/favicon-144.png" />
+        <meta name="msapplication-TileImage" content="img/appicons/apple-icon-144x144.png" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="application-name" content="<%= config.get('name') %>" />
 
 
 
         <!-- IE11 tiles -->
-        <meta name="msapplication-square70x70logo" content="img/appicons/tile-tiny.png" />
-        <meta name="msapplication-square150x150logo" content="img/appicons/tile-square.png" />
-        <meta name="msapplication-wide310x150logo" content="img/appicons/tile-wide.png" />
-        <meta name="msapplication-square310x310logo" content="img/appicons/tile-large.png" />
+        <meta name="msapplication-square70x70logo" content="img/appicons/ms-icon-70x70.png" />
+        <meta name="msapplication-square150x150logo" content="img/appicons/ms-icon-150x150.png" />
+        <meta name="msapplication-wide310x150logo" content="img/appicons/ms-icon-310x150.png" />
+        <meta name="msapplication-square310x310logo" content="img/appicons/ms-icon-310x310.png" />
     </head>
 
     <body>
@@ -81,9 +81,13 @@
                 }
             </script>
         <% } %>
-
+		
+		{% include 'partials::header.twig' %}
+		<main class="main">
         {% block body %}{% endblock %}
-
+		</main>
+		{% include 'partials::footer.twig' %}
+		
         <script src="js/main.js?cb={{ currentTimestamp }}"></script>
     </body>
 
