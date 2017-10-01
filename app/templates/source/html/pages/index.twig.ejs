@@ -4,6 +4,13 @@
 {% block description %}This is the startpage of your prototype{% endblock %}
 
 {% block body %}
+<% if (config.get('additives').indexOf('slider') != -1)
+{
+%>
+	{% include 'partials::slider.twig' %}
+<%
+}
+%>
     <p>Congratulations, the prototype was built successfully! :)</p>
     <div class="jsb_ jsb_Test" data-jsb="foo=bar"></div>
 {% endblock %}

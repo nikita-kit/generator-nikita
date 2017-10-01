@@ -12,6 +12,7 @@
 <%
 }
 %>
+
 <% if (config.get('features').indexOf('browserReset') != -1)
 {
 %>// Browser-Reset
@@ -19,6 +20,7 @@
 <%
 }
 %>
+
 // Variables
 @import "variables/**/*.scss";
 
@@ -34,12 +36,15 @@
     }
 }
 %>
+
 // Mixins
 @import "mixins/**/*.scss";
 
 <% if (config.get('nikitaCssExtends').length)
 {
-%>// nikita.css Extends
+%>
+
+// nikita.css Extends
 <%
     var nikitaCssExtends = config.get('nikitaCssExtends');
     for (var i = 0; i < nikitaCssExtends.length; i++)
@@ -49,6 +54,7 @@
     }
 }
 %>
+
 // Extends
 @import "extends/**/*.scss";
 
@@ -59,8 +65,17 @@
 <%
 }
 %>
+
 // Basic Formatting
 @import "basics";
+
+<% if (config.get('additives').indexOf('slider') != -1)
+{
+%>// Swiper
+@import "../../../../node_modules/swiper/dist/css/swiper.css";
+<%
+}
+%>
 
 // All Components
 @import "blocks/**/*.scss";
