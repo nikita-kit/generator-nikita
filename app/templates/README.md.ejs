@@ -91,16 +91,10 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 - [grunt-contrib-imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
 - [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify)
 - [grunt-contrib-watch](https://github.com/gruntjs/grunt-contrib-watch)
-- [grunt-csssplit](https://github.com/project-collins/grunt-csssplit)
 - [grunt-eslint](https://github.com/sindresorhus/grunt-eslint)
-- [grunt-gitinfo](https://github.com/damkraw/grunt-gitinfo)<% if (config.get('features').indexOf('groupMediaQueries') != -1) { %>
-- [grunt-group-css-media-queries](https://github.com/Se7enSky/grunt-group-css-media-queries)<% } %>
+- [grunt-gitinfo](https://github.com/damkraw/grunt-gitinfo)
 - [grunt-htmlhint](https://github.com/yaniswang/grunt-htmlhint)
-- [grunt-jsdoc](https://github.com/krampstudio/grunt-jsdoc)
 - [grunt-newer](https://github.com/tschaub/grunt-newer)
-- [grunt-pagespeed](https://github.com/jrcryer/grunt-pagespeed)
-- [grunt-phantomas](https://github.com/stefanjudis/grunt-phantomas)
-- [grunt-photobox](https://github.com/stefanjudis/grunt-photobox)
 - [grunt-postcss](https://github.com/nDmitry/grunt-postcss)
 - [grunt-prettify](https://github.com/jonschlinkert/grunt-prettify)
 - [grunt-sass](https://github.com/sindresorhus/grunt-sass)
@@ -109,17 +103,16 @@ You don't like to stare permanently on your console? So wouldn’t it be great i
 - [grunt-stylelint](https://github.com/wikimedia/grunt-stylelint)
 - [grunt-svg-css](https://github.com/psyrendust/grunt-svg-css)
 - [grunt-svgmin](https://github.com/sindresorhus/grunt-svgmin)
-- [grunt-svgstore](https://github.com/FWeinb/grunt-svgstore)
 - [grunt-sync](https://github.com/tomusdrw/grunt-sync)<% if (config.get('staticPageGenerator').indexOf('twigRender') != -1) { %>
 - [grunt-twig-render](https://github.com/stefanullinger/grunt-twig-render)<% } %>
 - [grunt-webpack](https://github.com/webpack/grunt-webpack)<% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>
 - [handlebars-helper-autolink](https://github.com/helpers/handlebars-helper-autolink)
 - [handlebars-helper-partial](https://github.com/helpers/handlebars-helper-partial)
 - [handlebars-helpers](https://github.com/assemble/handlebars-helpers)<% } %>
-- [load-grunt-config](https://github.com/firstandthird/load-grunt-config)
 - [import-glob](https://github.com/terpiljenya/import-glob)
 - [jest-cli](https://github.com/facebook/jest)
 - [jit-grunt](https://github.com/shootaroo/jit-grunt)
+- [load-grunt-config](https://github.com/firstandthird/load-grunt-config)
 - [pre-commit](https://github.com/observing/pre-commit)
 - [stylelint](https://github.com/stylelint/stylelint)
 - [stylelint-order](https://github.com/hudochenkov/stylelint-order)
@@ -178,7 +171,6 @@ $ tree -d -I node_modules
 │   │   ├── appicons
 │   │   ├── bgs
 │   │   ├── dev
-│   │   ├── icons
 │   │   └── temp
 │   ├── js
 │   │   └── modules
@@ -241,41 +233,23 @@ Run `grunt fix-scss` or `grunt fix-js` to call the linter with the `--fix` optio
 This will fix most of the common problems like indention, brace style and style property order automatically.
 
 
-## Icon-Workflow
+## Images
 
-<% if (config.get('features').indexOf('svgSprite') != -1 && config.get('features').indexOf('svgBackgrounds') != -1) { %>
-
-There're two possible ways to use icons.
-
-<% } %>
-
-<% if (config.get('features').indexOf('svgSprite') != -1) { %>
-### SVG-Sprite
-
-You'd like to edit your icons with CSS, e.g. to change the fill-color or you have one and the same icon in different colors? Then this is your choice.
-
-1. Just put your SVG-icons into `source/img/icons`.
-2. All icons will be processed with the svgmin-task and put into the `tmp/svgmin/icons` folder.
-3. Afterwards the svgstore-task uses these icons to put together an `icon-sprite.svg` which will be copied to the `img/icons` folder. It must be injected with ajax directly after the opening `<body>` element at the top of the document (have a look at the file <% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>`lyt-default.hbs`<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') != -1) { %>`master.twig`<% } %> in the `layouts` folder).
-4. To include a SVG-icon use `<svg class="your-class-name"><use xlink:href="#filename" /></svg>` in your <% if (config.get('staticPageGenerator').indexOf('assemble') != -1) { %>`hbs`<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') != -1) { %>`twig`<% } %>-files. Make sure you use a class name on the SVG to size it.
-5. Now you can use `.your-class-name { fill: #f30; }` to color your icon.
-
-For further infos read the article [Icon System with SVG sprites](http://css-tricks.com/svg-sprites-use-better-icon-fonts/) by Chris Coyier.
-<% } %>
+All images from `img`-folder will be minified and copied during build.
 
 <% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 
-### Data-URIs
+### SVG images as Data-URIs
 
-If you have to include your icon as a background-image, e.g. because you can't simply add a `svg` element, then you should use this method.
+To include your svg icons as background-images, proceed like this:
 
 1. Just put your SVG-icons into `source/img/bgs`.
 2. All icons will be processed with the svgmin-task and put into the `tmp/svgmin/bgs` folder.
 3. Afterwards the svgcss-task uses these icons to produce SCSS-files (all icons are included as data-URIs in the form of SASS-placeholders), which will be put into `tmp/svgcss` folder.
 4. These SCSS-files will now be processed by the string-replace-task to get different placeholder-extends. They are saved into `tmp/svg-bg-extends` folder.
 5. Now you can include your icons by using the `_svg-background.scss` mixin. Just type `@include svg-background(name-of-your-icon);`.
-
 <% } %>
+
 
 ## Use `source+build+dist` or one custom folder
 

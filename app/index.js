@@ -88,16 +88,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			promptConfirm('private', 'Is this project private?', true),
 			promptList('template', 'Which configuration template do you want to use?', [
 				{
-					name: 'Web-App setup (old slim)',
+					name: 'Web-App setup',
 					value: 'slim'
 				},
 				{
 					name: 'Spring Boot setup',
 					value: 'spring-boot'
-				},
-				{
-					name: 'Kickstarter setup (old default)',
-					value: 'default'
 				},
 			]),
 			promptConfirm('custom', 'Customize this template?', false),
@@ -180,38 +176,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			
 			var templateSpecificPrompts = [];
+			
+			if (['slim', 'spring-boot'].indexOf(that.config.get('template')) !== -1)
 
-			if (that.config.get('template') === 'default')
-			{
-				that.config.set('staticPageGenerator', 'assemble');
-				that.config.set('features', [
-					'webfonts',
-					'browserReset',
-					'svgBackgrounds',
-					'svgSprite',
-					'groupMediaQueries',
-					'gitinfos'
-				]);
-				that.config.set('addons', [
-				]);
-				that.config.set('nikitaCssMixins', [
-					'centering',
-					'fixed-ratiobox',
-					'font-smoothing',
-					'layering',
-					'respond-to',
-					'triangle'
-				]);
-				that.config.set('nikitaCssExtends', [
-					'a11y',
-					'cf',
-					'ellipsis',
-					'hide-text',
-					'ib'
-				]);
-				that.config.set('formFramework', true);
-			}
-			else if (['slim', 'spring-boot'].indexOf(that.config.get('template')) !== -1)
 			{
 				that.config.set('staticPageGenerator', 'twigRender');
 				that.config.set('features', [
@@ -264,29 +231,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							name: 'Use background SVG files as base64 encoded dataURIs with placeholder extends (grunt-grunticon + grunt-string-replace + svg-background-mixin)',
 							value: 'svgBackgrounds'
 						}, {
-							name: 'Use SVG Sprite to include icons with svg\'s <use> tag',
-							value: 'svgSprite'
-						}, {
-							name: 'Split your main CSS-file into several small ones to support IE9 and lower (grunt-csssplit)',
-							value: 'cssSplit'
-						}, {
-							name: 'group css media queries (grunt-group-css-media-queries)',
-							value: 'groupMediaQueries'
-						}, {
 							name: 'Create a CSS Styleguide (grunt-styleguide)',
 							value: 'cssStyleGuide'
-						}, {
-							name: 'Create a JS Documentation (grunt-jsdoc)',
-							value: 'jsDoc'
-						}, {
-							name: 'Measure Pagespeed (grunt-pagespeed)',
-							value: 'measurePagespeed'
-						}, {
-							name: 'Measure Frontend-Performance (grunt-phantomas)',
-							value: 'measurePerformance'
-						}, {
-							name: 'Take screenshots to diff your changes (grunt-photobox)',
-							value: 'takeScreenshots'
 						}, {
 							name: 'Use local grunt binary',
 							value: 'useLocalGrunt'
@@ -428,7 +374,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Basic Project Folders
 			this.dest.mkdir(sourceFolder + '/img');
 			this.dest.mkdir(sourceFolder + '/img/bgs');
-			this.dest.mkdir(sourceFolder + '/img/icons');
 			this.dest.mkdir(sourceFolder + '/sass/mixins');
 			this.directory('source/img/appicons', sourceFolder + '/img/appicons');
 
@@ -531,37 +476,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				delete packageJsonData['devDependencies']['grunt-string-replace'];
 			}
 
-			// Optional SVG Sprite
-			if (this.config.get('features').indexOf('svgSprite') === -1)
-			{
-				delete packageJsonData['devDependencies']['grunt-svgstore'];
-			}
-			else
-			{
-				this.template('grunt/config/svgstore.js.ejs', 'grunt/config/svgstore.js');
-				this.template('source/img/icons/README.md.ejs', sourceFolder + '/img/icons/README.md');
-			}
-
-			// Optional CSS Splitting for IE9 and lower
-			if (this.config.get('features').indexOf('cssSplit') === -1)
-			{
-				delete packageJsonData['devDependencies']['grunt-csssplit'];
-			}
-			else
-			{
-				this.template('grunt/config/csssplit.js.ejs', 'grunt/config/csssplit.js');
-			}
-
-			// Optional css media queries grouping
-			if (this.config.get('features').indexOf('groupMediaQueries') === -1)
-			{
-				delete packageJsonData['devDependencies']['grunt-group-css-media-queries'];
-			}
-			else
-			{
-				this.template('grunt/config/group_css_media_queries.js.ejs', 'grunt/config/group_css_media_queries.js');
-			}
-
 			// Optional CSS Styleguide
 			if (this.config.get('features').indexOf('cssStyleGuide') === -1)
 			{
@@ -572,46 +486,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('grunt/config/styleguide.js.ejs', 'grunt/config/styleguide.js');
 				this.template('source/sass/blocks/styleguide.md.ejs', sourceFolder + '/sass/blocks/styleguide.md');
 				this.directory('source/styleguide-template', sourceFolder + '/styleguide-template');
-			}
-
-			// Optional JS Documentation
-			if (this.config.get('features').indexOf('jsDoc') === -1)
-			{
-				delete packageJsonData['devDependencies']['grunt-jsdoc'];
-			}
-			else
-			{
-				this.template('grunt/config/jsdoc.js.ejs', 'grunt/config/jsdoc.js');
-			}
-
-			// Optional Pagespeed Measuring
-			if (this.config.get('features').indexOf('measurePagespeed') === -1)
-			{
-				delete packageJsonData['devDependencies']['grunt-pagespeed'];
-			}
-			else
-			{
-				this.template('grunt/config/pagespeed.js.ejs', 'grunt/config/pagespeed.js');
-			}
-
-			// Optional Performance Measuring
-			if (this.config.get('features').indexOf('measurePerformance') === -1)
-			{
-				delete packageJsonData['devDependencies']['grunt-phantomas'];
-			}
-			else
-			{
-				this.template('grunt/config/phantomas.js.ejs', 'grunt/config/phantomas.js');
-			}
-
-			// Optional Screenshots Diffing
-			if (this.config.get('features').indexOf('takeScreenshots') === -1)
-			{
-				delete packageJsonData['devDependencies']['grunt-photobox'];
-			}
-			else
-			{
-				this.template('grunt/config/photobox.js.ejs', 'grunt/config/photobox.js');
 			}
 
 			// Optional Gitinfos
