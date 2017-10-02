@@ -54,13 +54,11 @@
 	</head>
 
 	<body>
-<% if (config.get('features').indexOf('gitinfos') != -1) { %>
-		{{#if production}}
-		{{> 'gitinfos'}}
-		{{/if}}
-<% } %>
-
-<% } %>
+		<% if (config.get('features').indexOf('gitinfos') != -1) { %>
+			{{#if production}}
+			{{> 'gitinfos'}}
+			{{/if}}
+		<% } %>
 
 		{{> header}}
 		<main class="main">
