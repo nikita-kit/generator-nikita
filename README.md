@@ -1,5 +1,7 @@
 # generator-nikita [![Build Status](https://secure.travis-ci.org/nikita-kit/generator-nikita.png?branch=master)](https://travis-ci.org/nikita-kit/generator-nikita)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/nikita-kit/generator-nikita.svg)](https://greenkeeper.io/)
+
 Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerator-nikita.png)](https://github.com/nikita-kit/generator-nikita/releases)
 
 <a href="http://gruntjs.com/">
