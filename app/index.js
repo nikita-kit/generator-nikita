@@ -176,8 +176,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			
 			var templateSpecificPrompts = [];
-
+			
 			if (['slim', 'spring-boot'].indexOf(that.config.get('template')) !== -1)
+
 			{
 				that.config.set('staticPageGenerator', 'twigRender');
 				that.config.set('features', [
@@ -185,14 +186,14 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					'svgBackgrounds',
 					'gitinfos'
 				]);
+				that.config.set('addons', [
+				]);
 				that.config.set('nikitaCssMixins', [
 					'respond-to'
 				]);
-
 				that.config.set('nikitaCssExtends', [
 					'cf'
 				]);
-
 				that.config.set('formFramework', false);
 			}
 
@@ -277,6 +278,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}, {
 							name: 'ib: Use the inline-block method as an alternative to float elements',
 							value: 'ib'
+						}
+					]),
+					promptCheckbox('addons', 'Which additive modules do you want to use?', [
+						{
+							name: 'Would you like to use a slider in your project',
+							value: 'slider'
 						}
 					]),
 					promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true),
@@ -499,6 +506,25 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				{
 					this.template('source/html/partials/gitinfos.twig.ejs', sourceFolder + '/html/partials/gitinfos.twig');
 				}
+			}
+
+			// Optional Gitinfos
+			if (this.config.get('addons').indexOf('slider') === -1)
+			{
+				delete packageJsonData['devDependencies']['swiper'];
+			}
+			else
+			{
+				if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
+				{
+					this.template('source/assemble/partials/slider.hbs.ejs', sourceFolder + '/assemble/partials/slider.hbs');
+				}
+				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
+				{
+					this.template('source/html/partials/slider.twig.ejs', sourceFolder + '/html/partials/slider.twig');
+				}
+				this.template('source/js/Slider.jsb.js.ejs', sourceFolder + '/js/Slider.jsb.js');
+				this.template('source/sass/blocks/_slider.scss.ejs', sourceFolder + '/sass/blocks/_slider.scss');
 			}
 
 			// Optional Layering-Mixin

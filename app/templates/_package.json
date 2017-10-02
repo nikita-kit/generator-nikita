@@ -59,6 +59,7 @@
 		"pre-commit": "1.2.2",
 		"stylelint": "7.13.0",
 		"stylelint-order": "0.5.0",
+		"swiper": "3.4.2",
 		"time-grunt": "1.4.0",
 		"webpack": "3.3.0",
 		"webpack-bundle-analyzer": "2.8.3",
