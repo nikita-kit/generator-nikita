@@ -18,6 +18,6 @@ module.exports = {
         'tagname-lowercase': true
     },
     all: {
-        src: ['*/*.html'<% if (config.get('features').indexOf('jsDoc') != -1) { %>, '!jsdocs/**/*.html'<% } %><% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>, '!styleguide/**/*.html'<% } %>]
+        src: ['*/*.html'<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>, '!styleguide/**/*.html'<% } %>]
     }
 };

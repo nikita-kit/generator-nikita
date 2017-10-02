@@ -13,6 +13,8 @@
   * start autofixing with `grunt fix-scss`
 * updated browserslist for `autoprefixer` and `babel-preset-env` to exclude unimportant mobile browsers
 * removed bower and ruby sass
+* removed default template
+* removed modules `photobox`, `phantomas`, `pagespeed`, `css-split`, `svgstore`, `group-css-media-queries` and `jsdoc`
 * check build with all node major versions in travis
 
 # 3.0.0 (2017/05/04)

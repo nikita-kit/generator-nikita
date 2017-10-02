@@ -58,18 +58,7 @@ module.exports = {
                 src: ['*.svg', 'temp/*.svg']
             }
         ]
-    },<% if (config.get('features').indexOf('svgSprite') != -1) { %>
-    dev_ico: {
-        files: [
-            {
-                cwd: '<%%= paths.src %>/img/icons/',
-                dest: '<%%= paths.tmp %>/svgmin/icons/',
-                expand: true,
-                ext: '.svg',
-                src: ['*.svg']
-            }
-        ]
-    },<% } %><% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+    },<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
     dist_bg: {
         files: [
             {
@@ -91,16 +80,5 @@ module.exports = {
                 src: ['*.svg', 'temp/*.svg']
             }
         ]
-    }<% if (config.get('features').indexOf('svgSprite') != -1) { %>,
-    dist_ico: {
-        files: [
-            {
-                cwd: '<%%= paths.src %>/img/icons/',
-                dest: '<%%= paths.tmp %>/svgmin/icons/',
-                expand: true,
-                ext: '.svg',
-                src: ['*.svg']
-            }
-        ]
-    }<% } %>
+    }
 };
