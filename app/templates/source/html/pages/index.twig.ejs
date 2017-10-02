@@ -13,4 +13,12 @@
 %>
     <p>Congratulations, the prototype was built successfully! :)</p>
     <div class="jsb_ jsb_Test" data-jsb="foo=bar"></div>
+
+<% if (config.get('addons').indexOf('selectTwo') != -1)
+{
+%>
+	{% include 'partials::select-two.twig' %}
+<%
+}
+%>
 {% endblock %}

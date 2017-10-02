@@ -338,6 +338,10 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						{
 							name: 'Would you like to use a slider in your project',
 							value: 'slider'
+						},
+						{
+							name: 'Would you like to use select2 for styling selectboxes in your project',
+							value: 'selectTwo'
 						}
 					]),
 					promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true),
@@ -634,7 +638,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				}
 			}
 
-			// Optional Gitinfos
+			// Optional Slider
 			if (this.config.get('addons').indexOf('slider') === -1)
 			{
 				delete packageJsonData['devDependencies']['swiper'];
@@ -651,6 +655,26 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				}
 				this.template('source/js/Slider.jsb.js.ejs', sourceFolder + '/js/Slider.jsb.js');
 				this.template('source/sass/blocks/_slider.scss.ejs', sourceFolder + '/sass/blocks/_slider.scss');
+			}
+
+			// Optional Select2
+			if (this.config.get('addons').indexOf('selectTwo') === -1)
+			{
+				delete packageJsonData['devDependencies']['jquery'];
+				delete packageJsonData['devDependencies']['select2'];
+			}
+			else
+			{
+				if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
+				{
+					this.template('source/assemble/partials/select-two.hbs.ejs', sourceFolder + '/assemble/partials/select-two.hbs');
+				}
+				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
+				{
+					this.template('source/html/partials/select-two.twig.ejs', sourceFolder + '/html/partials/select-two.twig');
+				}
+				this.template('source/js/SelectTwo.jsb.js.ejs', sourceFolder + '/js/SelectTwo.jsb.js');
+				this.template('source/sass/blocks/_select-two.scss.ejs', sourceFolder + '/sass/blocks/_select-two.scss');
 			}
 
 			// Optional Layering-Mixin
