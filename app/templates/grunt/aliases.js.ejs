@@ -35,7 +35,7 @@ module.exports = {
         'svgmin:dist_bg',<% } %>
         'svgmin:dist_file',
         'concurrent:dist',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
-		'svgcss',
+        'svgcss',
         'string-replace',<% } %>
         'generate-tmp-styles-scss',
         'sass:dist',<% if (config.get('features').indexOf('gitinfos') != -1) { %>
