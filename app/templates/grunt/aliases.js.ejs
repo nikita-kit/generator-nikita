@@ -8,17 +8,14 @@ module.exports = {
     // development build task
     'dev': [<% if (config.get('cleanBuildFolders')) { %>
         'clean:dev',<% } %>
-        'clean:tmp',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
-        'svgmin:dev_bg',<% } %>
-        'svgmin:dev_file',<% if (config.get('features').indexOf('svgSprite') != -1) { %>
-        'svgmin:dev_ico',
-        'svgstore:dev',<% } %>
-        'concurrent:dev1',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+        'clean:tmp',
+        'svgmin:dev_file',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+        'svgmin:dev_bg',
+        'svgcss',
         'string-replace',<% } %>
         'generate-tmp-styles-scss',
-        'concurrent:dev2',
-        'postcss:dev',<% if (config.get('features').indexOf('cssSplit') != -1) { %>
-        'csssplit:dev',<% } %>
+        'concurrent:dev',
+        'postcss:dev',
         'webpack:dev',
         'sync',
         'prettify:dev'
@@ -34,13 +31,11 @@ module.exports = {
     // distribution task
     'dist': [<% if (config.get('cleanBuildFolders')) { %>
         'clean:dist',<% } %>
-        'clean:tmp',<% if (config.get('features').indexOf('jsDoc') != -1) { %>
-        'clean:docs',<% } %><% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+        'clean:tmp',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
         'svgmin:dist_bg',<% } %>
-        'svgmin:dist_file',<% if (config.get('features').indexOf('svgSprite') != -1) { %>
-        'svgmin:dist_ico',
-        'svgstore:dist',<% } %>
+        'svgmin:dist_file',
         'concurrent:dist',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+        'svgcss',
         'string-replace',<% } %>
         'generate-tmp-styles-scss',
         'sass:dist',<% if (config.get('features').indexOf('gitinfos') != -1) { %>
@@ -48,12 +43,9 @@ module.exports = {
         'write-gitinfos',<% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
         'assemble:dist',<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
         'twigRender:dist',<% } %>
-        'postcss:dist',<% if (config.get('features').indexOf('cssSplit') != -1) { %>
-        'csssplit:dist',<% } %><% if (config.get('features').indexOf('groupMediaQueries') != -1) { %>
-        'group_css_media_queries',<% } %>
+        'postcss:dist',
         'cssmin',
         'webpack:dist',
-        'copy:ajax',
         'copy:favicon',
         'copy:fonts',
         'uglify',
@@ -96,30 +88,10 @@ module.exports = {
 
     'analyze-js': [
         'webpack:analyze'
-    ],<% if (config.get('features').indexOf('measurePagespeed') != -1) { %>
-
-    'measure-pagespeed': [
-        'pagespeed'
-    ],<% } %><% if (config.get('features').indexOf('measurePerformance') != -1) { %>
-
-    'measure-performance': [
-        'dev',
-        'browserSync:dev',
-        'phantomas'
-    ],<% } %><% if (config.get('features').indexOf('takeScreenshots') != -1) { %>
-
-    'take-screenshots': [
-        'dev',
-        'browserSync:dev',
-        'photobox'
-    ],<% } %><% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
+    ],<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
 
     'build-styleguide': [
         'styleguide',
         'copy:styleguide'
-    ],<% } %><% if (config.get('features').indexOf('jsDoc') != -1) { %>
-
-    'build-jsdoc': [
-        'jsdoc'
     ],<% } %>
 };
