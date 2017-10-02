@@ -177,37 +177,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			
 			var templateSpecificPrompts = [];
 
-			if (that.config.get('template') === 'default')
-			{
-				that.config.set('staticPageGenerator', 'assemble');
-				that.config.set('features', [
-					'webfonts',
-					'browserReset',
-					'svgBackgrounds',
-					'svgSprite',
-					'groupMediaQueries',
-					'gitinfos'
-				]);
-				that.config.set('addons', [
-				]);
-				that.config.set('nikitaCssMixins', [
-					'centering',
-					'fixed-ratiobox',
-					'font-smoothing',
-					'layering',
-					'respond-to',
-					'triangle'
-				]);
-				that.config.set('nikitaCssExtends', [
-					'a11y',
-					'cf',
-					'ellipsis',
-					'hide-text',
-					'ib'
-				]);
-				that.config.set('formFramework', true);
-			}
-			else if (['slim', 'spring-boot'].indexOf(that.config.get('template')) !== -1)
+			if (['slim', 'spring-boot'].indexOf(that.config.get('template')) !== -1)
 			{
 				that.config.set('staticPageGenerator', 'twigRender');
 				that.config.set('features', [
