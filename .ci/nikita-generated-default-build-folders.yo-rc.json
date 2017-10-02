@@ -30,6 +30,7 @@
     "useBuildFolders": true,
     "svgBackgrounds": true,
     "cleanBuildFolders": true,
+    "staticPageGenerator": "assemble",
     "requirejsPathToNodeModules": "../../node_modules/"
   }
 }
