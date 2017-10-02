@@ -192,7 +192,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					'groupMediaQueries',
 					'gitinfos'
 				]);
-				that.config.set('additives', [
+				that.config.set('addons', [
 				]);
 				that.config.set('nikitaCssMixins', [
 					'centering',
@@ -219,7 +219,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					'svgBackgrounds',
 					'gitinfos'
 				]);
-				that.config.set('additives', [
+				that.config.set('addons', [
 				]);
 				that.config.set('nikitaCssMixins', [
 					'respond-to'
@@ -334,7 +334,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							value: 'ib'
 						}
 					]),
-					promptCheckbox('additives', 'Which additive modules do you want to use?', [
+					promptCheckbox('addons', 'Which additive modules do you want to use?', [
 						{
 							name: 'Would you like to use a slider in your project',
 							value: 'slider'
@@ -635,7 +635,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 
 			// Optional Gitinfos
-			if (this.config.get('additives').indexOf('slider') === -1)
+			if (this.config.get('addons').indexOf('slider') === -1)
 			{
 				delete packageJsonData['devDependencies']['swiper'];
 			}
