@@ -20,7 +20,8 @@ describe('nikita:app:custom-twigRender', function () {
 				nikitaCssMixins: [],
 				useBuildFolders: true,
 				nikitaCssExtends: [],
-				features: []
+				features: [],
+				addons: []
 			})
 			.on('end', done);
 	});
@@ -52,7 +53,8 @@ describe('nikita:app:custom-assemble', function () {
 				nikitaCssMixins: [],
 				useBuildFolders: true,
 				nikitaCssExtends: [],
-				features: []
+				features: [],
+				addons: []
 			})
 			.on('end', done);
 	});

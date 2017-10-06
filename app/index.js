@@ -185,14 +185,14 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					'svgBackgrounds',
 					'gitinfos'
 				]);
+				that.config.set('addons', [
+				]);
 				that.config.set('nikitaCssMixins', [
 					'respond-to'
 				]);
-
 				that.config.set('nikitaCssExtends', [
 					'cf'
 				]);
-
 				that.config.set('formFramework', false);
 			}
 
@@ -277,6 +277,16 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}, {
 							name: 'ib: Use the inline-block method as an alternative to float elements',
 							value: 'ib'
+						}
+					]),
+					promptCheckbox('addons', 'Which additive modules do you want to use?', [
+						{
+							name: 'Would you like to use a slider in your project',
+							value: 'slider'
+						},
+						{
+							name: 'Would you like to use select2 for styling selectboxes in your project',
+							value: 'selectTwo'
 						}
 					]),
 					promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true),
@@ -499,6 +509,36 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				{
 					this.template('source/html/partials/gitinfos.twig.ejs', sourceFolder + '/html/partials/gitinfos.twig');
 				}
+			}
+
+			// Optional Slider
+			if (this.config.get('addons').indexOf('slider') === -1)
+			{
+				delete packageJsonData['devDependencies']['swiper'];
+			}
+			else
+			{
+				if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
+				{
+					this.template('source/assemble/partials/slider.hbs.ejs', sourceFolder + '/assemble/partials/slider.hbs');
+				}
+				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
+				{
+					this.template('source/html/partials/slider.twig.ejs', sourceFolder + '/html/partials/slider.twig');
+				}
+				this.template('source/js/Slider.jsb.js.ejs', sourceFolder + '/js/Slider.jsb.js');
+				this.template('source/sass/blocks/_slider.scss.ejs', sourceFolder + '/sass/blocks/_slider.scss');
+			}
+
+			// Optional Select2
+			if (this.config.get('addons').indexOf('selectTwo') === -1)
+			{
+				delete packageJsonData['devDependencies']['jquery'];
+				delete packageJsonData['devDependencies']['select2'];
+			}
+			else
+			{
+				this.template('source/js/SelectTwo.jsb.js.ejs', sourceFolder + '/js/SelectTwo.jsb.js');
 			}
 
 			// Optional Layering-Mixin
