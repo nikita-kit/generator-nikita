@@ -183,7 +183,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				that.config.set('features', [
 					'webfonts',
 					'svgBackgrounds',
-					'svgBackgrounds',
 					'gitinfos'
 				]);
 				that.config.set('addons', [
