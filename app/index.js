@@ -183,6 +183,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				that.config.set('features', [
 					'webfonts',
 					'svgBackgrounds',
+					'svgBackgrounds',
 					'gitinfos'
 				]);
 				that.config.set('addons', [
@@ -538,16 +539,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			else
 			{
-				if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
-				{
-					this.template('source/assemble/partials/select-two.hbs.ejs', sourceFolder + '/assemble/partials/select-two.hbs');
-				}
-				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
-				{
-					this.template('source/html/partials/select-two.twig.ejs', sourceFolder + '/html/partials/select-two.twig');
-				}
 				this.template('source/js/SelectTwo.jsb.js.ejs', sourceFolder + '/js/SelectTwo.jsb.js');
-				this.template('source/sass/blocks/_select-two.scss.ejs', sourceFolder + '/sass/blocks/_select-two.scss');
 			}
 
 			// Optional Layering-Mixin

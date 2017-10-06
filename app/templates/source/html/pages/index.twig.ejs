@@ -17,7 +17,12 @@
 <% if (config.get('addons').indexOf('selectTwo') != -1)
 {
 %>
-	{% include 'partials::select-two.twig' %}
+	<select id="ref-select" class="select jsb_ jsb_SelectTwo" name="select" required="required">
+		<option disabled="disabled" selected="selected" value="">Please choose:</option>
+		<option value="option 1">option 1</option>
+		<option value="option 2">option 2</option>
+		<option value="option 3">option 3</option>
+	</select>
 <%
 }
 %>
