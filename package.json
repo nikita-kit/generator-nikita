@@ -9,8 +9,8 @@
     "email": "",
     "url": "https://github.com/nikita-kit"
   },
-  "engines" : {
-    "node" : ">=4.0"
+  "engines": {
+    "node": ">=4.0"
   },
   "scripts": {
     "test": "mocha"
