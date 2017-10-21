@@ -281,6 +281,10 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					]),
 					promptCheckbox('addons', 'Which additive modules do you want to use?', [
 						{
+							name: 'Would you like to use jQuery in your project',
+							value: 'jQuery'
+						},
+						{
 							name: 'Would you like to use a slider in your project',
 							value: 'slider'
 						},
@@ -511,6 +515,40 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				}
 			}
 
+			// Optional Layering-Mixin
+			if (this.config.get('nikitaCssMixins').indexOf('layering') !== -1)
+			{
+				this.template('source/sass/variables/_z-layers.scss.ejs', sourceFolder + '/sass/variables/_z-layers.scss');
+			}
+
+			// Optional Respond-To-Mixin
+			if (this.config.get('nikitaCssMixins').indexOf('respond-to') !== -1)
+			{
+				this.template('source/sass/variables/_breakpoints.scss.ejs', sourceFolder + '/sass/variables/_breakpoints.scss');
+			}
+
+			// Optional Form Framework
+			if (this.config.get('formFramework'))
+			{
+				if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
+				{
+					this.template('source/assemble/pages/forms.hbs.ejs', sourceFolder + '/assemble/pages/forms.hbs');
+				}
+				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
+				{
+					this.template('source/html/pages/forms.twig.ejs', sourceFolder + '/html/pages/forms.twig');
+				}
+
+				this.template('source/sass/blocks/_forms.scss.ejs', sourceFolder + '/sass/blocks/_forms.scss');
+				this.src.copy('source/img/bgs/form-select-arrow-down.svg', sourceFolder + '/img/bgs/form-select-arrow-down.svg');
+			}
+
+			// Optional jQuery
+			if ((this.config.get('addons').indexOf('jQuery') === -1) && (this.config.get('addons').indexOf('selectTwo') === -1))
+			{
+				delete packageJsonData['devDependencies']['jquery'];
+			}
+
 			// Optional Slider
 			if (this.config.get('addons').indexOf('slider') === -1)
 			{
@@ -533,40 +571,11 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Optional Select2
 			if (this.config.get('addons').indexOf('selectTwo') === -1)
 			{
-				delete packageJsonData['devDependencies']['jquery'];
 				delete packageJsonData['devDependencies']['select2'];
 			}
 			else
 			{
 				this.template('source/js/SelectTwo.jsb.js.ejs', sourceFolder + '/js/SelectTwo.jsb.js');
-			}
-
-			// Optional Layering-Mixin
-			if (this.config.get('nikitaCssMixins').indexOf('layering') !== -1)
-			{
-				this.template('source/sass/variables/_z-layers.scss.ejs', sourceFolder + '/sass/variables/_z-layers.scss');
-			}
-			
-			// Optional Respond-To-Mixin
-			if (this.config.get('nikitaCssMixins').indexOf('respond-to') !== -1)
-			{
-				this.template('source/sass/variables/_breakpoints.scss.ejs', sourceFolder + '/sass/variables/_breakpoints.scss');
-			}
-
-			// Optional Form Framework
-			if (this.config.get('formFramework'))
-			{
-				if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
-				{
-					this.template('source/assemble/pages/forms.hbs.ejs', sourceFolder + '/assemble/pages/forms.hbs');
-				}
-				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
-				{
-					this.template('source/html/pages/forms.twig.ejs', sourceFolder + '/html/pages/forms.twig');
-				}
-
-				this.template('source/sass/blocks/_forms.scss.ejs', sourceFolder + '/sass/blocks/_forms.scss');
-				this.src.copy('source/img/bgs/form-select-arrow-down.svg', sourceFolder + '/img/bgs/form-select-arrow-down.svg');
 			}
 			
 			if (this.config.get('template') === 'spring-boot') {
