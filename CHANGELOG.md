@@ -7,6 +7,7 @@
   * start tests with `grunt test`
   * start jest in watch mode with `grunt test --watch`
   * see test coverage with `grunt test-coverage`
+* updated grunt to 1.0
 * updated webpack and babel
 * updated eslint
 * updated stylelint and setup pre commit hook
