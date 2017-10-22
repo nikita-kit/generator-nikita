@@ -1,14 +1,5 @@
 /* Task does not remove any files and directories in 'dest' */
 module.exports = {
-    favicon: {
-        files: [
-            {
-                cwd: '<%%= paths.src %>/img/appicons/',
-                dest: '<%%= paths.dev %>/img/appicons/',
-                src: '**/*.ico'
-            }
-        ]
-    },
     fonts: {
         files: [
             {
@@ -23,7 +14,7 @@ module.exports = {
             {
                 cwd: '<%%= paths.src %>/img/',
                 dest: '<%%= paths.dev %>/img/',
-                src: '**/*.{jpg,jpeg,png,gif}'
+                src: ['**/*.{jpg,jpeg,png,gif,ico}', '!dev/**/*']
             }
         ]
     },

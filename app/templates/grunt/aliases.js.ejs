@@ -33,8 +33,7 @@ module.exports = {
         'clean:dist',<% } %>
         'clean:tmp',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
         'svgmin:dist_bg',<% } %>
-        'svgmin:dist_file',
-        'concurrent:dist',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+        'svgmin:dist_file',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
         'svgcss',
         'string-replace',<% } %>
         'generate-tmp-styles-scss',
@@ -46,7 +45,7 @@ module.exports = {
         'postcss:dist',
         'cssmin',
         'webpack:dist',
-        'copy:favicon',
+        'copy:images',
         'copy:fonts',
         'uglify',
         'prettify:dist'
@@ -68,6 +67,10 @@ module.exports = {
 
     'check-wcag2': [
         'accessibility'
+    ],
+
+    'minify-images': [
+        'imagemin:source'
     ],
 
     'check-scss': [

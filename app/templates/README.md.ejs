@@ -235,7 +235,9 @@ This will fix most of the common problems like indention, brace style and style 
 
 ## Images
 
-All images from `img`-folder will be minified and copied during build.
+All images from `img`-folder will be copied during build.
+If you wont to minify your source images in the `img`-folder using imagemin, just run `grunt minify-images`
+and commit them. Imagemin is very expensive so, this step is not part from build task to save time.
 
 <% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
 
