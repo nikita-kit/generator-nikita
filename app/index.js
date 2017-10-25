@@ -362,13 +362,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('grunt/config/watch.js.ejs', 'grunt/config/watch.js');
 			this.template('grunt/config/webpack.js.ejs', 'grunt/config/webpack.js');
 
-			//Test Files
-			this.dest.mkdir('tests');
-			this.template('tests/jest.setup.js.ejs', 'tests/jest.setup.js');
-			this.template('tests/jest.transform.js.ejs', 'tests/jest.transform.js');
-			this.template('tests/App.test.js.ejs', 'tests/App.test.js');
-			this.template('tests/Test.jsb.test.js.ejs', 'tests/Test.jsb.test.js');
-
 			// Source Folder
 			var sourceFolder = 'source';
 
@@ -376,6 +369,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			{
 				sourceFolder = this.config.get('sourceFolder');
 			}
+
+			//Test Files
+			this.dest.mkdir(sourceFolder + '/tests');
+			this.template('source/tests/jest.setup.js.ejs', sourceFolder + '/tests/jest.setup.js');
+			this.template('source/tests/jest.transform.js.ejs', sourceFolder + '/tests/jest.transform.js');
+			this.template('source/tests/App.test.js.ejs', sourceFolder + '/tests/App.test.js');
+			this.template('source/tests/Test.jsb.test.js.ejs', sourceFolder + '/tests/Test.jsb.test.js');
 
 			// Basic Project Folders
 			this.dest.mkdir(sourceFolder + '/img');
