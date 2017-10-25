@@ -2,13 +2,13 @@ module.exports = {
     options: {
         optimizationLevel: 7
     },
-    dist: {
+    source: {
         files: [
             {
                 cwd: '<%%= paths.src %>/img/',
-                dest: '<%%= paths.dist %>/img/',
+                dest: '<%%= paths.src %>/img/',
                 expand: true,
-                src: ['**/*.{jpg,jpeg,png,gif}']
+                src: ['**/*.{jpg,jpeg,png,gif}', '!dev/**/*']
             }
         ]
     }

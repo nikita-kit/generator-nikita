@@ -1,4 +1,3 @@
 module.exports = {
     dev: ['sass:dev', <% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>'assemble:dev', <% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>'twigRender:dev'<% } %>],
-    dist: [<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>'svgcss', <% } %>'imagemin:dist'],
 };

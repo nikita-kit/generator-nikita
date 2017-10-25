@@ -3,10 +3,12 @@
 * split gruntfile into separated config files
 * added `webpack-bundle-analyzer` to analyze bundle size
   * start analyzer with `grunt analyze-js`
-* add jest testing framework
+* added jest testing framework
   * start tests with `grunt test`
   * start jest in watch mode with `grunt test --watch`
   * see test coverage with `grunt test-coverage`
+* added ability to call imagemin on source images and removed it from running within build
+  * run imagemin with `grunt minify-images`
 * updated grunt to 1.0
 * updated webpack and babel
 * updated eslint
