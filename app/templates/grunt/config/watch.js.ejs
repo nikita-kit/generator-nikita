@@ -8,11 +8,11 @@ module.exports = {
     },<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
     svg_bgs: {
         files: ['<%%= paths.src %>/img/bgs/*.svg'],
-        tasks: ['newer:svgmin:dev_bg', 'svgcss', 'string-replace']
+        tasks: ['svgmin:dev_bg', 'svgcss', 'string-replace']
     },<% } %>
     svg_files: {
         files: ['<%%= paths.src %>/img/*.svg'],
-        tasks: ['newer:svgmin:dev_file']
+        tasks: ['svgmin:dev_file']
     },
     sync_images: {
         files: ['<%%= paths.src %>/img/*', '<%%= paths.src %>/img/**/*.{jpg,jpeg,png,gif}', '!<%%= paths.src %>/img/dev/*'],
@@ -28,8 +28,8 @@ module.exports = {
     },
     templates: {<% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
         files: ['<%%= paths.src %>/assemble/**/*.{json,hbs}'],
-        tasks: ['newer:assemble:dev', 'prettify:dev']<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
+        tasks: ['assemble:dev', 'prettify:dev']<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
         files: ['<%%= paths.src %>/html/**/*.{json,yml,yaml,twig}'],
-        tasks: ['newer:twigRender:dev', 'prettify:dev']<% } %>
+        tasks: ['twigRender:dev', 'prettify:dev']<% } %>
     }
 };
