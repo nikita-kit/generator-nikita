@@ -1,5 +1,5 @@
 {
-    "readmeFilename": "README.md",
+    "readmeFilename": "NIKITA-README.md",
 	"engines" : {
 		"node" : ">=4.0"
 	},
