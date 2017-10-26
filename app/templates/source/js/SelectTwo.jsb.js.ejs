@@ -1,24 +1,22 @@
-/* Documentation https://select2.org/ */
-
 import logging from 'node-logging-js';
 import jsb from 'node-jsb';
 import $ from 'jquery';
-import select2 from 'select2';
-import app from './app';
+import select2 from 'select2'; // eslint-disable-line no-unused-vars
 
+/* Documentation https://select2.org/ */
 class SelectTwo {
-	constructor(element, options) {
-		logging.applyLogging(this, 'SelectTwo');
-		this.logDebug('options:', options);
-		this.element = $(element);
-		this.initializeSelect2();
-	}
-	initializeSelect2() {
-		this.element.select2({
-			minimumResultsForSearch: -1,
-			width: '100%',
-		});
-	}
+    constructor(element, options) {
+        logging.applyLogging(this, 'SelectTwo');
+        this.logDebug('options:', options);
+        this.element = $(element);
+        this.initializeSelect2();
+    }
+    initializeSelect2() {
+        this.element.select2({
+            minimumResultsForSearch: -1,
+            width: '100%',
+        });
+    }
 }
 jsb.registerHandler('SelectTwo', SelectTwo);
 export default SelectTwo;

@@ -1,28 +1,26 @@
-/* Documentation http://idangero.us/swiper/ */
-
 import logging from 'node-logging-js';
 import jsb from 'node-jsb';
-import swiper from 'swiper';
-import app from './app';
+import Swiper from 'swiper';
 
+/* Documentation http://idangero.us/swiper/ */
 class Slider {
-	constructor(element, options) {
-		logging.applyLogging(this, 'Slider');
-		this.logDebug('options:', options);
-		this.element = element;
+    constructor(element, options) {
+        logging.applyLogging(this, 'Slider');
+        this.logDebug('options:', options);
+        this.element = element;
 
-		this.initializeSwiper();
-	}
+        this.initializeSwiper();
+    }
 
-	initializeSwiper() {
-		this.slider = new Swiper(this.element, {
-			slidesPerView: 1,
-			pagination: '.swiper-pagination',
-			paginationClickable: true,
-			nextButton: '.swiper-button-next',
-			prevButton: '.swiper-button-prev'
-		});
-	}
+    initializeSwiper() {
+        this.slider = new Swiper(this.element, {
+            slidesPerView: 1,
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+        });
+    }
 }
 
 jsb.registerHandler('Slider', Slider);
