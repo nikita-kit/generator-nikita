@@ -331,7 +331,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('Gruntfile.js.ejs', 'Gruntfile.js');
 			this.template('NIKITA-LICENSE.md.ejs', 'NIKITA-LICENSE.md');
 			this.template('README.md.ejs', 'README.md');
-			this.template('setup-dev-env.sh.ejs', 'setup-dev-env.sh');
 
 			// grunt Config Files
 			this.dest.mkdir('grunt');
