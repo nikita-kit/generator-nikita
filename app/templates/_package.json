@@ -4,6 +4,7 @@
 		"node" : ">=4.0"
 	},
 	"scripts": {
+		"grunt": "grunt",
 		"check": "grunt check-js && grunt check-scss"
 	},
     "pre-commit": "check",

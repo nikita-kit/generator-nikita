@@ -233,9 +233,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							name: 'Create a CSS Styleguide (grunt-styleguide)',
 							value: 'cssStyleGuide'
 						}, {
-							name: 'Use local grunt binary',
-							value: 'useLocalGrunt'
-						}, {
 							name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
 							value: 'gitinfos'
 						}
@@ -449,11 +446,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/img/bgs/README.md.ejs', sourceFolder + '/img/bgs/README.md');
 			this.template('source/img/dev/README.md.ejs', sourceFolder + '/img/dev/README.md');
 			this.template('source/img/temp/README.md.ejs', sourceFolder + '/img/temp/README.md');
-
-			if (this.config.get('features').indexOf('useLocalGrunt') === -1)
-			{
-				delete packageJsonData['devDependencies']['grunt-cli'];
-			}
 
 			// Optional Browser Reset SASS-Partial
 			if (this.config.get('features').indexOf('browserReset') !== -1)

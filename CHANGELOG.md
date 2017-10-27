@@ -1,6 +1,7 @@
 # dev
 
 * split gruntfile into separated config files
+* made grunt runnable with npm with `npm run grunt [task]`
 * added `webpack-bundle-analyzer` to analyze bundle size
   * start analyzer with `grunt analyze-js`
 * added jest testing framework
