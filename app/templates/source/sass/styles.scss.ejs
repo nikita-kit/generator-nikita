@@ -1,8 +1,11 @@
 /**
  * ---------------------------------------------------------------------------------------------------- #
  *
- * Main Stylesheet
+ * Main Stylesheet entry file
  *
+ * all imported files will be bundled to styles.css
+ * in this file it is possible to include files with globbing
+ * to include CSS files, just omit the file extension
  */
 
 <% if (config.get('features').indexOf('webfonts') != -1)
@@ -67,7 +70,7 @@
 <% if (config.get('addons').indexOf('slider') != -1)
 {
 %>// Swiper
-@import "../../../../node_modules/swiper/dist/css/swiper.css";
+@import "../../node_modules/swiper/dist/css/swiper";
 <%
 }
 %><% if (config.get('addons').indexOf('selectTwo') != -1)
