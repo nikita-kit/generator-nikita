@@ -1,15 +1,15 @@
+node_modules<% if (!config.get('useBuildFolders')) { %>
+<%= config.get('sourceFolder') %>/generated
+<%= config.get('sourceFolder') %>/*.html<% } else { %>
 build
-dist<% if (!config.get('useBuildFolders')) { %>
-<%= config.get('sourceFolder') %>/generated<% } %>
-node_modules
+dist<% } %>
 reports
 styleguide
 tmp
 
 .DS_Store
 .idea
-Gemfile.lock
-
+.vscode
 *.bat
 *.bundle
 *.cache
