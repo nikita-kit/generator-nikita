@@ -1,6 +1,6 @@
 build
-dist
-docs
+dist<% if (!config.get('useBuildFolders')) { %>
+<%= config.get('sourceFolder') %>/generated<% } %>
 node_modules
 reports
 styleguide

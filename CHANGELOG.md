@@ -1,5 +1,6 @@
 # dev
 
+* changed destination of genearted files from `js/` and `css/` to `generated/`
 * split gruntfile into separated config files
 * made grunt runnable with npm with `npm run grunt [task]`
 * added `webpack-bundle-analyzer` to analyze bundle size
