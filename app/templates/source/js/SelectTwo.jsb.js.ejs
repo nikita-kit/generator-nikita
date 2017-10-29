@@ -9,9 +9,9 @@ class SelectTwo {
         logging.applyLogging(this, 'SelectTwo');
         this.logDebug('options:', options);
         this.element = $(element);
-        this.initializeSelect2();
+        this.initialize();
     }
-    initializeSelect2() {
+    initialize() {
         this.element.select2({
             minimumResultsForSearch: -1,
             width: '100%',

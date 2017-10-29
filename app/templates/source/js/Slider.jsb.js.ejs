@@ -9,10 +9,10 @@ class Slider {
         this.logDebug('options:', options);
         this.element = element;
 
-        this.initializeSwiper();
+        this.initialize();
     }
 
-    initializeSwiper() {
+    initialize() {
         this.slider = new Swiper(this.element, {
             slidesPerView: 1,
             pagination: '.swiper-pagination',
