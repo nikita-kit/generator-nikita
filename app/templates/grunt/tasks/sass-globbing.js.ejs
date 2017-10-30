@@ -1,0 +1,55 @@
+module.exports = function (grunt) {
+
+    // task to generate styles.scss without sass-globbing
+    grunt.registerMultiTask('sass-globbing', 'expand globbing file declarations', function () {
+
+        var paths = grunt.config.get('paths');
+
+        this.files.forEach(function (file) {
+
+            if (!grunt.file.exists(file.src[0])) {
+                grunt.log.warn('Source file "' + file.src[0] + '" not found.');
+                return;
+            }
+
+            var contents = grunt.file.read(file.src[0]);
+
+            // get rid of ../../-prefix, since libsass does not support them in @import-statements+includePaths option
+            contents = contents.replace(/\"\.\.\/\.\.\//g, '"');
+
+            var importMatches = contents.match(/^@import.+\*.*$/mg);
+
+            if (importMatches) {
+                importMatches.forEach(function (initialMatch) {
+                    // remove all " or '
+                    var match = initialMatch.replace(/["']/g, '');
+
+                    // remove the preceeding @import
+                    match = match.replace(/^@import/g, '');
+
+                    // lets get rid of the final ; and whitespaces
+                    match = match.replace(/;$/g, '').trim();
+
+                    // get all files, which match this pattern
+                    var files = grunt.file.expand({
+                            'cwd': paths.src + '/sass/',
+                            'filter': 'isFile'
+                        },
+                        match
+                    );
+
+                    var replaceContent = [];
+
+                    files.forEach(function (matchedFile) {
+                        replaceContent.push('@import "' + matchedFile + '";');
+                    });
+
+                    contents = contents.replace(initialMatch, replaceContent.join("\n"));
+                });
+            }
+
+            grunt.file.write(file.dest, contents);
+            grunt.log.writeln('File "' + file.dest + '" created.');
+        });
+    });
+};

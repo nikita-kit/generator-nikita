@@ -335,7 +335,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.dest.mkdir('grunt/tasks');
 
 			this.template('grunt/aliases.js.ejs', 'grunt/aliases.js');
-			this.template('grunt/tasks/generate-tmp-styles-scss.js.ejs', 'grunt/tasks/generate-tmp-styles-scss.js');
+			this.template('grunt/tasks/sass-globbing.js.ejs', 'grunt/tasks/sass-globbing.js');
 			this.template('grunt/tasks/jest.js.ejs', 'grunt/tasks/jest.js');
 
 			this.template('grunt/config/accessibility.js.ejs', 'grunt/config/accessibility.js');
@@ -351,6 +351,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('grunt/config/postcss.js.ejs', 'grunt/config/postcss.js');
 			this.template('grunt/config/prettify.js.ejs', 'grunt/config/prettify.js');
 			this.template('grunt/config/sass.js.ejs', 'grunt/config/sass.js');
+			this.template('grunt/config/sass-globbing.js.ejs', 'grunt/config/sass-globbing.js');
 			this.template('grunt/config/stylelint.js.ejs', 'grunt/config/stylelint.js');
 			this.template('grunt/config/svgmin.js.ejs', 'grunt/config/svgmin.js');
 			this.template('grunt/config/sync.js.ejs', 'grunt/config/sync.js');

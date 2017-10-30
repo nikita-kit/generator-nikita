@@ -13,7 +13,7 @@ module.exports = {
         'svgmin:dev_bg',
         'svgcss',
         'string-replace',<% } %>
-        'generate-tmp-styles-scss',
+        'sass-globbing',
         'concurrent:dev',
         'postcss:dev',
         'webpack:dev',
@@ -36,7 +36,7 @@ module.exports = {
         'svgmin:dist_file',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
         'svgcss',
         'string-replace',<% } %>
-        'generate-tmp-styles-scss',
+        'sass-globbing',
         'sass:dist',<% if (config.get('features').indexOf('gitinfos') != -1) { %>
         'gitinfo',
         'write-gitinfos',<% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
