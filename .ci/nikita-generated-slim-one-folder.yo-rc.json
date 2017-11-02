@@ -17,6 +17,6 @@
     "formFramework": false,
     "useBuildFolders": false,
     "cleanBuildFolders": false,
-    "sourceFolder": "src/AppBundle/Resources/public"
+    "sourceFolder": "web/static"
   }
 }
