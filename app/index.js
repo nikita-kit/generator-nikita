@@ -230,9 +230,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							name: 'Use background SVG files as base64 encoded dataURIs with placeholder extends (grunt-grunticon + grunt-string-replace + svg-background-mixin)',
 							value: 'svgBackgrounds'
 						}, {
-							name: 'Create a CSS Styleguide (grunt-styleguide)',
-							value: 'cssStyleGuide'
-						}, {
 							name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
 							value: 'gitinfos'
 						}
@@ -472,18 +469,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			{
 				delete packageJsonData['devDependencies']['grunt-svg-css'];
 				delete packageJsonData['devDependencies']['grunt-string-replace'];
-			}
-
-			// Optional CSS Styleguide
-			if (this.config.get('features').indexOf('cssStyleGuide') === -1)
-			{
-				delete packageJsonData['devDependencies']['grunt-styleguide'];
-			}
-			else
-			{
-				this.template('grunt/config/styleguide.js.ejs', 'grunt/config/styleguide.js');
-				this.template('source/sass/blocks/styleguide.md.ejs', sourceFolder + '/sass/blocks/styleguide.md');
-				this.directory('source/styleguide-template', sourceFolder + '/styleguide-template');
 			}
 
 			// Optional Gitinfos

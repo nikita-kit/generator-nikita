@@ -91,10 +91,5 @@ module.exports = {
 
     'analyze-js': [
         'webpack:analyze'
-    ],<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>
-
-    'build-styleguide': [
-        'styleguide',
-        'copy:styleguide'
-    ],<% } %>
+    ],
 };

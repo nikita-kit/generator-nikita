@@ -21,7 +21,7 @@
 * restructured and renamed readme file
 * removed bower and ruby sass
 * removed default template
-* removed modules `photobox`, `phantomas`, `pagespeed`, `css-split`, `svgstore`, `group-css-media-queries` and `jsdoc`
+* removed modules `styleguide`, `photobox`, `phantomas`, `pagespeed`, `css-split`, `svgstore`, `group-css-media-queries` and `jsdoc`
 * removed `grunt-newer`
 * removed setup-dev-env.sh
 * check build with all node major versions in travis
