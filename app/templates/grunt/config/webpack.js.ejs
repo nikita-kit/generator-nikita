@@ -80,13 +80,13 @@ module.exports = function (grunt, options) {
             dev: {
                 devtool: 'sourcemap',
                 output: {
-                    path: path.resolve('<%%= paths.dev %>/js/')
+                    path: path.resolve('<%%= paths.dev %>/generated/')
                 },
                 plugins: plugins
             },
             dist: {
                 output: {
-                    path: path.resolve('<%%= paths.dist %>/js/')
+                    path: path.resolve('<%%= paths.dist %>/generated/')
                 },
                 plugins: plugins
             }

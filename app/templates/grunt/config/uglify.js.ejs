@@ -3,10 +3,10 @@ module.exports = {
         options: {},
         files: [
             {
-                cwd: '<%%= paths.dist %>/js',
-                dest: '<%%= paths.dist %>/js',
+                cwd: '<%%= paths.dist %>/generated',
+                dest: '<%%= paths.dist %>/generated',
                 expand: true,
-                src: ['main.js']
+                src: ['**/*.js']
             }
         ]
     }

@@ -233,9 +233,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							name: 'Create a CSS Styleguide (grunt-styleguide)',
 							value: 'cssStyleGuide'
 						}, {
-							name: 'Use local grunt binary',
-							value: 'useLocalGrunt'
-						}, {
 							name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
 							value: 'gitinfos'
 						}
@@ -330,8 +327,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('.gitignore.ejs', '.gitignore');
 			this.template('Gruntfile.js.ejs', 'Gruntfile.js');
 			this.template('NIKITA-LICENSE.md.ejs', 'NIKITA-LICENSE.md');
-			this.template('README.md.ejs', 'README.md');
-			this.template('setup-dev-env.sh.ejs', 'setup-dev-env.sh');
+			this.template('NIKITA-README.md.ejs', 'NIKITA-README.md');
 
 			// grunt Config Files
 			this.dest.mkdir('grunt');
@@ -339,7 +335,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.dest.mkdir('grunt/tasks');
 
 			this.template('grunt/aliases.js.ejs', 'grunt/aliases.js');
-			this.template('grunt/tasks/generate-tmp-styles-scss.js.ejs', 'grunt/tasks/generate-tmp-styles-scss.js');
+			this.template('grunt/tasks/sass-globbing.js.ejs', 'grunt/tasks/sass-globbing.js');
 			this.template('grunt/tasks/jest.js.ejs', 'grunt/tasks/jest.js');
 
 			this.template('grunt/config/accessibility.js.ejs', 'grunt/config/accessibility.js');
@@ -355,19 +351,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('grunt/config/postcss.js.ejs', 'grunt/config/postcss.js');
 			this.template('grunt/config/prettify.js.ejs', 'grunt/config/prettify.js');
 			this.template('grunt/config/sass.js.ejs', 'grunt/config/sass.js');
+			this.template('grunt/config/sass-globbing.js.ejs', 'grunt/config/sass-globbing.js');
 			this.template('grunt/config/stylelint.js.ejs', 'grunt/config/stylelint.js');
 			this.template('grunt/config/svgmin.js.ejs', 'grunt/config/svgmin.js');
 			this.template('grunt/config/sync.js.ejs', 'grunt/config/sync.js');
 			this.template('grunt/config/uglify.js.ejs', 'grunt/config/uglify.js');
 			this.template('grunt/config/watch.js.ejs', 'grunt/config/watch.js');
 			this.template('grunt/config/webpack.js.ejs', 'grunt/config/webpack.js');
-
-			//Test Files
-			this.dest.mkdir('tests');
-			this.template('tests/jest.setup.js.ejs', 'tests/jest.setup.js');
-			this.template('tests/jest.transform.js.ejs', 'tests/jest.transform.js');
-			this.template('tests/App.test.js.ejs', 'tests/App.test.js');
-			this.template('tests/Test.jsb.test.js.ejs', 'tests/Test.jsb.test.js');
 
 			// Source Folder
 			var sourceFolder = 'source';
@@ -376,6 +366,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			{
 				sourceFolder = this.config.get('sourceFolder');
 			}
+
+			//Test Files
+			this.dest.mkdir(sourceFolder + '/tests');
+			this.template('source/tests/jest.setup.js.ejs', sourceFolder + '/tests/jest.setup.js');
+			this.template('source/tests/jest.transform.js.ejs', sourceFolder + '/tests/jest.transform.js');
+			this.template('source/tests/App.test.js.ejs', sourceFolder + '/tests/App.test.js');
+			this.template('source/tests/Test.jsb.test.js.ejs', sourceFolder + '/tests/Test.jsb.test.js');
 
 			// Basic Project Folders
 			this.dest.mkdir(sourceFolder + '/img');
@@ -450,11 +447,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/img/bgs/README.md.ejs', sourceFolder + '/img/bgs/README.md');
 			this.template('source/img/dev/README.md.ejs', sourceFolder + '/img/dev/README.md');
 			this.template('source/img/temp/README.md.ejs', sourceFolder + '/img/temp/README.md');
-
-			if (this.config.get('features').indexOf('useLocalGrunt') === -1)
-			{
-				delete packageJsonData['devDependencies']['grunt-cli'];
-			}
 
 			// Optional Browser Reset SASS-Partial
 			if (this.config.get('features').indexOf('browserReset') !== -1)

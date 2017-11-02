@@ -1,0 +1,10 @@
+module.exports = {
+    all: {
+        files: [{
+            expand: true,
+            cwd: '<%%= paths.src %>/sass',
+            dest: '<%%= paths.tmp %>',
+            src: ['*.scss', '!_*.scss'],
+        }]
+    },
+};

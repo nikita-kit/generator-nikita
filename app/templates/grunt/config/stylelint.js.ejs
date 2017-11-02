@@ -2,7 +2,12 @@ module.exports = {
     options: {
         configFile: './node_modules/stylelint-config-nikita/index.js',
         formatter: 'string',
-        syntax: 'scss'
+        syntax: 'scss',
+        configOverrides: {
+            rules: {
+                // override rules here
+            }
+        }
     },
     check: ['<%%= paths.src %>/sass/**/*.scss'],
     fix: {

@@ -12,7 +12,7 @@ module.exports = {
         src: ['**/*.{jpg,jpeg,png,gif,ico}', '!dev/**/*']
     }<% if (config.get('features').indexOf('cssStyleGuide') != -1) { %>,
     styleguide: {
-        cwd: '<%%= paths.dev %>/css/',
+        cwd: '<%%= paths.dev %>/generated/',
         dest: 'styleguide/css/',
         expand: true,
         filter: 'isFile',

@@ -1,13 +1,16 @@
 module.exports = {
     options: {
-        envs: ['browser'],
-        configFile: './node_modules/eslint-config-nikita/index.js'
+        envs: ['browser', 'jest'],
+        configFile: './node_modules/eslint-config-nikita/index.js',
+        rules: {
+            // override rules here
+        }
     },
-    check: ['<%%= paths.src %>/js/**/*.js'],
+    check: ['<%%= paths.src %>/js/**/*.js', '<%%= paths.src %>/tests/**/*.test.js'],
     fix: {
         options: {
             fix: true,
         },
-        src: ['<%%= paths.src %>/js/**/*.js']
+        src: ['<%%= paths.src %>/js/**/*.js', '<%%= paths.src %>/tests/**/*.test.js']
     }
 };
