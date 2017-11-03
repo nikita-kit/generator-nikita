@@ -19,6 +19,7 @@
   * start autofixing with `grunt fix-scss`
 * updated browserslist for `autoprefixer` and `babel-preset-env` to exclude unimportant mobile browsers
 * restructured and renamed readme file
+* replaced `cssmin` by `postcss-csso`
 * removed bower and ruby sass
 * removed default template
 * removed modules `styleguide`, `photobox`, `phantomas`, `pagespeed`, `css-split`, `svgstore`, `group-css-media-queries` and `jsdoc`
