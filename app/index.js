@@ -340,7 +340,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('grunt/config/clean.js.ejs', 'grunt/config/clean.js');
 			this.template('grunt/config/concurrent.js.ejs', 'grunt/config/concurrent.js');
 			this.template('grunt/config/copy.js.ejs', 'grunt/config/copy.js');
-			this.template('grunt/config/cssmin.js.ejs', 'grunt/config/cssmin.js');
 			this.template('grunt/config/eslint.js.ejs', 'grunt/config/eslint.js');
 			this.template('grunt/config/htmlhint.js.ejs', 'grunt/config/htmlhint.js');
 			this.template('grunt/config/imagemin.js.ejs', 'grunt/config/imagemin.js');

@@ -43,7 +43,6 @@ module.exports = {
         'assemble:dist',<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
         'twigRender:dist',<% } %>
         'postcss:dist',
-        'cssmin',
         'webpack:dist',
         'copy:images',
         'copy:fonts',

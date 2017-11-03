@@ -1,19 +1,25 @@
 module.exports = function (grunt, options) {
     return {
-        options: {
-            processors: [
-                require('autoprefixer')({
-                    browsers: options.browserslist
-                })
-            ]
-        },
         dev: {
             options: {
-                map: true
+                map: true,
+                processors: [
+                    require('autoprefixer')({
+                        browsers: options.browserslist
+                    })
+                ]
             },
             src: '<%%= paths.dev %>/generated/*.css'
         },
         dist: {
+            options: {
+                processors: [
+                    require('autoprefixer')({
+                        browsers: options.browserslist
+                    }),
+                    require('postcss-csso')()
+                ]
+            },
             src: '<%%= paths.dist %>/generated/*.css'
         }
     }
