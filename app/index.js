@@ -92,6 +92,10 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					value: 'slim'
 				},
 				{
+					name: 'Symfony setup',
+					value: 'symfony'
+				},
+				{
 					name: 'Spring Boot setup',
 					value: 'spring-boot'
 				},
@@ -207,7 +211,13 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				that.config.set('cleanBuildFolders', false);
 				that.config.set('askBuildFolders', false);
 			}
-			
+			else if (that.config.get('template') === 'symfony') {
+				that.config.set('sourceFolder', 'web/static');
+				that.config.set('useBuildFolders', false);
+				that.config.set('cleanBuildFolders', false);
+				that.config.set('askBuildFolders', false);
+			}
+
 			if (that.config.get('custom')) {
 				[
 					promptList('staticPageGenerator', 'Which Static-Page-Generator do you want to use?', [
