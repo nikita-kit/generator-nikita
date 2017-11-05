@@ -171,6 +171,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 		that.prompt(templatePrompts, function (props)
 		{
+			var isInitialRun = !that.config.get('template');
+			var templateSpecificPrompts = [];
+
 			for (var key in props)
 			{
 				if (props.hasOwnProperty(key))
@@ -178,10 +181,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					that.config.set(key, props[key]);
 				}
 			}
-			
-			var templateSpecificPrompts = [];
 
-			if (['slim', 'spring-boot'].indexOf(that.config.get('template')) !== -1)
+			/* set defaults on first run only */
+			if (isInitialRun)
 			{
 				that.config.set('staticPageGenerator', 'twigRender');
 				that.config.set('features', [
@@ -194,13 +196,14 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				that.config.set('nikitaCssMixins', [
 					'respond-to'
 				]);
+
 				that.config.set('nikitaCssExtends', [
 					'cf'
 				]);
-				that.config.set('formFramework', false);
-			}
 
-			that.config.set('askBuildFolders', true);
+				that.config.set('formFramework', false);
+				that.config.set('askBuildFolders', true);
+			}
 
 			if (that.config.get('template') === 'spring-boot') {
 				templateSpecificPrompts.push(promptInput('javaGroupId', 'java groupId'));
@@ -208,13 +211,11 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				templateSpecificPrompts.push(promptInput('springBootVersion', 'spring boot version', '1.4.2'));
 				that.config.set('sourceFolder', 'src/main/resources/static');
 				that.config.set('useBuildFolders', false);
-				that.config.set('cleanBuildFolders', false);
 				that.config.set('askBuildFolders', false);
 			}
 			else if (that.config.get('template') === 'symfony') {
 				that.config.set('sourceFolder', 'web/static');
 				that.config.set('useBuildFolders', false);
-				that.config.set('cleanBuildFolders', false);
 				that.config.set('askBuildFolders', false);
 			}
 
@@ -297,7 +298,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							value: 'selectTwo'
 						}
 					]),
-					promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true),
+					promptConfirm('formFramework', 'Do you want to use the nikita form framework?'),
 				].forEach(function (prompt) {
 					templateSpecificPrompts.push(prompt);
 				});

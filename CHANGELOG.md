@@ -26,6 +26,7 @@
 * removed modules `styleguide`, `photobox`, `phantomas`, `pagespeed`, `css-split`, `svgstore`, `group-css-media-queries` and `jsdoc`
 * removed `grunt-newer`
 * removed setup-dev-env.sh
+* fixed generator answers were not restored in some cases
 * check build with all node major versions in travis
 
 # 3.0.0 (2017/05/04)
