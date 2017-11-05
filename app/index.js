@@ -288,17 +288,17 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							value: 'ib'
 						}
 					]),
-					promptCheckbox('addons', 'Which additive modules do you want to use?', [
+					promptCheckbox('addons', 'Which JS modules do you want to use?', [
 						{
-							name: 'Would you like to use jQuery in your project',
+							name: 'jQuery library',
 							value: 'jQuery'
 						},
 						{
-							name: 'Would you like to use a slider in your project',
+							name: 'iDangerous Swiper for sliders',
 							value: 'slider'
 						},
 						{
-							name: 'Would you like to use select2 for styling selectboxes in your project',
+							name: 'select2 for styled select inputs',
 							value: 'selectTwo'
 						}
 					]),
