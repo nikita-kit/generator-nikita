@@ -83,13 +83,17 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			};
 		};
 
+		if (that.config.get('template') === 'slim' || that.config.get('template') === 'default') {
+			that.config.set('template', 'web-app');
+		}
+
 		var templatePrompts = [
 			promptInput('name', 'Your project name', this.appname),
 			promptConfirm('private', 'Is this project private?', true),
 			promptList('template', 'Which configuration template do you want to use?', [
 				{
 					name: 'Web-App setup',
-					value: 'slim'
+					value: 'web-app'
 				},
 				{
 					name: 'Symfony setup',
