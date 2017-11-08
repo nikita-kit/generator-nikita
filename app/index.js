@@ -83,13 +83,21 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			};
 		};
 
+		if (that.config.get('template') === 'slim' || that.config.get('template') === 'default') {
+			that.config.set('template', 'web-app');
+		}
+
 		var templatePrompts = [
 			promptInput('name', 'Your project name', this.appname),
 			promptConfirm('private', 'Is this project private?', true),
 			promptList('template', 'Which configuration template do you want to use?', [
 				{
 					name: 'Web-App setup',
-					value: 'slim'
+					value: 'web-app'
+				},
+				{
+					name: 'Symfony setup',
+					value: 'symfony'
 				},
 				{
 					name: 'Spring Boot setup',
@@ -167,6 +175,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 		that.prompt(templatePrompts, function (props)
 		{
+			var isInitialRun = !that.config.get('template');
+			var templateSpecificPrompts = [];
+
 			for (var key in props)
 			{
 				if (props.hasOwnProperty(key))
@@ -174,10 +185,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					that.config.set(key, props[key]);
 				}
 			}
-			
-			var templateSpecificPrompts = [];
 
-			if (['slim', 'spring-boot'].indexOf(that.config.get('template')) !== -1)
+			/* set defaults on first run only */
+			if (isInitialRun)
 			{
 				that.config.set('staticPageGenerator', 'twigRender');
 				that.config.set('features', [
@@ -190,13 +200,14 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				that.config.set('nikitaCssMixins', [
 					'respond-to'
 				]);
+
 				that.config.set('nikitaCssExtends', [
 					'cf'
 				]);
-				that.config.set('formFramework', false);
-			}
 
-			that.config.set('askBuildFolders', true);
+				that.config.set('formFramework', false);
+				that.config.set('askBuildFolders', true);
+			}
 
 			if (that.config.get('template') === 'spring-boot') {
 				templateSpecificPrompts.push(promptInput('javaGroupId', 'java groupId'));
@@ -204,10 +215,14 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				templateSpecificPrompts.push(promptInput('springBootVersion', 'spring boot version', '1.4.2'));
 				that.config.set('sourceFolder', 'src/main/resources/static');
 				that.config.set('useBuildFolders', false);
-				that.config.set('cleanBuildFolders', false);
 				that.config.set('askBuildFolders', false);
 			}
-			
+			else if (that.config.get('template') === 'symfony') {
+				that.config.set('sourceFolder', 'web/static');
+				that.config.set('useBuildFolders', false);
+				that.config.set('askBuildFolders', false);
+			}
+
 			if (that.config.get('custom')) {
 				[
 					promptList('staticPageGenerator', 'Which Static-Page-Generator do you want to use?', [
@@ -273,21 +288,21 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							value: 'ib'
 						}
 					]),
-					promptCheckbox('addons', 'Which additive modules do you want to use?', [
+					promptCheckbox('addons', 'Which JS modules do you want to use?', [
 						{
-							name: 'Would you like to use jQuery in your project',
+							name: 'jQuery library',
 							value: 'jQuery'
 						},
 						{
-							name: 'Would you like to use a slider in your project',
+							name: 'iDangerous Swiper for sliders',
 							value: 'slider'
 						},
 						{
-							name: 'Would you like to use select2 for styling selectboxes in your project',
+							name: 'select2 for styled select inputs',
 							value: 'selectTwo'
 						}
 					]),
-					promptConfirm('formFramework', 'Do you want to use the nikita form framework?', true),
+					promptConfirm('formFramework', 'Do you want to use the nikita form framework?'),
 				].forEach(function (prompt) {
 					templateSpecificPrompts.push(prompt);
 				});

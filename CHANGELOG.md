@@ -3,6 +3,7 @@
 * changed destination of genearted files from `js/` and `css/` to `generated/`
 * split gruntfile into separated config files
 * made grunt runnable with npm with `npm run grunt [task]`
+* added symfony template
 * added `webpack-bundle-analyzer` to analyze bundle size
   * start analyzer with `grunt analyze-js`
 * added jest testing framework
@@ -25,6 +26,7 @@
 * removed modules `styleguide`, `photobox`, `phantomas`, `pagespeed`, `css-split`, `svgstore`, `group-css-media-queries` and `jsdoc`
 * removed `grunt-newer`
 * removed setup-dev-env.sh
+* fixed generator answers were not restored in some cases
 * check build with all node major versions in travis
 
 # 3.0.0 (2017/05/04)

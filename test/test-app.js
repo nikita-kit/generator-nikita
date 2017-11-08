@@ -13,7 +13,7 @@ describe('nikita:app:custom-twigRender', function () {
 			.inDir(path.join(os.tmpdir(), './temp-test'))
 			.withOptions({ 'skipInstall': true })
 			.withPrompt({
-				template: "custom",
+				template: "web-app",
 				staticPageGenerator: "twigRender",
 				private: true,
 				name: "testrun" + (new Date()).getTime(),
@@ -46,7 +46,7 @@ describe('nikita:app:custom-assemble', function () {
 			.inDir(path.join(os.tmpdir(), './temp-test'))
 			.withOptions({ 'skipInstall': true })
 			.withPrompt({
-				template: "custom",
+				template: "web-app",
 				staticPageGenerator: "assemble",
 				private: true,
 				name: "testrun" + (new Date()).getTime(),
@@ -79,7 +79,7 @@ describe('nikita:app:web-app', function () {
 			.inDir(path.join(os.tmpdir(), './temp-test'))
 			.withOptions({ 'skipInstall': true })
 			.withPrompt({
-				template: "slim",
+				template: "web-app",
 				private: true,
 				useBuildFolders: true,
 				name: "testrun" + (new Date()).getTime()
@@ -98,17 +98,16 @@ describe('nikita:app:web-app', function () {
 	});
 });
 
-describe('nikita:app:web-app-no-build-folder', function () {
+describe('nikita:app:symfony', function () {
 	this.timeout(5000);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
 			.withOptions({ 'skipInstall': true })
 			.withPrompt({
-				template: "slim",
+				template: "symfony",
 				private: true,
 				useBuildFolders: false,
-				sourceFolder: "src/App/Resources/public",
 				name: "testrun" + (new Date()).getTime()
 			})
 			.on('end', done);
@@ -119,8 +118,8 @@ describe('nikita:app:web-app-no-build-folder', function () {
 			'package.json',
 			'Gruntfile.js',
 			'grunt/aliases.js',
-			'src/App/Resources/public/js/_main.js',
-			'src/App/Resources/public/sass/styles.scss',
+			'web/static/js/_main.js',
+			'web/static/sass/styles.scss',
 		]);
 	});
 });
