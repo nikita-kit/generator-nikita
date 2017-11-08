@@ -103,7 +103,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			var prompts = [];
 			
 			if (that.config.get('askBuildFolders')) {
-				prompts.push(promptConfirm('useBuildFolders', 'Do you want to use "build/source and dist" folder?', that.config.get('useBuildFolders', true)));
+				prompts.push(promptConfirm('useBuildFolders', 'Do you want to use source+build+dist folders or one custom source folder?', that.config.get('useBuildFolders', true)));
 			}
 			that.prompt(prompts, function (props) {
 				for (var key in props) {
