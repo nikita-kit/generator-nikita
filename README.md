@@ -28,12 +28,29 @@ Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerat
 </a>
 
 
-This is our generator to start a new project from scratch. It will generate a completely customized version of the [nikita.kickstarter](https://github.com/nikita-kit/nikita-kickstarter)
-for your project.
+This is our generator to start a new project from scratch.
+It will generate a completely customized version of our nikita-kit project boilerplate for your project.
+
+
+## Project-Setup
+
+- [__Grunt__](http://gruntjs.com/) – Javascript task runner
+- [__Webpack__](https://webpack.js.org/) – module bundler
+- [__Babel__](https://babeljs.io/) – compiler for ES6 Javascript
+- [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) or [__Assemble__](http://assemble.io/) – static site generator
+- [__SASS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – css preprocessing
+- [__Jest__](https://facebook.github.io/jest/) – JS testing framework
+- [__ESLint__](http://eslint.org/) – linter for JS files
+- [__stylelint__](https://stylelint.io/) – linter for SCSS files
+- [__Browsersync__](https://browsersync.io/) – synchronised browser testing
+- [__nikita.html__](https://github.com/nikita-kit/nikita-html) – HTML conventions and coding guidelines
+- [__nikita.css__](https://github.com/nikita-kit/nikita-css) – (S)CSS conventions and coding guidelines
+- [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines
+
 
 ## Getting Started
 
-### What is Yeoman?
+### Yeoman
 
 Not every new computer comes with a [Yeoman](http://yeoman.io/) pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
 
@@ -43,17 +60,60 @@ npm install -g yo
 
 ### Nikita Yeoman Generator
 
-To install generator-nikita from npm, run:
+To install or update generator-nikita, run:
 
 ```bash
 npm install -g generator-nikita
 ```
 
-Finally, initiate the generator:
+Finally, initiate the generator at desired directory and answer the questions:
 
 ```bash
 yo nikita
 ```
+
+### Generator main questions
+
+
+```bash
+Your project name
+Is this project private?
+```
+
+These answers will set the corresponding values in the generated package.json.
+
+&nbsp;
+
+```bash
+Which configuration template do you want to use?
+* Web-App setup
+* Symfony setup
+* Spring Boot setup
+```
+
+Here you can choose a config preset for your kind of project.
+* __Web-App setup__: choose later if you want to use `source+build+dist` folders or one custom source folder
+* __Symfony setup__: use `web/static` as custom source folder
+* __Spring Boot setup__: use `src/main/resources/static` as custom source folder and generates pom.xml and Application.java
+
+&nbsp;
+
+```bash
+Customize this template?
+```
+
+Answer `Yes` to customize the nikita default options.
+This will ask you several questions which Features, Mixins, Extends and Librarys to add.
+
+&nbsp;
+
+```bash
+Do you want to use source+build+dist folders or one custom source folder?
+```
+
+This question appears only when you chose `Web-App setup` before.
+Here it is recommended to answer `Yes` because using source+build+dist folders provides a better separation of concerns.
+
 
 ## Contributing
 
@@ -63,4 +123,4 @@ We welcome contributions to generator nikita. See [CONTRIBUTING.md](CONTRIBUTING
 ## License
 
 `generator-nikita` is licensed under [CC0](http://creativecommons.org/publicdomain/zero/1.0/): Public Domain Dedication, please see
-[NIKITA-LICENSE.md](https://github.com/nikita-kit/generator-nikita/blob/master/NIKITA-LICENSE.md) for further information.
+[NIKITA-LICENSE.md](NIKITA-LICENSE.md) for further information.
