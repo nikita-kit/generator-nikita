@@ -30,6 +30,7 @@ Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerat
 
 This is our generator to start a new project from scratch.
 It will generate a completely customized version of our nikita-kit project boilerplate for your project.
+Feel free to re-run the generator to add or remove features.
 
 
 ## Project-Setup
@@ -88,12 +89,14 @@ These answers will set the corresponding values in the generated package.json.
 Which configuration template do you want to use?
 * Web-App setup
 * Symfony setup
+* Wordpress setup
 * Spring Boot setup
 ```
 
 Here you can choose a config preset for your kind of project.
 * __Web-App setup__: choose later if you want to use `source+build+dist` folders or one custom source folder
 * __Symfony setup__: use `web/static` as custom source folder
+* __Wordpress setup__: use `static` as custom source folder and add jQuery
 * __Spring Boot setup__: use `src/main/resources/static` as custom source folder and generates pom.xml and Application.java
 
 &nbsp;

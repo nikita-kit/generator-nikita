@@ -3,7 +3,7 @@
 * changed destination of genearted files from `js/` and `css/` to `generated/`
 * split gruntfile into separated config files
 * made grunt runnable with npm with `npm run grunt [task]`
-* added symfony template
+* added symfony and wordpress templates
 * added `webpack-bundle-analyzer` to analyze bundle size
   * start analyzer with `grunt analyze-js`
 * added jest testing framework

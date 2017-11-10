@@ -100,6 +100,10 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					value: 'symfony'
 				},
 				{
+					name: 'Wordpress setup',
+					value: 'wordpress'
+				},
+				{
 					name: 'Spring Boot setup',
 					value: 'spring-boot'
 				},
@@ -207,6 +211,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 				that.config.set('formFramework', false);
 				that.config.set('askBuildFolders', true);
+
+				if (that.config.get('template') === 'wordpress') {
+					that.config.set('addons', [
+						'jQuery'
+					]);
+				}
 			}
 
 			if (that.config.get('template') === 'spring-boot') {
@@ -219,6 +229,11 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			else if (that.config.get('template') === 'symfony') {
 				that.config.set('sourceFolder', 'web/static');
+				that.config.set('useBuildFolders', false);
+				that.config.set('askBuildFolders', false);
+			}
+			else if (that.config.get('template') === 'wordpress') {
+				that.config.set('sourceFolder', 'static');
 				that.config.set('useBuildFolders', false);
 				that.config.set('askBuildFolders', false);
 			}
@@ -242,7 +257,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							name: 'Browser Reset Styles, a _reset.scss will be added to your project',
 							value: 'browserReset'
 						}, {
-							name: 'Use background SVG files as base64 encoded dataURIs with placeholder extends (grunt-grunticon + grunt-string-replace + svg-background-mixin)',
+							name: 'Use background SVG files as base64 encoded dataURIs with placeholder extends',
 							value: 'svgBackgrounds'
 						}, {
 							name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
