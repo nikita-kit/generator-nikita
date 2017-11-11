@@ -75,7 +75,6 @@ yo nikita
 
 ### Generator main questions
 
-
 ```bash
 Your project name
 Is this project private?
@@ -94,10 +93,7 @@ Which configuration template do you want to use?
 ```
 
 Here you can choose a config preset for your kind of project.
-* __Web-App setup__: choose later if you want to use `source+build+dist` folders or one custom source folder
-* __Symfony setup__: use `web/static` as custom source folder
-* __Wordpress setup__: use `static` as custom source folder and add jQuery
-* __Spring Boot setup__: use `src/main/resources/static` as custom source folder and generates pom.xml and Application.java
+See `Templates` section below for further information.
 
 &nbsp;
 
@@ -116,6 +112,42 @@ Do you want to use source+build+dist folders or one custom source folder?
 
 This question appears only when you chose `Web-App setup` before.
 Here it is recommended to answer `Yes` because using source+build+dist folders provides a better separation of concerns.
+If you answer `No` you get asked for the custom source folder path later on.
+
+
+## Templates
+
+### Web-App
+
+This is the standard template for stand-alone web apps.
+You can choose if you want to use `source+build+dist` folders or one custom source folder.
+
+### Symfony
+
+The Symfony template sets the source folder to `web/static`.
+
+To use the nikita build files, just add something like following lines to your base.html.twig file:
+```html
+<link rel="stylesheet" href="{{ asset('generated/styles.css') }}" />
+<script src="{{ asset('generated/main.js') }}"></script>
+```
+
+### Wordpress
+
+The Wordpress template sets the source folder to `static/`.
+In addition to nikita generator defaults, jQuery is added.
+
+To use the nikita build files, just enqueue them in your wordpress tamplate like this:
+```php
+wp_enqueue_script('main.js', rtrim(WP_HOME, '/') . '/static/generated/main.js', array(), '1.0', false);
+wp_enqueue_style('styles.css', rtrim(WP_HOME, '/') . '/static/generated/styles.css', array(), '1.0', 'all');
+```
+
+### Spring Boot
+
+The Spring Boot template sets the source folder to `src/main/resources/static`.
+In addition, the files `Application.java` and `pom.xml` are generated.
+Therefor you were ask for Java groupId, Java version and Spring Boot version.
 
 
 ## Contributing
