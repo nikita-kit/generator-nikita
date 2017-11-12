@@ -1,6 +1,7 @@
 import logging from 'node-logging-js';
 import jsb from 'node-jsb';
 import app from './app';
+import TestTemplate from './TestTemplate.ejs';
 
 class Test {
     constructor(element, options) {
@@ -8,6 +9,7 @@ class Test {
         this.logDebug('options:', options);
         this.element = element;
 
+        this.element.innerHTML = TestTemplate({ title: 'Sample' });
         this.initializeEventListeners();
         app.doSomething();
     }

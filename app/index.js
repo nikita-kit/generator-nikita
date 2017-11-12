@@ -442,6 +442,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/js/_main.js.ejs', sourceFolder + '/js/_main.js');
 			this.template('source/js/app.js.ejs', sourceFolder + '/js/app.js');
 			this.template('source/js/Test.jsb.js.ejs', sourceFolder + '/js/Test.jsb.js');
+			this.template('source/js/TestTemplate.ejs.ejs', sourceFolder + '/js/TestTemplate.ejs');
 
 			// Assemble
 			if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
