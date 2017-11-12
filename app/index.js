@@ -43,7 +43,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 	{
 		var that = this;
 		var done = this.async();
-		var version = this.config.get('version') || '';
+		var version = this.pkg.version || '';
 
 		// Have Yeoman greet the user.
 		this.log(yosay(
