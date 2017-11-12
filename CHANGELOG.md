@@ -28,6 +28,7 @@
 * removed `grunt-newer`
 * removed setup-dev-env.sh
 * fixed generator answers were not restored in some cases
+* prevent the generator from execution if the kickstarter was generated with a newer version
 * check build with all node major versions in travis
 
 # 3.0.0 (2017/05/04)
