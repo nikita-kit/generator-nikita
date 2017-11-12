@@ -4,6 +4,7 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
+var compareVersions = require('compare-versions');
 
 var NikitaGenerator = yeoman.generators.Base.extend({
 
@@ -21,17 +22,32 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 	initializing: function ()
 	{
 		this.pkg = require('../package.json');
+
+		var generatedVersion = this.config.get('version');
+		var selfVersion = this.pkg.version;
+
+		if (generatedVersion && selfVersion && compareVersions(selfVersion, generatedVersion) === -1) {
+			this.env.error(
+				chalk.red.bold('Error:') + ' Your generator-nikita is too old (Version ' + chalk.yellow(selfVersion) + ')!\n' +
+				'This nikita kickstarter was generated with version ' + chalk.yellow(generatedVersion) + ', so update\n' +
+				'generator-nikita to newest version with ' + chalk.green('npm install -g generator-nikita') + '.'
+			);
+		}
+
+		if (selfVersion) {
+			this.config.set('version', selfVersion);
+		}
 	},
-	
+
 	prompting: function ()
 	{
 		var that = this;
-		
 		var done = this.async();
-		
+		var version = this.pkg.version || '';
+
 		// Have Yeoman greet the user.
 		this.log(yosay(
-			'Welcome to the Nikita Project Generator!'
+			'Welcome to the Nikita Project Generator '+version+'!'
 		));
 		
 		var promptInput = function (name, question, defaultValue)
@@ -426,6 +442,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/js/_main.js.ejs', sourceFolder + '/js/_main.js');
 			this.template('source/js/app.js.ejs', sourceFolder + '/js/app.js');
 			this.template('source/js/Test.jsb.js.ejs', sourceFolder + '/js/Test.jsb.js');
+			this.template('source/js/TestTemplate.ejs.ejs', sourceFolder + '/js/TestTemplate.ejs');
 
 			// Assemble
 			if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)

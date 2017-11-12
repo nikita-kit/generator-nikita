@@ -75,7 +75,7 @@ yo nikita
 
 ### Generator main questions
 
-```bash
+```
 Your project name
 Is this project private?
 ```
@@ -84,7 +84,7 @@ These answers will set the corresponding values in the generated package.json.
 
 &nbsp;
 
-```bash
+```
 Which configuration template do you want to use?
 * Web-App setup
 * Symfony setup
@@ -97,7 +97,7 @@ See `Templates` section below for further information.
 
 &nbsp;
 
-```bash
+```
 Customize this template?
 ```
 
@@ -106,7 +106,7 @@ This will ask you several questions which Features, Mixins, Extends and Librarys
 
 &nbsp;
 
-```bash
+```
 Do you want to use source+build+dist folders or one custom source folder?
 ```
 
