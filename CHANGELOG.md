@@ -4,6 +4,7 @@
 * split gruntfile into separated config files
 * made grunt runnable with npm with `npm run grunt [task]`
 * added symfony and wordpress templates
+* added component structure with `components`-folder
 * added `webpack-bundle-analyzer` to analyze bundle size
   * start analyzer with `grunt analyze-js`
 * added jest testing framework
