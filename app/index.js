@@ -413,6 +413,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.dest.mkdir(sourceFolder + '/tests');
 			this.template('source/tests/jest.setup.js.ejs', sourceFolder + '/tests/jest.setup.js');
 			this.template('source/tests/jest.transform.js.ejs', sourceFolder + '/tests/jest.transform.js');
+			this.template('source/tests/jest.transform-ejs.js.ejs', sourceFolder + '/tests/jest.transform-ejs.js');
 			this.template('source/tests/App.test.js.ejs', sourceFolder + '/tests/App.test.js');
 
 			// Basic Project Folders
