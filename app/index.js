@@ -213,7 +213,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				that.config.set('features', [
 					'webfonts',
 					'svgBackgrounds',
-					'gitinfos'
+					'gitinfos',
+					'preCommitHook'
 				]);
 				that.config.set('addons', [
 				]);
@@ -278,6 +279,9 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 						}, {
 							name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
 							value: 'gitinfos'
+						}, {
+							name: 'Add a git pre-commit hook to lint your code automatically',
+							value: 'preCommitHook'
 						}
 					]),
 					promptCheckbox('nikitaCssMixins', 'Which nikita.css mixins do you want to use?', [
@@ -541,6 +545,14 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				{
 					this.template('source/html/partials/gitinfos.twig.ejs', sourceFolder + '/html/partials/gitinfos.twig');
 				}
+			}
+
+			// Optional pre-commit hook
+			if (this.config.get('features').indexOf('preCommitHook') === -1)
+			{
+				delete packageJsonData['devDependencies']['pre-commit'];
+				delete packageJsonData['pre-commit'];
+				delete packageJsonData['pre-commit.silent'];
 			}
 
 			// Optional Layering-Mixin
