@@ -164,8 +164,8 @@ If you're interested in code coverage, run `grunt test-coverage`.
 ## Code linting
 
 The kickstarter comes with tasks for linting your JS, HTML and SASS code.
-Just run `check-html`, `check-css` or  `check-js`.
-In addition, the SASS and the JS code linting will be executed as a pre commit hook.
+Just run `check-html`, `check-css` or  `check-js`.<% if (config.get('features').indexOf('preCommitHook') !== -1) { %>
+In addition, the SASS and the JS code linting will be executed as a pre-commit hook.<% } %>
 This ensures a basic code style in nikita projects.
 Run `grunt fix-scss` or `grunt fix-js` to call the linter with the `--fix` option.
 This will fix most of the common problems like indention, brace style and style property order automatically.
