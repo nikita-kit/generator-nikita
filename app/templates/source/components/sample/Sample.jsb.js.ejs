@@ -1,0 +1,22 @@
+import logging from 'node-logging-js';
+import jsb from 'node-jsb';
+import app from '../../js/app';
+import SampleTemplate from './SampleTemplate.ejs';
+
+class Sample {
+    constructor(element, options) {
+        logging.applyLogging(this, 'Sample');
+        this.logDebug('options:', options);
+        this.element = element;
+
+        this.element.innerHTML = SampleTemplate({ title: 'Sample' });
+        this.initializeEventListeners();
+        app.doSomething();
+    }
+
+    initializeEventListeners() {
+    }
+}
+
+jsb.registerHandler('Sample', Sample);
+export default Sample;

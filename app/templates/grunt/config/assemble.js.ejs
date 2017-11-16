@@ -3,7 +3,7 @@ module.exports = {
         data: '<%%= paths.src %>/assemble/data/**/*.{json,yml}',
         helpers: ['<%%= paths.src %>/assemble/helpers/**/*.js'],
         layoutdir: '<%%= paths.src %>/assemble/layouts/',
-        partials: ['<%%= paths.src %>/assemble/partials/**/*.hbs'],
+        partials: ['<%%= paths.src %>/assemble/partials/**/*.hbs', '<%%= paths.src %>/components/**/*.hbs'],
         currentTimestamp: (new Date()).getTime()
     },
     dev: {

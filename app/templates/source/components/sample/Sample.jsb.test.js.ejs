@@ -1,0 +1,12 @@
+/* eslint-disable no-console */
+import SampleJsb from './Sample.jsb'; // eslint-disable-line no-unused-vars
+import jsb from 'node-jsb';
+
+test('Sample.jsb.js loads correctly', () => {
+    document.body.innerHTML = '<div class="jsb_ jsb_Sample" data-jsb="foo=bar"></div>';
+    jsb.applyBehaviour(document.body);
+
+    expect(console.log).toHaveBeenCalledWith('[Sample]', 'options:', { foo: 'bar' });
+    expect(console.log).toHaveBeenCalledWith('[Sample.initializeEventListeners]');
+    expect(console.log).toHaveBeenLastCalledWith('[App.doSomething]');
+});

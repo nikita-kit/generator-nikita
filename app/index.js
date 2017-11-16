@@ -413,8 +413,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.dest.mkdir(sourceFolder + '/tests');
 			this.template('source/tests/jest.setup.js.ejs', sourceFolder + '/tests/jest.setup.js');
 			this.template('source/tests/jest.transform.js.ejs', sourceFolder + '/tests/jest.transform.js');
+			this.template('source/tests/jest.transform-ejs.js.ejs', sourceFolder + '/tests/jest.transform-ejs.js');
 			this.template('source/tests/App.test.js.ejs', sourceFolder + '/tests/App.test.js');
-			this.template('source/tests/Test.jsb.test.js.ejs', sourceFolder + '/tests/Test.jsb.test.js');
 
 			// Basic Project Folders
 			this.dest.mkdir(sourceFolder + '/img');
@@ -441,8 +441,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// JS Files
 			this.template('source/js/_main.js.ejs', sourceFolder + '/js/_main.js');
 			this.template('source/js/app.js.ejs', sourceFolder + '/js/app.js');
-			this.template('source/js/Test.jsb.js.ejs', sourceFolder + '/js/Test.jsb.js');
-			this.template('source/js/TestTemplate.ejs.ejs', sourceFolder + '/js/TestTemplate.ejs');
+
+			// Sample Component Files
+			this.template('source/components/sample/Sample.jsb.js.ejs', sourceFolder + '/components/sample/Sample.jsb.js');
+			this.template('source/components/sample/SampleTemplate.ejs.ejs', sourceFolder + '/components/sample/SampleTemplate.ejs');
+			this.template('source/components/sample/Sample.jsb.test.js.ejs', sourceFolder + '/components/sample/Sample.jsb.test.js');
+			this.template('source/components/sample/_sample.scss.ejs', sourceFolder + '/components/sample/_sample.scss');
 
 			// Assemble
 			if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
@@ -454,6 +458,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('source/assemble/layouts/lyt-default.hbs.ejs', sourceFolder + '/assemble/layouts/lyt-default.hbs');
 				this.template('source/assemble/partials/header.hbs.ejs', sourceFolder + '/assemble/partials/header.hbs');
 				this.template('source/assemble/partials/footer.hbs.ejs', sourceFolder + '/assemble/partials/footer.hbs');
+				this.template('source/components/sample/sample.twig.ejs', sourceFolder + '/components/sample/sample.hbs');
 
 				// Assemble Folders
 				this.directory('source/assemble/data', sourceFolder + '/assemble/data');
@@ -480,6 +485,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('source/html/pages/rwd-testing.twig.ejs', sourceFolder + '/html/pages/rwd-testing.twig');
 				this.template('source/html/partials/header.twig.ejs', sourceFolder + '/html/partials/header.twig');
 				this.template('source/html/partials/footer.twig.ejs', sourceFolder + '/html/partials/footer.twig');
+				this.template('source/components/sample/sample.twig.ejs', sourceFolder + '/components/sample/sample.twig');
 			}
 			else
 			{
