@@ -158,5 +158,5 @@ We welcome contributions to generator nikita. See [CONTRIBUTING.md](CONTRIBUTING
 
 ## License
 
-`generator-nikita` is licensed under [CC0](http://creativecommons.org/publicdomain/zero/1.0/): Public Domain Dedication, please see
+generator-nikita is licensed under [CC0](http://creativecommons.org/publicdomain/zero/1.0/): Public Domain Dedication, please see
 [NIKITA-LICENSE.md](NIKITA-LICENSE.md) for further information.
