@@ -14,6 +14,9 @@ Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerat
 <a href="https://github.com/sass/node-sass">
     <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/node-sass.svg" alt="sass">
 </a>
+<a href="http://postcss.org/">
+    <img height="76" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/postcss.svg" alt="postcss">
+</a>
 <a href="https://facebook.github.io/jest/">
     <img height="79" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/jest.svg" alt="jest">
 </a>
@@ -28,7 +31,7 @@ Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerat
 </a>
 
 
-This is our generator to start a new project from scratch.
+This is our generator to start a new web project from scratch.
 It will generate a completely customized version of our nikita-kit project boilerplate for your project.
 Feel free to re-run the generator to add or remove features.
 
@@ -41,6 +44,7 @@ Feel free to re-run the generator to add or remove features.
 - [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) or [__Assemble__](http://assemble.io/) – static site generator
 - [__EJS__](http://ejs.co/) - client side templates
 - [__SASS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – css preprocessing
+- [__PostCSS__](http://postcss.org/) – css postprocessing
 - [__Jest__](https://facebook.github.io/jest/) – JS testing framework
 - [__ESLint__](http://eslint.org/) – linter for JS files
 - [__stylelint__](https://stylelint.io/) – linter for SCSS files
@@ -48,6 +52,12 @@ Feel free to re-run the generator to add or remove features.
 - [__nikita.html__](https://github.com/nikita-kit/nikita-html) – HTML conventions and coding guidelines
 - [__nikita.css__](https://github.com/nikita-kit/nikita-css) – (S)CSS conventions and coding guidelines
 - [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines
+- and many more optional features:
+  - svg images as inlined css background images
+  - useful scss mixins and extends
+  - jQuery, Select2 and Swiper
+  - webfonts
+  - pre-commit hook for code linting
 
 
 ## Getting Started
