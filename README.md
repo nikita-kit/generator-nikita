@@ -104,7 +104,7 @@ Which configuration template do you want to use?
 ```
 
 Here you can choose a config preset for your kind of project.
-See `Templates` section below for further information.
+See [Templates](#templates) section below for further information.
 
 &nbsp;
 
@@ -139,8 +139,8 @@ The Symfony template sets the source folder to `web/static`.
 
 To use the nikita build files, just add something like following lines to your base.html.twig file:
 ```html
-<link rel="stylesheet" href="{{ asset('generated/styles.css') }}" />
-<script src="{{ asset('generated/main.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('static/generated/styles.css') }}" />
+<script src="{{ asset('static/generated/main.js') }}"></script>
 ```
 
 ### Wordpress
