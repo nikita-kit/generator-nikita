@@ -51,4 +51,4 @@ deploy:
     tags: true
     repo: nikita-kit/generator-nikita
     all_branches: true
-    node: 4.2.4
+    node: 4.8.4
