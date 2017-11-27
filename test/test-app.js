@@ -102,7 +102,10 @@ describe('nikita:app:web-app', function () {
 			spawnCommand("npm", ["install"], {detached: false})
 				.on('exit', function() {
 					spawnCommand("grunt", ["dist"], {detached: false})
-						.on('exit', done)
+						.on('exit', function() {
+							spawnCommand("grunt", ["dev"], {detached: false})
+								.on('exit', done)
+						});
 				});
 		}
 	});
@@ -138,7 +141,10 @@ describe('nikita:app:symfony', function () {
 			spawnCommand("npm", ["install"], {detached: false})
 				.on('exit', function() {
 					spawnCommand("grunt", ["dist"], {detached: false})
-						.on('exit', done)
+						.on('exit', function() {
+							spawnCommand("grunt", ["dev"], {detached: false})
+								.on('exit', done)
+						});
 				});
 		}
 	});
@@ -179,7 +185,10 @@ describe('nikita:app:spring-boot', function () {
 			spawnCommand("npm", ["install"], {detached: false})
 			.on('exit', function() {
 				spawnCommand("grunt", ["dist"], {detached: false})
-				.on('exit', done)	
+					.on('exit', function() {
+						spawnCommand("grunt", ["dev"], {detached: false})
+							.on('exit', done)
+					});
 			});
 		}
 	});

@@ -10,18 +10,18 @@ env:
   - CXX=g++-4.8
 matrix:
   include:
-	- node_js: '4.0.0'
-	- node_js: '4.8.4'
-	- node_js: '5.12.0'
-	- node_js: '6.11.1'
-	- node_js: '7.10.1'
-	- node_js: '8.1.4'
-	- node_js: '8.1.4'
-	  env: TEMPLATE=web-app
-	- node_js: '8.1.4'
-	  env: TEMPLATE=symfony
-	- node_js: '8.1.4'
-	  env: TEMPLATE=spring-boot
+    - node_js: '4.0.0'
+    - node_js: '4.8.4'
+    - node_js: '5.12.0'
+    - node_js: '6.11.1'
+    - node_js: '7.10.1'
+    - node_js: '8.1.4'
+    - node_js: '8.1.4'
+      env: TEMPLATE=web-app
+    - node_js: '8.1.4'
+      env: TEMPLATE=symfony
+    - node_js: '8.1.4'
+      env: TEMPLATE=spring-boot
 addons:
   apt:
     sources:
