@@ -30,6 +30,10 @@ matrix:
         - CXX=g++-4.8
     - node_js: '8.1.4'
       env:
+        - TEMPLATE=wordpress
+        - CXX=g++-4.8
+    - node_js: '8.1.4'
+      env:
         - TEMPLATE=spring-boot
         - CXX=g++-4.8
 addons:

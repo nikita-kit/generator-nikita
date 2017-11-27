@@ -150,6 +150,45 @@ describe('nikita:app:symfony', function () {
 	});
 });
 
+describe('nikita:app:wordpress', function () {
+	this.timeout(5000);
+	before(function (done) {
+		helpers.run(path.join(__dirname, '../app'))
+			.inDir(path.join(os.tmpdir(), './temp-test'))
+			.withOptions({ 'skipInstall': true })
+			.withPrompt({
+				template: "wordpress",
+				private: true,
+				useBuildFolders: false,
+				name: "testrun" + (new Date()).getTime()
+			})
+			.on('end', done);
+	});
+
+	it('creates files', function () {
+		assert.file([
+			'package.json',
+			'Gruntfile.js',
+			'grunt/aliases.js',
+			'static/js/_main.js',
+			'static/sass/styles.scss',
+		]);
+
+		if (process.env.TEMPLATE === "wordpress") {
+			this.timeout(5 * 60 * 1000);
+			var spawnCommand = require('yeoman-generator/lib/actions/spawn_command');
+			spawnCommand("npm", ["install"], {detached: false})
+				.on('exit', function() {
+					spawnCommand("grunt", ["dist"], {detached: false})
+						.on('exit', function() {
+							spawnCommand("grunt", ["dev"], {detached: false})
+								.on('exit', done)
+						});
+				});
+		}
+	});
+});
+
 describe('nikita:app:spring-boot', function () {
 	this.timeout(5000);
 	var timestamp = (new Date()).getTime();
