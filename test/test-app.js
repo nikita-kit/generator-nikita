@@ -6,8 +6,11 @@ var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
 var os = require('os');
 
+var defaultTimeout = 10000;
+var buildTimeout = 5 * 60 * 1000;
+
 describe('nikita:app:custom-twigRender', function () {
-	this.timeout(5000);
+	this.timeout(defaultTimeout);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -40,7 +43,7 @@ describe('nikita:app:custom-twigRender', function () {
 });
 
 describe('nikita:app:custom-assemble', function () {
-	this.timeout(5000);
+	this.timeout(defaultTimeout);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -73,7 +76,7 @@ describe('nikita:app:custom-assemble', function () {
 });
 
 describe('nikita:app:web-app', function () {
-	this.timeout(5000);
+	this.timeout(defaultTimeout);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -97,7 +100,7 @@ describe('nikita:app:web-app', function () {
 		]);
 		
 		if (process.env.TEMPLATE === "web-app") {
-			this.timeout(5 * 60 * 1000);
+			this.timeout(buildTimeout);
 			var spawnCommand = require('yeoman-generator/lib/actions/spawn_command');
 			spawnCommand("npm", ["install"], {detached: false})
 				.on('exit', function() {
@@ -112,7 +115,7 @@ describe('nikita:app:web-app', function () {
 });
 
 describe('nikita:app:symfony', function () {
-	this.timeout(5000);
+	this.timeout(defaultTimeout);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -136,7 +139,7 @@ describe('nikita:app:symfony', function () {
 		]);
 		
 		if (process.env.TEMPLATE === "symfony") {
-			this.timeout(5 * 60 * 1000);
+			this.timeout(buildTimeout);
 			var spawnCommand = require('yeoman-generator/lib/actions/spawn_command');
 			spawnCommand("npm", ["install"], {detached: false})
 				.on('exit', function() {
@@ -151,7 +154,7 @@ describe('nikita:app:symfony', function () {
 });
 
 describe('nikita:app:wordpress', function () {
-	this.timeout(5000);
+	this.timeout(defaultTimeout);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -175,7 +178,7 @@ describe('nikita:app:wordpress', function () {
 		]);
 
 		if (process.env.TEMPLATE === "wordpress") {
-			this.timeout(5 * 60 * 1000);
+			this.timeout(buildTimeout);
 			var spawnCommand = require('yeoman-generator/lib/actions/spawn_command');
 			spawnCommand("npm", ["install"], {detached: false})
 				.on('exit', function() {
@@ -190,7 +193,7 @@ describe('nikita:app:wordpress', function () {
 });
 
 describe('nikita:app:spring-boot', function () {
-	this.timeout(5000);
+	this.timeout(defaultTimeout);
 	var timestamp = (new Date()).getTime();
 	
 	before(function (done) {
@@ -219,7 +222,7 @@ describe('nikita:app:spring-boot', function () {
 		]);
 		
 		if (process.env.TEMPLATE === "spring-boot") {
-			this.timeout(5 * 60 * 1000);
+			this.timeout(buildTimeout);
 			var spawnCommand = require('yeoman-generator/lib/actions/spawn_command');
 			spawnCommand("npm", ["install"], {detached: false})
 			.on('exit', function() {
