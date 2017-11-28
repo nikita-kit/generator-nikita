@@ -6,8 +6,11 @@ var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
 var os = require('os');
 
+var defaultTimeout = 10000;
+var buildTimeout = 5 * 60 * 1000;
+
 describe('nikita:app:custom-twigRender', function () {
-	this.timeout(5000);
+	this.timeout(defaultTimeout);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -40,7 +43,7 @@ describe('nikita:app:custom-twigRender', function () {
 });
 
 describe('nikita:app:custom-assemble', function () {
-	this.timeout(5000);
+	this.timeout(defaultTimeout);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -73,7 +76,7 @@ describe('nikita:app:custom-assemble', function () {
 });
 
 describe('nikita:app:web-app', function () {
-	this.timeout(5000);
+	this.timeout(defaultTimeout);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -87,7 +90,7 @@ describe('nikita:app:web-app', function () {
 			.on('end', done);
 	});
 
-	it('creates files', function () {
+	it('creates files', function (done) {
 		assert.file([
 			'package.json',
 			'Gruntfile.js',
@@ -95,11 +98,26 @@ describe('nikita:app:web-app', function () {
 			'source/js/_main.js',
 			'source/sass/styles.scss',
 		]);
+		
+		if (process.env.TEMPLATE === "web-app") {
+			this.timeout(buildTimeout);
+			var spawnCommand = require('yeoman-generator/lib/actions/spawn_command');
+			spawnCommand("npm", ["install"], {detached: false})
+				.on('exit', function() {
+					spawnCommand("grunt", ["dist"], {detached: false})
+						.on('exit', function() {
+							spawnCommand("grunt", ["dev"], {detached: false})
+								.on('exit', done)
+						});
+				});
+		} else {
+			done();
+		}
 	});
 });
 
 describe('nikita:app:symfony', function () {
-	this.timeout(5000);
+	this.timeout(defaultTimeout);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -113,7 +131,7 @@ describe('nikita:app:symfony', function () {
 			.on('end', done);
 	});
 
-	it('creates files', function () {
+	it('creates files', function (done) {
 		assert.file([
 			'package.json',
 			'Gruntfile.js',
@@ -121,13 +139,69 @@ describe('nikita:app:symfony', function () {
 			'web/static/js/_main.js',
 			'web/static/sass/styles.scss',
 		]);
+		
+		if (process.env.TEMPLATE === "symfony") {
+			this.timeout(buildTimeout);
+			var spawnCommand = require('yeoman-generator/lib/actions/spawn_command');
+			spawnCommand("npm", ["install"], {detached: false})
+				.on('exit', function() {
+					spawnCommand("grunt", ["dist"], {detached: false})
+						.on('exit', function() {
+							spawnCommand("grunt", ["dev"], {detached: false})
+								.on('exit', done)
+						});
+				});
+		} else {
+			done();
+		}
+	});
+});
+
+describe('nikita:app:wordpress', function () {
+	this.timeout(defaultTimeout);
+	before(function (done) {
+		helpers.run(path.join(__dirname, '../app'))
+			.inDir(path.join(os.tmpdir(), './temp-test'))
+			.withOptions({ 'skipInstall': true })
+			.withPrompt({
+				template: "wordpress",
+				private: true,
+				useBuildFolders: false,
+				name: "testrun" + (new Date()).getTime()
+			})
+			.on('end', done);
+	});
+
+	it('creates files', function (done) {
+		assert.file([
+			'package.json',
+			'Gruntfile.js',
+			'grunt/aliases.js',
+			'static/js/_main.js',
+			'static/sass/styles.scss',
+		]);
+
+		if (process.env.TEMPLATE === "wordpress") {
+			this.timeout(buildTimeout);
+			var spawnCommand = require('yeoman-generator/lib/actions/spawn_command');
+			spawnCommand("npm", ["install"], {detached: false})
+				.on('exit', function() {
+					spawnCommand("grunt", ["dist"], {detached: false})
+						.on('exit', function() {
+							spawnCommand("grunt", ["dev"], {detached: false})
+								.on('exit', done)
+						});
+				});
+		} else {
+			done();
+		}
 	});
 });
 
 describe('nikita:app:spring-boot', function () {
-	this.timeout(5000);
+	this.timeout(defaultTimeout);
 	var timestamp = (new Date()).getTime();
-
+	
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
 			.inDir(path.join(os.tmpdir(), './temp-test'))
@@ -143,7 +217,7 @@ describe('nikita:app:spring-boot', function () {
 			.on('end', done);
 	});
 
-	it('creates files', function () {
+	it('creates files', function (done) {
 		assert.file([
 			'package.json',
 			'Gruntfile.js',
@@ -152,5 +226,20 @@ describe('nikita:app:spring-boot', function () {
 			'src/main/resources/static/sass/styles.scss',
 			'src/main/resources/static/js/_main.js'
 		]);
+		
+		if (process.env.TEMPLATE === "spring-boot") {
+			this.timeout(buildTimeout);
+			var spawnCommand = require('yeoman-generator/lib/actions/spawn_command');
+			spawnCommand("npm", ["install"], {detached: false})
+			.on('exit', function() {
+				spawnCommand("grunt", ["dist"], {detached: false})
+					.on('exit', function() {
+						spawnCommand("grunt", ["dev"], {detached: false})
+							.on('exit', done)
+					});
+			});
+		} else {
+			done();
+		}
 	});
 });
