@@ -110,6 +110,8 @@ describe('nikita:app:web-app', function () {
 								.on('exit', done)
 						});
 				});
+		} else {
+			done();
 		}
 	});
 });
@@ -149,6 +151,8 @@ describe('nikita:app:symfony', function () {
 								.on('exit', done)
 						});
 				});
+		} else {
+			done();
 		}
 	});
 });
@@ -188,6 +192,8 @@ describe('nikita:app:wordpress', function () {
 								.on('exit', done)
 						});
 				});
+		} else {
+			done();
 		}
 	});
 });
@@ -232,6 +238,8 @@ describe('nikita:app:spring-boot', function () {
 							.on('exit', done)
 					});
 			});
+		} else {
+			done();
 		}
 	});
 });
