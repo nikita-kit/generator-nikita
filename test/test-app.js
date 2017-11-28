@@ -90,7 +90,7 @@ describe('nikita:app:web-app', function () {
 			.on('end', done);
 	});
 
-	it('creates files', function () {
+	it('creates files', function (done) {
 		assert.file([
 			'package.json',
 			'Gruntfile.js',
@@ -131,7 +131,7 @@ describe('nikita:app:symfony', function () {
 			.on('end', done);
 	});
 
-	it('creates files', function () {
+	it('creates files', function (done) {
 		assert.file([
 			'package.json',
 			'Gruntfile.js',
@@ -172,7 +172,7 @@ describe('nikita:app:wordpress', function () {
 			.on('end', done);
 	});
 
-	it('creates files', function () {
+	it('creates files', function (done) {
 		assert.file([
 			'package.json',
 			'Gruntfile.js',
