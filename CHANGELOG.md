@@ -1,4 +1,4 @@
-# dev
+# 4.0.0 (2017/11/28)
 
 * changed destination of genearted files from `js/` and `css/` to `generated/`
 * split gruntfile into separated config files
