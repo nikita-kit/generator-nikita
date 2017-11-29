@@ -1,3 +1,7 @@
+# dev
+
+* fixed bug in sample component where the folder was added twice (uppercase and lowercase)
+
 # 4.0.0 (2017/11/28)
 
 * changed destination of genearted files from `js/` and `css/` to `generated/`
