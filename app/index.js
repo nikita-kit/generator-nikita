@@ -4,6 +4,7 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
+var compareVersions = require('compare-versions');
 
 var NikitaGenerator = yeoman.generators.Base.extend({
 
@@ -21,17 +22,32 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 	initializing: function ()
 	{
 		this.pkg = require('../package.json');
+
+		var generatedVersion = this.config.get('version');
+		var selfVersion = this.pkg.version;
+
+		if (generatedVersion && selfVersion && compareVersions(selfVersion, generatedVersion) === -1) {
+			this.env.error(
+				chalk.red.bold('Error:') + ' Your generator-nikita is too old (Version ' + chalk.yellow(selfVersion) + ')!\n' +
+				'This nikita kickstarter was generated with version ' + chalk.yellow(generatedVersion) + ', so update\n' +
+				'generator-nikita to newest version with ' + chalk.green('npm install -g generator-nikita') + '.'
+			);
+		}
+
+		if (selfVersion) {
+			this.config.set('version', selfVersion);
+		}
 	},
-	
+
 	prompting: function ()
 	{
 		var that = this;
-		
 		var done = this.async();
-		
+		var version = this.pkg.version || '';
+
 		// Have Yeoman greet the user.
 		this.log(yosay(
-			'Welcome to the Nikita Project Generator!'
+			'Welcome to the Nikita Project Generator '+version+'!'
 		));
 		
 		var promptInput = function (name, question, defaultValue)
@@ -98,6 +114,10 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				{
 					name: 'Symfony setup',
 					value: 'symfony'
+				},
+				{
+					name: 'Wordpress setup',
+					value: 'wordpress'
 				},
 				{
 					name: 'Spring Boot setup',
@@ -193,7 +213,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				that.config.set('features', [
 					'webfonts',
 					'svgBackgrounds',
-					'gitinfos'
+					'gitinfos',
+					'preCommitHook'
 				]);
 				that.config.set('addons', [
 				]);
@@ -207,6 +228,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 				that.config.set('formFramework', false);
 				that.config.set('askBuildFolders', true);
+
+				if (that.config.get('template') === 'wordpress') {
+					that.config.set('addons', [
+						'jQuery'
+					]);
+				}
 			}
 
 			if (that.config.get('template') === 'spring-boot') {
@@ -219,6 +246,11 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			else if (that.config.get('template') === 'symfony') {
 				that.config.set('sourceFolder', 'web/static');
+				that.config.set('useBuildFolders', false);
+				that.config.set('askBuildFolders', false);
+			}
+			else if (that.config.get('template') === 'wordpress') {
+				that.config.set('sourceFolder', 'static');
 				that.config.set('useBuildFolders', false);
 				that.config.set('askBuildFolders', false);
 			}
@@ -242,11 +274,14 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							name: 'Browser Reset Styles, a _reset.scss will be added to your project',
 							value: 'browserReset'
 						}, {
-							name: 'Use background SVG files as base64 encoded dataURIs with placeholder extends (grunt-grunticon + grunt-string-replace + svg-background-mixin)',
+							name: 'Use background SVG files as base64 encoded dataURIs with placeholder extends',
 							value: 'svgBackgrounds'
 						}, {
 							name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
 							value: 'gitinfos'
+						}, {
+							name: 'Add a git pre-commit hook to lint your code automatically',
+							value: 'preCommitHook'
 						}
 					]),
 					promptCheckbox('nikitaCssMixins', 'Which nikita.css mixins do you want to use?', [
@@ -382,8 +417,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.dest.mkdir(sourceFolder + '/tests');
 			this.template('source/tests/jest.setup.js.ejs', sourceFolder + '/tests/jest.setup.js');
 			this.template('source/tests/jest.transform.js.ejs', sourceFolder + '/tests/jest.transform.js');
+			this.template('source/tests/jest.transform-ejs.js.ejs', sourceFolder + '/tests/jest.transform-ejs.js');
 			this.template('source/tests/App.test.js.ejs', sourceFolder + '/tests/App.test.js');
-			this.template('source/tests/Test.jsb.test.js.ejs', sourceFolder + '/tests/Test.jsb.test.js');
 
 			// Basic Project Folders
 			this.dest.mkdir(sourceFolder + '/img');
@@ -410,7 +445,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// JS Files
 			this.template('source/js/_main.js.ejs', sourceFolder + '/js/_main.js');
 			this.template('source/js/app.js.ejs', sourceFolder + '/js/app.js');
-			this.template('source/js/Test.jsb.js.ejs', sourceFolder + '/js/Test.jsb.js');
+
+			// Sample Component Files
+			this.template('source/components/sample/Sample.jsb.js.ejs', sourceFolder + '/components/sample/Sample.jsb.js');
+			this.template('source/components/sample/SampleTemplate.ejs.ejs', sourceFolder + '/components/sample/SampleTemplate.ejs');
+			this.template('source/components/sample/Sample.jsb.test.js.ejs', sourceFolder + '/components/sample/Sample.jsb.test.js');
+			this.template('source/components/sample/_sample.scss.ejs', sourceFolder + '/components/sample/_sample.scss');
 
 			// Assemble
 			if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
@@ -422,6 +462,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('source/assemble/layouts/lyt-default.hbs.ejs', sourceFolder + '/assemble/layouts/lyt-default.hbs');
 				this.template('source/assemble/partials/header.hbs.ejs', sourceFolder + '/assemble/partials/header.hbs');
 				this.template('source/assemble/partials/footer.hbs.ejs', sourceFolder + '/assemble/partials/footer.hbs');
+				this.template('source/components/sample/sample.twig.ejs', sourceFolder + '/components/sample/sample.hbs');
 
 				// Assemble Folders
 				this.directory('source/assemble/data', sourceFolder + '/assemble/data');
@@ -448,6 +489,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('source/html/pages/rwd-testing.twig.ejs', sourceFolder + '/html/pages/rwd-testing.twig');
 				this.template('source/html/partials/header.twig.ejs', sourceFolder + '/html/partials/header.twig');
 				this.template('source/html/partials/footer.twig.ejs', sourceFolder + '/html/partials/footer.twig');
+				this.template('source/components/sample/sample.twig.ejs', sourceFolder + '/components/sample/sample.twig');
 			}
 			else
 			{
@@ -503,6 +545,14 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				{
 					this.template('source/html/partials/gitinfos.twig.ejs', sourceFolder + '/html/partials/gitinfos.twig');
 				}
+			}
+
+			// Optional pre-commit hook
+			if (this.config.get('features').indexOf('preCommitHook') === -1)
+			{
+				delete packageJsonData['devDependencies']['pre-commit'];
+				delete packageJsonData['pre-commit'];
+				delete packageJsonData['pre-commit.silent'];
 			}
 
 			// Optional Layering-Mixin

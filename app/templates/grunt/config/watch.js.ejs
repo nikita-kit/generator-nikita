@@ -1,14 +1,15 @@
 module.exports = {
     options: {
-        spawn: true
+        spawn: true,
+        interrupt: true,
     },
     scss: {
-        files: ['<%%= paths.src %>/sass/**/*.scss'],
+        files: ['<%%= paths.src %>/sass/**/*.scss', '<%%= paths.src %>/components/**/*.scss'],
         tasks: ['sass:dev', 'postcss:dev']
     },<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
     svg_bgs: {
         files: ['<%%= paths.src %>/img/bgs/*.svg'],
-        tasks: ['svgmin:dev_bg', 'svgcss', 'string-replace']
+        tasks: ['svgmin:dev_bg', 'svgcss', 'string-replace', 'sass:dev', 'postcss:dev']
     },<% } %>
     svg_files: {
         files: ['<%%= paths.src %>/img/*.svg'],
@@ -23,13 +24,13 @@ module.exports = {
         tasks: ['sync:fonts']
     },
     sync_js: {
-        files: ['<%%= paths.src %>/js/**/*'],
+        files: ['<%%= paths.src %>/js/**/*', '<%%= paths.src %>/components/**/*.{js,ejs}', '!<%%= paths.src %>/components/**/*.test.js'],
         tasks: ['webpack:dev']
     },
-    templates: {<% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
-        files: ['<%%= paths.src %>/assemble/**/*.{json,hbs}'],
+    html: {<% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
+        files: ['<%%= paths.src %>/assemble/**/*.{json,hbs}', '<%%= paths.src %>/components/**/*.hbs'],
         tasks: ['assemble:dev', 'prettify:dev']<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
-        files: ['<%%= paths.src %>/html/**/*.{json,yml,yaml,twig}'],
+        files: ['<%%= paths.src %>/html/**/*.{json,yml,yaml,twig}', '<%%= paths.src %>/components/**/*.twig'],
         tasks: ['twigRender:dev', 'prettify:dev']<% } %>
     }
 };

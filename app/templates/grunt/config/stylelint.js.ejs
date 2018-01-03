@@ -9,11 +9,11 @@ module.exports = {
             }
         }
     },
-    check: ['<%%= paths.src %>/sass/**/*.scss'],
+    check: ['<%%= paths.src %>/sass/**/*.scss', '<%%= paths.src %>/components/**/*.scss'],
     fix: {
         options: {
             fix: true,
         },
-        src: ['<%%= paths.src %>/sass/**/*.scss'],
+        src: ['<%%= paths.src %>/sass/**/*.scss', '<%%= paths.src %>/components/**/*.scss'],
     }
 };

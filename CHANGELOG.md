@@ -1,9 +1,14 @@
-# dev
+# 4.0.1 (2017/11/29)
+
+* fixed bug in sample component where the folder was added twice (uppercase and lowercase)
+
+# 4.0.0 (2017/11/28)
 
 * changed destination of genearted files from `js/` and `css/` to `generated/`
 * split gruntfile into separated config files
 * made grunt runnable with npm with `npm run grunt [task]`
-* added symfony template
+* added symfony and wordpress templates
+* added component structure with `components`-folder
 * added `webpack-bundle-analyzer` to analyze bundle size
   * start analyzer with `grunt analyze-js`
 * added jest testing framework
@@ -28,7 +33,9 @@
 * removed `grunt-newer`
 * removed setup-dev-env.sh
 * fixed generator answers were not restored in some cases
+* prevent the generator from execution if the kickstarter was generated with a newer version
 * check build with all node major versions in travis
+* test all generator templates in travis
 
 # 3.0.0 (2017/05/04)
 

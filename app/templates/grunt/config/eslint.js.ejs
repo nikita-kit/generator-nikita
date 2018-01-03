@@ -6,11 +6,21 @@ module.exports = {
             // override rules here
         }
     },
-    check: ['<%%= paths.src %>/js/**/*.js', '<%%= paths.src %>/tests/**/*.test.js'],
+    check: [
+        '<%%= paths.src %>/js/**/*.js',
+        '<%%= paths.src %>/components/**/*.js',
+        '<%%= paths.src %>/tests/**/*.test.js',
+        '<%%= paths.src %>/components/**/*.test.js',
+    ],
     fix: {
         options: {
             fix: true,
         },
-        src: ['<%%= paths.src %>/js/**/*.js', '<%%= paths.src %>/tests/**/*.test.js']
+        src: [
+            '<%%= paths.src %>/js/**/*.js',
+            '<%%= paths.src %>/components/**/*.js',
+            '<%%= paths.src %>/tests/**/*.test.js',
+            '<%%= paths.src %>/components/**/*.test.js',
+        ]
     }
 };
