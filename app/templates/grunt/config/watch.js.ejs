@@ -5,7 +5,7 @@ module.exports = {
     },
     scss: {
         files: ['<%%= paths.src %>/sass/**/*.scss', '<%%= paths.src %>/components/**/*.scss'],
-        tasks: ['sass:dev', 'postcss:dev']
+        tasks: ['sass-globbing', 'sass:dev', 'postcss:dev']
     },<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
     svg_bgs: {
         files: ['<%%= paths.src %>/img/bgs/*.svg'],
