@@ -1,5 +1,6 @@
 # dev
 
+- swiper version update
 - regenerate sass globbing on added/removed glob imported scss files
 
 # 4.0.1 (2017/11/29)
