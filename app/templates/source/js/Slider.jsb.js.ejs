@@ -15,10 +15,14 @@ class Slider {
     initialize() {
         this.slider = new Swiper(this.element, {
             slidesPerView: 1,
-            pagination: '.swiper-pagination',
-            paginationClickable: true,
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
+            navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'bullets',
+            }
         });
     }
 }
