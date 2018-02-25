@@ -1,6 +1,7 @@
 # dev
 
-- regenerate sass globbing on added/removed glob imported scss files
+* fixed twigRender config
+* regenerate sass globbing on added/removed glob imported scss files
 
 # 4.0.1 (2017/11/29)
 
