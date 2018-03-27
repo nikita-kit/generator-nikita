@@ -1,3 +1,8 @@
+# dev
+
+* fixed twigRender config
+* regenerate sass globbing on added/removed glob imported scss files
+
 # 4.0.1 (2017/11/29)
 
 * fixed bug in sample component where the folder was added twice (uppercase and lowercase)
