@@ -148,7 +148,7 @@ To use the nikita build files, just add something like following lines to your b
 The Wordpress template sets the source folder to `static/`.
 In addition to nikita generator defaults, jQuery is added.
 
-To use the nikita build files, just enqueue them in your wordpress tamplate like this:
+To use the nikita build files, just enqueue them in your wordpress template like this:
 ```php
 wp_enqueue_script('main.js', rtrim(WP_HOME, '/') . '/static/generated/main.js', array(), '1.0', false);
 wp_enqueue_style('styles.css', rtrim(WP_HOME, '/') . '/static/generated/styles.css', array(), '1.0', 'all');
