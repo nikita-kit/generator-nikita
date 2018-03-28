@@ -1,3 +1,7 @@
+# dev
+
+* fixed browserSync page reload when js files are changing
+
 # 4.0.2 (2018/30/27)
 
 * fixed twigRender config
