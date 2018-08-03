@@ -333,8 +333,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							value: 'slider'
 						},
 						{
-							name: 'select2 for styled select inputs',
-							value: 'selectTwo'
+							name: 'choices for styled select inputs',
+							value: 'select'
 						}
 					]),
 					promptConfirm('formFramework', 'Do you want to use the nikita form framework?'),
@@ -584,7 +584,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 
 			// Optional jQuery
-			if ((this.config.get('addons').indexOf('jQuery') === -1) && (this.config.get('addons').indexOf('selectTwo') === -1))
+			if (this.config.get('addons').indexOf('jQuery') === -1)
 			{
 				delete packageJsonData['devDependencies']['jquery'];
 			}
@@ -609,13 +609,14 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 
 			// Optional Select2
-			if (this.config.get('addons').indexOf('selectTwo') === -1)
+			if (this.config.get('addons').indexOf('select') === -1)
 			{
-				delete packageJsonData['devDependencies']['select2'];
+				delete packageJsonData['devDependencies']['choices.js'];
 			}
 			else
 			{
-				this.template('source/js/SelectTwo.jsb.js.ejs', sourceFolder + '/js/SelectTwo.jsb.js');
+				this.template('source/sass/extends/_selects.scss.ejs', sourceFolder + '/sass/extends/_selects.scss');
+				this.template('source/js/Select.jsb.js.ejs', sourceFolder + '/js/Select.jsb.js');
 			}
 			
 			if (this.config.get('template') === 'spring-boot') {

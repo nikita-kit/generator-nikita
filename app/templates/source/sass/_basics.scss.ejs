@@ -184,3 +184,17 @@ button {
     text-transform: none;
     background-color: transparent;
 }
+<% if (config.get('addons').indexOf('select') != -1)
+{
+%>
+
+/**
+* Select
+*/
+
+.select {
+	@extend %select;
+}
+<%
+}
+%>

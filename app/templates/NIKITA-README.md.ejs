@@ -140,11 +140,11 @@ Run `grunt analyze-js` to see bundled content of `generated/main.js` as convenie
 Within the Javascript modules it's also possible the import client side templates with EJS syntax.
 
 ### Libraries included
-<% if (config.get('addons').indexOf('jQuery') != -1 || config.get('addons').indexOf('selectTwo') != -1) { %>
+<% if (config.get('addons').indexOf('jQuery') != -1) { %>
 - [jquery](http://jquery.com/)<% } %>
 - [jsb](https://github.com/DracoBlue/jsb)
-- [logging.js](https://github.com/DracoBlue/logging-js)<% if (config.get('addons').indexOf('selectTwo') != -1) { %>
-- [select2](https://github.com/select2/select2)<% } %><% if (config.get('addons').indexOf('slider') != -1) { %>
+- [logging.js](https://github.com/DracoBlue/logging-js)<% if (config.get('addons').indexOf('select') != -1) { %>
+- [choices.js](https://github.com/jshjohnson/Choices)<% } %><% if (config.get('addons').indexOf('slider') != -1) { %>
 - [swiper](https://github.com/nolimits4web/Swiper)<% } %>
 
 

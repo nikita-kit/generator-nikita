@@ -1,0 +1,35 @@
+import logging from 'node-logging-js';
+import jsb from 'node-jsb';
+import choices from 'choices.js';
+
+/* Documentation https://github.com/jshjohnson/Choices */
+class Select {
+constructor(element, options) {
+logging.applyLogging(this, 'Select');
+
+options = options || {};
+options.classNames = options.classNames || {
+containerOuter: 'select',
+containerInner: 'select-inner',
+input: 'select-input',
+inputCloned: 'select-input-cloned',
+list: 'select-list',
+listItems: 'select-list-multiple',
+listSingle: 'select-list-single',
+listDropdown: 'select-list-dropdown',
+item: 'select-item',
+itemSelectable: 'select-item-selectable',
+itemDisabled: 'select-item-disabled',
+itemChoice: 'select-item-choice',
+placeholder: 'select_placeholder',
+group: 'select-group',
+groupHeading: 'select-heading',
+button: 'select-button'
+};
+
+this.logDebug('options:', options);
+this.element = new choices(element, options);
+}
+}
+jsb.registerHandler('Select', Select);
+export default Select;

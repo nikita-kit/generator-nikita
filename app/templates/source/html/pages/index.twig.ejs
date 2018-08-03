@@ -14,11 +14,10 @@
     <p>Congratulations, the prototype was built successfully! :)</p>
 	{% include 'components::sample/sample.twig' %}
 
-<% if (config.get('addons').indexOf('selectTwo') != -1)
+<% if (config.get('addons').indexOf('select') != -1)
 {
 %>
-	<select id="ref-select" class="select jsb_ jsb_SelectTwo" name="select" required="required">
-		<option disabled="disabled" selected="selected" value="">Please choose:</option>
+	<select id="ref-select" class="select jsb_ jsb_Select" name="select" required="required" data-jsb="">
 		<option value="option 1">option 1</option>
 		<option value="option 2">option 2</option>
 		<option value="option 3">option 3</option>
