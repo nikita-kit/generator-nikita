@@ -625,7 +625,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			} else {
 				delete packageJsonData['devDependencies']['babel-eslint'];
 				delete packageJsonData['devDependencies']['babel-preset-react'];
-				delete packageJsonData['devDependencies']['babel-preset-stage-1'];
 				delete packageJsonData['devDependencies']['classnames'];
 				delete packageJsonData['devDependencies']['enzyme'];
 				delete packageJsonData['devDependencies']['enzyme-adapter-react-16.3'];
