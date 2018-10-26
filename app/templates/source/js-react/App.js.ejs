@@ -1,0 +1,29 @@
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import logging from 'node-logging-js';
+import { Provider } from './Store';
+
+import Sample from '../components/sample/Sample';
+import Counter from '../components/counter/Counter';
+
+export default class App extends Component {
+
+    constructor(props) {
+        super(props);
+        logging.applyLogging(this, 'App');
+        this.logDebug('init');
+    }
+
+    render() {
+        return (
+            <Provider>
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/" component={Sample} />
+                        <Route exact path="/state-example" component={Counter} />
+                    </Switch>
+                </BrowserRouter>
+            </Provider>
+        );
+    }
+}

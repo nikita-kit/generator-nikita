@@ -3,9 +3,9 @@ module.exports = function (grunt) {
 
         const options = {
             config: JSON.stringify(this.options()),
-            watch: !!grunt.option('watch')
+            watch: !!grunt.option('watch'),
         };
 
-        require('jest-cli').runCLI(options, [process.cwd()], this.async());
+        require('jest-cli').runCLI(options, [process.cwd()]).then(this.async());
     });
 };

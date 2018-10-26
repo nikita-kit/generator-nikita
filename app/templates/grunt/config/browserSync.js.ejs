@@ -4,14 +4,15 @@ module.exports = function (grunt) {
             bsFiles: {
                 src: [
                     '<%%= paths.dev %>/img/**/*.{jpg,jpeg,png,gif,ico,svg}',
-                    '<%%= paths.dev %>/generated/**/*.{css, js}',
+                    '<%%= paths.dev %>/generated/**/*.{css,js}',
                     '<%%= paths.dev %>/**/*.html'
                 ]
             },
             options: {
                 open: false,
                 online: false,
-                watchTask: true,
+                watchTask: true,<% if (config.get('jsFramework') === 'react') { %>
+                single: true,<% } %>
                 port: grunt.option('port') || 3000,
                 ui: {
                     port: grunt.option('port') + 1 || 3001

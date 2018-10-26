@@ -1,0 +1,30 @@
+import React, { Component } from 'react';
+import logging from 'node-logging-js';
+import { Link } from 'react-router-dom';
+import { connect, actions } from '../../js/Store';
+
+class Counter extends Component {
+    constructor(props) {
+        super(props);
+        logging.applyLogging(this, 'Counter');
+        this.logDebug('init:', props);
+    }
+
+    onClick = () => {
+        actions.increaseCount(1);
+    }
+
+    render() {
+        return (
+            <div className="b-counter">
+                counter value is: { this.props.count }
+                <br/>
+                <button onClick={this.onClick}>[Increase Counter]</button>
+                <br/>
+                <Link to="/">go back</Link>
+            </div>
+        );
+    }
+}
+
+export default connect(({ count }) => ({ count }))(Counter);

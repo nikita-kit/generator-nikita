@@ -15,7 +15,7 @@ If you have discovered a bug or have a feature suggestion, feel free to create a
 
 1. generate a nikita project from a local checkout of generator-nikita
 2. work on that generated project and commit all the changes locally
-3. backport the changes the the checkout of generator-nikita
+3. backport the changes to the checkout of generator-nikita
 4. generate the project again.
 5. if no files are modified and test are passing your done
 
@@ -30,7 +30,7 @@ If you have discovered a bug or have a feature suggestion, feel free to create a
 git clone git@github.com:<YOUR-USER>/generator-nikita.git
 ```
 
-3. make a new branch  and set upstream
+3. make a new branch and set upstream
 
 ```bash
 cd generator-nikita

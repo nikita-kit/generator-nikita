@@ -1,4 +1,10 @@
-# 4.0.2 (2018/30/27)
+# dev
+
+* added react.js
+* made jsb optional
+* fixed browserSync page reload when js files are changing
+
+# 4.0.2 (2018/03/27)
 
 * fixed twigRender config
 * regenerate sass globbing on added/removed glob imported scss files

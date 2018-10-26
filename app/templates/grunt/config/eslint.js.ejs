@@ -1,9 +1,23 @@
 module.exports = {
     options: {
         envs: ['browser', 'jest'],
-        configFile: './node_modules/eslint-config-nikita/index.js',
+        configFile: './node_modules/eslint-config-nikita/index.js',<% if (config.get('jsFramework') === 'react') { %>
+        plugins: ['react'],
+        baseConfig: {
+            extends: [
+                'plugin:react/recommended'
+            ]
+        },
+        parser: 'babel-eslint',
+        parserOptions: {
+            ecmaVersion: 2018,
+            ecmaFeatures: {
+                jsx: true,
+            }
+        },<% } %>
         rules: {
-            // override rules here
+            // override rules here<% if (config.get('jsFramework') === 'react') { %>
+            'react/prop-types': 0,<% } %>
         }
     },
     check: [

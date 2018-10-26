@@ -116,6 +116,51 @@ describe('nikita:app:web-app', function () {
 	});
 });
 
+describe('nikita:app:web-app-react', function () {
+	this.timeout(defaultTimeout);
+	before(function (done) {
+		helpers.run(path.join(__dirname, '../app'))
+			.inDir(path.join(os.tmpdir(), './temp-test'))
+			.withOptions({ 'skipInstall': true })
+			.withPrompt({
+				template: "web-app",
+				private: true,
+				useBuildFolders: true,
+				jsFramework: 'react',
+				name: "testrun" + (new Date()).getTime()
+			})
+			.on('end', done);
+	});
+
+	it('creates files', function (done) {
+		assert.file([
+			'package.json',
+			'Gruntfile.js',
+			'grunt/aliases.js',
+			'source/js/_main.js',
+			'source/js/App.js',
+			'source/js/Store.js',
+			'source/components/counter/Counter.js',
+			'source/sass/styles.scss',
+		]);
+
+		if (process.env.TEMPLATE === "web-app") {
+			this.timeout(buildTimeout);
+			var spawnCommand = require('yeoman-generator/lib/actions/spawn_command');
+			spawnCommand("npm", ["install"], {detached: false})
+				.on('exit', function() {
+					spawnCommand("grunt", ["dist"], {detached: false})
+						.on('exit', function() {
+							spawnCommand("grunt", ["dev"], {detached: false})
+								.on('exit', done)
+						});
+				});
+		} else {
+			done();
+		}
+	});
+});
+
 describe('nikita:app:symfony', function () {
 	this.timeout(defaultTimeout);
 	before(function (done) {

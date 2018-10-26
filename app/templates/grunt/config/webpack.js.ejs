@@ -4,9 +4,12 @@ module.exports = function (grunt, options) {
         const path = require('path');
         const webpack = require('webpack');
         const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-        const plugins = [
-            new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/),
-            new webpack.optimize.ModuleConcatenationPlugin(),
+        const plugins = [<% if (config.get('jsFramework') === 'jsb') { %>
+            new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/),<% } %>
+            new webpack.optimize.ModuleConcatenationPlugin(),<% if (config.get('jsFramework') === 'react') { %>
+            new webpack.DefinePlugin({
+              'process.env.NODE_ENV': JSON.stringify('production')
+            }),<% } %>
         ];
 
         return {
@@ -47,7 +50,7 @@ module.exports = function (grunt, options) {
                                     targets: {
                                         browsers: options.browserslist
                                     }
-                                }]]
+                                }], <% if (config.get('jsFramework') === 'react') { %>'react', <% } %>'stage-1']
                             }
                         },
                         {
@@ -72,6 +75,9 @@ module.exports = function (grunt, options) {
             },
             analyze: {
                 watch: true,
+                stats: {
+                    maxModules: 99999,
+                },
                 output: {
                     path: path.resolve('<%%= paths.tmp %>/js/')
                 },
