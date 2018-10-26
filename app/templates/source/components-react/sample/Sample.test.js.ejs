@@ -1,0 +1,17 @@
+/* eslint-disable no-console */
+import React from 'react';
+import { mount } from 'enzyme';
+import { MemoryRouter } from 'react-router';
+import Sample from './Sample';
+
+test('Sample Component loads correctly', () => {
+
+    const component = mount(
+        <MemoryRouter>
+            <Sample/>
+        </MemoryRouter>,
+    );
+
+    expect(component.find('.b-sample')).toHaveLength(1);
+    expect(console.log).toHaveBeenLastCalledWith('[Sample.render]');
+});

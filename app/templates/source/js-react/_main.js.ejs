@@ -1,0 +1,12 @@
+/**
+ * Main Javascript entry file
+ *
+ * all imported modules will be bundled to main.js
+ * in this file it is possible to include files with globbing
+ */
+
+import React from 'react';
+import { render } from 'react-dom';
+import App from './App';
+
+render(<App />, document.getElementById('main-app'));

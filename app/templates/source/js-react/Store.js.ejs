@@ -1,0 +1,14 @@
+import createStore from 'react-waterfall';
+
+const config = {
+    initialState: {
+        count: 0,
+    },
+    actionsCreators: {
+        increaseCount: (previousState, actions, value) => ({
+            count: previousState.count + value,
+        }),
+    },
+};
+
+export const { Provider, connect, actions } = createStore(config);

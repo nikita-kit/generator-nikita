@@ -25,3 +25,10 @@ description: This is the startpage of your prototype. Provide an overview of all
 <%
 }
 %>
+<% if (config.get('jsFramework') === 'react')
+{
+%>
+	<div id="main-app"></div>
+<%
+}
+%>

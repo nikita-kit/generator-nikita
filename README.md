@@ -11,6 +11,9 @@ Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerat
 <a href="https://babeljs.io/">
     <img height="65" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/babel.svg" alt="babel">
 </a>
+<a href="https://reactjs.org/">
+    <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/react.svg" alt="react">
+</a>
 <a href="https://github.com/sass/node-sass">
     <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/node-sass.svg" alt="sass">
 </a>
@@ -42,7 +45,7 @@ Feel free to re-run the generator to add or remove features.
 - [__Webpack__](https://webpack.js.org/) – module bundler
 - [__Babel__](https://babeljs.io/) – compiler for ES6 Javascript
 - [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) or [__Assemble__](http://assemble.io/) – static site generator
-- [__EJS__](http://ejs.co/) - client side templates
+- [__React__](https://reactjs.org/) or [__JSB__](https://github.com/DracoBlue/jsb/) - Javascript Framework
 - [__SASS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – css preprocessing
 - [__PostCSS__](http://postcss.org/) – css postprocessing
 - [__Jest__](https://facebook.github.io/jest/) – JS testing framework

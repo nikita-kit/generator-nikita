@@ -284,6 +284,15 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							value: 'preCommitHook'
 						}
 					]),
+					promptList('jsFramework', 'Which JavaScript Framework do you want to use?', [
+						{
+							name: 'JSB, BehaviourToolkit featuring module initializing and event bus',
+							value: 'jsb'
+						}, {
+							name: 'React.js, the famous view framework with addons like react-router and react-waterfall',
+							value: 'react'
+						}
+					]),
 					promptCheckbox('nikitaCssMixins', 'Which nikita.css mixins do you want to use?', [
 						{
 							name: 'Centering: Horizontally and/or vertically centering elements with the translate-method (IE9+)',
@@ -370,6 +379,8 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			packageJsonData['name'] = this.config.get('name');
 			packageJsonData['private'] = this.config.get('private');
 
+			var isReact = (this.config.get('jsFramework') === 'react');
+
 			// Standard Files & Folders
 			this.template('.gitignore.ejs', '.gitignore');
 			this.template('Gruntfile.js.ejs', 'Gruntfile.js');
@@ -415,10 +426,16 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 			//Test Files
 			this.dest.mkdir(sourceFolder + '/tests');
-			this.template('source/tests/jest.setup.js.ejs', sourceFolder + '/tests/jest.setup.js');
-			this.template('source/tests/jest.transform.js.ejs', sourceFolder + '/tests/jest.transform.js');
-			this.template('source/tests/jest.transform-ejs.js.ejs', sourceFolder + '/tests/jest.transform-ejs.js');
-			this.template('source/tests/App.test.js.ejs', sourceFolder + '/tests/App.test.js');
+			if (isReact) {
+				this.template('source/tests-react/jest.setup.js.ejs', sourceFolder + '/tests/jest.setup.js');
+				this.template('source/tests-react/jest.transform.js.ejs', sourceFolder + '/tests/jest.transform.js');
+				this.template('source/tests-react/App.test.js.ejs', sourceFolder + '/tests/App.test.js');
+			} else {
+				this.template('source/tests-jsb/jest.setup.js.ejs', sourceFolder + '/tests/jest.setup.js');
+				this.template('source/tests-jsb/jest.transform.js.ejs', sourceFolder + '/tests/jest.transform.js');
+				this.template('source/tests-jsb/jest.transform-ejs.js.ejs', sourceFolder + '/tests/jest.transform-ejs.js');
+				this.template('source/tests-jsb/App.test.js.ejs', sourceFolder + '/tests/App.test.js');
+			}
 
 			// Basic Project Folders
 			this.dest.mkdir(sourceFolder + '/img');
@@ -431,7 +448,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/sass/_basics.scss.ejs', sourceFolder + '/sass/_basics.scss');
 
 			// SASS Extra Files
-			this.template('source/sass/blocks/_rwd-testing.scss.ejs', sourceFolder + '/sass/blocks/_rwd-testing.scss');
 			this.template('source/sass/blocks/_header.scss.ejs', sourceFolder + '/sass/blocks/_header.scss');
 			this.template('source/sass/blocks/_footer.scss.ejs', sourceFolder + '/sass/blocks/_footer.scss');
 			this.template('source/sass/extends/.gitkeep', sourceFolder + '/sass/extends/.gitkeep');
@@ -443,14 +459,29 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('source/sass/variables/_typography.scss.ejs', sourceFolder + '/sass/variables/_typography.scss');
 
 			// JS Files
-			this.template('source/js/_main.js.ejs', sourceFolder + '/js/_main.js');
-			this.template('source/js/app.js.ejs', sourceFolder + '/js/app.js');
+			if (isReact) {
+				this.template('source/js-react/_main.js.ejs', sourceFolder + '/js/_main.js');
+				this.template('source/js-react/App.js.ejs', sourceFolder + '/js/App.js');
+				this.template('source/js-react/Store.js.ejs', sourceFolder + '/js/Store.js');
+			} else {
+				this.template('source/js-jsb/_main.js.ejs', sourceFolder + '/js/_main.js');
+				this.template('source/js-jsb/app.js.ejs', sourceFolder + '/js/app.js');
+			}
 
 			// Sample Component Files
-			this.template('source/components/sample/Sample.jsb.js.ejs', sourceFolder + '/components/sample/Sample.jsb.js');
-			this.template('source/components/sample/SampleTemplate.ejs.ejs', sourceFolder + '/components/sample/SampleTemplate.ejs');
-			this.template('source/components/sample/Sample.jsb.test.js.ejs', sourceFolder + '/components/sample/Sample.jsb.test.js');
-			this.template('source/components/sample/_sample.scss.ejs', sourceFolder + '/components/sample/_sample.scss');
+			if (isReact) {
+				this.template('source/components-react/sample/Sample.js.ejs', sourceFolder + '/components/sample/Sample.js');
+				this.template('source/components-react/sample/Sample.test.js.ejs', sourceFolder + '/components/sample/Sample.test.js');
+				this.template('source/components-react/sample/_sample.scss.ejs', sourceFolder + '/components/sample/_sample.scss');
+				this.template('source/components-react/counter/Counter.js.ejs', sourceFolder + '/components/counter/Counter.js');
+				this.template('source/components-react/counter/Counter.test.js.ejs', sourceFolder + '/components/counter/Counter.test.js');
+				this.template('source/components-react/counter/_counter.scss.ejs', sourceFolder + '/components/counter/_counter.scss');
+            } else {
+				this.template('source/components-jsb/sample/Sample.jsb.js.ejs', sourceFolder + '/components/sample/Sample.jsb.js');
+				this.template('source/components-jsb/sample/SampleTemplate.ejs.ejs', sourceFolder + '/components/sample/SampleTemplate.ejs');
+				this.template('source/components-jsb/sample/Sample.jsb.test.js.ejs', sourceFolder + '/components/sample/Sample.jsb.test.js');
+				this.template('source/components-jsb/sample/_sample.scss.ejs', sourceFolder + '/components/sample/_sample.scss');
+			}
 
 			// Assemble
 			if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
@@ -458,11 +489,12 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('grunt/config/assemble.js.ejs', 'grunt/config/assemble.js');
 				// Assemble Files
 				this.template('source/assemble/pages/index.hbs.ejs', sourceFolder + '/assemble/pages/index.hbs');
-				this.template('source/assemble/pages/rwd-testing.hbs.ejs', sourceFolder + '/assemble/pages/rwd-testing.hbs');
 				this.template('source/assemble/layouts/lyt-default.hbs.ejs', sourceFolder + '/assemble/layouts/lyt-default.hbs');
 				this.template('source/assemble/partials/header.hbs.ejs', sourceFolder + '/assemble/partials/header.hbs');
 				this.template('source/assemble/partials/footer.hbs.ejs', sourceFolder + '/assemble/partials/footer.hbs');
-				this.template('source/components/sample/sample.twig.ejs', sourceFolder + '/components/sample/sample.hbs');
+				if (!isReact) {
+					this.template('source/components-jsb/sample/sample.twig.ejs', sourceFolder + '/components/sample/sample.hbs');
+				}
 
 				// Assemble Folders
 				this.directory('source/assemble/data', sourceFolder + '/assemble/data');
@@ -486,10 +518,11 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('source/html/layouts/master.twig.ejs', sourceFolder + '/html/layouts/master.twig');
 				this.template('source/html/macros/.gitkeep', sourceFolder + '/html/macros/.gitkeep');
 				this.template('source/html/pages/index.twig.ejs', sourceFolder + '/html/pages/index.twig');
-				this.template('source/html/pages/rwd-testing.twig.ejs', sourceFolder + '/html/pages/rwd-testing.twig');
 				this.template('source/html/partials/header.twig.ejs', sourceFolder + '/html/partials/header.twig');
 				this.template('source/html/partials/footer.twig.ejs', sourceFolder + '/html/partials/footer.twig');
-				this.template('source/components/sample/sample.twig.ejs', sourceFolder + '/components/sample/sample.twig');
+				if (!isReact) {
+					this.template('source/components-jsb/sample/sample.twig.ejs', sourceFolder + '/components/sample/sample.twig');
+				}
 			}
 			else
 			{
@@ -581,6 +614,27 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 				this.template('source/sass/blocks/_forms.scss.ejs', sourceFolder + '/sass/blocks/_forms.scss');
 				this.src.copy('source/img/bgs/form-select-arrow-down.svg', sourceFolder + '/img/bgs/form-select-arrow-down.svg');
+			}
+
+			// jsFramework
+			if (isReact) {
+				this.config.set('addons', []);
+
+				delete packageJsonData['devDependencies']['node-jsb'];
+				delete packageJsonData['devDependencies']['ejs-compiled-loader'];
+			} else {
+				delete packageJsonData['devDependencies']['babel-eslint'];
+				delete packageJsonData['devDependencies']['babel-preset-react'];
+				delete packageJsonData['devDependencies']['babel-preset-stage-1'];
+				delete packageJsonData['devDependencies']['classnames'];
+				delete packageJsonData['devDependencies']['enzyme'];
+				delete packageJsonData['devDependencies']['enzyme-adapter-react-16.3'];
+				delete packageJsonData['devDependencies']['eslint-plugin-react'];
+				delete packageJsonData['devDependencies']['prop-types'];
+				delete packageJsonData['devDependencies']['react'];
+				delete packageJsonData['devDependencies']['react-dom'];
+				delete packageJsonData['devDependencies']['react-router-dom'];
+				delete packageJsonData['devDependencies']['react-waterfall'];
 			}
 
 			// Optional jQuery
