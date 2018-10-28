@@ -140,32 +140,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					}
 				}
 
-				if (!that.config.get('svgBackgrounds') && that.config.get('formFramework'))
-				{
-					console.info('You need the SVG backgrounds feature to enable the nikita form framework. Activating this option now.');
-					that.config.set('svgBackgrounds', true);
-				}
-
-				var hasExtend = function (extend) {
-					return that.config.get('nikitaCssExtends') && that.config.get('nikitaCssExtends').indexOf(extend) !== -1 ? true : false;
-				}
-
-				if ((!hasExtend('a11y') || !hasExtend('cf') || !hasExtend('ellipsis')) && that.config.get('formFramework'))
-				{
-					console.info('You need the nikita.css mixins to enable the nikita form framework. Activating this option now.');
-					that.config.set('nikitaCssExtends', ['a11y', 'cf', 'ellipsis', 'hide-text', 'ib']);
-				}
-
-				var hasMixin = function (mixin) {
-					return that.config.get('nikitaCssMixins') && that.config.get('nikitaCssMixins').indexOf(mixin) !== -1 ? true : false;
-				}
-
-				if ((!hasMixin('respond-to')) && that.config.get('formFramework'))
-				{
-					console.info('You need the nikita.css mixins to enable the nikita form framework. Activating this option now.');
-					that.config.set('nikitaCssMixins', ['centering', 'fixed-ratiobox', 'font-smoothing', 'layering', 'respond-to', 'triangle']);
-				}
-
 				if (!that.config.get('useBuildFolders'))
 				{
 					that.config.set('cleanBuildFolders', false);
@@ -225,7 +199,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 					'cf'
 				]);
 
-				that.config.set('formFramework', false);
 				that.config.set('askBuildFolders', true);
 
 				if (that.config.get('template') === 'wordpress') {
@@ -336,7 +309,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 							value: 'selectTwo'
 						}
 					]),
-					promptConfirm('formFramework', 'Do you want to use the nikita form framework?'),
 				].forEach(function (prompt) {
 					templateSpecificPrompts.push(prompt);
 				});
@@ -547,14 +519,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			if (this.config.get('nikitaCssMixins').indexOf('respond-to') !== -1)
 			{
 				this.template('source/sass/variables/_breakpoints.scss.ejs', sourceFolder + '/sass/variables/_breakpoints.scss');
-			}
-
-			// Optional Form Framework
-			if (this.config.get('formFramework'))
-			{
-				this.template('source/html/pages/forms.twig.ejs', sourceFolder + '/html/pages/forms.twig');
-				this.template('source/sass/blocks/_forms.scss.ejs', sourceFolder + '/sass/blocks/_forms.scss');
-				this.src.copy('source/img/bgs/form-select-arrow-down.svg', sourceFolder + '/img/bgs/form-select-arrow-down.svg');
 			}
 
 			// jsFramework
