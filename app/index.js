@@ -358,7 +358,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			this.template('grunt/tasks/sass-globbing.js.ejs', 'grunt/tasks/sass-globbing.js');
 			this.template('grunt/tasks/jest.js.ejs', 'grunt/tasks/jest.js');
 
-			this.template('grunt/config/accessibility.js.ejs', 'grunt/config/accessibility.js');
 			this.template('grunt/config/browserSync.js.ejs', 'grunt/config/browserSync.js');
 			this.template('grunt/config/clean.js.ejs', 'grunt/config/clean.js');
 			this.template('grunt/config/concurrent.js.ejs', 'grunt/config/concurrent.js');
