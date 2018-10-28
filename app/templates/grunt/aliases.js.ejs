@@ -39,9 +39,8 @@ module.exports = {
         'sass-globbing',
         'sass:dist',<% if (config.get('features').indexOf('gitinfos') != -1) { %>
         'gitinfo',
-        'write-gitinfos',<% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
-        'assemble:dist',<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
-        'twigRender:dist',<% } %>
+        'write-gitinfos',<% } %>
+        'twigRender:dist',
         'postcss:dist',
         'webpack:dist',
         'copy:images',

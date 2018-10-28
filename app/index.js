@@ -209,7 +209,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			/* set defaults on first run only */
 			if (isInitialRun)
 			{
-				that.config.set('staticPageGenerator', 'twigRender');
 				that.config.set('features', [
 					'webfonts',
 					'svgBackgrounds',
@@ -257,15 +256,6 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 
 			if (that.config.get('custom')) {
 				[
-					promptList('staticPageGenerator', 'Which Static-Page-Generator do you want to use?', [
-						{
-							name: 'twigRender, Static-Page-Generator featuring twig templates',
-							value: 'twigRender'
-						}, {
-							name: 'assemble.io, Static-Page-Generator with handlebars templates',
-							value: 'assemble'
-						}
-					]),
 					promptCheckbox('features', 'Which features do you want to use?', [
 						{
 							name: 'Self hosted webfonts, a fonts-folder will be added to your project',
@@ -483,50 +473,17 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 				this.template('source/components-jsb/sample/_sample.scss.ejs', sourceFolder + '/components/sample/_sample.scss');
 			}
 
-			// Assemble
-			if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
-			{
-				this.template('grunt/config/assemble.js.ejs', 'grunt/config/assemble.js');
-				// Assemble Files
-				this.template('source/assemble/pages/index.hbs.ejs', sourceFolder + '/assemble/pages/index.hbs');
-				this.template('source/assemble/layouts/lyt-default.hbs.ejs', sourceFolder + '/assemble/layouts/lyt-default.hbs');
-				this.template('source/assemble/partials/header.hbs.ejs', sourceFolder + '/assemble/partials/header.hbs');
-				this.template('source/assemble/partials/footer.hbs.ejs', sourceFolder + '/assemble/partials/footer.hbs');
-				if (!isReact) {
-					this.template('source/components-jsb/sample/sample.twig.ejs', sourceFolder + '/components/sample/sample.hbs');
-				}
-
-				// Assemble Folders
-				this.directory('source/assemble/data', sourceFolder + '/assemble/data');
-				this.directory('source/assemble/helpers', sourceFolder + '/assemble/helpers');
-				this.template('source/assemble/partials/.gitkeep', sourceFolder + '/assemble/partials/.gitkeep');
-			}
-			else
-			{
-				delete packageJsonData['devDependencies']['assemble'];
-				delete packageJsonData['devDependencies']['grunt-assemble'];
-				delete packageJsonData['devDependencies']['handlebars-helper-autolink'];
-				delete packageJsonData['devDependencies']['handlebars-helpers'];
-			}
-
 			// twigRender
-			if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
-			{
-				this.template('grunt/config/twigRender.js.ejs', 'grunt/config/twigRender.js');
-				this.template('source/html/README.md.ejs', sourceFolder + '/html/README.md');
-				this.template('source/html/data/.gitkeep', sourceFolder + '/html/data/.gitkeep');
-				this.template('source/html/layouts/master.twig.ejs', sourceFolder + '/html/layouts/master.twig');
-				this.template('source/html/macros/.gitkeep', sourceFolder + '/html/macros/.gitkeep');
-				this.template('source/html/pages/index.twig.ejs', sourceFolder + '/html/pages/index.twig');
-				this.template('source/html/partials/header.twig.ejs', sourceFolder + '/html/partials/header.twig');
-				this.template('source/html/partials/footer.twig.ejs', sourceFolder + '/html/partials/footer.twig');
-				if (!isReact) {
-					this.template('source/components-jsb/sample/sample.twig.ejs', sourceFolder + '/components/sample/sample.twig');
-				}
-			}
-			else
-			{
-				delete packageJsonData['devDependencies']['grunt-twig-render'];
+			this.template('grunt/config/twigRender.js.ejs', 'grunt/config/twigRender.js');
+			this.template('source/html/README.md.ejs', sourceFolder + '/html/README.md');
+			this.template('source/html/data/.gitkeep', sourceFolder + '/html/data/.gitkeep');
+			this.template('source/html/layouts/master.twig.ejs', sourceFolder + '/html/layouts/master.twig');
+			this.template('source/html/macros/.gitkeep', sourceFolder + '/html/macros/.gitkeep');
+			this.template('source/html/pages/index.twig.ejs', sourceFolder + '/html/pages/index.twig');
+			this.template('source/html/partials/header.twig.ejs', sourceFolder + '/html/partials/header.twig');
+			this.template('source/html/partials/footer.twig.ejs', sourceFolder + '/html/partials/footer.twig');
+			if (!isReact) {
+				this.template('source/components-jsb/sample/sample.twig.ejs', sourceFolder + '/components/sample/sample.twig');
 			}
 
 			// Image README Files
@@ -569,15 +526,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			{
 				this.template('grunt/config/gitinfo.js.ejs', 'grunt/config/gitinfo.js');
 				this.template('grunt/tasks/write-gitinfos.js.ejs', 'grunt/tasks/write-gitinfos.js');
-
-				if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
-				{
-					this.template('source/assemble/partials/gitinfos.hbs.ejs', sourceFolder + '/assemble/partials/gitinfos.hbs');
-				}
-				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
-				{
-					this.template('source/html/partials/gitinfos.twig.ejs', sourceFolder + '/html/partials/gitinfos.twig');
-				}
+				this.template('source/html/partials/gitinfos.twig.ejs', sourceFolder + '/html/partials/gitinfos.twig');
 			}
 
 			// Optional pre-commit hook
@@ -603,15 +552,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			// Optional Form Framework
 			if (this.config.get('formFramework'))
 			{
-				if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
-				{
-					this.template('source/assemble/pages/forms.hbs.ejs', sourceFolder + '/assemble/pages/forms.hbs');
-				}
-				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
-				{
-					this.template('source/html/pages/forms.twig.ejs', sourceFolder + '/html/pages/forms.twig');
-				}
-
+				this.template('source/html/pages/forms.twig.ejs', sourceFolder + '/html/pages/forms.twig');
 				this.template('source/sass/blocks/_forms.scss.ejs', sourceFolder + '/sass/blocks/_forms.scss');
 				this.src.copy('source/img/bgs/form-select-arrow-down.svg', sourceFolder + '/img/bgs/form-select-arrow-down.svg');
 			}
@@ -649,14 +590,7 @@ var NikitaGenerator = yeoman.generators.Base.extend({
 			}
 			else
 			{
-				if (this.config.get('staticPageGenerator').indexOf('assemble') !== -1)
-				{
-					this.template('source/assemble/partials/slider.hbs.ejs', sourceFolder + '/assemble/partials/slider.hbs');
-				}
-				if (this.config.get('staticPageGenerator').indexOf('twigRender') !== -1)
-				{
-					this.template('source/html/partials/slider.twig.ejs', sourceFolder + '/html/partials/slider.twig');
-				}
+				this.template('source/html/partials/slider.twig.ejs', sourceFolder + '/html/partials/slider.twig');
 				this.template('source/js/Slider.jsb.js.ejs', sourceFolder + '/js/Slider.jsb.js');
 				this.template('source/sass/blocks/_slider.scss.ejs', sourceFolder + '/sass/blocks/_slider.scss');
 			}

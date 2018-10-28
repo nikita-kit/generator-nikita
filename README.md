@@ -44,8 +44,8 @@ Feel free to re-run the generator to add or remove features.
 - [__Grunt__](http://gruntjs.com/) – Javascript task runner
 - [__Webpack__](https://webpack.js.org/) – module bundler
 - [__Babel__](https://babeljs.io/) – compiler for ES6 Javascript
-- [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) or [__Assemble__](http://assemble.io/) – static site generator
-- [__React__](https://reactjs.org/) or [__JSB__](https://github.com/DracoBlue/jsb/) - Javascript Framework
+- [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) – static site generator
+- [__React__](https://reactjs.org/) or [__JSB__](https://github.com/DracoBlue/jsb/) - JS framework
 - [__SASS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – css preprocessing
 - [__PostCSS__](http://postcss.org/) – css postprocessing
 - [__Jest__](https://facebook.github.io/jest/) – JS testing framework

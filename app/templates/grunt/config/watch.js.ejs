@@ -27,10 +27,8 @@ module.exports = {
         files: ['<%%= paths.src %>/js/**/*', '<%%= paths.src %>/components/**/*.{js,ejs}', '!<%%= paths.src %>/components/**/*.test.js'],
         tasks: ['webpack:dev']
     },
-    html: {<% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
-        files: ['<%%= paths.src %>/assemble/**/*.{json,hbs}', '<%%= paths.src %>/components/**/*.hbs'],
-        tasks: ['assemble:dev', 'prettify:dev']<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
+    html: {
         files: ['<%%= paths.src %>/html/**/*.{json,yml,yaml,twig}', '<%%= paths.src %>/components/**/*.twig'],
-        tasks: ['twigRender:dev', 'prettify:dev']<% } %>
+        tasks: ['twigRender:dev', 'prettify:dev']
     }
 };

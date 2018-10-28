@@ -3,6 +3,7 @@
 * added react.js
 * made jsb optional
 * fixed browserSync page reload when js files are changing
+* removed assemble
 
 # 4.0.2 (2018/03/27)
 
