@@ -9,7 +9,7 @@ var os = require('os');
 var defaultTimeout = 10000;
 var buildTimeout = 5 * 60 * 1000;
 
-describe('nikita:app:custom-twigRender', function () {
+describe('nikita:app:custom', function () {
 	this.timeout(defaultTimeout);
 	before(function (done) {
 		helpers.run(path.join(__dirname, '../app'))
@@ -17,7 +17,6 @@ describe('nikita:app:custom-twigRender', function () {
 			.withOptions({ 'skipInstall': true })
 			.withPrompt({
 				template: "web-app",
-				staticPageGenerator: "twigRender",
 				private: true,
 				name: "testrun" + (new Date()).getTime(),
 				nikitaCssMixins: [],
@@ -38,39 +37,6 @@ describe('nikita:app:custom-twigRender', function () {
 			'source/js/_main.js',
 			'source/sass/styles.scss',
 			'source/html/pages/index.twig'
-		]);
-	});
-});
-
-describe('nikita:app:custom-assemble', function () {
-	this.timeout(defaultTimeout);
-	before(function (done) {
-		helpers.run(path.join(__dirname, '../app'))
-			.inDir(path.join(os.tmpdir(), './temp-test'))
-			.withOptions({ 'skipInstall': true })
-			.withPrompt({
-				template: "web-app",
-				staticPageGenerator: "assemble",
-				private: true,
-				name: "testrun" + (new Date()).getTime(),
-				nikitaCssMixins: [],
-				useBuildFolders: true,
-				nikitaCssExtends: [],
-				features: [],
-				addons: []
-			})
-			.on('end', done);
-	});
-
-	it('creates files', function () {
-		assert.file([
-			'package.json',
-			'Gruntfile.js',
-			'grunt/aliases.js',
-			'grunt/config/assemble.js',
-			'source/js/_main.js',
-			'source/sass/styles.scss',
-			'source/assemble/pages/index.hbs',
 		]);
 	});
 });
