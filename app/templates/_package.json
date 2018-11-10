@@ -73,5 +73,6 @@
 		"webpack": "3.8.1",
 		"webpack-bundle-analyzer": "2.9.0",
 		"webpack-dev-server": "2.9.3"
-	}
+	},
+	"private": true
 }
