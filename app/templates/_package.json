@@ -1,7 +1,7 @@
 {
     "readmeFilename": "NIKITA-README.md",
 	"engines" : {
-		"node" : ">=4.0"
+		"node" : ">=6.0"
 	},
 	"scripts": {
 		"grunt": "grunt",

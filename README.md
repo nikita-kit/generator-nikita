@@ -91,10 +91,9 @@ yo nikita
 
 ```
 Your project name
-Is this project private?
 ```
 
-These answers will set the corresponding values in the generated package.json.
+These answer will set the corresponding value in the generated package.json.
 
 &nbsp;
 
