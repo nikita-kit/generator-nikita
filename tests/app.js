@@ -71,7 +71,7 @@ describe('generator-nikita:web-app-jsb', () => {
             'grunt/config/twigRender.js',
             'source/js/_main.js',
             'source/js/app.js',
-            'source/components/sample/sample.jsb.js',
+            'source/components/sample/Sample.jsb.js',
             'source/sass/styles.scss',
             'source/html/pages/index.twig',
         ]);
