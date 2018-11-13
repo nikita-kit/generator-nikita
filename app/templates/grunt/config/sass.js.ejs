@@ -3,26 +3,26 @@ module.exports = {
         options: {
             outputStyle: 'nested',
             sourceMap: true,
-            includePaths: ['<%%= paths.src %>/sass']
+            includePaths: ['<%%= paths.src %>/scss']
         },
         files: [{
             expand: true,
             cwd: '<%%= paths.tmp %>',
-            dest: '<%%= paths.dev %>/generated',
+            dest: '<%%= paths.static %>/generated',
             src: ['*.scss'],
             ext: '.css'
         }]
     },
     dist: {
         options: {
-            outputStyle: 'nested', // minifying by cssmin-task
+            outputStyle: 'nested', // minifying by csso
             sourceMap: false,
-            includePaths: ['<%%= paths.src %>/sass']
+            includePaths: ['<%%= paths.src %>/scss']
         },
         files: [{
             expand: true,
             cwd: '<%%= paths.tmp %>',
-            dest: '<%%= paths.dist %>/generated',
+            dest: '<%%= paths.static %>/generated',
             src: ['*.scss'],
             ext: '.css'
         }]

@@ -1,11 +1,8 @@
-node_modules<% if (!config.get('useBuildFolders')) { %>
-<%= config.get('sourceFolder') %>/generated
-<%= config.get('sourceFolder') %>/*.html<% } else { %>
-build
-dist<% } %>
+node_modules
+<%= config.get('rootFolder') %>static/generated
+<%= config.get('rootFolder') %>static/**/*.html
 reports
 tmp
-
 .DS_Store
 .idea
 .vscode

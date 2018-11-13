@@ -1,7 +1,8 @@
 {
     "readmeFilename": "NIKITA-README.md",
 	"engines" : {
-		"node" : ">=6.0"
+		"node" : ">=6.0",
+		"npm" : ">=5.0"
 	},
 	"scripts": {
 		"grunt": "grunt",
@@ -32,7 +33,6 @@
 		"grunt-browser-sync": "2.2.0",
 		"grunt-concurrent": "2.3.1",
 		"grunt-contrib-clean": "1.1.0",
-		"grunt-contrib-copy": "1.0.0",
 		"grunt-contrib-imagemin": "2.0.1",
 		"grunt-contrib-uglify": "3.1.0",
 		"grunt-contrib-watch": "1.0.0",

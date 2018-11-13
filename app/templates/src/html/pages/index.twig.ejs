@@ -4,12 +4,12 @@
 {% block description %}This is the startpage of your prototype{% endblock %}
 
 {% block body %}
-<% if (config.get('addons').indexOf('slider') != -1) { %>
+<% if (config.get('addons').includes('slider')) { %>
 	{% include 'partials::slider.twig' %}
 <% } %><% if (config.get('jsFramework') === 'jsb') { %>
     <p>Congratulations, the prototype was built successfully! :)</p>
 	{% include 'components::sample/sample.twig' %}
-<% } %><% if (config.get('addons').indexOf('selectTwo') != -1) { %>
+<% } %><% if (config.get('addons').includes('selectTwo')) { %>
 	<select id="ref-select" class="select jsb_ jsb_SelectTwo" name="select" required="required">
 		<option disabled="disabled" selected="selected" value="">Please choose:</option>
 		<option value="option 1">option 1</option>

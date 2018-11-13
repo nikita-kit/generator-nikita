@@ -1,4 +1,3 @@
-
 const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
@@ -39,9 +38,9 @@ describe('generator-nikita:app', () => {
             'Gruntfile.js',
             'grunt/aliases.js',
             'grunt/config/twigRender.js',
-            'source/js/_main.js',
-            'source/sass/styles.scss',
-            'source/html/pages/index.twig',
+            'src/js/_main.js',
+            'src/scss/styles.scss',
+            'src/html/pages/index.twig',
         ]);
     });
 });
@@ -69,11 +68,11 @@ describe('generator-nikita:web-app-jsb', () => {
             'Gruntfile.js',
             'grunt/aliases.js',
             'grunt/config/twigRender.js',
-            'source/js/_main.js',
-            'source/js/app.js',
-            'source/components/sample/Sample.jsb.js',
-            'source/sass/styles.scss',
-            'source/html/pages/index.twig',
+            'src/js/_main.js',
+            'src/js/app.js',
+            'src/components/sample/Sample.jsb.js',
+            'src/scss/styles.scss',
+            'src/html/pages/index.twig',
         ]);
 
         if (process.env.TEMPLATE === 'web-app') {
@@ -109,13 +108,13 @@ describe('generator-nikita:web-app-react', () => {
             'Gruntfile.js',
             'grunt/aliases.js',
             'grunt/config/twigRender.js',
-            'source/js/_main.js',
-            'source/js/App.js',
-            'source/js/Store.js',
-            'source/components/sample/Sample.js',
-            'source/components/counter/Counter.js',
-            'source/sass/styles.scss',
-            'source/html/pages/index.twig',
+            'src/js/_main.js',
+            'src/js/App.js',
+            'src/js/Store.js',
+            'src/components/sample/Sample.js',
+            'src/components/counter/Counter.js',
+            'src/scss/styles.scss',
+            'src/html/pages/index.twig',
         ]);
 
         if (process.env.TEMPLATE === 'web-app') {
@@ -144,8 +143,8 @@ describe('generator-nikita:symfony', () => {
             'package.json',
             'Gruntfile.js',
             'grunt/aliases.js',
-            'web/static/js/_main.js',
-            'web/static/sass/styles.scss',
+            'web/src/js/_main.js',
+            'web/src/scss/styles.scss',
         ]);
 
         if (process.env.TEMPLATE === 'symfony') {
@@ -174,8 +173,8 @@ describe('generator-nikita:wordpress', () => {
             'package.json',
             'Gruntfile.js',
             'grunt/aliases.js',
-            'static/js/_main.js',
-            'static/sass/styles.scss',
+            'web/src/js/_main.js',
+            'web/src/scss/styles.scss',
         ]);
 
         if (process.env.TEMPLATE === 'wordpress') {
@@ -209,8 +208,8 @@ describe('generator-nikita:spring-boot', () => {
             'Gruntfile.js',
             'grunt/aliases.js',
             `src/main/java/groupId/testrun${timestamp}/Testrun${timestamp}Application.java`,
-            'src/main/resources/static/sass/styles.scss',
-            'src/main/resources/static/js/_main.js',
+            'src/main/resources/web/src/scss/styles.scss',
+            'src/main/resources/web/src/js/_main.js',
         ]);
 
         if (process.env.TEMPLATE === 'spring-boot') {

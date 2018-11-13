@@ -6,10 +6,10 @@ module.exports = function (grunt, options) {
                 processors: [
                     require('autoprefixer')({
                         browsers: options.browserslist
-                    })
-                ]
+                    }),
+                ],
             },
-            src: '<%%= paths.dev %>/generated/*.css'
+            src: '<%%= paths.static %>/generated/*.css',
         },
         dist: {
             options: {
@@ -17,10 +17,10 @@ module.exports = function (grunt, options) {
                     require('autoprefixer')({
                         browsers: options.browserslist
                     }),
-                    require('postcss-csso')()
-                ]
+                    require('postcss-csso')(),
+                ],
             },
-            src: '<%%= paths.dist %>/generated/*.css'
+            src: '<%%= paths.static %>/generated/*.css',
         }
     }
 };

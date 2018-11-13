@@ -6,7 +6,7 @@ module.exports = function (grunt) {
                 'layouts': '<%%= paths.src %>/html/layouts/',
                 'partials': '<%%= paths.src %>/html/partials/',
                 'components': '<%%= paths.src %>/components/',
-                'macros': '<%%= paths.src %>/html/macros/'
+                'macros': '<%%= paths.src %>/html/macros/',
             },
             extensions: [
                 function(Twig) {
@@ -19,21 +19,21 @@ module.exports = function (grunt) {
                             return grunt.file.readJSON(namespacePath);
                         }
                     });
-                }
-            ]
+                },
+            ],
         },
         dev: {
             files: [
                 {
                     data: {
                         production: false,
-                        currentTimestamp: (new Date()).getTime()
+                        currentTimestamp: (new Date()).getTime(),
                     },
                     expand: true,
                     cwd: '<%%= paths.src %>/html/pages/',
                     src: ['**/*.twig'],
-                    dest: '<%%= paths.dev %>/',
-                    ext: '.html'
+                    dest: '<%%= paths.static %>/',
+                    ext: '.html',
                 }
             ]
         },
@@ -41,7 +41,7 @@ module.exports = function (grunt) {
             files: [
                 {
                     data: [
-                        <% if (config.get('features').indexOf('gitinfos') != -1) { %>'<%%= paths.tmp %>/gitinfos.json',<% } %>
+                        <% if (config.get('features').includes('gitinfos')) { %>'<%%= paths.tmp %>/gitinfos.json',<% } %>
                         {
                             production: true,
                             currentTimestamp: (new Date()).getTime(),
@@ -50,8 +50,8 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: '<%%= paths.src %>/html/pages/',
                     src: ['**/*.twig'],
-                    dest: '<%%= paths.dist %>/',
-                    ext: '.html'
+                    dest: '<%%= paths.static %>/',
+                    ext: '.html',
                 }
             ]
         }

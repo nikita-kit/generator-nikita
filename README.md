@@ -46,7 +46,7 @@ Feel free to re-run the generator to add or remove features.
 - [__Babel__](https://babeljs.io/) – compiler for ES6 Javascript
 - [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) – static site generator
 - [__React__](https://reactjs.org/) or [__JSB__](https://github.com/DracoBlue/jsb/) - JS framework
-- [__SASS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – css preprocessing
+- [__SCSS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – css preprocessing
 - [__PostCSS__](http://postcss.org/) – css postprocessing
 - [__Jest__](https://facebook.github.io/jest/) – JS testing framework
 - [__ESLint__](http://eslint.org/) – linter for JS files
@@ -115,29 +115,28 @@ Customize this template?
 ```
 
 Answer `Yes` to customize the nikita default options.
-This will ask you several questions which Features, Mixins, Extends and Librarys to add.
+This will ask you several questions which features, mixins, extends and libraries to add.
 
 &nbsp;
 
 ```
-Do you want to use source+build+dist folders or one custom source folder?
+Which root folder do you want to use?
 ```
 
-This question appears only when you chose `Web-App setup` before.
-Here it is recommended to answer `Yes` because using source+build+dist folders provides a better separation of concerns.
-If you answer `No` you get asked for the custom source folder path later on.
+Here you can just hit enter to keep the template default root folder or enter a custom folder.
+In this specified folder, the `src` and `static` folders gets created.
 
 
 ## Templates
 
 ### Web-App
 
-This is the standard template for stand-alone web apps.
-You can choose if you want to use `source+build+dist` folders or one custom source folder.
+This is the standard template for stand-alone web apps. The root folder is your project directory by default.
+
 
 ### Symfony
 
-The Symfony template sets the source folder to `web/static`.
+The Symfony template sets the root folder to `web/`.
 
 To use the nikita build files, just add something like following lines to your base.html.twig file:
 ```html
@@ -147,18 +146,18 @@ To use the nikita build files, just add something like following lines to your b
 
 ### Wordpress
 
-The Wordpress template sets the source folder to `static/`.
+The Wordpress template sets the source folder to `web/`.
 In addition to nikita generator defaults, jQuery is added.
 
-To use the nikita build files, just enqueue them in your wordpress template like this:
+To use the nikita build files (e.g. `web/static/generated/main.js` and `web/static/generated/styles.css`), just enqueue them in your wordpress theme like this:
 ```php
-wp_enqueue_script('main.js', rtrim(WP_HOME, '/') . '/static/generated/main.js', array(), '1.0', false);
-wp_enqueue_style('styles.css', rtrim(WP_HOME, '/') . '/static/generated/styles.css', array(), '1.0', 'all');
+wp_enqueue_script('main.js', rtrim(WP_HOME, '/') . '/web/static/generated/main.js', array(), '1.0', false);
+wp_enqueue_style('styles.css', rtrim(WP_HOME, '/') . '/web/static/generated/styles.css', array(), '1.0', 'all');
 ```
 
 ### Spring Boot
 
-The Spring Boot template sets the source folder to `src/main/resources/static`.
+The Spring Boot template sets the source folder to `src/main/resources/web/`.
 In addition, the files `Application.java` and `pom.xml` are generated.
 Therefor you were ask for Java groupId, Java version and Spring Boot version.
 

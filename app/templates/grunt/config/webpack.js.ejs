@@ -16,11 +16,11 @@ module.exports = function (grunt, options) {
             options: {
                 cache: true,
                 entry: {
-                    main: './<%%= paths.src %>/js/_main.js'
+                    main: './<%%= paths.src %>/js/_main.js',
                 },
                 output: {
                     filename: '[name].js',
-                    chunkFilename: '[chunkhash].pkg.js'
+                    chunkFilename: '[chunkhash].pkg.js',
                 },
                 module: {
                     exprContextCritical: false,
@@ -66,12 +66,12 @@ module.exports = function (grunt, options) {
                         {
                             test: /\.scss$/,
                             use: ['style-loader', 'css-loader', 'sass-loader']
-                        }
-                    ]
+                        },
+                    ],
                 },
                 resolve: {
-                    modules: ['<%%= paths.src %>/js', '<%%= paths.src %>/components', 'node_modules']
-                }
+                    modules: ['<%%= paths.src %>/js', '<%%= paths.src %>/components', 'node_modules'],
+                },
             },
             analyze: {
                 watch: true,
@@ -79,22 +79,22 @@ module.exports = function (grunt, options) {
                     maxModules: 99999,
                 },
                 output: {
-                    path: path.resolve('<%%= paths.tmp %>/js/')
+                    path: path.resolve('<%%= paths.tmp %>/js/'),
                 },
-                plugins: plugins.concat([new BundleAnalyzerPlugin()])
+                plugins: plugins.concat([new BundleAnalyzerPlugin()]),
             },
             dev: {
                 devtool: 'sourcemap',
                 output: {
-                    path: path.resolve('<%%= paths.dev %>/generated/')
+                    path: path.resolve('<%%= paths.static %>/generated/'),
                 },
-                plugins: plugins
+                plugins: plugins,
             },
             dist: {
                 output: {
-                    path: path.resolve('<%%= paths.dist %>/generated/')
+                    path: path.resolve('<%%= paths.static %>/generated/'),
                 },
-                plugins: plugins
+                plugins: plugins,
             }
         };
     })()

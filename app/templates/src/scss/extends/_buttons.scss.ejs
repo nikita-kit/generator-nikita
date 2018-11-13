@@ -2,7 +2,7 @@
 
 
 // Standard Button-Placeholder
-%btn {<% if (config.get('nikitaCssMixins').indexOf('font-smoothing') != -1) { %>
+%btn {<% if (config.get('nikitaCssMixins').includes('font-smoothing')) { %>
     @include font-smoothing(on);
 <%}%>
     position: relative;

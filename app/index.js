@@ -7,11 +7,12 @@ module.exports = class extends Generator {
 
     initializing() {
         this.pkg = require('../package.json');
+        this.isFirstRun = !this.config.get('template');
 
         const generatedVersion = this.config.get('version');
         const selfVersion = this.pkg.version;
 
-        if (generatedVersion && selfVersion && compareVersions(selfVersion, generatedVersion) === -1) {
+        if (generatedVersion && selfVersion && compareVersions(selfVersion, generatedVersion)) {
             this.env.error(
                 `${chalk.red.bold('Error:')} Your generator-nikita is too old (Version ${chalk.yellow(selfVersion)})!\n` +
                 `This nikita kickstarter was generated with version ${chalk.yellow(generatedVersion)}, so update\n` +
@@ -72,17 +73,15 @@ module.exports = class extends Generator {
     }
 
     _handleMainPrompts(answers) {
-        const isFirstRun = !this.config.get('template');
         this.config.set(answers);
 
         /* set defaults on first run only */
-        if (isFirstRun) {
+        if (this.isFirstRun) {
             this.config.set({
-                askBuildFolders: true,
+                rootFolder: '',
                 features: [
                     'webfonts',
                     'svgBackgrounds',
-                    'gitinfos',
                     'preCommitHook',
                 ],
                 nikitaCssMixins: ['respond-to'],
@@ -90,23 +89,14 @@ module.exports = class extends Generator {
                 addons: [],
             });
 
-            if (this.config.get('template') === 'wordpress') {
+            if (this.config.get('template') === 'spring-boot') {
+                this.config.set('rootFolder', 'src/main/resources/web');
+            } else if (this.config.get('template') === 'symfony') {
+                this.config.set('rootFolder', 'web');
+            } else if (this.config.get('template') === 'wordpress') {
+                this.config.set('rootFolder', 'web');
                 this.config.set('addons', ['jQuery']);
             }
-        }
-
-        if (this.config.get('template') === 'spring-boot') {
-            this.config.set('sourceFolder', 'src/main/resources/static');
-            this.config.set('useBuildFolders', false);
-            this.config.set('askBuildFolders', false);
-        } else if (this.config.get('template') === 'symfony') {
-            this.config.set('sourceFolder', 'web/static');
-            this.config.set('useBuildFolders', false);
-            this.config.set('askBuildFolders', false);
-        } else if (this.config.get('template') === 'wordpress') {
-            this.config.set('sourceFolder', 'static');
-            this.config.set('useBuildFolders', false);
-            this.config.set('askBuildFolders', false);
         }
     }
 
@@ -118,22 +108,12 @@ module.exports = class extends Generator {
                 this._promptInput('springBootVersion', 'spring boot version', '1.4.2'),
             ];
         }
-        if (this.config.get('askBuildFolders') && this.config.get('custom')) {
-            return [this._promptConfirm('useBuildFolders', 'Do you want to use source+build+dist folders or one custom source folder?', true)];
-        }
 
         return [];
     }
 
     _handleTemplateSpecificPrompts(answers) {
         this.config.set(answers);
-
-        if (!this.config.get('useBuildFolders')) {
-            this.config.set('askBuildFolders', false);
-            this.config.set('cleanBuildFolders', false);
-        } else {
-            this.config.set('cleanBuildFolders', true);
-        }
     }
 
     _getCustomizePrompts() {
@@ -143,8 +123,8 @@ module.exports = class extends Generator {
             return [];
         }
 
-        if (!this.config.get('useBuildFolders')) {
-            customPrompts.push(this._promptInput('sourceFolder', 'Which source folder do you want to use?', 'source'));
+        if (this.isFirstRun) {
+            customPrompts.push(this._promptInput('rootFolder', 'Which root folder do you want to use?', this.config.get('rootFolder')));
         }
 
         customPrompts = customPrompts.concat([
@@ -222,8 +202,9 @@ module.exports = class extends Generator {
     _handleCustomizePrompts(answers) {
         this.config.set(answers);
 
-        /* remove sourceFolder trailing slash */
-        this.config.set('sourceFolder', (this.config.get('sourceFolder') || '').replace(/\/$/, ''));
+        /* add trailing slash to root folder if not empty */
+        const rootFolder = this.config.get('rootFolder') || '';
+        this.config.set('rootFolder', (rootFolder.endsWith('/') || rootFolder.length === 0) ? rootFolder : `${rootFolder}/`);
     }
 
     _getCustomLibrariesPrompts() {
@@ -312,15 +293,15 @@ module.exports = class extends Generator {
         packageJsonData.name = this.config.get('name');
 
         const isReact = (this.config.get('jsFramework') === 'react');
-        const sourceFolder = (this.config.get('useBuildFolders')) ? 'source' : this.config.get('sourceFolder');
+        const rootFolder = this.config.get('rootFolder');
 
-        // Standard Files & Folders
+        // Standard Files
         this._copyTemplate('.gitignore.ejs', '.gitignore');
         this._copyTemplate('Gruntfile.js.ejs', 'Gruntfile.js');
         this._copyTemplate('NIKITA-LICENSE.md.ejs', 'NIKITA-LICENSE.md');
         this._copyTemplate('NIKITA-README.md.ejs', 'NIKITA-README.md');
 
-        // grunt Config Files
+        // grunt Files
         this._copyTemplate('grunt/aliases.js.ejs', 'grunt/aliases.js');
         this._copyTemplate('grunt/tasks/sass-globbing.js.ejs', 'grunt/tasks/sass-globbing.js');
         this._copyTemplate('grunt/tasks/jest.js.ejs', 'grunt/tasks/jest.js');
@@ -328,7 +309,6 @@ module.exports = class extends Generator {
         this._copyTemplate('grunt/config/browserSync.js.ejs', 'grunt/config/browserSync.js');
         this._copyTemplate('grunt/config/clean.js.ejs', 'grunt/config/clean.js');
         this._copyTemplate('grunt/config/concurrent.js.ejs', 'grunt/config/concurrent.js');
-        this._copyTemplate('grunt/config/copy.js.ejs', 'grunt/config/copy.js');
         this._copyTemplate('grunt/config/eslint.js.ejs', 'grunt/config/eslint.js');
         this._copyTemplate('grunt/config/htmlhint.js.ejs', 'grunt/config/htmlhint.js');
         this._copyTemplate('grunt/config/imagemin.js.ejs', 'grunt/config/imagemin.js');
@@ -340,128 +320,124 @@ module.exports = class extends Generator {
         this._copyTemplate('grunt/config/stylelint.js.ejs', 'grunt/config/stylelint.js');
         this._copyTemplate('grunt/config/svgmin.js.ejs', 'grunt/config/svgmin.js');
         this._copyTemplate('grunt/config/sync.js.ejs', 'grunt/config/sync.js');
+        this._copyTemplate('grunt/config/twigRender.js.ejs', 'grunt/config/twigRender.js');
         this._copyTemplate('grunt/config/uglify.js.ejs', 'grunt/config/uglify.js');
         this._copyTemplate('grunt/config/watch.js.ejs', 'grunt/config/watch.js');
         this._copyTemplate('grunt/config/webpack.js.ejs', 'grunt/config/webpack.js');
 
         // Test Files
         if (isReact) {
-            this._copyTemplate('source/tests-react/jest.setup.js.ejs', `${sourceFolder}/tests/jest.setup.js`);
-            this._copyTemplate('source/tests-react/jest.transform.js.ejs', `${sourceFolder}/tests/jest.transform.js`);
-            this._copyTemplate('source/tests-react/App.test.js.ejs', `${sourceFolder}/tests/App.test.js`);
+            this._copyTemplate('src/tests-react/setup/jest.setup.js.ejs', `${rootFolder}src/tests/setup/jest.setup.js`);
+            this._copyTemplate('src/tests-react/setup/jest.transform.js.ejs', `${rootFolder}src/tests/setup/jest.transform.js`);
+            this._copyTemplate('src/tests-react/App.test.js.ejs', `${rootFolder}src/tests/App.test.js`);
         } else {
-            this._copyTemplate('source/tests-jsb/jest.setup.js.ejs', `${sourceFolder}/tests/jest.setup.js`);
-            this._copyTemplate('source/tests-jsb/jest.transform.js.ejs', `${sourceFolder}/tests/jest.transform.js`);
-            this._copyTemplate('source/tests-jsb/jest.transform-ejs.js.ejs', `${sourceFolder}/tests/jest.transform-ejs.js`);
-            this._copyTemplate('source/tests-jsb/App.test.js.ejs', `${sourceFolder}/tests/App.test.js`);
+            this._copyTemplate('src/tests-jsb/setup/jest.setup.js.ejs', `${rootFolder}src/tests/setup/jest.setup.js`);
+            this._copyTemplate('src/tests-jsb/setup/jest.transform.js.ejs', `${rootFolder}src/tests/setup/jest.transform.js`);
+            this._copyTemplate('src/tests-jsb/setup/jest.transform-ejs.js.ejs', `${rootFolder}src/tests/setup/jest.transform-ejs.js`);
+            this._copyTemplate('src/tests-jsb/App.test.js.ejs', `${rootFolder}src/tests/App.test.js`);
         }
 
-        // Basic Project Folders
-        this._copy('source/img/appicons', `${sourceFolder}/img/appicons`);
+        // images Folder
+        this._copy('static/img/appicons', `${rootFolder}static/img/appicons`);
+        this._copyTemplate('static/img/temp/README.md.ejs', `${rootFolder}static/img/temp/README.md`);
 
-        // SASS Basic Files
-        this._copyTemplate('source/sass/styles.scss.ejs', `${sourceFolder}/sass/styles.scss`);
-        this._copyTemplate('source/sass/_basics.scss.ejs', `${sourceFolder}/sass/_basics.scss`);
+        // SCSS Basic Files
+        this._copyTemplate('src/scss/styles.scss.ejs', `${rootFolder}src/scss/styles.scss`);
+        this._copyTemplate('src/scss/_basics.scss.ejs', `${rootFolder}src/scss/_basics.scss`);
 
-        // SASS Extra Files
-        this._copyTemplate('source/sass/blocks/_header.scss.ejs', `${sourceFolder}/sass/blocks/_header.scss`);
-        this._copyTemplate('source/sass/blocks/_footer.scss.ejs', `${sourceFolder}/sass/blocks/_footer.scss`);
-        this._copyTemplate('source/sass/extends/.gitkeep', `${sourceFolder}/sass/extends/.gitkeep`);
-        this._copyTemplate('source/sass/extends/_buttons.scss.ejs', `${sourceFolder}/sass/extends/_buttons.scss`);
+        // SCSS Extra Files
+        this._copyTemplate('src/scss/blocks/_header.scss.ejs', `${rootFolder}src/scss/blocks/_header.scss`);
+        this._copyTemplate('src/scss/blocks/_footer.scss.ejs', `${rootFolder}src/scss/blocks/_footer.scss`);
+        this._copyTemplate('src/scss/extends/_buttons.scss.ejs', `${rootFolder}src/scss/extends/_buttons.scss`);
 
-        // SASS Variables
-        this._copyTemplate('source/sass/variables/_color.scss.ejs', `${sourceFolder}/sass/variables/_color.scss`);
-        this._copyTemplate('source/sass/variables/_timing.scss.ejs', `${sourceFolder}/sass/variables/_timing.scss`);
-        this._copyTemplate('source/sass/variables/_typography.scss.ejs', `${sourceFolder}/sass/variables/_typography.scss`);
+        // SCSS Variables
+        this._copyTemplate('src/scss/variables/_color.scss.ejs', `${rootFolder}src/scss/variables/_color.scss`);
+        this._copyTemplate('src/scss/variables/_timing.scss.ejs', `${rootFolder}src/scss/variables/_timing.scss`);
+        this._copyTemplate('src/scss/variables/_typography.scss.ejs', `${rootFolder}src/scss/variables/_typography.scss`);
 
         // JS Files
         if (isReact) {
-            this._copyTemplate('source/js-react/_main.js.ejs', `${sourceFolder}/js/_main.js`);
-            this._copyTemplate('source/js-react/App.js.ejs', `${sourceFolder}/js/App.js`);
-            this._copyTemplate('source/js-react/Store.js.ejs', `${sourceFolder}/js/Store.js`);
+            this._copyTemplate('src/js-react/_main.js.ejs', `${rootFolder}src/js/_main.js`);
+            this._copyTemplate('src/js-react/App.js.ejs', `${rootFolder}src/js/App.js`);
+            this._copyTemplate('src/js-react/Store.js.ejs', `${rootFolder}src/js/Store.js`);
         } else {
-            this._copyTemplate('source/js-jsb/_main.js.ejs', `${sourceFolder}/js/_main.js`);
-            this._copyTemplate('source/js-jsb/app.js.ejs', `${sourceFolder}/js/app.js`);
+            this._copyTemplate('src/js-jsb/_main.js.ejs', `${rootFolder}src/js/_main.js`);
+            this._copyTemplate('src/js-jsb/app.js.ejs', `${rootFolder}src/js/app.js`);
         }
 
         // Sample Component Files
         if (isReact) {
-            this._copyTemplate('source/components-react/sample/Sample.js.ejs', `${sourceFolder}/components/sample/Sample.js`);
-            this._copyTemplate('source/components-react/sample/Sample.test.js.ejs', `${sourceFolder}/components/sample/Sample.test.js`);
-            this._copyTemplate('source/components-react/sample/_sample.scss.ejs', `${sourceFolder}/components/sample/_sample.scss`);
-            this._copyTemplate('source/components-react/counter/Counter.js.ejs', `${sourceFolder}/components/counter/Counter.js`);
-            this._copyTemplate('source/components-react/counter/Counter.test.js.ejs', `${sourceFolder}/components/counter/Counter.test.js`);
-            this._copyTemplate('source/components-react/counter/_counter.scss.ejs', `${sourceFolder}/components/counter/_counter.scss`);
+            this._copyTemplate('src/components-react/sample/Sample.js.ejs', `${rootFolder}src/components/sample/Sample.js`);
+            this._copyTemplate('src/components-react/sample/Sample.test.js.ejs', `${rootFolder}src/components/sample/Sample.test.js`);
+            this._copyTemplate('src/components-react/sample/_sample.scss.ejs', `${rootFolder}src/components/sample/_sample.scss`);
+            this._copyTemplate('src/components-react/counter/Counter.js.ejs', `${rootFolder}src/components/counter/Counter.js`);
+            this._copyTemplate('src/components-react/counter/Counter.test.js.ejs', `${rootFolder}src/components/counter/Counter.test.js`);
+            this._copyTemplate('src/components-react/counter/_counter.scss.ejs', `${rootFolder}src/components/counter/_counter.scss`);
         } else {
-            this._copyTemplate('source/components-jsb/sample/Sample.jsb.js.ejs', `${sourceFolder}/components/sample/Sample.jsb.js`);
-            this._copyTemplate('source/components-jsb/sample/SampleTemplate.ejs.ejs', `${sourceFolder}/components/sample/SampleTemplate.ejs`);
-            this._copyTemplate('source/components-jsb/sample/Sample.jsb.test.js.ejs', `${sourceFolder}/components/sample/Sample.jsb.test.js`);
-            this._copyTemplate('source/components-jsb/sample/_sample.scss.ejs', `${sourceFolder}/components/sample/_sample.scss`);
+            this._copyTemplate('src/components-jsb/sample/Sample.jsb.js.ejs', `${rootFolder}src/components/sample/Sample.jsb.js`);
+            this._copyTemplate('src/components-jsb/sample/SampleTemplate.ejs.ejs', `${rootFolder}src/components/sample/SampleTemplate.ejs`);
+            this._copyTemplate('src/components-jsb/sample/Sample.jsb.test.js.ejs', `${rootFolder}src/components/sample/Sample.jsb.test.js`);
+            this._copyTemplate('src/components-jsb/sample/_sample.scss.ejs', `${rootFolder}src/components/sample/_sample.scss`);
         }
 
         // twigRender
-        this._copyTemplate('grunt/config/twigRender.js.ejs', 'grunt/config/twigRender.js');
-        this._copyTemplate('source/html/README.md.ejs', `${sourceFolder}/html/README.md`);
-        this._copyTemplate('source/html/data/.gitkeep', `${sourceFolder}/html/data/.gitkeep`);
-        this._copyTemplate('source/html/layouts/master.twig.ejs', `${sourceFolder}/html/layouts/master.twig`);
-        this._copyTemplate('source/html/macros/.gitkeep', `${sourceFolder}/html/macros/.gitkeep`);
-        this._copyTemplate('source/html/pages/index.twig.ejs', `${sourceFolder}/html/pages/index.twig`);
-        this._copyTemplate('source/html/partials/header.twig.ejs', `${sourceFolder}/html/partials/header.twig`);
-        this._copyTemplate('source/html/partials/footer.twig.ejs', `${sourceFolder}/html/partials/footer.twig`);
+        this._copyTemplate('src/html/README.md.ejs', `${rootFolder}src/html/README.md`);
+        this._copyTemplate('src/html/data/.gitkeep', `${rootFolder}src/html/data/.gitkeep`);
+        this._copyTemplate('src/html/layouts/master.twig.ejs', `${rootFolder}src/html/layouts/master.twig`);
+        this._copyTemplate('src/html/macros/.gitkeep', `${rootFolder}src/html/macros/.gitkeep`);
+        this._copyTemplate('src/html/pages/index.twig.ejs', `${rootFolder}src/html/pages/index.twig`);
+        this._copyTemplate('src/html/partials/header.twig.ejs', `${rootFolder}src/html/partials/header.twig`);
+        this._copyTemplate('src/html/partials/footer.twig.ejs', `${rootFolder}src/html/partials/footer.twig`);
         if (!isReact) {
-            this._copyTemplate('source/components-jsb/sample/sample.twig.ejs', `${sourceFolder}/components/sample/sample.twig`);
+            this._copyTemplate('src/components-jsb/sample/sample.twig.ejs', `${rootFolder}src/components/sample/sample.twig`);
         }
 
-        // Image README Files
-        this._copyTemplate('source/img/bgs/README.md.ejs', `${sourceFolder}/img/bgs/README.md`);
-        this._copyTemplate('source/img/dev/README.md.ejs', `${sourceFolder}/img/dev/README.md`);
-        this._copyTemplate('source/img/temp/README.md.ejs', `${sourceFolder}/img/temp/README.md`);
-
-        // Optional Browser Reset SASS-Partial
-        if (this.config.get('features').indexOf('browserReset') !== -1) {
-            this._copyTemplate('source/sass/_reset.scss.ejs', `${sourceFolder}/sass/_reset.scss`);
+        // Optional Browser Reset SCSS-Partial
+        if (this.config.get('features').includes('browserReset')) {
+            this._copyTemplate('src/scss/_reset.scss.ejs', `${rootFolder}src/scss/_reset.scss`);
         }
 
-        // Optional Webfonts folder and SASS-Partial
-        if (this.config.get('features').indexOf('webfonts') !== -1) {
-            this._copy('source/fonts', `${sourceFolder}/fonts`);
-            this._copyTemplate('source/sass/_webfonts.scss.ejs', `${sourceFolder}/sass/_webfonts.scss`);
+        // Optional Webfonts folder and SCSS-Partial
+        if (this.config.get('features').includes('webfonts')) {
+            this._copy('static/fonts', `${rootFolder}static/fonts`);
+            this._copyTemplate('src/scss/_webfonts.scss.ejs', `${rootFolder}src/scss/_webfonts.scss`);
         }
 
         // Optional SVG Backgrounds
-        if (this.config.get('features').indexOf('svgBackgrounds') !== -1) {
+        if (this.config.get('features').includes('svgBackgrounds')) {
             this._copyTemplate('grunt/config/string-replace.js.ejs', 'grunt/config/string-replace.js');
             this._copyTemplate('grunt/config/svgcss.js.ejs', 'grunt/config/svgcss.js');
-            this._copyTemplate('source/sass/mixins/_svg-background.scss.ejs', `${sourceFolder}/sass/mixins/_svg-background.scss`);
+            this._copyTemplate('src/scss/mixins/_svg-background.scss.ejs', `${rootFolder}src/scss/mixins/_svg-background.scss`);
+            this._copyTemplate('src/scss/bg-icons/README.md.ejs', `${rootFolder}src/scss/bg-icons/README.md`);
         } else {
             delete packageJsonData.devDependencies['grunt-svg-css'];
             delete packageJsonData.devDependencies['grunt-string-replace'];
         }
 
         // Optional Gitinfos
-        if (this.config.get('features').indexOf('gitinfos') === -1) {
+        if (!this.config.get('features').includes('gitinfos')) {
             delete packageJsonData.devDependencies['grunt-gitinfos'];
         } else {
             this._copyTemplate('grunt/config/gitinfo.js.ejs', 'grunt/config/gitinfo.js');
             this._copyTemplate('grunt/tasks/write-gitinfos.js.ejs', 'grunt/tasks/write-gitinfos.js');
-            this._copyTemplate('source/html/partials/gitinfos.twig.ejs', `${sourceFolder}/html/partials/gitinfos.twig`);
+            this._copyTemplate('src/html/partials/gitinfos.twig.ejs', `${rootFolder}src/html/partials/gitinfos.twig`);
         }
 
         // Optional pre-commit hook
-        if (this.config.get('features').indexOf('preCommitHook') === -1) {
+        if (!this.config.get('features').includes('preCommitHook')) {
             delete packageJsonData.devDependencies['pre-commit'];
             delete packageJsonData['pre-commit'];
             delete packageJsonData['pre-commit.silent'];
         }
 
         // Optional Layering-Mixin
-        if (this.config.get('nikitaCssMixins').indexOf('layering') !== -1) {
-            this._copyTemplate('source/sass/variables/_z-layers.scss.ejs', `${sourceFolder}/sass/variables/_z-layers.scss`);
+        if (this.config.get('nikitaCssMixins').includes('layering')) {
+            this._copyTemplate('src/scss/variables/_z-layers.scss.ejs', `${rootFolder}src/scss/variables/_z-layers.scss`);
         }
 
         // Optional Respond-To-Mixin
-        if (this.config.get('nikitaCssMixins').indexOf('respond-to') !== -1) {
-            this._copyTemplate('source/sass/variables/_breakpoints.scss.ejs', `${sourceFolder}/sass/variables/_breakpoints.scss`);
+        if (this.config.get('nikitaCssMixins').includes('respond-to')) {
+            this._copyTemplate('src/scss/variables/_breakpoints.scss.ejs', `${rootFolder}src/scss/variables/_breakpoints.scss`);
         }
 
         // jsFramework
@@ -485,24 +461,24 @@ module.exports = class extends Generator {
         }
 
         // Optional jQuery
-        if ((this.config.get('addons').indexOf('jQuery') === -1) && (this.config.get('addons').indexOf('selectTwo') === -1)) {
+        if (!this.config.get('addons').includes('jQuery') && !this.config.get('addons').includes('selectTwo')) {
             delete packageJsonData.devDependencies.jquery;
         }
 
         // Optional Slider
-        if (this.config.get('addons').indexOf('slider') === -1) {
+        if (!this.config.get('addons').includes('slider')) {
             delete packageJsonData.devDependencies.swiper;
         } else {
-            this._copyTemplate('source/html/partials/slider.twig.ejs', `${sourceFolder}/html/partials/slider.twig`);
-            this._copyTemplate('source/js/Slider.jsb.js.ejs', `${sourceFolder}/js/Slider.jsb.js`);
-            this._copyTemplate('source/sass/blocks/_slider.scss.ejs', `${sourceFolder}/sass/blocks/_slider.scss`);
+            this._copyTemplate('src/html/partials/slider.twig.ejs', `${rootFolder}src/html/partials/slider.twig`);
+            this._copyTemplate('src/js/Slider.jsb.js.ejs', `${rootFolder}src/js/Slider.jsb.js`);
+            this._copyTemplate('src/scss/blocks/_slider.scss.ejs', `${rootFolder}src/scss/blocks/_slider.scss`);
         }
 
         // Optional Select2
-        if (this.config.get('addons').indexOf('selectTwo') === -1) {
+        if (!this.config.get('addons').includes('selectTwo')) {
             delete packageJsonData.devDependencies.select2;
         } else {
-            this._copyTemplate('source/js/SelectTwo.jsb.js.ejs', `${sourceFolder}/js/SelectTwo.jsb.js`);
+            this._copyTemplate('src/js/SelectTwo.jsb.js.ejs', `${rootFolder}src/js/SelectTwo.jsb.js`);
         }
 
         if (this.config.get('template') === 'spring-boot') {
@@ -558,6 +534,6 @@ module.exports = class extends Generator {
     }
 
     end() {
-        this.log('ADIOS AMIGO');
+        this.log(chalk.yellow.bold('\nNikita Project Generator run finished!\n'));
     }
 };

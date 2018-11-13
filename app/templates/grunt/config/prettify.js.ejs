@@ -6,6 +6,7 @@ module.exports = {
         indent_inner_html: false,
         max_preserve_newlines: 1,
         preserve_newlines: true,
+        brace_style: 'collapse',
         unformatted: [
             "a",
             "b",
@@ -15,34 +16,15 @@ module.exports = {
             "mark",
             "strong",
             "pre"
-        ]
+        ],
     },
-    dev: {
-        options: {
-            brace_style: 'expand'
-        },
-        files: [
-            {
-                cwd: '<%%= paths.dev %>/',
-                dest: '<%%= paths.dev %>/',
-                expand: true,
-                ext: '.html',
-                src: ['*.html']
-            }
-        ]
+    static: {
+        files: [{
+            cwd: '<%%= paths.satic %>/',
+            dest: '<%%= paths.static %>/',
+            expand: true,
+            ext: '.html',
+            src: ['*.html'],
+        }],
     },
-    dist: {
-        options: {
-            brace_style: 'collapse'
-        },
-        files: [
-            {
-                cwd: '<%%= paths.dist %>/',
-                dest: '<%%= paths.dist %>/',
-                expand: true,
-                ext: '.html',
-                src: ['*.html']
-            }
-        ]
-    }
 };

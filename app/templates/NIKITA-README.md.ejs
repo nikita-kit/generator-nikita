@@ -10,7 +10,7 @@ If you want to know more about our Javascript Coding-Standard, try [nikita.js](h
 
 ## Requirements
 
-- [__Node.js__](http://nodejs.org) >= 4
+- [__Node.js__](http://nodejs.org) >= 6
 - [__Grunt CLI__](http://gruntjs.com/getting-started)(optional) – install with `sudo npm install -g grunt-cli` or use `npm run grunt`
 
 
@@ -22,7 +22,7 @@ If you want to know more about our Javascript Coding-Standard, try [nikita.js](h
 - [__React__](https://reactjs.org/) – JS library for building user interfaces<% } %>
 - [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) – static site generator<% if (config.get('jsFramework') === 'jsb') { %>
 - [__EJS__](http://ejs.co/) - client side templates<% } %>
-- [__SASS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – css preprocessing
+- [__SCSS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – css preprocessing
 - [__PostCSS__](http://postcss.org/) – css postprocessing
 - [__Jest__](https://facebook.github.io/jest/) – JS testing framework
 - [__ESLint__](http://eslint.org/) – linter for JS files
@@ -35,8 +35,8 @@ If you want to know more about our Javascript Coding-Standard, try [nikita.js](h
 
 ## Getting started
 
-1. run `npm install`
-2. run `grunt` or `grunt build` – start build script
+1. run `npm install` - install dependencies
+2. run `grunt` – start dev build script
 3. open [http://localhost:3000/](http://localhost:3000/) – watch your build-directory in the browser
 * run `grunt dist` – start distribution build script
 
@@ -44,65 +44,48 @@ If you want to specify a different port, you can start the script with the `--po
 `grunt --port=9000` will launch the Browsersync webserver on [http://0.0.0.0:9000/](http://0.0.0.0:9000/) and will start the Browsersync UI on port 9001 (= 9000 + 1).
 If a port is already in use, BrowserSync will auto detect that case and increases the port number until a free port is found.
 
-If you want to generate the dist to a different folder, you may use the `--target` option:
-`grunt dist --target=www` will generate to `www` folder instead of `dist`.
-
 
 ## Project structure
 
-<% if (config.get('useBuildFolders')) { %>
-The nikita-setup provides the three main folders `source/`, `build/` and `dist/`.
-All source-files will be put to the `source`-folder like templates, fonts, images, js- and sass-files.
-These files will be processed by several grunt tasks – e.g. grunt-sass: sass -> css – and then stored in the `build`-folder.
-From there you can view the generated html-files in the browser.
-The `dist`-folder is built up like the `build`-folder.
-The main difference between `build/` and `dist/` is, that `dist/` has combined and minified css/js files and no unnecessary files or code-comments.
-The `build`-folder is for debugging your files, the `dist-`folder should be used for production.
-<% } else { %>
-All source-files like templates, fonts, images, js- and sass-files will be put to your custom source-folder at `<%= config.get('sourceFolder') %>/`.
-Js- and sass-files will be processed by several grunt tasks and then stored in the `generated`-subfolder.
+The nikita-setup provides the three main folders `<%= config.get('rootFolder') %>src/`, `<%= config.get('rootFolder') %>static/` and `grunt/`.
+All source-files will be put to the `<%= config.get('rootFolder') %>src`-folder like html templates, js- and scss-files.
+These files will be processed by several grunt tasks and then stored in the `<%= config.get('rootFolder') %>static/generated/`-folder.
 Depending whether you called `grunt` or `grunt dist`, these files are minified or not.
-The html pages are created at the root of your custom source-folder.
-From there you can view the generated html-files in the browser.
-<% } %>
+
+Besides these generated files, several other static files like images will be put into the `<%= config.get('rootFolder') %>static/`-folder.
 
 In the `grunt`-folder you find the task configurations and custom grunt tasks.
 Have a look at `grunt/aliases.js` to see all available task group definitions and aliases.
 
-```<% if (config.get('useBuildFolders')) { %>
-├── build
-│   ├── fonts
-│   ├── generated
-│   ├── img
-├── dist
-│   ├── fonts
-│   ├── generated
-│   ├── img<% } %>
+```
 ├── grunt
 │   ├── config
 │   ├── tasks
-├── <%= config.get('sourceFolder') || 'source' %>
+├── <%= config.get('rootFolder') %>src
 │   ├── components
 │   ├── html
 │   │   ├── data
 │   │   ├── macros
 │   │   ├── layouts
 │   │   ├── pages
-│   │   └── partials<% if (config.get('features').indexOf('webfonts') !== -1) { %>
-│   ├── fonts<% } %><% if (!config.get('useBuildFolders')) { %>
-│   ├── generated<% } %>
-│   ├── img
-│   │   ├── appicons
-│   │   ├── bgs
-│   │   ├── dev
-│   │   └── temp
+│   │   └── partials
 │   ├── js
-│   ├── sass
+│   ├── scss
+│   │   ├── bg-icons
 │   │   ├── blocks
 │   │   ├── extends
 │   │   ├── mixins
 │   │   └── variables
 │   └── tests
+│       └── setup
+├── <%= config.get('rootFolder') %>static
+<% if (config.get('features').includes('webfonts')) { -%>
+│   ├── fonts
+<% } -%>
+│   ├── generated
+│   └── img
+│       ├── appicons
+│       └── temp
 └── tmp
 ```
 
@@ -118,7 +101,7 @@ describes the HTML coding standards and conventions.
 For the CSS structure, please have a look at [nikita.css](https://github.com/nikita-kit/nikita-css). This sub project
 describes the CSS coding standards and conventions.
 
-The master layout at `html/layouts/master.twig` includes the main stylesheet `styles.css`.
+The master layout at `src/html/layouts/master.twig` includes the main stylesheet `styles.css`.
 
 
 ## Javascript
@@ -126,7 +109,7 @@ The master layout at `html/layouts/master.twig` includes the main stylesheet `st
 For the JS structure, please have a look at [nikita.js](https://github.com/nikita-kit/nikita-js). This sub project
 describes the JS coding standards and conventions.
 
-The master layout at `html/layouts/master.twig` includes the Javascript at the end of the file (before the closing `</body>` tag).
+The master layout at `src/html/layouts/master.twig` includes the Javascript at the end of the file (before the closing `</body>` tag).
 
 The `generated/main.js` file is generated by webpack. This file contains everything, which is `require`d or `import`ed in your JS-Code.
 Run `grunt analyze-js` to see bundled content of `generated/main.js` as convenient interactive zoomable treemap.
@@ -142,33 +125,33 @@ Within the Javascript modules it's also possible the import client side template
 - [classnames](https://github.com/JedWatson/classnames)
 - [logging.js](https://github.com/DracoBlue/logging-js)
 <% } else {%>
-<% if (config.get('addons').indexOf('jQuery') != -1 || config.get('addons').indexOf('selectTwo') != -1) { %>
+<% if (config.get('addons').includes('jQuery') || config.get('addons').includes('selectTwo')) { %>
 - [jquery](http://jquery.com/)<% } %>
 - [jsb](https://github.com/DracoBlue/jsb)
-- [logging.js](https://github.com/DracoBlue/logging-js)<% if (config.get('addons').indexOf('selectTwo') != -1) { %>
-- [select2](https://github.com/select2/select2)<% } %><% if (config.get('addons').indexOf('slider') != -1) { %>
+- [logging.js](https://github.com/DracoBlue/logging-js)<% if (config.get('addons').includes('selectTwo')) { %>
+- [select2](https://github.com/select2/select2)<% } %><% if (config.get('addons').includes('slider')) { %>
 - [swiper](https://github.com/nolimits4web/Swiper)<% } %>
 <% } %>
 
 ## Components
 
 if you have small, independent and reusable modules, this is the right place for it.
-Just store your component files in a subfolder of the `components`-folder and all files will be processed by the grunt tasks.
-This way you have all related files at one single place. Supported are Javascript Files, EJS templates, SASS partials, HTML partials and test files.
+Just store your component files in a subfolder of the `src/components`-folder and all files will be processed by the grunt tasks.
+This way you have all related files at one single place. Supported are Javascript Files, EJS templates, SCSS partials, twig partials and test files.
 
 
 ## Tests
 
 You'd like to test your Javascript code? The kickstarter comes with Jest testing framework<% if (config.get('jsFramework') === 'react') { %> and Enzyme<% } %>!
-Just add your tests at `tests/`-folder with `.test.js`-suffix and run `grunt test`. To launch Jest in watch mode, just run `grunt test --watch`.
+Just add your tests at `src/tests`-folder with `.test.js`-suffix and run `grunt test`. To launch Jest in watch mode, just run `grunt test --watch`.
 If you're interested in code coverage, run `grunt test-coverage`.
 
 
 ## Code linting
 
-The kickstarter comes with tasks for linting your JS, HTML and SASS code.
-Just run `check-html`, `check-css` or  `check-js`.<% if (config.get('features').indexOf('preCommitHook') !== -1) { %>
-In addition, the SASS and the JS code linting will be executed as a pre-commit hook.<% } %>
+The kickstarter comes with tasks for linting your JS, HTML and SCSS code.
+Just run `check-html`, `check-css` or  `check-js`.<% if (config.get('features').includes('preCommitHook')) { %>
+In addition, the SCSS and the JS code linting will be executed as a pre-commit hook.<% } %>
 This ensures a basic code style in nikita projects.
 Run `grunt fix-scss` or `grunt fix-js` to call the linter with the `--fix` option.
 This will fix most of the common problems like indention, brace style and style property order automatically.
@@ -176,22 +159,21 @@ This will fix most of the common problems like indention, brace style and style 
 
 ## Images
 
-All images from `img`-folder will be copied during build.
-Only exception is the `img/dev`-folder. Here you can put all your Photoshop-PSDs, Fireworks-PNGs or Illustrator-AIs.
-If you wont to minify your source images in the `img`-folder using imagemin, just run `grunt minify-images` and commit them.
-Imagemin is very expensive, so this step is not part from build task to save time.
+Put all your images-files into `static/img`-folder.
+If you wont to minify your source images in the `static/img`-folder using imagemin, just run `grunt minify-images` and commit them.
+Imagemin is very expensive, so this step is not part of build task to save time.
 
-<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+<% if (config.get('features').includes('svgBackgrounds')) { %>
 ### SVG images as Data-URIs
 
-To include svg icons as background-images, just put your SVG-icons into `img/bgs`.
+To include svg icons as background-images, just put your SVG-icons into `src/scss/bg-icons`-folder.
 All icons will be processed with the svgmin-task and included as data-URIs in a scss placeholder file.
 As a result, you can include your svg icons by using the `_svg-background.scss` mixin. Just type `@include svg-background(name-of-your-icon);`.
 <% } %>
-<% if (config.get('features').indexOf('webfonts') !== -1) { %>
+<% if (config.get('features').includes('webfonts')) { %>
 ## Fonts
 
-Put all your webfonts into `fonts`-folder and add the style definitions to `sass/_webfonts.scss`-file.
+Put all your webfonts into `static/fonts`-folder and add the style definitions to `src/scss/_webfonts.scss`-file.
 <% } %>
 
 ## Questions?

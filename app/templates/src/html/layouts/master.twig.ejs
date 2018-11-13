@@ -54,7 +54,7 @@
     </head>
 
     <body>
-        <% if (config.get('features').indexOf('gitinfos') != -1) { %>
+        <% if (config.get('features').includes('gitinfos')) { %>
             {% if production %}
                 {% include 'partials::gitinfos.twig' %}
             {% endif %}

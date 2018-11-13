@@ -3,9 +3,9 @@ module.exports = function (grunt) {
         dev: {
             bsFiles: {
                 src: [
-                    '<%%= paths.dev %>/img/**/*.{jpg,jpeg,png,gif,ico,svg}',
-                    '<%%= paths.dev %>/generated/**/*.{css,js}',
-                    '<%%= paths.dev %>/**/*.html'
+                    '<%%= paths.static %>/img/**/*.{jpg,jpeg,png,gif,ico,svg}',
+                    '<%%= paths.static %>/generated/**/*.{css,js}',
+                    '<%%= paths.static %>/**/*.html',
                 ]
             },
             options: {
@@ -18,11 +18,11 @@ module.exports = function (grunt) {
                     port: grunt.option('port') + 1 || 3001
                 },
                 server: {
-                    baseDir: ['<%%= paths.dev %>']
+                    baseDir: ['<%%= paths.static %>']
                 },
                 ghostMode: {
                     scroll: false
-                }
+                },
             }
         }
     };

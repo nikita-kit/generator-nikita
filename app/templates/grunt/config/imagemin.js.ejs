@@ -2,13 +2,13 @@ module.exports = {
     options: {
         optimizationLevel: 7
     },
-    source: {
+    static: {
         files: [
             {
-                cwd: '<%%= paths.src %>/img/',
-                dest: '<%%= paths.src %>/img/',
+                cwd: '<%%= paths.static %>/img/',
+                dest: '<%%= paths.static %>/img/',
                 expand: true,
-                src: ['**/*.{jpg,jpeg,png,gif}', '!dev/**/*']
+                src: ['**/*.{jpg,jpeg,png,gif}']
             }
         ]
     }
