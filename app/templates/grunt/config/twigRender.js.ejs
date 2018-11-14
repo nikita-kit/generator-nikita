@@ -41,7 +41,9 @@ module.exports = function (grunt) {
             files: [
                 {
                     data: [
-                        <% if (config.get('features').includes('gitinfos')) { %>'<%%= paths.tmp %>/gitinfos.json',<% } %>
+<% if (config.get('features').includes('gitinfos')) { -%>
+                        '<%%= paths.tmp %>/gitinfos.json',
+<% } -%>
                         {
                             production: true,
                             currentTimestamp: (new Date()).getTime(),

@@ -13,8 +13,9 @@
 * fixed browserSync page reload when js files are changing
 * removed `assemble`
 * removed `grunt-accessibility`
+* removed `grunt-htmlhint`
 * removed form framework
-* rewrote generator logic completely
+* rewrote generator logic completely and improved templates
 * updated generator dependencies
 * added eslint and pre commit hook to generator
 

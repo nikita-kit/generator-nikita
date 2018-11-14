@@ -8,10 +8,12 @@ module.exports = {
     // development build task
     'dev': [
         'clean:static',
-        'clean:tmp',<% if (config.get('features').includes('svgBackgrounds')) { %>
+        'clean:tmp',
+<% if (config.get('features').includes('svgBackgrounds')) { -%>
         'svgmin:src_bg',
         'svgcss',
-        'string-replace',<% } %>
+        'string-replace',
+<% } -%>
         'sass-globbing',
         'concurrent:dev',
         'postcss:dev',
@@ -29,14 +31,18 @@ module.exports = {
     // distribution task
     'dist': [
         'clean:static',
-        'clean:tmp',<% if (config.get('features').includes('svgBackgrounds')) { %>
+        'clean:tmp',
+<% if (config.get('features').includes('svgBackgrounds')) { -%>
         'svgmin:src_bg',
         'svgcss',
-        'string-replace',<% } %>
+        'string-replace',
+<% } -%>
         'sass-globbing',
-        'sass:dist',<% if (config.get('features').includes('gitinfos')) { %>
+        'sass:dist',
+<% if (config.get('features').includes('gitinfos')) { -%>
         'gitinfo',
-        'write-gitinfos',<% } %>
+        'write-gitinfos',
+<% } -%>
         'twigRender:dist',
         'postcss:dist',
         'webpack:dist',

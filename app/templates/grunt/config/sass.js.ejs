@@ -1,30 +1,30 @@
 module.exports = {
+    options: {
+        outputStyle: 'nested', // minifying by csso
+        includePaths: ['<%%= paths.src %>/scss'],
+    },
     dev: {
         options: {
-            outputStyle: 'nested',
             sourceMap: true,
-            includePaths: ['<%%= paths.src %>/scss']
         },
         files: [{
             expand: true,
             cwd: '<%%= paths.tmp %>',
             dest: '<%%= paths.static %>/generated',
             src: ['*.scss'],
-            ext: '.css'
+            ext: '.css',
         }]
     },
     dist: {
         options: {
-            outputStyle: 'nested', // minifying by csso
             sourceMap: false,
-            includePaths: ['<%%= paths.src %>/scss']
         },
         files: [{
             expand: true,
             cwd: '<%%= paths.tmp %>',
             dest: '<%%= paths.static %>/generated',
             src: ['*.scss'],
-            ext: '.css'
+            ext: '.css',
         }]
     }
 };

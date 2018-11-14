@@ -7,8 +7,10 @@ module.exports = {
             '<rootDir>/<%%= paths.src %>/components/**/*.test.js',
         ],
         transform: {
-            '^.+\\.js$': '<rootDir>/<%%= paths.src %>/tests/setup/jest.transform.js',<% if (config.get('jsFramework') === 'jsb') { %>
-            '^.+\\.ejs$': '<rootDir>/<%%= paths.src %>/tests/setup/jest.transform-ejs.js',<% } %>
+            '^.+\\.js$': '<rootDir>/<%%= paths.src %>/tests/setup/jest.transform.js',
+<% if (config.get('jsFramework') === 'jsb') { -%>
+            '^.+\\.ejs$': '<rootDir>/<%%= paths.src %>/tests/setup/jest.transform-ejs.js',
+<% } -%>
         },
         setupTestFrameworkScriptFile: '<rootDir>/<%%= paths.src %>/tests/setup/jest.setup.js',
         transformIgnorePatterns: ['/node_modules/'],

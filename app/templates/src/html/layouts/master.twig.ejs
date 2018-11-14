@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <!--[if IE 9]> <html class="lt-ie10 ie9" lang="de"> <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="de"> <!--<![endif]-->
-
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -52,21 +51,19 @@
         <meta name="msapplication-wide310x150logo" content="img/appicons/ms-icon-310x150.png" />
         <meta name="msapplication-square310x310logo" content="img/appicons/ms-icon-310x310.png" />
     </head>
-
     <body>
-        <% if (config.get('features').includes('gitinfos')) { %>
-            {% if production %}
-                {% include 'partials::gitinfos.twig' %}
-            {% endif %}
-        <% } %>
-		
+<% if (config.get('features').includes('gitinfos')) { -%>
+        {% if production %}
+            {% include 'partials::gitinfos.twig' %}
+        {% endif %}
+<% } -%>
+
 		{% include 'partials::header.twig' %}
 		<main class="main">
         {% block body %}{% endblock %}
 		</main>
 		{% include 'partials::footer.twig' %}
-		
+
         <script src="generated/main.js?cb={{ currentTimestamp }}"></script>
     </body>
-
 </html>

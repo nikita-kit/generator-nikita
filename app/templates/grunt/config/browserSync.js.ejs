@@ -11,17 +11,19 @@ module.exports = function (grunt) {
             options: {
                 open: false,
                 online: false,
-                watchTask: true,<% if (config.get('jsFramework') === 'react') { %>
-                single: true,<% } %>
+                watchTask: true,
+<% if (config.get('jsFramework') === 'react') { -%>
+                single: true,
+<% } -%>
                 port: grunt.option('port') || 3000,
                 ui: {
-                    port: grunt.option('port') + 1 || 3001
+                    port: grunt.option('port') + 1 || 3001,
                 },
                 server: {
-                    baseDir: ['<%%= paths.static %>']
+                    baseDir: ['<%%= paths.static %>'],
                 },
                 ghostMode: {
-                    scroll: false
+                    scroll: false,
                 },
             }
         }

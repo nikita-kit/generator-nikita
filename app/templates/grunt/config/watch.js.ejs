@@ -5,11 +5,13 @@ module.exports = {
     scss: {
         files: ['<%%= paths.src %>/scss/**/*.scss', '<%%= paths.src %>/components/**/*.scss'],
         tasks: ['sass-globbing', 'sass:dev', 'postcss:dev']
-    },<% if (config.get('features').includes('svgBackgrounds')) { %>
+    },
+<% if (config.get('features').includes('svgBackgrounds')) { -%>
     svg_bgs: {
         files: ['<%%= paths.src %>/scss/bg-icons/*.svg'],
         tasks: ['svgmin:src_bg', 'svgcss', 'string-replace', 'sass:dev', 'postcss:dev']
-    },<% } %>
+    },
+<% } -%>
     js: {
         files: ['<%%= paths.src %>/js/**/*', '<%%= paths.src %>/components/**/*.{js,ejs,json}', '!<%%= paths.src %>/components/**/*.test.js'],
         tasks: ['webpack:dev']
