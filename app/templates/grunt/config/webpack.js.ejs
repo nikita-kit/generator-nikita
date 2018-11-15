@@ -9,11 +9,6 @@ module.exports = function (grunt, options) {
             new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/),
 <% } -%>
             new webpack.optimize.ModuleConcatenationPlugin(),
-<% if (config.get('jsFramework') === 'react') { -%>
-            new webpack.DefinePlugin({
-              'process.env.NODE_ENV': JSON.stringify('production')
-            }),
-<% } -%>
         ];
 
         return {
@@ -24,10 +19,11 @@ module.exports = function (grunt, options) {
                 },
                 output: {
                     filename: '[name].js',
-                    chunkFilename: '[chunkhash].pkg.js',
                 },
                 module: {
+<% if (config.get('jsFramework') === 'jsb') { -%>
                     exprContextCritical: false,
+<% } -%>
                     rules: [
                         {
                             test: /\.js$/,
@@ -43,7 +39,9 @@ module.exports = function (grunt, options) {
                         {
                             test: /\.js$/,
                             loader: 'babel-loader',
-                            exclude: /node_modules/,
+                            include: [
+                                path.resolve('<%%= paths.src %>'),
+                            ],
                             options: {
                                 compact: true,
                                 cacheDirectory: true,
@@ -74,11 +72,8 @@ module.exports = function (grunt, options) {
                     ],
                 },
                 resolve: {
-                    modules: [
-                        '<%%= paths.src %>/js',
-                        '<%%= paths.src %>/components',
-                        'node_modules'
-                    ],
+                    mainFields: ['browser', 'main', 'module'],
+                    symlinks: false,
                 },
             },
             analyze: {
@@ -96,13 +91,21 @@ module.exports = function (grunt, options) {
                 output: {
                     path: path.resolve('<%%= paths.static %>/generated/'),
                 },
-                plugins: plugins,
+                plugins: plugins.concat([
+                    new webpack.DefinePlugin({
+                        'process.env.NODE_ENV': '"development"',
+                    }),
+                ]),
             },
             dist: {
                 output: {
                     path: path.resolve('<%%= paths.static %>/generated/'),
                 },
-                plugins: plugins,
+                plugins: plugins.concat([
+                    new webpack.DefinePlugin({
+                        'process.env.NODE_ENV': '"production"',
+                    }),
+                ]),
             }
         };
     })()
