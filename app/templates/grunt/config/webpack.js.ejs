@@ -4,26 +4,26 @@ module.exports = function (grunt, options) {
         const path = require('path');
         const webpack = require('webpack');
         const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-        const plugins = [<% if (config.get('jsFramework') === 'jsb') { %>
-            new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/),<% } %>
-            new webpack.optimize.ModuleConcatenationPlugin(),<% if (config.get('jsFramework') === 'react') { %>
-            new webpack.DefinePlugin({
-              'process.env.NODE_ENV': JSON.stringify('production')
-            }),<% } %>
+        const plugins = [
+<% if (config.get('jsFramework') === 'jsb') { -%>
+            new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/),
+<% } -%>
+            new webpack.optimize.ModuleConcatenationPlugin(),
         ];
 
         return {
             options: {
                 cache: true,
                 entry: {
-                    main: './<%%= paths.src %>/js/_main.js'
+                    main: './<%%= paths.src %>/js/_main.js',
                 },
                 output: {
                     filename: '[name].js',
-                    chunkFilename: '[chunkhash].pkg.js'
                 },
                 module: {
+<% if (config.get('jsFramework') === 'jsb') { -%>
                     exprContextCritical: false,
+<% } -%>
                     rules: [
                         {
                             test: /\.js$/,
@@ -39,7 +39,9 @@ module.exports = function (grunt, options) {
                         {
                             test: /\.js$/,
                             loader: 'babel-loader',
-                            exclude: /node_modules/,
+                            include: [
+                                path.resolve('<%%= paths.src %>'),
+                            ],
                             options: {
                                 compact: true,
                                 cacheDirectory: true,
@@ -48,8 +50,8 @@ module.exports = function (grunt, options) {
                                     modules: false,
                                     loose: true,
                                     targets: {
-                                        browsers: options.browserslist
-                                    }
+                                        browsers: options.browserslist,
+                                    },
                                 }], <% if (config.get('jsFramework') === 'react') { %>'react', <% } %>'stage-1']
                             }
                         },
@@ -59,19 +61,20 @@ module.exports = function (grunt, options) {
                             options: {
                                 'htmlmin': true,
                                 'htmlminOptions': {
-                                    removeComments: true
-                                }
+                                    removeComments: true,
+                                },
                             }
                         },
                         {
                             test: /\.scss$/,
                             use: ['style-loader', 'css-loader', 'sass-loader']
-                        }
-                    ]
+                        },
+                    ],
                 },
                 resolve: {
-                    modules: ['<%%= paths.src %>/js', '<%%= paths.src %>/components', 'node_modules']
-                }
+                    mainFields: ['browser', 'main', 'module'],
+                    symlinks: false,
+                },
             },
             analyze: {
                 watch: true,
@@ -79,22 +82,30 @@ module.exports = function (grunt, options) {
                     maxModules: 99999,
                 },
                 output: {
-                    path: path.resolve('<%%= paths.tmp %>/js/')
+                    path: path.resolve('<%%= paths.tmp %>/js/'),
                 },
-                plugins: plugins.concat([new BundleAnalyzerPlugin()])
+                plugins: plugins.concat([new BundleAnalyzerPlugin()]),
             },
             dev: {
                 devtool: 'sourcemap',
                 output: {
-                    path: path.resolve('<%%= paths.dev %>/generated/')
+                    path: path.resolve('<%%= paths.static %>/generated/'),
                 },
-                plugins: plugins
+                plugins: plugins.concat([
+                    new webpack.DefinePlugin({
+                        'process.env.NODE_ENV': '"development"',
+                    }),
+                ]),
             },
             dist: {
                 output: {
-                    path: path.resolve('<%%= paths.dist %>/generated/')
+                    path: path.resolve('<%%= paths.static %>/generated/'),
                 },
-                plugins: plugins
+                plugins: plugins.concat([
+                    new webpack.DefinePlugin({
+                        'process.env.NODE_ENV': '"production"',
+                    }),
+                ]),
             }
         };
     })()

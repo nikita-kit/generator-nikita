@@ -5,22 +5,22 @@ module.exports = function (grunt, options) {
                 map: true,
                 processors: [
                     require('autoprefixer')({
-                        browsers: options.browserslist
-                    })
-                ]
+                        browsers: options.browserslist,
+                    }),
+                ],
             },
-            src: '<%%= paths.dev %>/generated/*.css'
+            src: '<%%= paths.static %>/generated/*.css',
         },
         dist: {
             options: {
                 processors: [
                     require('autoprefixer')({
-                        browsers: options.browserslist
+                        browsers: options.browserslist,
                     }),
-                    require('postcss-csso')()
-                ]
+                    require('postcss-csso')(),
+                ],
             },
-            src: '<%%= paths.dist %>/generated/*.css'
+            src: '<%%= paths.static %>/generated/*.css',
         }
     }
 };

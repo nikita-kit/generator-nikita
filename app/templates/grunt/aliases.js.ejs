@@ -2,93 +2,87 @@ module.exports = {
 
     // standard build task when calling grunt without arguments
     'default': [
-        'build'
+        'build',
     ],
 
     // development build task
-    'dev': [<% if (config.get('cleanBuildFolders')) { %>
-        'clean:dev',<% } %>
+    'dev': [
+        'clean:static',
         'clean:tmp',
-        'svgmin:dev_file',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
-        'svgmin:dev_bg',
+<% if (config.get('features').includes('svgBackgrounds')) { -%>
+        'svgmin:src_bg',
         'svgcss',
-        'string-replace',<% } %>
+        'string-replace',
+<% } -%>
         'sass-globbing',
         'concurrent:dev',
         'postcss:dev',
         'webpack:dev',
         'sync',
-        'prettify:dev'
     ],
 
     // development build task including server and watch
     'build': [
         'dev',
         'browserSync:dev',
-        'watch'
+        'watch',
     ],
 
     // distribution task
-    'dist': [<% if (config.get('cleanBuildFolders')) { %>
-        'clean:dist',<% } %>
-        'clean:tmp',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
-        'svgmin:dist_bg',<% } %>
-        'svgmin:dist_file',<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+    'dist': [
+        'clean:static',
+        'clean:tmp',
+<% if (config.get('features').includes('svgBackgrounds')) { -%>
+        'svgmin:src_bg',
         'svgcss',
-        'string-replace',<% } %>
+        'string-replace',
+<% } -%>
         'sass-globbing',
-        'sass:dist',<% if (config.get('features').indexOf('gitinfos') != -1) { %>
+        'sass:dist',
+<% if (config.get('features').includes('gitinfos')) { -%>
         'gitinfo',
-        'write-gitinfos',<% } %><% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
-        'assemble:dist',<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
-        'twigRender:dist',<% } %>
+        'write-gitinfos',
+<% } -%>
+        'twigRender:dist',
         'postcss:dist',
         'webpack:dist',
-        'copy:images',
-        'copy:fonts',
+        'sync',
         'uglify',
-        'prettify:dist'
+        'prettify:static',
     ],
 
     // testing, linting and fixing tasks
 
     'test': [
-        'jest:test'
+        'jest:test',
     ],
 
     'test-coverage': [
-        'jest:testCoverage'
-    ],
-
-    'check-html': [
-        'htmlhint'
-    ],
-
-    'check-wcag2': [
-        'accessibility'
+        'jest:testCoverage',
     ],
 
     'minify-images': [
-        'imagemin:source'
+        'imagemin:static',
+        'svgmin:static',
     ],
 
     'check-scss': [
-        'stylelint:check'
+        'stylelint:check',
     ],
 
     'fix-scss': [
-        'stylelint:fix'
+        'stylelint:fix',
     ],
 
     'check-js': [
-        'eslint:check'
+        'eslint:check',
     ],
 
     'fix-js': [
-        'eslint:fix'
+        'eslint:fix',
     ],
 
     'analyze-js': [
-        'webpack:analyze'
+        'webpack:analyze',
     ],
 };

@@ -12,10 +12,8 @@ fs.readFile('.yo-rc.json', function(err, yoRcContents) {
 	yoRcContents = JSON.parse(yoRcContents.toString());
 	helpers.run(path.join(__dirname, '../app'))
 		.withOptions({ 'skipInstall': true, 'force': true })
-		.withPrompt(yoRcContents["generator-nikita"])
-		.on('end', function() {
+		.withPrompts(yoRcContents["generator-nikita"])
+		.then(() => {
 			process.exit(0);
 		});
 });
-
-

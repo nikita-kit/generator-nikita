@@ -1,6 +1,6 @@
 {
   "name": "generator-nikita",
-  "description": "The official yeoman generator for nikita.kit",
+  "description": "The yeoman generator for nikita.kit project boilerplate featuring Grunt, Webpack, Babel, twig, React, SASS, PostCSS, Jest, ESLint and stylelint.",
   "license": "CC0-1.0",
   "main": "app/index.js",
   "repository": "nikita-kit/generator-nikita",
@@ -10,25 +10,60 @@
     "url": "https://github.com/nikita-kit"
   },
   "engines": {
-    "node": ">=4.0"
+    "node": ">=6.0",
+    "npm": ">=5.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "jest",
+    "lint": "eslint app/index.js tests/*.js",
+    "fix": "eslint app/index.js tests/*.js --fix"
   },
   "files": [
     "app"
   ],
+  "pre-commit": ["lint", "test"],
+  "pre-commit.silent": true,
+  "eslintConfig": {
+    "extends": [
+      "nikita"
+    ],
+    "env": {
+      "node": true,
+      "jest": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "rules": {
+      "import/no-nodejs-modules": 0
+    }
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "<rootDir>/tests/**/*.js"
+    ]
+  },
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "nikita"
   ],
   "dependencies": {
-    "yeoman-generator": "^0.17.0",
-    "chalk": "^0.5.0",
-    "yosay": "^0.3.0",
-    "compare-versions": "^3.1.0"
+    "yeoman-generator": "3.1.1",
+    "chalk": "2.4.1",
+    "yosay": "2.0.2",
+    "compare-versions": "3.4.0"
   },
   "devDependencies": {
-    "mocha": "*"
+    "eslint": "5.9.0",
+    "eslint-config-nikita": "2.0.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-promise": "4.0.1",
+    "pre-commit": "1.2.2",
+    "yeoman-test": "1.9.1",
+    "yeoman-assert": "3.1.1",
+    "jest": "23.6.0"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"

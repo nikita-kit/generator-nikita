@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--[if IE 9]> <html class="lt-ie10 ie9" lang="de"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="de"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+        <title>{% block title %}{% endblock %}</title>
+
+        <meta name="description" content="{% block description %}{% endblock %}" />
+        <meta name="keywords" content="" />
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link href="generated/styles.css?cb={{ currentTimestamp }}" rel="stylesheet"  />
+
+        <!-- Favicon - Generate on https://www.favicon-generator.org/ to avoid renaming work -->
+        <link rel="shortcut icon" href="img/appicons/favicon.ico" />
+
+        <!-- non-retina iPhone pre iOS 7 -->
+        <link rel="apple-touch-icon" sizes="57x57" href="img/appicons/apple-icon-57x57.png" />
+
+        <!-- non-retina iPad pre iOS 7 -->
+        <link rel="apple-touch-icon" sizes="72x72" href="img/appicons/apple-icon-72x72.png" />
+
+        <!-- non-retina iPad iOS 7 -->
+        <link rel="apple-touch-icon" sizes="76x76" href="img/appicons/apple-icon-76x76.png" />
+
+        <!-- retina iPhone pre iOS 7 -->
+        <link rel="apple-touch-icon" sizes="114x114" href="img/appicons/apple-icon-114x114.png" />
+
+        <!-- retina iPhone iOS 7 -->
+        <link rel="apple-touch-icon" sizes="120x120" href="img/appicons/apple-icon-120x120.png" />
+
+        <!-- retina iPad pre iOS 7 -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/appicons/apple-icon-144x144.png" />
+
+        <!-- retina iPad iOS 7 -->
+        <link rel="apple-touch-icon" sizes="152x152" href="img/appicons/apple-icon-152x152.png" />
+
+        <!-- Win8 tile -->
+        <meta name="msapplication-TileImage" content="img/appicons/apple-icon-144x144.png" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="application-name" content="<%= config.get('name') %>" />
+
+        <!-- IE11 tiles -->
+        <meta name="msapplication-square70x70logo" content="img/appicons/ms-icon-70x70.png" />
+        <meta name="msapplication-square150x150logo" content="img/appicons/ms-icon-150x150.png" />
+        <meta name="msapplication-wide310x150logo" content="img/appicons/ms-icon-310x150.png" />
+        <meta name="msapplication-square310x310logo" content="img/appicons/ms-icon-310x310.png" />
+    </head>
+    <body>
+<% if (config.get('features').includes('gitinfos')) { -%>
+        {% if production %}
+            {% include 'partials::gitinfos.twig' %}
+        {% endif %}
+<% } -%>
+
+		{% include 'partials::header.twig' %}
+		<main class="main">
+        {% block body %}{% endblock %}
+		</main>
+		{% include 'partials::footer.twig' %}
+
+        <script src="generated/main.js?cb={{ currentTimestamp }}"></script>
+    </body>
+</html>

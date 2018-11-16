@@ -1,36 +1,23 @@
 module.exports = {
     options: {
-        spawn: true,
         interrupt: true,
     },
     scss: {
-        files: ['<%%= paths.src %>/sass/**/*.scss', '<%%= paths.src %>/components/**/*.scss'],
+        files: ['<%%= paths.src %>/scss/**/*.scss', '<%%= paths.src %>/components/**/*.scss'],
         tasks: ['sass-globbing', 'sass:dev', 'postcss:dev']
-    },<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
+    },
+<% if (config.get('features').includes('svgBackgrounds')) { -%>
     svg_bgs: {
-        files: ['<%%= paths.src %>/img/bgs/*.svg'],
-        tasks: ['svgmin:dev_bg', 'svgcss', 'string-replace', 'sass:dev', 'postcss:dev']
-    },<% } %>
-    svg_files: {
-        files: ['<%%= paths.src %>/img/*.svg'],
-        tasks: ['svgmin:dev_file']
+        files: ['<%%= paths.src %>/scss/bg-icons/*.svg'],
+        tasks: ['svgmin:src_bg', 'svgcss', 'string-replace', 'sass:dev', 'postcss:dev']
     },
-    sync_images: {
-        files: ['<%%= paths.src %>/img/*', '<%%= paths.src %>/img/**/*.{jpg,jpeg,png,gif}', '!<%%= paths.src %>/img/dev/*'],
-        tasks: ['sync:images']
-    },
-    sync_fonts: {
-        files: ['<%%= paths.src %>/fonts/**/*'],
-        tasks: ['sync:fonts']
-    },
-    sync_js: {
-        files: ['<%%= paths.src %>/js/**/*', '<%%= paths.src %>/components/**/*.{js,ejs}', '!<%%= paths.src %>/components/**/*.test.js'],
+<% } -%>
+    js: {
+        files: ['<%%= paths.src %>/js/**/*', '<%%= paths.src %>/components/**/*.{js,ejs,json}', '!<%%= paths.src %>/components/**/*.test.js'],
         tasks: ['webpack:dev']
     },
-    html: {<% if (config.get('staticPageGenerator').indexOf('assemble') !== -1) { %>
-        files: ['<%%= paths.src %>/assemble/**/*.{json,hbs}', '<%%= paths.src %>/components/**/*.hbs'],
-        tasks: ['assemble:dev', 'prettify:dev']<% } %><% if (config.get('staticPageGenerator').indexOf('twigRender') !== -1) { %>
+    html: {
         files: ['<%%= paths.src %>/html/**/*.{json,yml,yaml,twig}', '<%%= paths.src %>/components/**/*.twig'],
-        tasks: ['twigRender:dev', 'prettify:dev']<% } %>
-    }
+        tasks: ['twigRender:dev', 'prettify:static']
+    },
 };

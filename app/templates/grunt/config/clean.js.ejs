@@ -1,26 +1,14 @@
 module.exports = {
     options: {
-        force: true
+        force: true,
     },
-    dev: {
-        files: [
-            {
-                src: ['<%%= paths.dev %>']
-            }
-        ]
-    },
-    dist: {
-        files: [
-            {
-                src: ['<%%= paths.dist %>']
-            }
-        ]
+    static: {
+        src: [
+            '<%%= paths.static %>/**/*.html',
+            '<%%= paths.static %>/generated',
+        ],
     },
     tmp: {
-        files: [
-            {
-                src: ['<%%= paths.tmp %>']
-            }
-        ]
-    }
+        src: ['<%%= paths.tmp %>'],
+    },
 };

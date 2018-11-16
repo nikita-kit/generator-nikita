@@ -1,7 +1,8 @@
 {
     "readmeFilename": "NIKITA-README.md",
 	"engines" : {
-		"node" : ">=4.0"
+		"node" : ">=6.0",
+		"npm" : ">=5.0"
 	},
 	"scripts": {
 		"grunt": "grunt",
@@ -10,7 +11,6 @@
     "pre-commit": "check",
     "pre-commit.silent": true,
     "devDependencies": {
-		"assemble": "0.23.0",
 		"autoprefixer": "7.1.5",
 		"babel-core": "6.26.0",
 		"babel-eslint": "8.2.6",
@@ -30,18 +30,14 @@
 		"eslint-plugin-react": "7.10.0",
 		"grunt": "1.0.1",
 		"grunt-cli": "1.2.0",
-		"grunt-accessibility": "5.0.0",
 		"grunt-browser-sync": "2.2.0",
-		"grunt-assemble": "0.6.3",
 		"grunt-concurrent": "2.3.1",
 		"grunt-contrib-clean": "1.1.0",
-		"grunt-contrib-copy": "1.0.0",
 		"grunt-contrib-imagemin": "2.0.1",
 		"grunt-contrib-uglify": "3.1.0",
 		"grunt-contrib-watch": "1.0.0",
 		"grunt-eslint": "20.1.0",
 		"grunt-gitinfo": "0.1.8",
-		"grunt-htmlhint": "0.9.13",
 		"grunt-postcss": "0.9.0",
 		"grunt-prettify": "0.4.0",
 		"grunt-sass": "2.0.0",
@@ -52,8 +48,6 @@
 		"grunt-sync": "0.6.2",
 		"grunt-twig-render": "1.8.1",
 		"grunt-webpack": "3.0.2",
-		"handlebars-helper-autolink": "0.1.1",
-		"handlebars-helpers": "0.8.0",
 		"import-glob": "1.5.0",
 		"jest-cli": "23.3.0",
 		"jit-grunt": "0.10.0",
@@ -78,5 +72,6 @@
 		"webpack": "3.8.1",
 		"webpack-bundle-analyzer": "2.9.0",
 		"webpack-dev-server": "2.9.3"
-	}
+	},
+	"private": true
 }

@@ -8,31 +8,25 @@ before_deploy:
   - node_modules/.bin/json -E "this.version='$TRAVIS_TAG'" -f package.json -I
 matrix:
   include:
-    - node_js: '4.0.0'
-      env: CXX=g++-4.8
-    - node_js: '4.8.4'
-      env: CXX=g++-4.8
-    - node_js: '5.12.0'
-      env: CXX=g++-4.8
-    - node_js: '6.11.1'
+    - node_js: '6.14.4'
       env: CXX=g++-4.8
     - node_js: '7.10.1'
       env: CXX=g++-4.8
-    - node_js: '8.1.4'
+    - node_js: '10.13.0'
       env: CXX=g++-4.8
-    - node_js: '8.1.4'
+    - node_js: '8.12.0'
       env:
         - TEMPLATE=web-app
         - CXX=g++-4.8
-    - node_js: '8.1.4'
+    - node_js: '8.12.0'
       env:
         - TEMPLATE=symfony
         - CXX=g++-4.8
-    - node_js: '8.1.4'
+    - node_js: '8.12.0'
       env:
         - TEMPLATE=wordpress
         - CXX=g++-4.8
-    - node_js: '8.1.4'
+    - node_js: '8.12.0'
       env:
         - TEMPLATE=spring-boot
         - CXX=g++-4.8
@@ -51,4 +45,4 @@ deploy:
     tags: true
     repo: nikita-kit/generator-nikita
     all_branches: true
-    node: 4.8.4
+    node: 6.14.4

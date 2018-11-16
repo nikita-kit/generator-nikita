@@ -34,50 +34,30 @@ module.exports = {
             { removeViewBox: false }, // Keep the viewBox because that's where illustrator hides the SVG dimensions
             { removeXMLProcInst: false }, // Enabling this breaks svgcss because it removes the XML header
             { sortAttrs: true },
-            { transformsWithOnePath: false } // Enabling this breaks Illustrator SVGs with complex text
+            { transformsWithOnePath: false }, // Enabling this breaks Illustrator SVGs with complex text
         ]
-    },<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
-    dev_bg: {
+    },
+<% if (config.get('features').includes('svgBackgrounds')) { -%>
+    src_bg: {
         files: [
             {
-                cwd: '<%%= paths.src %>/img/bgs/',
+                cwd: '<%%= paths.src %>scss/bg-icons/',
                 dest: '<%%= paths.tmp %>/svgmin/bgs/',
                 expand: true,
                 ext: '.svg',
-                src: ['*.svg']
+                src: ['*.svg'],
             }
         ]
-    },<% } %>
-    dev_file: {
+    },
+<% } -%>
+    static: {
         files: [
             {
-                cwd: '<%%= paths.src %>/img/',
-                dest: '<%%= paths.dev %>/img/',
+                cwd: '<%%= paths.static %>/img/',
+                dest: '<%%= paths.static %>/img/',
                 expand: true,
                 ext: '.svg',
-                src: ['*.svg', 'temp/*.svg']
-            }
-        ]
-    },<% if (config.get('features').indexOf('svgBackgrounds') != -1) { %>
-    dist_bg: {
-        files: [
-            {
-                cwd: '<%%= paths.src %>/img/bgs/',
-                dest: '<%%= paths.tmp %>/svgmin/bgs/',
-                expand: true,
-                ext: '.svg',
-                src: ['*.svg']
-            }
-        ]
-    },<% } %>
-    dist_file: {
-        files: [
-            {
-                cwd: '<%%= paths.src %>/img/',
-                dest: '<%%= paths.dist %>/img/',
-                expand: true,
-                ext: '.svg',
-                src: ['*.svg', 'temp/*.svg']
+                src: ['**/*.svg'],
             }
         ]
     }

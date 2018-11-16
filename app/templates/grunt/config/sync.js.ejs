@@ -1,21 +1,6 @@
 /* Task does not remove any files and directories in 'dest' */
 module.exports = {
-    fonts: {
-        files: [
-            {
-                cwd: '<%%= paths.src %>/fonts/',
-                dest: '<%%= paths.dev %>/fonts/',
-                src: '**/*'
-            }
-        ]
-    },
-    images: {
-        files: [
-            {
-                cwd: '<%%= paths.src %>/img/',
-                dest: '<%%= paths.dev %>/img/',
-                src: ['**/*.{jpg,jpeg,png,gif,ico}', '!dev/**/*']
-            }
-        ]
+    all: {
+        //src: [],
     },
 };

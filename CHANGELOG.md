@@ -1,8 +1,25 @@
 # dev
 
+* nikita now depends on node.js version >= 6.0 and npm >= 5.0
+* changed folder structure:
+  * removed `build` and `dist` folder in favor of `static`-folder
+  * moved `img` and `fonts` folders to `static`-folder
+  * renamed `source`-folder to `src`
+  * renamed `sass`-folder to `scss`
+  * moved jest setup files to `tests/setup/`
+  * moved svg background icons to `scss/bg-icons/`
+* improved jest code coverage output
 * added react.js
 * made jsb optional
 * fixed browserSync page reload when js files are changing
+* removed `assemble`
+* removed `grunt-accessibility`
+* removed `grunt-htmlhint`
+* removed form framework
+* rewrote generator logic completely and improved templates
+* updated generator dependencies
+* added eslint and pre commit hook to generator
+
 
 # 4.0.2 (2018/03/27)
 

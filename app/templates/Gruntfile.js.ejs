@@ -23,15 +23,10 @@ module.exports = function (grunt) {
             /*
              * project base directories
              */
-            paths: {<% if (config.get('useBuildFolders')) { %>
-                src: 'source',
-                dev: grunt.option('target') || 'build',
-                dist: grunt.option('target') || 'dist',
-                tmp: 'tmp'<% } else { %>
-                src: '<%= config.get('sourceFolder') %>',
-                dev: '<%= config.get('sourceFolder') %>',
-                dist: '<%= config.get('sourceFolder') %>',
-                tmp: 'tmp'<% }%>
+            paths: {
+                src: '<%= config.get('rootFolder') %>src',
+                static: '<%= config.get('rootFolder') %>static',
+                tmp: 'tmp',
             },
             /*
              * dynamic browser list for css autoprefixer and babel-preset-env
