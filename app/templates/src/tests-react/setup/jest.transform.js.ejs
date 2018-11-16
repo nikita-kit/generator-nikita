@@ -3,7 +3,7 @@
  * babel presets, so we don't have to use .babelrc.
  */
 module.exports = require('babel-jest').createTransformer({
-    presets: ['react', ['env', {
+    presets: [['env', {
         loose: true,
-    }]]
+    }], 'react', 'stage-1']
 });

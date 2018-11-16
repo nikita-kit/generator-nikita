@@ -2,6 +2,11 @@ module.exports = {
     options: {
         cache: false,
         coverageDirectory: 'reports/coverage',
+        collectCoverageFrom: [
+            '<%%= paths.src %>/js/**/*.js',
+            '<%%= paths.src %>/components/**/*.js',
+            '!<%%= paths.src %>/js/_*.js',
+        ],
         testMatch: [
             '<rootDir>/<%%= paths.src %>/tests/**/*.test.js',
             '<rootDir>/<%%= paths.src %>/components/**/*.test.js',
