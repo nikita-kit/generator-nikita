@@ -3,7 +3,7 @@ import logging from 'node-logging-js';
 import { Link } from 'react-router-dom';
 import { connect, actions } from '../../js/Store';
 
-class Counter extends Component {
+export class RawCounter extends Component {
     constructor(props) {
         super(props);
         logging.applyLogging(this, 'Counter');
@@ -17,7 +17,7 @@ class Counter extends Component {
     render() {
         return (
             <div className="b-counter">
-                counter value is: { this.props.count }
+                counter value is: <span className="value">{ this.props.count }</span>
                 <br/>
                 <button onClick={this.onClick}>[Increase Counter]</button>
                 <br/>
@@ -27,4 +27,4 @@ class Counter extends Component {
     }
 }
 
-export default connect(({ count }) => ({ count }))(Counter);
+export default connect(({ count }) => ({ count }))(RawCounter);

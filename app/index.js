@@ -49,7 +49,7 @@ module.exports = class extends Generator {
 
     _getMainPrompts() {
         return [
-            this._promptInput('name', 'Your project name', this.appname),
+            this._promptInput('name', 'Your project name', this.appname.replace(/ /g, '-').toLowerCase()),
             this._promptList('template', 'Which configuration template do you want to use?', [
                 {
                     name: 'Web-App setup',
@@ -124,7 +124,7 @@ module.exports = class extends Generator {
         }
 
         if (this.isFirstRun) {
-            customPrompts.push(this._promptInput('rootFolder', 'Which root folder do you want to use?', this.config.get('rootFolder')));
+            customPrompts.push(this._promptInput('rootFolder', 'Which root folder do you want to use?', '[project-root]'));
         }
 
         customPrompts = customPrompts.concat([
@@ -202,9 +202,14 @@ module.exports = class extends Generator {
     _handleCustomizePrompts(answers) {
         this.config.set(answers);
 
+        let rootFolder = this.config.get('rootFolder').trim() || '';
+
+        if (rootFolder === '[project-root]' || rootFolder === '.') {
+            rootFolder = '';
+        }
+
         /* add trailing slash to root folder if not empty */
-        const rootFolder = this.config.get('rootFolder') || '';
-        this.config.set('rootFolder', (rootFolder.endsWith('/') || rootFolder.length === 0) ? rootFolder : `${rootFolder}/`);
+        this.config.set('rootFolder', (rootFolder.endsWith('/') || rootFolder === '') ? rootFolder : `${rootFolder}/`);
     }
 
     _getCustomLibrariesPrompts() {
@@ -444,13 +449,13 @@ module.exports = class extends Generator {
             this.config.set('addons', []);
 
             delete packageJsonData.devDependencies['node-jsb'];
-            delete packageJsonData.devDependencies['ejs-compiled-loader'];
+            delete packageJsonData.devDependencies['ejs-webpack-loader'];
+            delete packageJsonData.devDependencies['import-glob'];
         } else {
-            delete packageJsonData.devDependencies['babel-eslint'];
             delete packageJsonData.devDependencies['babel-preset-react'];
             delete packageJsonData.devDependencies.classnames;
             delete packageJsonData.devDependencies.enzyme;
-            delete packageJsonData.devDependencies['enzyme-adapter-react-16.3'];
+            delete packageJsonData.devDependencies['enzyme-adapter-react-16'];
             delete packageJsonData.devDependencies['eslint-plugin-react'];
             delete packageJsonData.devDependencies['prop-types'];
             delete packageJsonData.devDependencies.react;

@@ -1,9 +1,15 @@
 /*
  * Custom Jest transform implementation that wraps babel-jest and injects our
- * babel presets, so we don't have to use .babelrc.
+ * babel config, so we don't have to use .babelrc.
  */
 module.exports = require('babel-jest').createTransformer({
-    presets: [['env', {
-        loose: true,
-    }], 'react', 'stage-1']
+    plugins: [
+        '@babel/plugin-proposal-class-properties',
+    ],
+    presets: [
+        ['@babel/preset-env', {
+            loose: true,
+        }],
+        '@babel/preset-react',
+    ]
 });

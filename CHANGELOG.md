@@ -8,6 +8,7 @@
   * renamed `sass`-folder to `scss`
   * moved jest setup files to `tests/setup/`
   * moved svg background icons to `scss/bg-icons/`
+* updated all dependencies to newest version and improved configs   
 * improved jest code coverage output
 * added react.js
 * made jsb optional
