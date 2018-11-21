@@ -7,7 +7,7 @@ module.exports = class extends Generator {
 
     initializing() {
         this.pkg = require('../package.json');
-        this.isFirstRun = !this.config.get('template') || !this.config.get('rootFolder');
+        this.isFirstRun = !this.config.get('template') || typeof this.config.get('rootFolder') === 'undefined';
 
         const generatedVersion = this.config.get('version');
         const selfVersion = this.pkg.version;
@@ -447,31 +447,30 @@ module.exports = class extends Generator {
         // jsFramework
         if (isReact) {
             this.config.set('addons', []);
-
-            delete packageJsonData.devDependencies['node-jsb'];
-            delete packageJsonData.devDependencies['ejs-webpack-loader'];
+            delete packageJsonData.dependencies['node-jsb'];
             delete packageJsonData.devDependencies['import-glob'];
+            delete packageJsonData.devDependencies['ejs-webpack-loader'];
         } else {
             delete packageJsonData.devDependencies['babel-preset-react'];
-            delete packageJsonData.devDependencies.classnames;
             delete packageJsonData.devDependencies.enzyme;
             delete packageJsonData.devDependencies['enzyme-adapter-react-16'];
             delete packageJsonData.devDependencies['eslint-plugin-react'];
-            delete packageJsonData.devDependencies['prop-types'];
-            delete packageJsonData.devDependencies.react;
-            delete packageJsonData.devDependencies['react-dom'];
-            delete packageJsonData.devDependencies['react-router-dom'];
-            delete packageJsonData.devDependencies['react-waterfall'];
+            delete packageJsonData.dependencies.classnames;
+            delete packageJsonData.dependencies['prop-types'];
+            delete packageJsonData.dependencies.react;
+            delete packageJsonData.dependencies['react-dom'];
+            delete packageJsonData.dependencies['react-router-dom'];
+            delete packageJsonData.dependencies['react-waterfall'];
         }
 
         // Optional jQuery
         if (!this.config.get('addons').includes('jQuery') && !this.config.get('addons').includes('selectTwo')) {
-            delete packageJsonData.devDependencies.jquery;
+            delete packageJsonData.dependencies.jquery;
         }
 
         // Optional Slider
         if (!this.config.get('addons').includes('slider')) {
-            delete packageJsonData.devDependencies.swiper;
+            delete packageJsonData.dependencies.swiper;
         } else {
             this._copyTemplate('src/html/partials/slider.twig.ejs', `${rootFolder}src/html/partials/slider.twig`);
             this._copyTemplate('src/js/Slider.jsb.js.ejs', `${rootFolder}src/js/Slider.jsb.js`);
@@ -480,7 +479,7 @@ module.exports = class extends Generator {
 
         // Optional Select2
         if (!this.config.get('addons').includes('selectTwo')) {
-            delete packageJsonData.devDependencies.select2;
+            delete packageJsonData.dependencies.select2;
         } else {
             this._copyTemplate('src/js/SelectTwo.jsb.js.ejs', `${rootFolder}src/js/SelectTwo.jsb.js`);
         }
