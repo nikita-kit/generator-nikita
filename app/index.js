@@ -7,7 +7,7 @@ module.exports = class extends Generator {
 
     initializing() {
         this.pkg = require('../package.json');
-        this.isFirstRun = !this.config.get('template');
+        this.isFirstRun = !this.config.get('template') || !this.config.get('rootFolder');
 
         const generatedVersion = this.config.get('version');
         const selfVersion = this.pkg.version;
@@ -202,7 +202,7 @@ module.exports = class extends Generator {
     _handleCustomizePrompts(answers) {
         this.config.set(answers);
 
-        let rootFolder = this.config.get('rootFolder').trim() || '';
+        let rootFolder = (this.config.get('rootFolder') || '').trim();
 
         if (rootFolder === '[project-root]' || rootFolder === '.') {
             rootFolder = '';
@@ -323,7 +323,6 @@ module.exports = class extends Generator {
         this._copyTemplate('grunt/config/sass-globbing.js.ejs', 'grunt/config/sass-globbing.js');
         this._copyTemplate('grunt/config/stylelint.js.ejs', 'grunt/config/stylelint.js');
         this._copyTemplate('grunt/config/svgmin.js.ejs', 'grunt/config/svgmin.js');
-        this._copyTemplate('grunt/config/sync.js.ejs', 'grunt/config/sync.js');
         this._copyTemplate('grunt/config/twigRender.js.ejs', 'grunt/config/twigRender.js');
         this._copyTemplate('grunt/config/uglify.js.ejs', 'grunt/config/uglify.js');
         this._copyTemplate('grunt/config/watch.js.ejs', 'grunt/config/watch.js');
