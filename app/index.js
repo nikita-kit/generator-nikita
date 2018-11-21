@@ -84,6 +84,7 @@ module.exports = class extends Generator {
                     'svgBackgrounds',
                     'preCommitHook',
                 ],
+                jsFramework: 'jsb',
                 nikitaCssMixins: ['respond-to'],
                 nikitaCssExtends: ['cf'],
                 addons: [],
