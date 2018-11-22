@@ -2,14 +2,13 @@ module.exports = function (grunt, options) {
     return (function () {
 
         const path = require('path');
-        const webpack = require('webpack');
         const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-        const plugins = [
 <% if (config.get('jsFramework') === 'jsb') { -%>
+        const webpack = require('webpack');
+        const plugins = [
             new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/),
-<% } -%>
-            new webpack.optimize.ModuleConcatenationPlugin(),
         ];
+<% } -%>
 
         return {
             options: {
@@ -19,23 +18,21 @@ module.exports = function (grunt, options) {
                 },
                 output: {
                     filename: '[name].js',
+                    chunkFilename: '[name].js',
                 },
                 module: {
 <% if (config.get('jsFramework') === 'jsb') { -%>
                     exprContextCritical: false,
 <% } -%>
                     rules: [
+<% if (config.get('jsFramework') === 'jsb') { -%>
                         {
                             test: /\.js$/,
                             enforce: 'pre',
                             loader: 'import-glob',
-                            exclude: /node_modules/
+                            exclude: /node_modules/,
                         },
-                        {
-                            test: /\.scss$/,
-                            enforce: 'pre',
-                            loader: 'import-glob'
-                        },
+<% } -%>
                         {
                             test: /\.js$/,
                             loader: 'babel-loader',
@@ -45,29 +42,43 @@ module.exports = function (grunt, options) {
                             options: {
                                 compact: true,
                                 cacheDirectory: true,
-                                plugins: ['transform-runtime'],
-                                presets: [['env', {
-                                    modules: false,
-                                    loose: true,
-                                    targets: {
-                                        browsers: options.browserslist,
-                                    },
-                                }], <% if (config.get('jsFramework') === 'react') { %>'react', <% } %>'stage-1']
-                            }
+                                plugins: [
+                                    ['@babel/plugin-transform-runtime', {
+                                        regenerator: false,
+                                        useESModules: true,
+                                    }],
+                                    ['@babel/plugin-proposal-class-properties', { loose: true }],
+                                ],
+                                presets: [
+                                    ['@babel/preset-env', {
+                                        modules: false,
+                                        loose: true,
+                                        useBuiltIns: 'usage',
+                                        targets: {
+                                            browsers: options.browserslist,
+                                        },
+                                    }],
+<% if (config.get('jsFramework') === 'react') { -%>
+                                    '@babel/preset-react',
+<% } -%>
+                                ],
+                            },
                         },
+<% if (config.get('jsFramework') === 'jsb') { -%>
                         {
                             test: /\.ejs$/,
-                            loader: 'ejs-compiled-loader',
+                            loader: 'ejs-webpack-loader',
                             options: {
                                 'htmlmin': true,
                                 'htmlminOptions': {
                                     removeComments: true,
                                 },
-                            }
+                            },
                         },
+<% } -%>
                         {
                             test: /\.scss$/,
-                            use: ['style-loader', 'css-loader', 'sass-loader']
+                            use: ['style-loader', 'css-loader', 'sass-loader'],
                         },
                     ],
                 },
@@ -77,6 +88,7 @@ module.exports = function (grunt, options) {
                 },
             },
             analyze: {
+                mode: 'production',
                 watch: true,
                 stats: {
                     maxModules: 99999,
@@ -84,29 +96,27 @@ module.exports = function (grunt, options) {
                 output: {
                     path: path.resolve('<%%= paths.tmp %>/js/'),
                 },
-                plugins: plugins.concat([new BundleAnalyzerPlugin()]),
+                plugins: [new BundleAnalyzerPlugin()],
             },
             dev: {
-                devtool: 'sourcemap',
+                mode: 'development',
+                devtool: 'source-map',
                 output: {
                     path: path.resolve('<%%= paths.static %>/generated/'),
                 },
-                plugins: plugins.concat([
-                    new webpack.DefinePlugin({
-                        'process.env.NODE_ENV': '"development"',
-                    }),
-                ]),
+<% if (config.get('jsFramework') === 'jsb') { -%>
+                plugins: plugins,
+<% } -%>
             },
             dist: {
+                mode: 'production',
                 output: {
                     path: path.resolve('<%%= paths.static %>/generated/'),
                 },
-                plugins: plugins.concat([
-                    new webpack.DefinePlugin({
-                        'process.env.NODE_ENV': '"production"',
-                    }),
-                ]),
-            }
+<% if (config.get('jsFramework') === 'jsb') { -%>
+                plugins: plugins,
+<% } -%>
+            },
         };
-    })()
+    })();
 };

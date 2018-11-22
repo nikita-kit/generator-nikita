@@ -9,14 +9,16 @@ module.exports = {
                 'plugin:react/recommended',
             ]
         },
+<% } -%>
         parser: 'babel-eslint',
         parserOptions: {
             ecmaVersion: 2018,
+<% if (config.get('jsFramework') === 'react') { -%>
             ecmaFeatures: {
                 jsx: true,
             },
-        },
 <% } -%>
+        },
         rules: {
             // override rules here
 <% if (config.get('jsFramework') === 'react') { -%>

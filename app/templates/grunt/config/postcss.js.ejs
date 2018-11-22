@@ -17,10 +17,12 @@ module.exports = function (grunt, options) {
                     require('autoprefixer')({
                         browsers: options.browserslist,
                     }),
-                    require('postcss-csso')(),
+                    require('postcss-csso')({
+                        restructure: false,
+                    }),
                 ],
             },
             src: '<%%= paths.static %>/generated/*.css',
-        }
+        },
     }
 };

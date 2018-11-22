@@ -41,6 +41,7 @@ describe('generator-nikita:app', () => {
             'src/js/_main.js',
             'src/scss/styles.scss',
             'src/html/pages/index.twig',
+            'static/img/appicons/favicon.ico',
         ]);
     });
 });
@@ -73,6 +74,7 @@ describe('generator-nikita:web-app-jsb', () => {
             'src/components/sample/Sample.jsb.js',
             'src/scss/styles.scss',
             'src/html/pages/index.twig',
+            'static/img/appicons/favicon.ico',
         ]);
 
         if (process.env.TEMPLATE === 'web-app') {
@@ -115,6 +117,7 @@ describe('generator-nikita:web-app-react', () => {
             'src/components/counter/Counter.js',
             'src/scss/styles.scss',
             'src/html/pages/index.twig',
+            'static/img/appicons/favicon.ico',
         ]);
 
         if (process.env.TEMPLATE === 'web-app') {
@@ -145,6 +148,7 @@ describe('generator-nikita:symfony', () => {
             'grunt/aliases.js',
             'web/src/js/_main.js',
             'web/src/scss/styles.scss',
+            'web/static/img/appicons/favicon.ico',
         ]);
 
         if (process.env.TEMPLATE === 'symfony') {
@@ -175,6 +179,7 @@ describe('generator-nikita:wordpress', () => {
             'grunt/aliases.js',
             'web/src/js/_main.js',
             'web/src/scss/styles.scss',
+            'web/static/img/appicons/favicon.ico',
         ]);
 
         if (process.env.TEMPLATE === 'wordpress') {
@@ -210,6 +215,7 @@ describe('generator-nikita:spring-boot', () => {
             `src/main/java/groupId/testrun${timestamp}/Testrun${timestamp}Application.java`,
             'src/main/resources/web/src/scss/styles.scss',
             'src/main/resources/web/src/js/_main.js',
+            'src/main/resources/web/static/img/appicons/favicon.ico',
         ]);
 
         if (process.env.TEMPLATE === 'spring-boot') {
