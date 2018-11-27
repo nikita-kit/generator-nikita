@@ -68,7 +68,6 @@
         "jest-cli": "23.6.0",
         "jit-grunt": "0.10.0",
         "load-grunt-config": "0.19.2",
-        "nikita-css": "1.0.0",
         "postcss-csso": "3.0.0",
         "pre-commit": "1.2.2",
         "stylelint": "9.8.0",

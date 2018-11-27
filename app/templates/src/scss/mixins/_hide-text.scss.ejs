@@ -1,0 +1,17 @@
+//
+// hide-text mixin
+// --------------------
+//
+// hide text on elements in sake of accessibility
+//
+// Sample:
+// .element {
+//     @include hide-text();
+// }
+
+@mixin hide-text() {
+    overflow: hidden;
+    font: 0/0 serif;
+    text-shadow: none;
+    color: transparent;
+}

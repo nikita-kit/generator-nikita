@@ -85,8 +85,14 @@ module.exports = class extends Generator {
                     'preCommitHook',
                 ],
                 jsFramework: 'jsb',
-                nikitaCssMixins: ['respond-to'],
-                nikitaCssExtends: ['cf'],
+                scssMixins: [
+                    'a11y-hide',
+                    'clearfix',
+                    'ellipsis',
+                    'fixed-ratiobox',
+                    'hide-text',
+                    'triangle',
+                ],
                 libraries: [],
             });
 
@@ -155,43 +161,25 @@ module.exports = class extends Generator {
                     value: 'react',
                 },
             ]),
-            this._promptCheckbox('nikitaCssMixins', 'Which nikita.css mixins do you want to use?', [
+            this._promptCheckbox('scssMixins', 'Which nikita.css mixins do you want to use?', [
                 {
-                    name: 'Centering: Horizontally and/or vertically centering elements with the translate-method (IE9+)',
-                    value: 'centering',
+                    name: 'a11y-hide: Hide elements in sake of accessibility',
+                    value: 'a11y-hide',
                 }, {
-                    name: 'Fixed-Ratiobox: Use intrinsic ratio to force child elements like images, videos or frames to fluidly scale at a given ratio',
-                    value: 'fixed-ratiobox',
-                }, {
-                    name: 'Font-Smoothing: Turn font-smoothing on/off for a better font-rendering on OS X',
-                    value: 'font-smoothing',
-                }, {
-                    name: 'Layering: A function for managing z-index layers within a Sass map',
-                    value: 'layering',
-                }, {
-                    name: 'Respond-To: Easy managing your media queries',
-                    value: 'respond-to',
-                }, {
-                    name: 'Triangle: Easy generating arrow-like triangles with the border-method',
-                    value: 'triangle',
-                },
-            ]),
-            this._promptCheckbox('nikitaCssExtends', 'Which nikita.css extends do you want to use?', [
-                {
-                    name: 'a11y: Hide elements in sake of accessibility',
-                    value: 'a11y',
-                }, {
-                    name: 'cf: Micro clearfix',
-                    value: 'cf',
+                    name: 'clearfix: Micro clearfix',
+                    value: 'clearfix',
                 }, {
                     name: 'ellipsis: Ellipsis to point out text',
                     value: 'ellipsis',
                 }, {
+                    name: 'fixed-ratiobox: Use intrinsic ratio to force child elements to fluidly scale at a given ratio',
+                    value: 'fixed-ratiobox',
+                }, {
                     name: 'hide-text: Hide text on elements in sake of accessibility',
                     value: 'hide-text',
                 }, {
-                    name: 'ib: Use the inline-block method as an alternative to float elements',
-                    value: 'ib',
+                    name: 'triangle: Easy generating arrow-like triangles with the border-method',
+                    value: 'triangle',
                 },
             ]),
         ]);
@@ -375,18 +363,23 @@ module.exports = class extends Generator {
         // SCSS Basic Files
         this._copyTemplate('src/scss/styles.scss.ejs', `${rootFolder}src/scss/styles.scss`);
         this._copyTemplate('src/scss/_basics.scss.ejs', `${rootFolder}src/scss/_basics.scss`);
-
-        // SCSS Extra Files
-        this._copyTemplate('src/scss/extends/_buttons.scss.ejs', `${rootFolder}src/scss/extends/_buttons.scss`);
         if (!isReact) {
             this._copyTemplate('src/scss/blocks/_header.scss.ejs', `${rootFolder}src/scss/blocks/_header.scss`);
             this._copyTemplate('src/scss/blocks/_footer.scss.ejs', `${rootFolder}src/scss/blocks/_footer.scss`);
         }
 
+        // SCSS extends/mixins Files
+        this._copyTemplate('src/scss/extends/_buttons.scss.ejs', `${rootFolder}src/scss/extends/_buttons.scss`);
+        this.config.get('scssMixins').forEach((mixin) => {
+            this._copyTemplate(`src/scss/mixins/_${mixin}.scss.ejs`, `${rootFolder}src/scss/mixins/_${mixin}.scss`);
+        });
+
         // SCSS Variables
+        this._copyTemplate('src/scss/variables/_breakpoints.scss.ejs', `${rootFolder}src/scss/variables/_breakpoints.scss`);
         this._copyTemplate('src/scss/variables/_color.scss.ejs', `${rootFolder}src/scss/variables/_color.scss`);
         this._copyTemplate('src/scss/variables/_timing.scss.ejs', `${rootFolder}src/scss/variables/_timing.scss`);
         this._copyTemplate('src/scss/variables/_typography.scss.ejs', `${rootFolder}src/scss/variables/_typography.scss`);
+        this._copyTemplate('src/scss/variables/_z-layers.scss.ejs', `${rootFolder}src/scss/variables/_z-layers.scss`);
 
         // JS Files
         if (isReact) {
@@ -461,16 +454,6 @@ module.exports = class extends Generator {
             delete packageJsonData.devDependencies['pre-commit'];
             delete packageJsonData['pre-commit'];
             delete packageJsonData['pre-commit.silent'];
-        }
-
-        // Optional Layering-Mixin
-        if (this.config.get('nikitaCssMixins').includes('layering')) {
-            this._copyTemplate('src/scss/variables/_z-layers.scss.ejs', `${rootFolder}src/scss/variables/_z-layers.scss`);
-        }
-
-        // Optional Respond-To-Mixin
-        if (this.config.get('nikitaCssMixins').includes('respond-to')) {
-            this._copyTemplate('src/scss/variables/_breakpoints.scss.ejs', `${rootFolder}src/scss/variables/_breakpoints.scss`);
         }
 
         // jsFramework

@@ -27,9 +27,15 @@ describe('generator-nikita:app', () => {
             useBuildFolders: true,
             features: [],
             jsFramework: 'jsb',
-            nikitaCssMixins: [],
-            nikitaCssExtends: [],
             libraries: [],
+            scssMixins: [
+                'a11y-hide',
+                'clearfix',
+                'ellipsis',
+                'fixed-ratiobox',
+                'hide-text',
+                'triangle',
+            ],
         }));
 
     test('creates files', () => {
@@ -40,6 +46,9 @@ describe('generator-nikita:app', () => {
             'grunt/config/twigRender.js',
             'src/js/_main.js',
             'src/scss/styles.scss',
+            'src/scss/extends/_buttons.scss',
+            'src/scss/mixins/_clearfix.scss',
+            'src/scss/variables/_breakpoints.scss',
             'src/html/pages/index.twig',
             'static/img/appicons/favicon.ico',
         ]);
@@ -64,8 +73,7 @@ describe('generator-nikita:web-app-jsb', () => {
             useBuildFolders: true,
             features: [],
             jsFramework: 'jsb',
-            nikitaCssMixins: [],
-            nikitaCssExtends: [],
+            scssMixins: [],
             libraries: [
                 'lodash',
                 'date-fns',
@@ -88,9 +96,13 @@ describe('generator-nikita:web-app-jsb', () => {
             'src/components/select/Select.jsb.js',
             'src/components/dialog/Dialog.jsb.js',
             'src/scss/styles.scss',
+            'src/scss/blocks/_header.scss',
+            'src/scss/blocks/_footer.scss',
             'src/html/pages/index.twig',
             'static/img/appicons/favicon.ico',
         ]);
+
+        assert.noFile(['src/scss/mixins/_clearfix.scss']);
 
         assert.fileContent([
             ['src/components/sample/Sample.jsb.js', /lodash-es/],
@@ -119,8 +131,6 @@ describe('generator-nikita:web-app-react', () => {
             useBuildFolders: true,
             features: [],
             jsFramework: 'react',
-            nikitaCssMixins: [],
-            nikitaCssExtends: [],
             libraries: [
                 'lodash',
                 'date-fns',
@@ -128,6 +138,7 @@ describe('generator-nikita:web-app-react', () => {
                 'react-select',
                 'react-a11y-dialog',
             ],
+            scssMixins: [],
         }));
 
     test('creates files', (done) => {
@@ -147,6 +158,12 @@ describe('generator-nikita:web-app-react', () => {
             'src/scss/styles.scss',
             'src/html/pages/index.twig',
             'static/img/appicons/favicon.ico',
+        ]);
+
+        assert.noFile([
+            'src/scss/mixins/_clearfix.scss',
+            'src/scss/blocks/_header.scss',
+            'src/scss/blocks/_footer.scss',
         ]);
 
         assert.fileContent([

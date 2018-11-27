@@ -13,6 +13,7 @@
 * fixed browserSync page reload when js files are changing
 * added react.js
 * made jsb optional
+* reworked included scss mixins
 * added libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns` 
 * removed libraries `jquery`, `swiper` and `select2`
 * removed `assemble`
