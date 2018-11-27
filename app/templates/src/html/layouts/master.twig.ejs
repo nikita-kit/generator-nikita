@@ -58,11 +58,15 @@
         {% endif %}
 <% } -%>
 
-		{% include 'partials::header.twig' %}
-		<main class="main">
+<% if (config.get('jsFramework') === 'jsb') { -%>
+        {% include 'partials::header.twig' %}
+<% } -%>
+        <main id="main" class="main">
         {% block body %}{% endblock %}
-		</main>
-		{% include 'partials::footer.twig' %}
+        </main>
+<% if (config.get('jsFramework') === 'jsb') { -%>
+        {% include 'partials::footer.twig' %}
+<% } -%>
 
         <script src="generated/main.js?cb={{ currentTimestamp }}"></script>
     </body>

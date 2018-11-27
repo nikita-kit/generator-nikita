@@ -93,6 +93,9 @@ module.exports = function (grunt, options) {
                 stats: {
                     maxModules: 99999,
                 },
+                optimization: {
+                    concatenateModules: false,
+                },
                 output: {
                     path: path.resolve('<%%= paths.tmp %>/js/'),
                 },

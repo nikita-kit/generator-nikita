@@ -10,9 +10,11 @@
   * moved svg background icons to `scss/bg-icons/`
 * updated all dependencies to newest version and improved configs   
 * improved jest code coverage output
+* fixed browserSync page reload when js files are changing
 * added react.js
 * made jsb optional
-* fixed browserSync page reload when js files are changing
+* added libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns` 
+* removed libraries `jquery`, `swiper` and `select2`
 * removed `assemble`
 * removed `grunt-accessibility`
 * removed `grunt-htmlhint`

@@ -1,0 +1,46 @@
+import logging from 'node-logging-js';
+import jsb from 'node-jsb';
+import Siema from 'siema';
+
+/* @see https://github.com/pawelgrzybek/siema */
+export default class Slider {
+    constructor(element, options = {}) {
+        logging.applyLogging(this, 'Slider', false);
+
+        const defaults = {
+            selector: element.querySelector(options.selector || '.slide-container'),
+            duration: 200,
+            easing: 'ease-out',
+            perPage: 1,
+            startIndex: 0,
+            draggable: true,
+            multipleDrag: true,
+            threshold: 20,
+            loop: false,
+            rtl: false,
+            onInit: () => {
+            },
+            onChange: () => {
+            },
+        };
+
+        delete options.selector;
+        options = { ...defaults, ...options };
+
+        this.logDebug('init', element, options);
+        this.siema = new Siema(options);
+
+        this.prev = element.querySelector('.prev');
+        this.next = element.querySelector('.next');
+
+        this.initializeEventListeners();
+    }
+
+    initializeEventListeners() {
+        this.prev.addEventListener('click', () => this.siema.prev());
+        this.next.addEventListener('click', () => this.siema.next());
+        window.addEventListener('resize', () => this.siema.resizeHandler());
+    }
+}
+
+jsb.registerHandler('Slider', Slider);

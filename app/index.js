@@ -87,7 +87,7 @@ module.exports = class extends Generator {
                 jsFramework: 'jsb',
                 nikitaCssMixins: ['respond-to'],
                 nikitaCssExtends: ['cf'],
-                addons: [],
+                libraries: [],
             });
 
             if (this.config.get('template') === 'spring-boot') {
@@ -96,7 +96,6 @@ module.exports = class extends Generator {
                 this.config.set('rootFolder', 'web');
             } else if (this.config.get('template') === 'wordpress') {
                 this.config.set('rootFolder', 'web');
-                this.config.set('addons', ['jQuery']);
             }
         }
     }
@@ -215,26 +214,54 @@ module.exports = class extends Generator {
 
     _getCustomLibrariesPrompts() {
 
+        const options = [
+            // {
+            //     name: 'logging.js, trace and logging library',
+            //     value: 'logging',
+            // },
+            {
+                name: 'lodash, Javascript utility library',
+                value: 'lodash',
+            },
+            {
+                name: 'date-fns, date utility library',
+                value: 'date-fns',
+            },
+        ];
+
         if (this.config.get('jsFramework') === 'react') {
-            return [];
+            options.push(
+                {
+                    name: 'Siema, the lightweight slider',
+                    value: 'siema',
+                },
+                {
+                    name: 'react-select, for styling select inputs',
+                    value: 'react-select',
+                },
+                {
+                    name: 'react-a11y-dialog, lightweight and accessible modal dialog',
+                    value: 'react-a11y-dialog',
+                },
+            );
+        } else {
+            options.push(
+                {
+                    name: 'Siema, the lightweight slider',
+                    value: 'siema',
+                },
+                {
+                    name: 'Chioces, for styling select inputs',
+                    value: 'choices',
+                },
+                {
+                    name: 'a11y-dialog, lightweight and accessible modal dialog',
+                    value: 'a11y-dialog',
+                },
+            );
         }
 
-        return [
-            this._promptCheckbox('addons', 'Which JS modules do you want to use?', [
-                {
-                    name: 'jQuery library',
-                    value: 'jQuery',
-                },
-                {
-                    name: 'iDangerous Swiper for sliders',
-                    value: 'slider',
-                },
-                {
-                    name: 'select2 for styled select inputs',
-                    value: 'selectTwo',
-                },
-            ]),
-        ];
+        return [this._promptCheckbox('libraries', 'Which common libraries do you want to add?', options)];
     }
 
     _handleCustomLibrariesPrompts(answers) {
@@ -350,9 +377,11 @@ module.exports = class extends Generator {
         this._copyTemplate('src/scss/_basics.scss.ejs', `${rootFolder}src/scss/_basics.scss`);
 
         // SCSS Extra Files
-        this._copyTemplate('src/scss/blocks/_header.scss.ejs', `${rootFolder}src/scss/blocks/_header.scss`);
-        this._copyTemplate('src/scss/blocks/_footer.scss.ejs', `${rootFolder}src/scss/blocks/_footer.scss`);
         this._copyTemplate('src/scss/extends/_buttons.scss.ejs', `${rootFolder}src/scss/extends/_buttons.scss`);
+        if (!isReact) {
+            this._copyTemplate('src/scss/blocks/_header.scss.ejs', `${rootFolder}src/scss/blocks/_header.scss`);
+            this._copyTemplate('src/scss/blocks/_footer.scss.ejs', `${rootFolder}src/scss/blocks/_footer.scss`);
+        }
 
         // SCSS Variables
         this._copyTemplate('src/scss/variables/_color.scss.ejs', `${rootFolder}src/scss/variables/_color.scss`);
@@ -390,9 +419,9 @@ module.exports = class extends Generator {
         this._copyTemplate('src/html/layouts/master.twig.ejs', `${rootFolder}src/html/layouts/master.twig`);
         this._copyTemplate('src/html/macros/.gitkeep', `${rootFolder}src/html/macros/.gitkeep`);
         this._copyTemplate('src/html/pages/index.twig.ejs', `${rootFolder}src/html/pages/index.twig`);
-        this._copyTemplate('src/html/partials/header.twig.ejs', `${rootFolder}src/html/partials/header.twig`);
-        this._copyTemplate('src/html/partials/footer.twig.ejs', `${rootFolder}src/html/partials/footer.twig`);
         if (!isReact) {
+            this._copyTemplate('src/html/partials/header.twig.ejs', `${rootFolder}src/html/partials/header.twig`);
+            this._copyTemplate('src/html/partials/footer.twig.ejs', `${rootFolder}src/html/partials/footer.twig`);
             this._copyTemplate('src/components-jsb/sample/sample.twig.ejs', `${rootFolder}src/components/sample/sample.twig`);
         }
 
@@ -446,7 +475,6 @@ module.exports = class extends Generator {
 
         // jsFramework
         if (isReact) {
-            this.config.set('addons', []);
             delete packageJsonData.dependencies['node-jsb'];
             delete packageJsonData.devDependencies['import-glob'];
             delete packageJsonData.devDependencies['ejs-webpack-loader'];
@@ -463,27 +491,77 @@ module.exports = class extends Generator {
             delete packageJsonData.dependencies['react-waterfall'];
         }
 
-        // Optional jQuery
-        if (!this.config.get('addons').includes('jQuery') && !this.config.get('addons').includes('selectTwo')) {
-            delete packageJsonData.dependencies.jquery;
-        }
+        // Optional Framework specific Libraries
+        if (isReact) {
+            delete packageJsonData.dependencies['choices.js'];
+            delete packageJsonData.dependencies['a11y-dialog'];
 
-        // Optional Slider
-        if (!this.config.get('addons').includes('slider')) {
-            delete packageJsonData.dependencies.swiper;
+            // Optional Siema Slider
+            if (this.config.get('libraries').includes('siema')) {
+                this._copyTemplate('src/components-react/slider/Slider.js.ejs', `${rootFolder}src/components/slider/Slider.js`);
+                this._copyTemplate('src/components-react/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
+            } else {
+                delete packageJsonData.dependencies.siema;
+            }
+
+            // Optional Choices
+            if (this.config.get('libraries').includes('react-select')) {
+                this._copyTemplate('src/components-react/select/Select.js.ejs', `${rootFolder}src/components/select/Select.js`);
+                this._copyTemplate('src/components-react/select/_select.scss.ejs', `${rootFolder}src/components/select/_select.scss`);
+            } else {
+                delete packageJsonData.dependencies['react-select'];
+            }
+
+            // Optional A11y Dialog
+            if (this.config.get('libraries').includes('react-a11y-dialog')) {
+                this._copyTemplate('src/components-react/dialog/Dialog.js.ejs', `${rootFolder}src/components/dialog/Dialog.js`);
+                this._copyTemplate('src/components-react/dialog/_dialog.scss.ejs', `${rootFolder}src/components/dialog/_dialog.scss`);
+            } else {
+                delete packageJsonData.dependencies['react-a11y-dialog'];
+            }
         } else {
-            this._copyTemplate('src/html/partials/slider.twig.ejs', `${rootFolder}src/html/partials/slider.twig`);
-            this._copyTemplate('src/js/Slider.jsb.js.ejs', `${rootFolder}src/js/Slider.jsb.js`);
-            this._copyTemplate('src/scss/blocks/_slider.scss.ejs', `${rootFolder}src/scss/blocks/_slider.scss`);
+            delete packageJsonData.dependencies['react-select'];
+            delete packageJsonData.dependencies['react-a11y-dialog'];
+
+            // Optional Siema Slider
+            if (this.config.get('libraries').includes('siema')) {
+                this._copyTemplate('src/components-jsb/slider/Slider.jsb.js.ejs', `${rootFolder}src/components/slider/Slider.jsb.js`);
+                this._copyTemplate('src/components-jsb/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
+                this._copyTemplate('src/components-jsb/slider/slider.twig.ejs', `${rootFolder}src/components/slider/slider.twig`);
+            } else {
+                delete packageJsonData.dependencies.siema;
+            }
+
+            // Optional Choices
+            if (this.config.get('libraries').includes('choices')) {
+                this._copyTemplate('src/components-jsb/select/Select.jsb.js.ejs', `${rootFolder}src/components/select/Select.jsb.js`);
+                this._copyTemplate('src/components-jsb/select/_select.scss.ejs', `${rootFolder}src/components/select/_select.scss`);
+                this._copyTemplate('src/components-jsb/select/select.twig.ejs', `${rootFolder}src/components/select/select.twig`);
+            } else {
+                delete packageJsonData.dependencies['choices.js'];
+            }
+
+            // Optional A11y Dialog
+            if (this.config.get('libraries').includes('a11y-dialog')) {
+                this._copyTemplate('src/components-jsb/dialog/Dialog.jsb.js.ejs', `${rootFolder}src/components/dialog/Dialog.jsb.js`);
+                this._copyTemplate('src/components-jsb/dialog/_dialog.scss.ejs', `${rootFolder}src/components/dialog/_dialog.scss`);
+                this._copyTemplate('src/components-jsb/dialog/dialog.twig.ejs', `${rootFolder}src/components/dialog/dialog.twig`);
+            } else {
+                delete packageJsonData.dependencies['a11y-dialog'];
+            }
         }
 
-        // Optional Select2
-        if (!this.config.get('addons').includes('selectTwo')) {
-            delete packageJsonData.dependencies.select2;
-        } else {
-            this._copyTemplate('src/js/SelectTwo.jsb.js.ejs', `${rootFolder}src/js/SelectTwo.jsb.js`);
+        // Optional lodash
+        if (!this.config.get('libraries').includes('lodash')) {
+            delete packageJsonData.dependencies['lodash-es'];
         }
 
+        // Optional date-fns
+        if (!this.config.get('libraries').includes('date-fns')) {
+            delete packageJsonData.dependencies['date-fns'];
+        }
+
+        // Spring Boot Template
         if (this.config.get('template') === 'spring-boot') {
             const javaName = this.config.get('name')
                 .replace(/-/g, ' ')

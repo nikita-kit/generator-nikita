@@ -11,17 +11,21 @@
     "pre-commit": "check",
     "pre-commit.silent": true,
     "dependencies": {
+        "a11y-dialog": "5.2.0",
+        "choices.js": "4.1.0",
         "classnames": "2.2.6",
-        "jquery": "3.3.1",
+        "date-fns": "2.0.0-alpha.25",
+        "lodash-es": "4.17.11",
         "node-jsb": "3.1.0",
         "node-logging-js": "1.2.0",
         "prop-types": "15.6.2",
         "react": "16.6.3",
+        "react-a11y-dialog": "4.1.0",
         "react-dom": "16.6.3",
         "react-router-dom": "4.3.1",
+        "react-select": "2.1.2",
         "react-waterfall": "4.0.0",
-        "select2": "4.0.3",
-        "swiper": "3.4.2"
+        "siema": "1.5.1"
     },
     "devDependencies": {
         "@babel/core": "7.1.6",

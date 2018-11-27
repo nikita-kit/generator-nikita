@@ -1,25 +1,33 @@
 {% extends 'layouts::master.twig' %}
 
-{% block title %}Index – Project-Overview{% endblock %}
-{% block description %}This is the startpage of your prototype{% endblock %}
+{% block title %}Nikita Prototype{% endblock %}
+{% block description %}This is the startpage of your Nikita prototype{% endblock %}
 
+<% if (config.get('jsFramework') === 'react') { -%>
 {% block body %}
-<% if (config.get('addons').includes('slider')) { -%>
-	{% include 'partials::slider.twig' %}
+    <div id="main-app"></div>
+<%     if (config.get('libraries').includes('react-a11y-dialog')) { -%>
+    <div id="main-dialogs"></div>
+<%     } -%>
+{% endblock %}
 <% } -%>
 <% if (config.get('jsFramework') === 'jsb') { -%>
-    <p>Congratulations, the prototype was built successfully! :)</p>
-	{% include 'components::sample/sample.twig' %}
-<% } -%>
-<% if (config.get('addons').includes('selectTwo')) { -%>
-	<select id="ref-select" class="select jsb_ jsb_SelectTwo" name="select" required="required">
-		<option disabled="disabled" selected="selected" value="">Please choose:</option>
-		<option value="option 1">option 1</option>
-		<option value="option 2">option 2</option>
-		<option value="option 3">option 3</option>
-	</select>
-<% } -%>
-<% if (config.get('jsFramework') === 'react') { -%>
-	<div id="main-app"></div>
-<% } -%>
+{% block body %}
+    <p>Congratulations, your Nikita prototype was built successfully! :)</p>
+
+    <br />
+    {% include 'components::sample/sample.twig' %}
+<%     if (config.get('libraries').includes('a11y-dialog')) { -%>
+    <br />
+    {% include 'components::dialog/dialog.twig' %}
+<%     } -%>
+<%     if (config.get('libraries').includes('choices')) { -%>
+    <br />
+    {% include 'components::select/select.twig' %}
+<%     } -%>
+<%     if (config.get('libraries').includes('siema')) { -%>
+    <br />
+    {% include 'components::slider/slider.twig' %}
+<%     } -%>
 {% endblock %}
+<% } -%>
