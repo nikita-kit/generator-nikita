@@ -32,9 +32,6 @@ If you want to know more about our Javascript Coding-Standard, try [nikita.js](h
 - [__ESLint__](http://eslint.org/) – linter for JS files
 - [__stylelint__](https://stylelint.io/) – linter for SCSS files
 - [__Browsersync__](https://browsersync.io/) – synchronised browser testing
-- [__nikita.html__](https://github.com/nikita-kit/nikita-html) – HTML conventions and coding guidelines
-- [__nikita.css__](https://github.com/nikita-kit/nikita-css) – (S)CSS conventions and coding guidelines
-- [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines
 
 
 ## Getting started
@@ -134,22 +131,38 @@ Within the Javascript modules it's also possible the import client side template
 - [react](https://reactjs.org/)
 - [react-router](https://reacttraining.com/react-router/web/)
 - [react-waterfall](https://github.com/didierfranc/react-waterfall)
-- [prop-types](https://github.com/facebook/prop-types)
+<%     if (config.get('libraries').includes('react-select')) { -%>
+- [react-select](https://react-select.com)
+<%     } -%>
+<%     if (config.get('libraries').includes('siema')) { -%>
+- [siema](https://pawelgrzybek.github.io/siema/)
+<%     } -%>
+<%     if (config.get('libraries').includes('react-a11y-dialog')) { -%>
+- [react-a11y-dialog](https://github.com/HugoGiraudel/react-a11y-dialog)
+<%     } -%>
 - [classnames](https://github.com/JedWatson/classnames)
+- [prop-types](https://github.com/facebook/prop-types)
 - [logging.js](https://github.com/DracoBlue/logging-js)
 <% } else { -%>
-<%     if (config.get('addons').includes('jQuery') || config.get('addons').includes('selectTwo')) { -%>
-- [jquery](http://jquery.com/)
-<%     } -%>
 - [jsb](https://github.com/DracoBlue/jsb)
 - [logging.js](https://github.com/DracoBlue/logging-js)
-<%     if (config.get('addons').includes('selectTwo')) { -%>
-- [select2](https://github.com/select2/select2)
-<%     } %>
-<%     if (config.get('addons').includes('slider')) { -%>
-- [swiper](https://github.com/nolimits4web/Swiper)
+<%     if (config.get('libraries').includes('choices')) { -%>
+- [choices](https://joshuajohnson.co.uk/Choices/)
 <%     } -%>
-<% } %>
+<%     if (config.get('libraries').includes('siema')) { -%>
+- [siema](https://pawelgrzybek.github.io/siema/)
+<%     } -%>
+<%     if (config.get('libraries').includes('a11y-dialog')) { -%>
+- [a11y-dialog](https://github.com/edenspiekermann/a11y-dialog)
+<%     } -%>
+<% } -%>
+<% if (config.get('libraries').includes('lodash')) { -%>
+- [lodash](https://lodash.com/)
+<% } -%>
+<% if (config.get('libraries').includes('date-fns')) { -%>
+- [date-fns](https://date-fns.org/)
+<% } -%>
+
 
 ## Components
 

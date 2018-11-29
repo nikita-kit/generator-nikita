@@ -1,0 +1,67 @@
+import React, { Component } from 'react';
+import logging from 'node-logging-js';
+import Siema from 'siema';
+
+/* @see https://github.com/pawelgrzybek/siema */
+class Slider extends Component {
+    constructor(props) {
+        super(props);
+        logging.applyLogging(this, 'Slider');
+        this.logDebug('init:', props);
+        this.container = React.createRef();
+        this.slider = null;
+    }
+
+    componentDidMount() {
+        const options = {
+            resizeDebounce: 250,
+            duration: 200,
+            easing: 'ease-out',
+            perPage: 1,
+            startIndex: 0,
+            draggable: true,
+            threshold: 20,
+            loop: false,
+            ...this.props,
+            selector: this.container.current,
+        };
+
+        this.siema = new Siema(options);
+        window.addEventListener('resize', this.onResize);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.onResize);
+    }
+
+    onResize = () => {
+        this.siema.resizeHandler();
+    }
+
+    onPrevClick = () => {
+        this.siema.prev();
+    }
+
+    onNextClick = () => {
+        this.siema.next();
+    }
+
+    render() {
+
+        return (
+            <div className="b-slider">
+                <div className="slide-container" ref={this.container}>
+                    <div className="slide">Hi, I&apos;m slide 1</div>
+                    <div className="slide">Hi, I&apos;m slide 2</div>
+                    <div className="slide">Hi, I&apos;m slide 3</div>
+                    <div className="slide">Hi, I&apos;m slide 4</div>
+                </div>
+
+                <button className="prev" onClick={this.onPrevClick}>prev</button>
+                <button className="next" onClick={this.onNextClick}>next</button>
+            </div>
+        );
+    }
+}
+
+export default Slider;

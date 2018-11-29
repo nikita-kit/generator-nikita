@@ -1,15 +1,31 @@
 import logging from 'node-logging-js';
 import jsb from 'node-jsb';
+<% if (config.get('libraries').includes('lodash')) { -%>
+import { camelCase } from 'lodash-es';
+<% } -%>
+<% if (config.get('libraries').includes('date-fns')) { -%>
+import { format } from 'date-fns/esm';
+<% } -%>
+
 import app from '../../js/app';
 import SampleTemplate from './SampleTemplate.ejs';
 
-class Sample {
+export default class Sample {
     constructor(element, options) {
         logging.applyLogging(this, 'Sample');
         this.logDebug('options:', options);
         this.element = element;
 
         this.element.innerHTML = SampleTemplate({ title: 'Sample' });
+
+<% if (config.get('libraries').includes('lodash')) { -%>
+        this.logDebug(`lodash in nikita: ${camelCase('this should be camel case')}`);
+<% } -%>
+
+<% if (config.get('libraries').includes('date-fns')) { -%>
+        this.logDebug(`date-fns in nikita: Today is a ${format(new Date(), 'EEEE')}`);
+<% } -%>
+
         this.initializeEventListeners();
         app.doSomething();
     }
@@ -19,4 +35,3 @@ class Sample {
 }
 
 jsb.registerHandler('Sample', Sample);
-export default Sample;

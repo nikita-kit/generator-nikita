@@ -1,19 +1,63 @@
 import React, { Component } from 'react';
 import logging from 'node-logging-js';
 import { Link } from 'react-router-dom';
+<% if (config.get('libraries').includes('lodash')) { -%>
+import { camelCase } from 'lodash-es';
+<% } -%>
+<% if (config.get('libraries').includes('date-fns')) { -%>
+import { format } from 'date-fns/esm';
+<% } -%>
+<% if (config.get('libraries').includes('react-a11y-dialog')) { -%>
+import Dialog from '../dialog/Dialog';
+<% } -%>
+<% if (config.get('libraries').includes('react-select')) { -%>
+import Select from '../select/Select';
+<% } -%>
+<% if (config.get('libraries').includes('siema')) { -%>
+import Slider from '../slider/Slider';
+<% } -%>
 
 class Sample extends Component {
     constructor(props) {
         super(props);
         logging.applyLogging(this, 'Sample');
         this.logDebug('init:', props);
+
+<% if (config.get('libraries').includes('lodash')) { -%>
+        this.logDebug(`lodash in nikita: ${camelCase('this should be camel case')}`);
+<% } -%>
+
+<% if (config.get('libraries').includes('date-fns')) { -%>
+        this.logDebug(`date-fns in nikita: Today is a ${format(new Date(), 'EEEE')}`);
+<% } -%>
     }
 
     render() {
+<% if (config.get('libraries').includes('react-select')) { -%>
+        const options = [
+            { value: 'option 1', label: 'option 1' },
+            { value: 'option 2', label: 'option 2' },
+            { value: 'option 3', label: 'option 3' },
+        ];
+
+<% } -%>
         return (
             <div className="b-sample">
-                Congratulations, the react prototype was built successfully! :)<br />
+                Congratulations, the nikita react prototype was built successfully! :)<br />
                 <Link to="/state-example">goto state example</Link>
+
+<% if (config.get('libraries').includes('react-a11y-dialog')) { -%>
+                <br/>
+                <Dialog/>
+<% } -%>
+<% if (config.get('libraries').includes('react-select')) { -%>
+                <br/>
+                <Select options={options} />
+<% } -%>
+<% if (config.get('libraries').includes('siema')) { -%>
+                <br/>
+                <Slider/>
+<% } -%>
             </div>
         );
     }

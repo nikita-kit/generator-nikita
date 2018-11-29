@@ -1,0 +1,18 @@
+//
+// a11y-hide mixin
+// --------------------
+//
+// Hide elements in sake of accessibility
+//
+// Sample:
+// .element {
+//     @include a11y-hide();
+// }
+
+@mixin a11y-hide() {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    clip: rect(1px, 1px, 1px, 1px);
+}

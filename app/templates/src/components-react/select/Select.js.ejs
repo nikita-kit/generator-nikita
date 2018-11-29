@@ -1,0 +1,27 @@
+import React, { Component } from 'react';
+import logging from 'node-logging-js';
+import ReactSelect from 'react-select';
+
+/* @see https://github.com/JedWatson/react-select */
+class Select extends Component {
+    constructor(props) {
+        super(props);
+        logging.applyLogging(this, 'Select');
+        this.logDebug('init:', props);
+    }
+
+    render() {
+
+        const options = {
+            className: 'b-select',
+            classNamePrefix: 'select',
+            ...this.props,
+        };
+
+        return (
+            <ReactSelect {...options} />
+        );
+    }
+}
+
+export default Select;

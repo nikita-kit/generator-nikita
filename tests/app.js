@@ -9,7 +9,9 @@ const buildTimeout = 5 * 60 * 1000;
 const buildApp = (done) => {
     spawnCommand('npm', ['install'], { detached: false }).on('exit', () => {
         spawnCommand('grunt', ['dist'], { detached: false }).on('exit', () => {
-            spawnCommand('grunt', ['dev'], { detached: false }).on('exit', done);
+            spawnCommand('grunt', ['dev'], { detached: false }).on('exit', () => {
+                spawnCommand('grunt', ['test'], { detached: false }).on('exit', done);
+            });
         });
     });
 };
@@ -27,9 +29,15 @@ describe('generator-nikita:app', () => {
             useBuildFolders: true,
             features: [],
             jsFramework: 'jsb',
-            nikitaCssMixins: [],
-            nikitaCssExtends: [],
-            addons: [],
+            libraries: [],
+            scssMixins: [
+                'a11y-hide',
+                'clearfix',
+                'ellipsis',
+                'fixed-ratiobox',
+                'hide-text',
+                'triangle',
+            ],
         }));
 
     test('creates files', () => {
@@ -40,8 +48,17 @@ describe('generator-nikita:app', () => {
             'grunt/config/twigRender.js',
             'src/js/_main.js',
             'src/scss/styles.scss',
+            'src/scss/extends/_buttons.scss',
+            'src/scss/mixins/_clearfix.scss',
+            'src/scss/variables/_color.scss',
             'src/html/pages/index.twig',
             'static/img/appicons/favicon.ico',
+        ]);
+
+        assert.noFile([
+            'src/components/slider/Slider.jsb.js',
+            'src/components/select/Select.jsb.js',
+            'src/components/dialog/Dialog.jsb.js',
         ]);
     });
 });
@@ -58,9 +75,14 @@ describe('generator-nikita:web-app-jsb', () => {
             useBuildFolders: true,
             features: [],
             jsFramework: 'jsb',
-            nikitaCssMixins: [],
-            nikitaCssExtends: [],
-            addons: [],
+            scssMixins: [],
+            libraries: [
+                'lodash',
+                'date-fns',
+                'choices',
+                'siema',
+                'a11y-dialog',
+            ],
         }));
 
     test('creates files', (done) => {
@@ -72,9 +94,21 @@ describe('generator-nikita:web-app-jsb', () => {
             'src/js/_main.js',
             'src/js/app.js',
             'src/components/sample/Sample.jsb.js',
+            'src/components/slider/Slider.jsb.js',
+            'src/components/select/Select.jsb.js',
+            'src/components/dialog/Dialog.jsb.js',
             'src/scss/styles.scss',
+            'src/scss/blocks/_header.scss',
+            'src/scss/blocks/_footer.scss',
             'src/html/pages/index.twig',
             'static/img/appicons/favicon.ico',
+        ]);
+
+        assert.noFile(['src/scss/mixins/_clearfix.scss']);
+
+        assert.fileContent([
+            ['src/components/sample/Sample.jsb.js', /lodash-es/],
+            ['src/components/sample/Sample.jsb.js', /date-fns\/esm/],
         ]);
 
         if (process.env.TEMPLATE === 'web-app') {
@@ -99,9 +133,14 @@ describe('generator-nikita:web-app-react', () => {
             useBuildFolders: true,
             features: [],
             jsFramework: 'react',
-            nikitaCssMixins: [],
-            nikitaCssExtends: [],
-            addons: [],
+            libraries: [
+                'lodash',
+                'date-fns',
+                'siema',
+                'react-select',
+                'react-a11y-dialog',
+            ],
+            scssMixins: [],
         }));
 
     test('creates files', (done) => {
@@ -115,9 +154,23 @@ describe('generator-nikita:web-app-react', () => {
             'src/js/Store.js',
             'src/components/sample/Sample.js',
             'src/components/counter/Counter.js',
+            'src/components/slider/Slider.js',
+            'src/components/select/Select.js',
+            'src/components/dialog/Dialog.js',
             'src/scss/styles.scss',
             'src/html/pages/index.twig',
             'static/img/appicons/favicon.ico',
+        ]);
+
+        assert.noFile([
+            'src/scss/mixins/_clearfix.scss',
+            'src/scss/blocks/_header.scss',
+            'src/scss/blocks/_footer.scss',
+        ]);
+
+        assert.fileContent([
+            ['src/components/sample/Sample.js', /lodash-es/],
+            ['src/components/sample/Sample.js', /date-fns\/esm/],
         ]);
 
         if (process.env.TEMPLATE === 'web-app') {

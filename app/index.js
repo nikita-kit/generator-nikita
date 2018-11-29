@@ -85,9 +85,15 @@ module.exports = class extends Generator {
                     'preCommitHook',
                 ],
                 jsFramework: 'jsb',
-                nikitaCssMixins: ['respond-to'],
-                nikitaCssExtends: ['cf'],
-                addons: [],
+                scssMixins: [
+                    'a11y-hide',
+                    'clearfix',
+                    'ellipsis',
+                    'fixed-ratiobox',
+                    'hide-text',
+                    'triangle',
+                ],
+                libraries: [],
             });
 
             if (this.config.get('template') === 'spring-boot') {
@@ -96,7 +102,6 @@ module.exports = class extends Generator {
                 this.config.set('rootFolder', 'web');
             } else if (this.config.get('template') === 'wordpress') {
                 this.config.set('rootFolder', 'web');
-                this.config.set('addons', ['jQuery']);
             }
         }
     }
@@ -156,43 +161,25 @@ module.exports = class extends Generator {
                     value: 'react',
                 },
             ]),
-            this._promptCheckbox('nikitaCssMixins', 'Which nikita.css mixins do you want to use?', [
+            this._promptCheckbox('scssMixins', 'Which nikita.css mixins do you want to use?', [
                 {
-                    name: 'Centering: Horizontally and/or vertically centering elements with the translate-method (IE9+)',
-                    value: 'centering',
+                    name: 'a11y-hide: Hide elements in sake of accessibility',
+                    value: 'a11y-hide',
                 }, {
-                    name: 'Fixed-Ratiobox: Use intrinsic ratio to force child elements like images, videos or frames to fluidly scale at a given ratio',
-                    value: 'fixed-ratiobox',
-                }, {
-                    name: 'Font-Smoothing: Turn font-smoothing on/off for a better font-rendering on OS X',
-                    value: 'font-smoothing',
-                }, {
-                    name: 'Layering: A function for managing z-index layers within a Sass map',
-                    value: 'layering',
-                }, {
-                    name: 'Respond-To: Easy managing your media queries',
-                    value: 'respond-to',
-                }, {
-                    name: 'Triangle: Easy generating arrow-like triangles with the border-method',
-                    value: 'triangle',
-                },
-            ]),
-            this._promptCheckbox('nikitaCssExtends', 'Which nikita.css extends do you want to use?', [
-                {
-                    name: 'a11y: Hide elements in sake of accessibility',
-                    value: 'a11y',
-                }, {
-                    name: 'cf: Micro clearfix',
-                    value: 'cf',
+                    name: 'clearfix: Micro clearfix',
+                    value: 'clearfix',
                 }, {
                     name: 'ellipsis: Ellipsis to point out text',
                     value: 'ellipsis',
                 }, {
+                    name: 'fixed-ratiobox: Use intrinsic ratio to force child elements to fluidly scale at a given ratio',
+                    value: 'fixed-ratiobox',
+                }, {
                     name: 'hide-text: Hide text on elements in sake of accessibility',
                     value: 'hide-text',
                 }, {
-                    name: 'ib: Use the inline-block method as an alternative to float elements',
-                    value: 'ib',
+                    name: 'triangle: Easy generating arrow-like triangles with the border-method',
+                    value: 'triangle',
                 },
             ]),
         ]);
@@ -215,26 +202,54 @@ module.exports = class extends Generator {
 
     _getCustomLibrariesPrompts() {
 
+        const options = [
+            // {
+            //     name: 'logging.js, trace and logging library',
+            //     value: 'logging',
+            // },
+            {
+                name: 'lodash, Javascript utility library',
+                value: 'lodash',
+            },
+            {
+                name: 'date-fns, date utility library',
+                value: 'date-fns',
+            },
+        ];
+
         if (this.config.get('jsFramework') === 'react') {
-            return [];
+            options.push(
+                {
+                    name: 'Siema, the lightweight slider',
+                    value: 'siema',
+                },
+                {
+                    name: 'react-select, for styling select inputs',
+                    value: 'react-select',
+                },
+                {
+                    name: 'react-a11y-dialog, lightweight and accessible modal dialog',
+                    value: 'react-a11y-dialog',
+                },
+            );
+        } else {
+            options.push(
+                {
+                    name: 'Siema, the lightweight slider',
+                    value: 'siema',
+                },
+                {
+                    name: 'Chioces, for styling select inputs',
+                    value: 'choices',
+                },
+                {
+                    name: 'a11y-dialog, lightweight and accessible modal dialog',
+                    value: 'a11y-dialog',
+                },
+            );
         }
 
-        return [
-            this._promptCheckbox('addons', 'Which JS modules do you want to use?', [
-                {
-                    name: 'jQuery library',
-                    value: 'jQuery',
-                },
-                {
-                    name: 'iDangerous Swiper for sliders',
-                    value: 'slider',
-                },
-                {
-                    name: 'select2 for styled select inputs',
-                    value: 'selectTwo',
-                },
-            ]),
-        ];
+        return [this._promptCheckbox('libraries', 'Which common libraries do you want to add?', options)];
     }
 
     _handleCustomLibrariesPrompts(answers) {
@@ -319,7 +334,6 @@ module.exports = class extends Generator {
         this._copyTemplate('grunt/config/imagemin.js.ejs', 'grunt/config/imagemin.js');
         this._copyTemplate('grunt/config/jest.js.ejs', 'grunt/config/jest.js');
         this._copyTemplate('grunt/config/postcss.js.ejs', 'grunt/config/postcss.js');
-        this._copyTemplate('grunt/config/prettify.js.ejs', 'grunt/config/prettify.js');
         this._copyTemplate('grunt/config/sass.js.ejs', 'grunt/config/sass.js');
         this._copyTemplate('grunt/config/sass-globbing.js.ejs', 'grunt/config/sass-globbing.js');
         this._copyTemplate('grunt/config/stylelint.js.ejs', 'grunt/config/stylelint.js');
@@ -348,16 +362,24 @@ module.exports = class extends Generator {
         // SCSS Basic Files
         this._copyTemplate('src/scss/styles.scss.ejs', `${rootFolder}src/scss/styles.scss`);
         this._copyTemplate('src/scss/_basics.scss.ejs', `${rootFolder}src/scss/_basics.scss`);
+        this._copyTemplate('src/scss/_foundation.scss.ejs', `${rootFolder}src/scss/_foundation.scss`);
+        if (!isReact) {
+            this._copyTemplate('src/scss/blocks/_header.scss.ejs', `${rootFolder}src/scss/blocks/_header.scss`);
+            this._copyTemplate('src/scss/blocks/_footer.scss.ejs', `${rootFolder}src/scss/blocks/_footer.scss`);
+        }
 
-        // SCSS Extra Files
-        this._copyTemplate('src/scss/blocks/_header.scss.ejs', `${rootFolder}src/scss/blocks/_header.scss`);
-        this._copyTemplate('src/scss/blocks/_footer.scss.ejs', `${rootFolder}src/scss/blocks/_footer.scss`);
+        // SCSS extends/mixins Files
         this._copyTemplate('src/scss/extends/_buttons.scss.ejs', `${rootFolder}src/scss/extends/_buttons.scss`);
+        this.config.get('scssMixins').forEach((mixin) => {
+            this._copyTemplate(`src/scss/mixins/_${mixin}.scss.ejs`, `${rootFolder}src/scss/mixins/_${mixin}.scss`);
+        });
 
         // SCSS Variables
+        this._copyTemplate('src/scss/variables/_foundation-settings.scss.ejs', `${rootFolder}src/scss/variables/_foundation-settings.scss`);
         this._copyTemplate('src/scss/variables/_color.scss.ejs', `${rootFolder}src/scss/variables/_color.scss`);
         this._copyTemplate('src/scss/variables/_timing.scss.ejs', `${rootFolder}src/scss/variables/_timing.scss`);
         this._copyTemplate('src/scss/variables/_typography.scss.ejs', `${rootFolder}src/scss/variables/_typography.scss`);
+        this._copyTemplate('src/scss/variables/_z-layers.scss.ejs', `${rootFolder}src/scss/variables/_z-layers.scss`);
 
         // JS Files
         if (isReact) {
@@ -390,9 +412,9 @@ module.exports = class extends Generator {
         this._copyTemplate('src/html/layouts/master.twig.ejs', `${rootFolder}src/html/layouts/master.twig`);
         this._copyTemplate('src/html/macros/.gitkeep', `${rootFolder}src/html/macros/.gitkeep`);
         this._copyTemplate('src/html/pages/index.twig.ejs', `${rootFolder}src/html/pages/index.twig`);
-        this._copyTemplate('src/html/partials/header.twig.ejs', `${rootFolder}src/html/partials/header.twig`);
-        this._copyTemplate('src/html/partials/footer.twig.ejs', `${rootFolder}src/html/partials/footer.twig`);
         if (!isReact) {
+            this._copyTemplate('src/html/partials/header.twig.ejs', `${rootFolder}src/html/partials/header.twig`);
+            this._copyTemplate('src/html/partials/footer.twig.ejs', `${rootFolder}src/html/partials/footer.twig`);
             this._copyTemplate('src/components-jsb/sample/sample.twig.ejs', `${rootFolder}src/components/sample/sample.twig`);
         }
 
@@ -434,19 +456,8 @@ module.exports = class extends Generator {
             delete packageJsonData['pre-commit.silent'];
         }
 
-        // Optional Layering-Mixin
-        if (this.config.get('nikitaCssMixins').includes('layering')) {
-            this._copyTemplate('src/scss/variables/_z-layers.scss.ejs', `${rootFolder}src/scss/variables/_z-layers.scss`);
-        }
-
-        // Optional Respond-To-Mixin
-        if (this.config.get('nikitaCssMixins').includes('respond-to')) {
-            this._copyTemplate('src/scss/variables/_breakpoints.scss.ejs', `${rootFolder}src/scss/variables/_breakpoints.scss`);
-        }
-
         // jsFramework
         if (isReact) {
-            this.config.set('addons', []);
             delete packageJsonData.dependencies['node-jsb'];
             delete packageJsonData.devDependencies['import-glob'];
             delete packageJsonData.devDependencies['ejs-webpack-loader'];
@@ -463,27 +474,77 @@ module.exports = class extends Generator {
             delete packageJsonData.dependencies['react-waterfall'];
         }
 
-        // Optional jQuery
-        if (!this.config.get('addons').includes('jQuery') && !this.config.get('addons').includes('selectTwo')) {
-            delete packageJsonData.dependencies.jquery;
-        }
+        // Optional Framework specific Libraries
+        if (isReact) {
+            delete packageJsonData.dependencies['choices.js'];
+            delete packageJsonData.dependencies['a11y-dialog'];
 
-        // Optional Slider
-        if (!this.config.get('addons').includes('slider')) {
-            delete packageJsonData.dependencies.swiper;
+            // Optional Siema Slider
+            if (this.config.get('libraries').includes('siema')) {
+                this._copyTemplate('src/components-react/slider/Slider.js.ejs', `${rootFolder}src/components/slider/Slider.js`);
+                this._copyTemplate('src/components-react/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
+            } else {
+                delete packageJsonData.dependencies.siema;
+            }
+
+            // Optional Choices
+            if (this.config.get('libraries').includes('react-select')) {
+                this._copyTemplate('src/components-react/select/Select.js.ejs', `${rootFolder}src/components/select/Select.js`);
+                this._copyTemplate('src/components-react/select/_select.scss.ejs', `${rootFolder}src/components/select/_select.scss`);
+            } else {
+                delete packageJsonData.dependencies['react-select'];
+            }
+
+            // Optional A11y Dialog
+            if (this.config.get('libraries').includes('react-a11y-dialog')) {
+                this._copyTemplate('src/components-react/dialog/Dialog.js.ejs', `${rootFolder}src/components/dialog/Dialog.js`);
+                this._copyTemplate('src/components-react/dialog/_dialog.scss.ejs', `${rootFolder}src/components/dialog/_dialog.scss`);
+            } else {
+                delete packageJsonData.dependencies['react-a11y-dialog'];
+            }
         } else {
-            this._copyTemplate('src/html/partials/slider.twig.ejs', `${rootFolder}src/html/partials/slider.twig`);
-            this._copyTemplate('src/js/Slider.jsb.js.ejs', `${rootFolder}src/js/Slider.jsb.js`);
-            this._copyTemplate('src/scss/blocks/_slider.scss.ejs', `${rootFolder}src/scss/blocks/_slider.scss`);
+            delete packageJsonData.dependencies['react-select'];
+            delete packageJsonData.dependencies['react-a11y-dialog'];
+
+            // Optional Siema Slider
+            if (this.config.get('libraries').includes('siema')) {
+                this._copyTemplate('src/components-jsb/slider/Slider.jsb.js.ejs', `${rootFolder}src/components/slider/Slider.jsb.js`);
+                this._copyTemplate('src/components-jsb/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
+                this._copyTemplate('src/components-jsb/slider/slider.twig.ejs', `${rootFolder}src/components/slider/slider.twig`);
+            } else {
+                delete packageJsonData.dependencies.siema;
+            }
+
+            // Optional Choices
+            if (this.config.get('libraries').includes('choices')) {
+                this._copyTemplate('src/components-jsb/select/Select.jsb.js.ejs', `${rootFolder}src/components/select/Select.jsb.js`);
+                this._copyTemplate('src/components-jsb/select/_select.scss.ejs', `${rootFolder}src/components/select/_select.scss`);
+                this._copyTemplate('src/components-jsb/select/select.twig.ejs', `${rootFolder}src/components/select/select.twig`);
+            } else {
+                delete packageJsonData.dependencies['choices.js'];
+            }
+
+            // Optional A11y Dialog
+            if (this.config.get('libraries').includes('a11y-dialog')) {
+                this._copyTemplate('src/components-jsb/dialog/Dialog.jsb.js.ejs', `${rootFolder}src/components/dialog/Dialog.jsb.js`);
+                this._copyTemplate('src/components-jsb/dialog/_dialog.scss.ejs', `${rootFolder}src/components/dialog/_dialog.scss`);
+                this._copyTemplate('src/components-jsb/dialog/dialog.twig.ejs', `${rootFolder}src/components/dialog/dialog.twig`);
+            } else {
+                delete packageJsonData.dependencies['a11y-dialog'];
+            }
         }
 
-        // Optional Select2
-        if (!this.config.get('addons').includes('selectTwo')) {
-            delete packageJsonData.dependencies.select2;
-        } else {
-            this._copyTemplate('src/js/SelectTwo.jsb.js.ejs', `${rootFolder}src/js/SelectTwo.jsb.js`);
+        // Optional lodash
+        if (!this.config.get('libraries').includes('lodash')) {
+            delete packageJsonData.dependencies['lodash-es'];
         }
 
+        // Optional date-fns
+        if (!this.config.get('libraries').includes('date-fns')) {
+            delete packageJsonData.dependencies['date-fns'];
+        }
+
+        // Spring Boot Template
         if (this.config.get('template') === 'spring-boot') {
             const javaName = this.config.get('name')
                 .replace(/-/g, ' ')

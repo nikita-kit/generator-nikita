@@ -1,0 +1,16 @@
+//
+// ellipsis mixin
+// --------------------
+//
+// adds ellipsis to point out text
+//
+// Sample:
+// .element {
+//     @include ellipsis();
+// }
+
+@mixin ellipsis() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

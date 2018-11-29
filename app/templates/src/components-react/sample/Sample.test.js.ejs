@@ -6,6 +6,10 @@ import Sample from './Sample';
 
 test('Sample Component loads correctly', () => {
 
+<% if (config.get('libraries').includes('react-a11y-dialog')) { -%>
+    document.body.innerHTML = '<div id="main-dialogs"></div>';
+
+<% } -%>
     const component = mount(
         <MemoryRouter>
             <Sample/>
@@ -13,5 +17,5 @@ test('Sample Component loads correctly', () => {
     );
 
     expect(component.find('.b-sample')).toHaveLength(1);
-    expect(console.log).toHaveBeenLastCalledWith('[Sample.render]');
+    expect(console.log).toHaveBeenCalledWith('[Sample.render]');
 });

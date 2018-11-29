@@ -2,17 +2,13 @@
 
 // Standard Button-Placeholder
 %btn {
-<% if (config.get('nikitaCssMixins').includes('font-smoothing')) { -%>
-    @include font-smoothing(on);
-
-<% } -%>
     position: relative;
     display: inline-block;
     font-family: $base-font;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.4s ease-out;
+    transition: all $base-animation-duration ease-out;
 }
 
 %btn:focus,
