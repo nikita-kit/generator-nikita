@@ -363,6 +363,7 @@ module.exports = class extends Generator {
         // SCSS Basic Files
         this._copyTemplate('src/scss/styles.scss.ejs', `${rootFolder}src/scss/styles.scss`);
         this._copyTemplate('src/scss/_basics.scss.ejs', `${rootFolder}src/scss/_basics.scss`);
+        this._copyTemplate('src/scss/_foundation.scss.ejs', `${rootFolder}src/scss/_foundation.scss`);
         if (!isReact) {
             this._copyTemplate('src/scss/blocks/_header.scss.ejs', `${rootFolder}src/scss/blocks/_header.scss`);
             this._copyTemplate('src/scss/blocks/_footer.scss.ejs', `${rootFolder}src/scss/blocks/_footer.scss`);
@@ -375,7 +376,7 @@ module.exports = class extends Generator {
         });
 
         // SCSS Variables
-        this._copyTemplate('src/scss/variables/_breakpoints.scss.ejs', `${rootFolder}src/scss/variables/_breakpoints.scss`);
+        this._copyTemplate('src/scss/variables/_foundation-settings.scss.ejs', `${rootFolder}src/scss/variables/_foundation-settings.scss`);
         this._copyTemplate('src/scss/variables/_color.scss.ejs', `${rootFolder}src/scss/variables/_color.scss`);
         this._copyTemplate('src/scss/variables/_timing.scss.ejs', `${rootFolder}src/scss/variables/_timing.scss`);
         this._copyTemplate('src/scss/variables/_typography.scss.ejs', `${rootFolder}src/scss/variables/_typography.scss`);

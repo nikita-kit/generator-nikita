@@ -13,6 +13,7 @@
 * fixed browserSync page reload when js files are changing
 * added react.js
 * made jsb optional
+* added foundation css framework
 * reworked included scss mixins
   * now all chosen mixins gets copied into project
   * converted extends to mixins

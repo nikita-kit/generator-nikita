@@ -50,7 +50,7 @@ describe('generator-nikita:app', () => {
             'src/scss/styles.scss',
             'src/scss/extends/_buttons.scss',
             'src/scss/mixins/_clearfix.scss',
-            'src/scss/variables/_breakpoints.scss',
+            'src/scss/variables/_color.scss',
             'src/html/pages/index.twig',
             'static/img/appicons/favicon.ico',
         ]);
