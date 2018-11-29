@@ -239,7 +239,7 @@ module.exports = class extends Generator {
                     value: 'siema',
                 },
                 {
-                    name: 'Chioces, for styling select inputs',
+                    name: 'Choices, for styling select inputs',
                     value: 'choices',
                 },
                 {
@@ -337,7 +337,6 @@ module.exports = class extends Generator {
         this._copyTemplate('grunt/config/sass.js.ejs', 'grunt/config/sass.js');
         this._copyTemplate('grunt/config/sass-globbing.js.ejs', 'grunt/config/sass-globbing.js');
         this._copyTemplate('grunt/config/stylelint.js.ejs', 'grunt/config/stylelint.js');
-        this._copyTemplate('grunt/config/svgmin.js.ejs', 'grunt/config/svgmin.js');
         this._copyTemplate('grunt/config/twigRender.js.ejs', 'grunt/config/twigRender.js');
         this._copyTemplate('grunt/config/uglify.js.ejs', 'grunt/config/uglify.js');
         this._copyTemplate('grunt/config/watch.js.ejs', 'grunt/config/watch.js');

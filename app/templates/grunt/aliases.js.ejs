@@ -10,7 +10,7 @@ module.exports = {
         'clean:static',
         'clean:tmp',
 <% if (config.get('features').includes('svgBackgrounds')) { -%>
-        'svgmin:src_bg',
+        'imagemin:bgSvg',
         'svgcss',
         'string-replace',
 <% } -%>
@@ -32,7 +32,7 @@ module.exports = {
         'clean:static',
         'clean:tmp',
 <% if (config.get('features').includes('svgBackgrounds')) { -%>
-        'svgmin:src_bg',
+        'imagemin:bgSvg',
         'svgcss',
         'string-replace',
 <% } -%>
@@ -60,7 +60,6 @@ module.exports = {
 
     'minify-images': [
         'imagemin:static',
-        'svgmin:static',
     ],
 
     'check-scss': [
