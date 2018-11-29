@@ -19,6 +19,14 @@ module.exports = {
         },
         setupTestFrameworkScriptFile: '<rootDir>/<%%= paths.src %>/tests/setup/jest.setup.js',
         transformIgnorePatterns: ['/node_modules/'],
+        moduleNameMapper: {
+<% if (config.get('libraries').includes('lodash')) { -%>
+            "^lodash-es$": "lodash",
+<% } -%>
+<% if (config.get('libraries').includes('date-fns')) { -%>
+            "^date-fns\/esm$": "date-fns",
+<% } -%>
+        },
     },
     test: {
         options: {

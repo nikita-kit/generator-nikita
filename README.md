@@ -58,7 +58,7 @@ Feel free to re-run the generator to add or remove features.
 - and many more optional features:
   - libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns`
   - svg images as inlined css background images
-  - useful scss mixins and extends
+  - useful scss mixins
   - webfonts
   - pre-commit hook for code linting
 

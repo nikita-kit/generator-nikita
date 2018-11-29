@@ -9,7 +9,9 @@ const buildTimeout = 5 * 60 * 1000;
 const buildApp = (done) => {
     spawnCommand('npm', ['install'], { detached: false }).on('exit', () => {
         spawnCommand('grunt', ['dist'], { detached: false }).on('exit', () => {
-            spawnCommand('grunt', ['dev'], { detached: false }).on('exit', done);
+            spawnCommand('grunt', ['dev'], { detached: false }).on('exit', () => {
+                spawnCommand('grunt', ['test'], { detached: false }).on('exit', done);
+            });
         });
     });
 };

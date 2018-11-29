@@ -14,6 +14,8 @@
 * added react.js
 * made jsb optional
 * reworked included scss mixins
+  * now all chosen mixins gets copied into project
+  * converted extends to mixins
 * added libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns` 
 * removed libraries `jquery`, `swiper` and `select2`
 * removed `assemble`

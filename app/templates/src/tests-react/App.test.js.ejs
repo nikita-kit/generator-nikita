@@ -5,6 +5,10 @@ import App from '../js/App';
 
 test('app mounts without errors', () => {
 
+<% if (config.get('libraries').includes('react-a11y-dialog')) { -%>
+    document.body.innerHTML = '<div id="main-dialogs"></div>';
+
+<% } -%>
     mount(<App/>);
     expect(console.log).toHaveBeenCalledWith('[App.render]');
 });
