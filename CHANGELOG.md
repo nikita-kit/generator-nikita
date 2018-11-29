@@ -22,6 +22,7 @@
 * removed `assemble`
 * removed `grunt-accessibility`
 * removed `grunt-htmlhint`
+* removed `grunt-prettify`
 * removed form framework
 * rewrote generator logic completely and improved templates
 * updated generator dependencies
