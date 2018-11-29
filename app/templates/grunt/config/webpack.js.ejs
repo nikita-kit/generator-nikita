@@ -113,6 +113,10 @@ module.exports = function (grunt, options) {
             },
             dist: {
                 mode: 'production',
+                performance: {
+                    maxEntrypointSize: 500000,
+                    maxAssetSize: 500000,
+                },
                 output: {
                     path: path.resolve('<%%= paths.static %>/generated/'),
                 },
