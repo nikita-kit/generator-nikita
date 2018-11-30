@@ -239,7 +239,7 @@ module.exports = class extends Generator {
                     value: 'siema',
                 },
                 {
-                    name: 'Chioces, for styling select inputs',
+                    name: 'Choices, for styling select inputs',
                     value: 'choices',
                 },
                 {
@@ -334,10 +334,10 @@ module.exports = class extends Generator {
         this._copyTemplate('grunt/config/imagemin.js.ejs', 'grunt/config/imagemin.js');
         this._copyTemplate('grunt/config/jest.js.ejs', 'grunt/config/jest.js');
         this._copyTemplate('grunt/config/postcss.js.ejs', 'grunt/config/postcss.js');
+        this._copyTemplate('grunt/config/realFavicon.js.ejs', 'grunt/config/realFavicon.js');
         this._copyTemplate('grunt/config/sass.js.ejs', 'grunt/config/sass.js');
         this._copyTemplate('grunt/config/sass-globbing.js.ejs', 'grunt/config/sass-globbing.js');
         this._copyTemplate('grunt/config/stylelint.js.ejs', 'grunt/config/stylelint.js');
-        this._copyTemplate('grunt/config/svgmin.js.ejs', 'grunt/config/svgmin.js');
         this._copyTemplate('grunt/config/twigRender.js.ejs', 'grunt/config/twigRender.js');
         this._copyTemplate('grunt/config/uglify.js.ejs', 'grunt/config/uglify.js');
         this._copyTemplate('grunt/config/watch.js.ejs', 'grunt/config/watch.js');
@@ -412,6 +412,7 @@ module.exports = class extends Generator {
         this._copyTemplate('src/html/layouts/master.twig.ejs', `${rootFolder}src/html/layouts/master.twig`);
         this._copyTemplate('src/html/macros/.gitkeep', `${rootFolder}src/html/macros/.gitkeep`);
         this._copyTemplate('src/html/pages/index.twig.ejs', `${rootFolder}src/html/pages/index.twig`);
+        this._copyTemplate('src/html/partials/appicons.twig.ejs', `${rootFolder}src/html/partials/appicons.twig`);
         if (!isReact) {
             this._copyTemplate('src/html/partials/header.twig.ejs', `${rootFolder}src/html/partials/header.twig`);
             this._copyTemplate('src/html/partials/footer.twig.ejs', `${rootFolder}src/html/partials/footer.twig`);

@@ -9,19 +9,19 @@ Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerat
     <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/webpack.svg" alt="webpack">
 </a>
 <a href="https://babeljs.io/">
-    <img height="65" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/babel.svg" alt="babel">
+    <img height="75" width="120" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/babel.svg" alt="babel">
 </a>
 <a href="https://reactjs.org/">
     <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/react.svg" alt="react">
 </a>
 <a href="https://github.com/sass/node-sass">
-    <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/node-sass.svg" alt="sass">
+    <img height="75" width="70" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/node-sass.svg" alt="sass">
 </a>
 <a href="http://postcss.org/">
     <img height="76" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/postcss.svg" alt="postcss">
 </a>
 <a href="https://foundation.zurb.com/sites.html">
-    <img height="76" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/foundation.svg" alt="foundation">
+    <img height="76" width="60" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/foundation.svg" alt="foundation">
 </a>
 <a href="https://facebook.github.io/jest/">
     <img height="79" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/jest.svg" alt="jest">
@@ -46,7 +46,7 @@ Feel free to re-run the generator to add or remove features.
 
 - [__Grunt__](http://gruntjs.com/) – Javascript task runner
 - [__Webpack__](https://webpack.js.org/) – module bundler
-- [__Babel__](https://babeljs.io/) – compiler for ES6 Javascript
+- [__Babel__](https://babeljs.io/) – next generation Javascript compiler
 - [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) – static site generator
 - [__React__](https://reactjs.org/) or [__JSB__](https://github.com/DracoBlue/jsb/) - JS framework
 - [__SCSS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – CSS preprocessing

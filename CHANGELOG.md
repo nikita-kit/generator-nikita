@@ -11,12 +11,16 @@
 * updated all dependencies to newest version and improved configs   
 * improved jest code coverage output
 * fixed browserSync page reload when js files are changing
+* added `grunt-real-favicon` for app-icon generation
+  * place desired image at `static/img/appicons/_source.png`
+  * start favicon generator with `grunt generate-appicons`
 * added react.js
 * made jsb optional
 * added foundation css framework
 * reworked included scss mixins
   * now all chosen mixins gets copied into project
   * converted extends to mixins
+* added shorthand grunt tasks `grunt check-code` and `grunt fix-code` for linting js and scss
 * added libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns` 
 * removed libraries `jquery`, `swiper` and `select2`
 * removed `assemble`
