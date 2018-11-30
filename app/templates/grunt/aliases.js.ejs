@@ -1,8 +1,11 @@
 module.exports = {
 
     // standard build task when calling grunt without arguments
+    // development build task including server and watch
     'default': [
-        'build',
+        'dev',
+        'browserSync:dev',
+        'watch',
     ],
 
     // development build task
@@ -20,13 +23,6 @@ module.exports = {
         'webpack:dev',
     ],
 
-    // development build task including server and watch
-    'build': [
-        'dev',
-        'browserSync:dev',
-        'watch',
-    ],
-
     // distribution task
     'dist': [
         'clean:static',
@@ -38,17 +34,17 @@ module.exports = {
 <% } -%>
         'sass-globbing',
         'sass:dist',
+        'postcss:dist',
 <% if (config.get('features').includes('gitinfos')) { -%>
         'gitinfo',
         'write-gitinfos',
 <% } -%>
         'twigRender:dist',
-        'postcss:dist',
         'webpack:dist',
         'uglify',
     ],
 
-    // testing, linting and fixing tasks
+    // testing tasks
 
     'test': [
         'jest:test',
@@ -58,8 +54,26 @@ module.exports = {
         'jest:testCoverage',
     ],
 
+    // image tasks
+
     'minify-images': [
         'imagemin:static',
+    ],
+
+    'genrate-favicons': [
+        'realFavicon:static',
+    ],
+
+    // linting and fixing task
+
+    'check-code': [
+        'check-js',
+        'check-scss',
+    ],
+
+    'fix-code': [
+        'fix-js',
+        'fix-scss',
     ],
 
     'check-scss': [
@@ -77,6 +91,8 @@ module.exports = {
     'fix-js': [
         'eslint:fix',
     ],
+
+    // analyze tasks
 
     'analyze-js': [
         'webpack:analyze',
