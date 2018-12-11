@@ -17,6 +17,7 @@
 * added react.js
 * made jsb optional
 * added foundation css framework
+* set html font-size to 1px; now rem units = px units
 * reworked included scss mixins
   * now all chosen mixins gets copied into project
   * converted extends to mixins
