@@ -14,8 +14,7 @@ module.exports = {
         'clean:tmp',
 <% if (config.get('features').includes('svgBackgrounds')) { -%>
         'imagemin:bgSvg',
-        'svgcss',
-        'string-replace',
+        'svg2scss',
 <% } -%>
         'sass-globbing',
         'concurrent:dev',
@@ -29,8 +28,7 @@ module.exports = {
         'clean:tmp',
 <% if (config.get('features').includes('svgBackgrounds')) { -%>
         'imagemin:bgSvg',
-        'svgcss',
-        'string-replace',
+        'svg2scss',
 <% } -%>
         'sass-globbing',
         'sass:dist',

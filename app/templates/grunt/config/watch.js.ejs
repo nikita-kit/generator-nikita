@@ -9,7 +9,7 @@ module.exports = {
 <% if (config.get('features').includes('svgBackgrounds')) { -%>
     svg_bgs: {
         files: ['<%%= paths.src %>/scss/bg-icons/*.svg'],
-        tasks: ['svgmin:src_bg', 'svgcss', 'string-replace', 'sass:dev', 'postcss:dev']
+        tasks: ['clean:tmp', 'imagemin:bgSvg', 'svg2scss', 'sass-globbing', 'sass:dev', 'postcss:dev']
     },
 <% } -%>
     js: {

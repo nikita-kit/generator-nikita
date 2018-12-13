@@ -2,17 +2,22 @@
 // svg-background mixin
 // --------------------
 //
-// This mixin is used for delivering grunt-svgcss-generated background-images to different browsers after being string-replaced.
+// This mixin is used for delivering datauri svgs to to your scss.
 //
-// @see: https://github.com/erickrdch/grunt-string-replace
-// @see: https://github.com/psyrendust/grunt-svg-css
 //
 // Usage:
 // .element {
 //     @include svg-background(name-of-your-file);
 // }
-//
+
+@function get-svg-bg-icon($name) {
+    @if not map-has-key($svg-icon-map, $name) {
+        @error "No svg icon found for name #{$name} in $svg-icon-map.";
+    }
+
+    @return map-get($svg-icon-map, $name);
+}
 
 @mixin svg-background($name) {
-    @extend %bg-data-svg-#{$name};
+    background: get-svg-bg-icon($name) no-repeat;
 }

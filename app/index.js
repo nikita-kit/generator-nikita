@@ -432,13 +432,12 @@ module.exports = class extends Generator {
 
         // Optional SVG Backgrounds
         if (this.config.get('features').includes('svgBackgrounds')) {
-            this._copyTemplate('grunt/config/string-replace.js.ejs', 'grunt/config/string-replace.js');
-            this._copyTemplate('grunt/config/svgcss.js.ejs', 'grunt/config/svgcss.js');
+            this._copyTemplate('grunt/config/svg2scss.js.ejs', 'grunt/config/svg2scss.js');
+            this._copyTemplate('grunt/tasks/svg2scss.js.ejs', 'grunt/tasks/svg2scss.js');
             this._copyTemplate('src/scss/mixins/_svg-background.scss.ejs', `${rootFolder}src/scss/mixins/_svg-background.scss`);
             this._copyTemplate('src/scss/bg-icons/README.md.ejs', `${rootFolder}src/scss/bg-icons/README.md`);
         } else {
-            delete packageJsonData.devDependencies['grunt-svg-css'];
-            delete packageJsonData.devDependencies['grunt-string-replace'];
+            delete packageJsonData.devDependencies.xmldom;
         }
 
         // Optional Gitinfos

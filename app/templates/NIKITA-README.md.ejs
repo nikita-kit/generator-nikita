@@ -199,8 +199,8 @@ Imagemin is very expensive, so this step is not part of build task to save time.
 ### SVG images as Data-URIs
 
 To include svg icons as background-images, just put your SVG-icons into `src/scss/bg-icons`-folder.
-All icons will be processed with the svgmin-task and included as data-URIs in a scss placeholder file.
-As a result, you can include your svg icons by using the `_svg-background.scss` mixin. Just type `@include svg-background(name-of-your-icon);`.
+All SVG-files will be processed with svg2scss-task which creates a sass map containing the SVGs as data-URI strings.
+Now you can include your svg icons by using the `_svg-background.scss` mixin. Just type `@include svg-background(name-of-your-icon);`.
 
 
 <% } -%>
