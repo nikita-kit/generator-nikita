@@ -331,6 +331,7 @@ module.exports = class extends Generator {
         this._copyTemplate('grunt/config/clean.js.ejs', 'grunt/config/clean.js');
         this._copyTemplate('grunt/config/concurrent.js.ejs', 'grunt/config/concurrent.js');
         this._copyTemplate('grunt/config/eslint.js.ejs', 'grunt/config/eslint.js');
+        this._copyTemplate('grunt/config/htmlmin.js.ejs', 'grunt/config/htmlmin.js');
         this._copyTemplate('grunt/config/imagemin.js.ejs', 'grunt/config/imagemin.js');
         this._copyTemplate('grunt/config/jest.js.ejs', 'grunt/config/jest.js');
         this._copyTemplate('grunt/config/postcss.js.ejs', 'grunt/config/postcss.js');
