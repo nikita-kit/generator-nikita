@@ -27,7 +27,7 @@ describe('generator-nikita:app', () => {
             template: 'web-app',
             name: `testrun${(new Date()).getTime()}`,
             useBuildFolders: true,
-            features: [],
+            features: ['docker'],
             jsFramework: 'jsb',
             libraries: [],
             scssMixins: [
@@ -44,6 +44,8 @@ describe('generator-nikita:app', () => {
         assert.file([
             'package.json',
             'Gruntfile.js',
+            'Makefile',
+            'docker-compose.yml',
             'grunt/aliases.js',
             'grunt/config/twigRender.js',
             'src/js/_main.js',

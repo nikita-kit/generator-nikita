@@ -150,6 +150,9 @@ module.exports = class extends Generator {
                 }, {
                     name: 'Add a git pre-commit hook to lint your code automatically',
                     value: 'preCommitHook',
+                }, {
+                    name: 'Add docker setup (docker-compose.yml, Makefile)',
+                    value: 'docker',
                 },
             ]),
             this._promptList('jsFramework', 'Which JavaScript Framework do you want to use?', [
@@ -455,6 +458,13 @@ module.exports = class extends Generator {
             delete packageJsonData.devDependencies['pre-commit'];
             delete packageJsonData['pre-commit'];
             delete packageJsonData['pre-commit.silent'];
+        }
+
+        // Docker setup
+        if (this.config.get('features').includes('docker')) {
+            this._copyTemplate('docker-compose.yml.ejs', 'docker-compose.yml');
+            this._copyTemplate('Makefile.ejs', 'Makefile');
+            this._copy('.docker', '.docker');
         }
 
         // jsFramework

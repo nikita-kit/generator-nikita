@@ -10,6 +10,11 @@ If you want to know more about our Javascript Coding-Standard, try [nikita.js](h
 
 ## Requirements
 
+<% if (config.get('features').includes('docker')) { -%>
+- [__Docker__](https://www.docker.com/)
+
+  OR
+<% } -%>
 - [__Node.js__](http://nodejs.org) >= 6
 - [__Grunt CLI__](http://gruntjs.com/getting-started)(optional) – install with `sudo npm install -g grunt-cli` or use `npm run grunt`
 
@@ -36,9 +41,12 @@ If you want to know more about our Javascript Coding-Standard, try [nikita.js](h
 
 ## Getting started
 
+<% if (config.get('features').includes('docker')) { -%>
+1. launch docker node container with `make node-cli`
+<% } -%>
 1. run `npm install` - install dependencies
-2. run `grunt` – start dev build script
-3. open [http://localhost:3000/](http://localhost:3000/) – watch your build-directory in the browser
+1. run `grunt` – start dev build script
+1. open [http://localhost:3000/](http://localhost:3000/) – watch your build-directory in the browser
 * run `grunt dist` – start distribution build script
 
 If you want to specify a different port, you can start the script with the `--port` option:
@@ -59,6 +67,9 @@ In the `grunt`-folder you find the task configurations and custom grunt tasks.
 Have a look at `grunt/aliases.js` to see all available task group definitions and aliases.
 
 ```
+<% if (config.get('features').includes('docker')) { -%>
+├── .docker
+<% } -%>
 ├── grunt
 │   ├── config
 │   ├── tasks

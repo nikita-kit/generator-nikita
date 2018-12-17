@@ -65,6 +65,7 @@ Feel free to re-run the generator to add or remove features.
   - useful scss mixins
   - webfonts
   - pre-commit hook for code linting
+  - docker integration
 
 
 ## Getting Started

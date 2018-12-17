@@ -1,0 +1,23 @@
+version: "3.2"
+
+services:
+  node-cli:
+    image: node:10.14.0
+    entrypoint: ""
+    command: "bash"
+    hostname: node-cli
+    user: node
+    tty: true
+    volumes:
+      - ./:/usr/src/app:cached
+      - ./.docker/data/node:/home/node/
+      - ./.docker/user/.bashrc:/home/node/.bashrc
+    env_file:
+      - ./.docker/common.env
+#      - .env
+    working_dir: /usr/src/app
+    environment:
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/src/app/node_modules/.bin
+    ports:
+      - "3000:3000"
+      - "3001:3001"

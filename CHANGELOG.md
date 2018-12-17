@@ -11,6 +11,7 @@
 * updated all dependencies to newest version and improved configs   
 * improved jest code coverage output
 * fixed browserSync page reload when js files are changing
+* added docker setup and Makefile
 * added `grunt-contrib-htmlmin` to minify html
 * added `grunt-real-favicon` for app-icon generation
   * place desired image at `static/img/appicons/_source.png`

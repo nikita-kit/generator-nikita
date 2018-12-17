@@ -15,13 +15,13 @@
   },
   "scripts": {
     "test": "jest",
-    "lint": "eslint app/index.js tests/*.js",
-    "fix": "eslint app/index.js tests/*.js --fix"
+    "check-code": "eslint app/index.js tests/*.js",
+    "fix-code": "eslint app/index.js tests/*.js --fix"
   },
   "files": [
     "app"
   ],
-  "pre-commit": ["lint", "test"],
+  "pre-commit": ["check-code", "test"],
   "pre-commit.silent": true,
   "eslintConfig": {
     "extends": [
