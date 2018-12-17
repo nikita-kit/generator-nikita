@@ -1,7 +1,9 @@
 module.exports = {
     static: {
         options: {
+<% if (!config.get('features').includes('gitinfos')) { -%>
             removeComments: true,
+<% } -%>
             collapseWhitespace: true,
             removeScriptTypeAttributes: true,
             removeStyleLinkTypeAttributes: true,
