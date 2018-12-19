@@ -6,9 +6,9 @@
     },
     "scripts": {
         "grunt": "grunt",
-        "check": "grunt check-code"
+        "check-code": "grunt check-code"
     },
-    "pre-commit": "check",
+    "pre-commit": "check-code",
     "pre-commit.silent": true,
     "dependencies": {
         "a11y-dialog": "5.2.0",
