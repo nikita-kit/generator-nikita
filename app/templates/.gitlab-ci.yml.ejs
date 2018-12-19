@@ -1,0 +1,44 @@
+stages:
+  - test
+  - build
+  - deploy
+
+cache:
+  paths:
+  - node_modules/
+
+variables:
+
+test-frontend:
+  stage: test
+  image: node:10.14.0
+  tags:
+    - docker
+  script:
+    - node -v
+    - npm -v
+    - npm install
+    - npm run check-code
+  except:
+    - tags
+
+build-frontend:
+  stage: build
+  image: node:10.14.0
+# save files as artifacts
+  artifacts:
+    name: "${CI_JOB_NAME}_${CI_COMMIT_REF_NAME}"
+    expire_in: 1 day
+    paths:
+      - <%= config.get('rootFolder') %>static/
+  tags:
+    - docker
+  script:
+    - node -v
+    - npm -v
+    - npm install
+    - npm run grunt dist
+  only:
+    - master
+  except:
+    - tags

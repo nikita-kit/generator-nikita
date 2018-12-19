@@ -142,10 +142,10 @@ module.exports = class extends Generator {
                     name: 'Browser Reset Styles, a _reset.scss will be added to your project',
                     value: 'browserReset',
                 }, {
-                    name: 'Use background SVG files as base64 encoded dataURIs with placeholder extends',
+                    name: 'Use background SVG files as base64 encoded dataURIs in your SCSS',
                     value: 'svgBackgrounds',
                 }, {
-                    name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
+                    name: 'Add Git-Infos to your html files as comment',
                     value: 'gitinfos',
                 }, {
                     name: 'Add a git pre-commit hook to lint your code automatically',
@@ -153,6 +153,9 @@ module.exports = class extends Generator {
                 }, {
                     name: 'Add docker setup (docker-compose.yml, Makefile)',
                     value: 'docker',
+                }, {
+                    name: 'Add basic gitlab setup (.gitlab-ci.yml)',
+                    value: 'gitlab',
                 },
             ]),
             this._promptList('jsFramework', 'Which JavaScript Framework do you want to use?', [
@@ -460,11 +463,16 @@ module.exports = class extends Generator {
             delete packageJsonData['pre-commit.silent'];
         }
 
-        // Docker setup
+        // Optional Docker setup
         if (this.config.get('features').includes('docker')) {
             this._copyTemplate('docker-compose.yml.ejs', 'docker-compose.yml');
             this._copyTemplate('Makefile.ejs', 'Makefile');
             this._copy('.docker', '.docker');
+        }
+
+        // Optional Gitlab setup
+        if (this.config.get('features').includes('gitlab')) {
+            this._copyTemplate('.gitlab-ci.yml.ejs', '.gitlab-ci.yml');
         }
 
         // jsFramework
