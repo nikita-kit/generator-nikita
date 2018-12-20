@@ -17,6 +17,7 @@ services:
 #      - .env
     working_dir: /usr/src/app
     environment:
+      - TZ=Europe/Berlin
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/src/app/node_modules/.bin
     ports:
       - "3000:3000"
