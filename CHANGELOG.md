@@ -10,6 +10,7 @@
   * moved svg background icons to `scss/bg-icons/`
 * updated all dependencies to newest version and improved configs   
 * improved jest code coverage output
+* enabled caching for eslint and stylelint
 * fixed browserSync page reload when js files are changing
 * added docker setup and Makefile
 * added `grunt-contrib-htmlmin` to minify html

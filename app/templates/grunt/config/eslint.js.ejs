@@ -19,6 +19,8 @@ module.exports = {
             },
 <% } -%>
         },
+        cache: true,
+        cacheLocation: '<%%= paths.tmp %>/.eslintcache',
         rules: {
             // override rules here
 <% if (config.get('jsFramework') === 'react') { -%>

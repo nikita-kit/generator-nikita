@@ -9,6 +9,10 @@ module.exports = {
         ],
     },
     tmp: {
-        src: ['<%%= paths.tmp %>'],
+        src: [
+            '<%%= paths.tmp %>/*',
+            '!<%%= paths.tmp %>/.eslintcache',
+            '!<%%= paths.tmp %>/.stylelintcache',
+        ],
     },
 };

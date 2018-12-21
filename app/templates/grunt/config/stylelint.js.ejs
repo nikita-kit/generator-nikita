@@ -3,6 +3,8 @@ module.exports = {
         configFile: './node_modules/stylelint-config-nikita/index.js',
         formatter: 'string',
         syntax: 'scss',
+        cache: true,
+        cacheLocation: '<%%= paths.tmp %>/.stylelintcache',
         configOverrides: {
             rules: {
                 // override rules here
