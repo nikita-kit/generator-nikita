@@ -99,7 +99,7 @@ module.exports = class extends Generator {
             if (this.config.get('template') === 'spring-boot') {
                 this.config.set('rootFolder', 'src/main/resources/web');
             } else if (this.config.get('template') === 'symfony') {
-                this.config.set('rootFolder', 'web');
+                this.config.set('rootFolder', 'public');
             } else if (this.config.get('template') === 'wordpress') {
                 this.config.set('rootFolder', 'web');
             }

@@ -201,9 +201,9 @@ describe('generator-nikita:symfony', () => {
             'package.json',
             'Gruntfile.js',
             'grunt/aliases.js',
-            'web/src/js/_main.js',
-            'web/src/scss/styles.scss',
-            'web/static/img/appicons/favicon.ico',
+            'public/src/js/_main.js',
+            'public/src/scss/styles.scss',
+            'public/static/img/appicons/favicon.ico',
         ]);
 
         if (process.env.TEMPLATE === 'symfony') {

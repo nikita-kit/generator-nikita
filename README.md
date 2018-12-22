@@ -59,13 +59,14 @@ Feel free to re-run the generator to add or remove features.
 - [__nikita.html__](https://github.com/nikita-kit/nikita-html) – HTML conventions and coding guidelines
 - [__nikita.css__](https://github.com/nikita-kit/nikita-css) – (S)CSS conventions and coding guidelines
 - [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines
-- and many more optional features:
+- and many more **optional** features:
   - libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns`
   - svg images as inlined css background images
   - useful scss mixins
   - webfonts
   - pre-commit hook for code linting
-  - docker integration
+  - docker setup
+  - basic gitlab-ci setup
 
 
 ## Getting Started
@@ -141,7 +142,7 @@ This is the standard template for stand-alone web apps. The root folder is your 
 
 ### Symfony
 
-The Symfony template sets the root folder to `web/`.
+The Symfony template sets the root folder to `public/`.
 
 To use the nikita build files, just add something like following lines to your base.html.twig file:
 ```html
@@ -152,12 +153,11 @@ To use the nikita build files, just add something like following lines to your b
 ### Wordpress
 
 The Wordpress template sets the source folder to `web/`.
-In addition to nikita generator defaults, jQuery is added.
 
 To use the nikita build files (e.g. `web/static/generated/main.js` and `web/static/generated/styles.css`), just enqueue them in your wordpress theme like this:
 ```php
-wp_enqueue_script('main.js', rtrim(WP_HOME, '/') . '/web/static/generated/main.js', array(), '1.0', false);
-wp_enqueue_style('styles.css', rtrim(WP_HOME, '/') . '/web/static/generated/styles.css', array(), '1.0', 'all');
+wp_enqueue_script('main.js', '/web/static/generated/main.js', array(), '1.0', false);
+wp_enqueue_style('styles.css', '/web/static/generated/styles.css', array(), '1.0', 'all');
 ```
 
 ### Spring Boot
