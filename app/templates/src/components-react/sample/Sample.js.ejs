@@ -22,12 +22,12 @@ class Sample extends Component {
         super(props);
         logging.applyLogging(this, 'Sample');
         this.logDebug('init:', props);
-
 <% if (config.get('libraries').includes('lodash')) { -%>
+
         this.logDebug(`lodash in nikita: ${camelCase('this should be camel case')}`);
 <% } -%>
-
 <% if (config.get('libraries').includes('date-fns')) { -%>
+
         this.logDebug(`date-fns in nikita: Today is a ${format(new Date(), 'EEEE')}`);
 <% } -%>
     }

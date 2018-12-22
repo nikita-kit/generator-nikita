@@ -20,12 +20,12 @@ export default class Sample {
 
 <% if (config.get('libraries').includes('lodash')) { -%>
         this.logDebug(`lodash in nikita: ${camelCase('this should be camel case')}`);
-<% } -%>
 
+<% } -%>
 <% if (config.get('libraries').includes('date-fns')) { -%>
         this.logDebug(`date-fns in nikita: Today is a ${format(new Date(), 'EEEE')}`);
-<% } -%>
 
+<% } -%>
         this.initializeEventListeners();
         app.doSomething();
     }
