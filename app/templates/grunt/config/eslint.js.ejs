@@ -1,15 +1,20 @@
 module.exports = {
     options: {
-        envs: ['browser', 'jest'],
-        configFile: './node_modules/eslint-config-nikita/index.js',
-<% if (config.get('jsFramework') === 'react') { -%>
-        plugins: ['react'],
         baseConfig: {
+<% if (config.get('jsFramework') === 'react') { -%>
+            plugins: ['react'],
             extends: [
+                'nikita',
                 'plugin:react/recommended',
-            ]
-        },
+            ],
+<% } else { -%>
+            extends: ['nikita'],
 <% } -%>
+            env: {
+                browser: true,
+                jest: true,
+            },
+        },
         parser: 'babel-eslint',
         parserOptions: {
             ecmaVersion: 2018,
@@ -21,6 +26,7 @@ module.exports = {
         },
         cache: true,
         cacheLocation: '<%%= paths.tmp %>/.eslintcache',
+        useEslintrc: false,
         rules: {
             // override rules here
 <% if (config.get('jsFramework') === 'react') { -%>

@@ -325,11 +325,13 @@ module.exports = class extends Generator {
         // Standard Files
         this._copyTemplate('.gitignore.ejs', '.gitignore');
         this._copyTemplate('Gruntfile.js.ejs', 'Gruntfile.js');
+        this._copyTemplate('.eslintrc.js.ejs', '.eslintrc.js');
         this._copyTemplate('NIKITA-LICENSE.md.ejs', 'NIKITA-LICENSE.md');
         this._copyTemplate('NIKITA-README.md.ejs', 'NIKITA-README.md');
 
         // grunt Files
         this._copyTemplate('grunt/aliases.js.ejs', 'grunt/aliases.js');
+        this._copyTemplate('grunt/.eslintrc.js.ejs', 'grunt/.eslintrc.js');
         this._copyTemplate('grunt/tasks/sass-globbing.js.ejs', 'grunt/tasks/sass-globbing.js');
         this._copyTemplate('grunt/tasks/jest.js.ejs', 'grunt/tasks/jest.js');
 
