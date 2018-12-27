@@ -2,22 +2,22 @@ module.exports = function (grunt) {
     return {
         options: {
             namespaces: {
-                'data': '<%%= paths.src %>/html/data/',
-                'layouts': '<%%= paths.src %>/html/layouts/',
-                'partials': '<%%= paths.src %>/html/partials/',
-                'components': '<%%= paths.src %>/components/',
-                'macros': '<%%= paths.src %>/html/macros/',
+                data: '<%%= paths.src %>/html/data/',
+                layouts: '<%%= paths.src %>/html/layouts/',
+                partials: '<%%= paths.src %>/html/partials/',
+                components: '<%%= paths.src %>/components/',
+                macros: '<%%= paths.src %>/html/macros/',
             },
             extensions: [
-                function(Twig) {
-                    Twig.exports.extendFunction('data', function(filename) {
-                        var namespacePath = Twig.path.parsePath.apply(this, [this, filename]);
+                function (Twig) {
+                    Twig.exports.extendFunction('data', function (filename) {
+                        const namespacePath = Twig.path.parsePath.apply(this, [this, filename]);
 
                         if (/\.yml$/i.test(namespacePath) || /\.yaml/i.test(namespacePath)) {
                             return grunt.file.readYAML(namespacePath);
-                        } else {
-                            return grunt.file.readJSON(namespacePath);
                         }
+                        return grunt.file.readJSON(namespacePath);
+
                     });
                 },
             ],
@@ -34,8 +34,8 @@ module.exports = function (grunt) {
                     src: ['**/*.twig'],
                     dest: '<%%= paths.static %>/',
                     ext: '.html',
-                }
-            ]
+                },
+            ],
         },
         dist: {
             files: [
@@ -47,15 +47,15 @@ module.exports = function (grunt) {
                         {
                             production: true,
                             currentTimestamp: (new Date()).getTime(),
-                        }
+                        },
                     ],
                     expand: true,
                     cwd: '<%%= paths.src %>/html/pages/',
                     src: ['**/*.twig'],
                     dest: '<%%= paths.static %>/',
                     ext: '.html',
-                }
-            ]
-        }
-    }
+                },
+            ],
+        },
+    };
 };

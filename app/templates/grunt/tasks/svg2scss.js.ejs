@@ -4,9 +4,10 @@ module.exports = function (grunt) {
     const path = require('path');
     const DOMParser = require('xmldom').DOMParser;
 
+    // eslint-disable-next-line no-useless-escape
     const commentsReg = /<\!\-\-(.*(?=\-\->))\-\->/gmi;
     const newlineReg = /[\r\n]/gmi;
-    const pxReg = /([\d\.]+)\D*/;
+    const pxReg = /([\d.]+)\D*/;
     const singleQuoteReg = /'/gmi;
     const tabReg = /\t/gmi;
     const svgdatauri = 'data:image/svg+xml;charset=US-ASCII,';
@@ -72,7 +73,7 @@ module.exports = function (grunt) {
             name: path.basename(filepath, '.svg'),
             datauri: buildSVGDataURI(data),
             width: width.replace(pxReg, '$1px'),
-            height: height.replace(pxReg, '$1px')
+            height: height.replace(pxReg, '$1px'),
         };
     }
 
@@ -93,7 +94,7 @@ module.exports = function (grunt) {
             file += `    ${icon.name}: url(${icon.datauri}),${eol}`;
         });
 
-        file += `);`;
+        file += ');';
 
         // Insert final newline if true
         if (options.insertfinalnewline) {
@@ -101,7 +102,7 @@ module.exports = function (grunt) {
         }
 
         // Write the destination file.
-        grunt.log.write('Creating ' + destination.cyan + ` with ${data.icons.length} icons included...`);
+        grunt.log.write(`Creating ${destination.cyan} with ${data.icons.length} icons included...`);
         grunt.file.write(destination, file);
         grunt.log.ok();
         if (callback) {
@@ -122,26 +123,26 @@ module.exports = function (grunt) {
         });
 
         // Iterate over all specified file groups.
-        this.files.forEach(function (file) {
+        this.files.forEach((file) => {
             const results = {
                 icons: [],
                 cssfile: path.basename(file.dest),
             };
-            file.src.filter(function (filepath) {
+            file.src.filter((filepath) => {
                 // Warn on and remove invalid source files (if nonull was set).
                 if (!grunt.file.exists(filepath)) {
-                    grunt.log.warn('Source file "' + filepath + '" not found.');
+                    grunt.log.warn(`Source file "${filepath}" not found.`);
                     return false;
-                } else {
-                    return true;
                 }
-            }).forEach(function (filepath) {
+                return true;
+
+            }).forEach((filepath) => {
                 if (grunt.file.isFile(filepath)) {
                     results.icons.push(processSvgFile(filepath, options));
                 }
             });
 
-            createFile(options, results, path.join(file.dest), function () {
+            createFile(options, results, path.join(file.dest), () => {
                 done();
             });
 

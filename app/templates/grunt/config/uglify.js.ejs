@@ -2,11 +2,13 @@ module.exports = {
     static: {
         options: {
         },
-        files: [{
-            cwd: '<%%= paths.static %>/generated',
-            dest: '<%%= paths.static %>/generated',
-            expand: true,
-            src: ['**/*.js'],
-        }],
-    }
+        files: [
+            {
+                cwd: '<%%= paths.static %>/generated',
+                dest: '<%%= paths.static %>/generated',
+                expand: true,
+                src: ['**/*.js'],
+            },
+        ],
+    },
 };

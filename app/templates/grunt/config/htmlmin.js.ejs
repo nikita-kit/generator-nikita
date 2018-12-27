@@ -8,11 +8,13 @@ module.exports = {
             removeScriptTypeAttributes: true,
             removeStyleLinkTypeAttributes: true,
         },
-        files: [{
-            cwd: '<%%= paths.static %>',
-            dest: '<%%= paths.static %>',
-            expand: true,
-            src: ['**/*.html'],
-        }],
-    }
+        files: [
+            {
+                cwd: '<%%= paths.static %>',
+                dest: '<%%= paths.static %>',
+                expand: true,
+                src: ['**/*.html'],
+            },
+        ],
+    },
 };

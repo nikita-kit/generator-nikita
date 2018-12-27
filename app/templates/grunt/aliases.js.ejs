@@ -2,14 +2,14 @@ module.exports = {
 
     // standard build task when calling grunt without arguments
     // development build task including server and watch
-    'default': [
+    default: [
         'dev',
         'browserSync:dev',
         'watch',
     ],
 
     // development build task
-    'dev': [
+    dev: [
         'clean:static',
         'clean:tmp',
 <% if (config.get('features').includes('svgBackgrounds')) { -%>
@@ -23,7 +23,7 @@ module.exports = {
     ],
 
     // distribution task
-    'dist': [
+    dist: [
         'clean:static',
         'clean:tmp',
 <% if (config.get('features').includes('svgBackgrounds')) { -%>
@@ -44,27 +44,14 @@ module.exports = {
     ],
 
     // testing tasks
-
-    'test': [
-        'jest:test',
-    ],
-
-    'test-coverage': [
-        'jest:testCoverage',
-    ],
+    test: ['jest:test'],
+    'test-coverage': ['jest:testCoverage'],
 
     // image tasks
+    'minify-images': ['imagemin:static'],
+    'generate-appicons': ['realFavicon:static'],
 
-    'minify-images': [
-        'imagemin:static',
-    ],
-
-    'generate-appicons': [
-        'realFavicon:static',
-    ],
-
-    // linting and fixing task
-
+    // linting and fixing tasks
     'check-code': [
         'check-js',
         'check-scss',
@@ -75,25 +62,12 @@ module.exports = {
         'fix-scss',
     ],
 
-    'check-scss': [
-        'stylelint:check',
-    ],
+    'check-scss': ['stylelint:check'],
+    'fix-scss': ['stylelint:fix'],
 
-    'fix-scss': [
-        'stylelint:fix',
-    ],
-
-    'check-js': [
-        'eslint:check',
-    ],
-
-    'fix-js': [
-        'eslint:fix',
-    ],
+    'check-js': ['eslint:check'],
+    'fix-js': ['eslint:fix'],
 
     // analyze tasks
-
-    'analyze-js': [
-        'webpack:analyze',
-    ],
+    'analyze-js': ['webpack:analyze'],
 };

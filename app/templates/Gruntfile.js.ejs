@@ -5,7 +5,6 @@
  * see grunt/tasks for custom tasks
  * see grunt/aliases.js for task group definitions
  */
-/* eslint-disable no-undef,import/no-nodejs-modules */
 module.exports = function (grunt) {
     const path = require('path');
 
@@ -18,15 +17,15 @@ module.exports = function (grunt) {
             customTasksDir: 'grunt/tasks',
             staticMappings: {
                 postcss: '@lodder/grunt-postcss',
-            }
+            },
         },
         data: {
             /*
              * project base directories
              */
             paths: {
-                src: '<%= config.get('rootFolder') %>src',
-                static: '<%= config.get('rootFolder') %>static',
+                src: 'src',
+                static: 'static',
                 tmp: 'tmp',
             },
             /*

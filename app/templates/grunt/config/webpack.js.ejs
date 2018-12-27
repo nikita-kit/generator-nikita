@@ -5,9 +5,7 @@ module.exports = function (grunt, options) {
         const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 <% if (config.get('jsFramework') === 'jsb') { -%>
         const webpack = require('webpack');
-        const plugins = [
-            new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/),
-        ];
+        const plugins = [new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/)];
 <% } -%>
 
         return {
@@ -36,28 +34,30 @@ module.exports = function (grunt, options) {
                         {
                             test: /\.js$/,
                             loader: 'babel-loader',
-                            include: [
-                                path.resolve('<%%= paths.src %>'),
-                            ],
+                            include: [path.resolve('<%%= paths.src %>')],
                             options: {
                                 compact: true,
                                 cacheDirectory: true,
                                 plugins: [
-                                    ['@babel/plugin-transform-runtime', {
-                                        regenerator: false,
-                                        useESModules: true,
-                                    }],
+                                    [
+                                        '@babel/plugin-transform-runtime', {
+                                            regenerator: false,
+                                            useESModules: true,
+                                        },
+                                    ],
                                     ['@babel/plugin-proposal-class-properties', { loose: true }],
                                 ],
                                 presets: [
-                                    ['@babel/preset-env', {
-                                        modules: false,
-                                        loose: true,
-                                        useBuiltIns: 'usage',
-                                        targets: {
-                                            browsers: options.browserslist,
+                                    [
+                                        '@babel/preset-env', {
+                                            modules: false,
+                                            loose: true,
+                                            useBuiltIns: 'usage',
+                                            targets: {
+                                                browsers: options.browserslist,
+                                            },
                                         },
-                                    }],
+                                    ],
 <% if (config.get('jsFramework') === 'react') { -%>
                                     '@babel/preset-react',
 <% } -%>
@@ -69,8 +69,8 @@ module.exports = function (grunt, options) {
                             test: /\.ejs$/,
                             loader: 'ejs-webpack-loader',
                             options: {
-                                'htmlmin': true,
-                                'htmlminOptions': {
+                                htmlmin: true,
+                                htmlminOptions: {
                                     removeComments: true,
                                 },
                             },
@@ -108,7 +108,7 @@ module.exports = function (grunt, options) {
                     path: path.resolve('<%%= paths.static %>/generated/'),
                 },
 <% if (config.get('jsFramework') === 'jsb') { -%>
-                plugins: plugins,
+                plugins,
 <% } -%>
             },
             dist: {
@@ -121,9 +121,9 @@ module.exports = function (grunt, options) {
                     path: path.resolve('<%%= paths.static %>/generated/'),
                 },
 <% if (config.get('jsFramework') === 'jsb') { -%>
-                plugins: plugins,
+                plugins,
 <% } -%>
             },
         };
-    })();
+    }());
 };

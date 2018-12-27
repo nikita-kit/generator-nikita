@@ -21,10 +21,10 @@ module.exports = {
         transformIgnorePatterns: ['/node_modules/'],
         moduleNameMapper: {
 <% if (config.get('libraries').includes('lodash')) { -%>
-            "^lodash-es$": "lodash",
+            '^lodash-es$': 'lodash',
 <% } -%>
 <% if (config.get('libraries').includes('date-fns')) { -%>
-            "^date-fns\/esm$": "date-fns",
+            '^date-fns/esm$': 'date-fns',
 <% } -%>
         },
     },
@@ -37,5 +37,5 @@ module.exports = {
         options: {
             collectCoverage: true,
         },
-    }
+    },
 };
