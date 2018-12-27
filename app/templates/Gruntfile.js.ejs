@@ -24,8 +24,8 @@ module.exports = function (grunt) {
              * project base directories
              */
             paths: {
-                src: 'src',
-                static: 'static',
+                src: '<%= config.get('rootFolder') %>src',
+                static: '<%= config.get('rootFolder') %>static',
                 tmp: 'tmp',
             },
             /*
