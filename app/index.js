@@ -326,6 +326,7 @@ module.exports = class extends Generator {
         this._copyTemplate('.gitignore.ejs', '.gitignore');
         this._copyTemplate('Gruntfile.js.ejs', 'Gruntfile.js');
         this._copyTemplate('.eslintrc.js.ejs', '.eslintrc.js');
+        this._copyTemplate('.stylelintrc.js.ejs', '.stylelintrc.js');
         this._copyTemplate('NIKITA-LICENSE.md.ejs', 'NIKITA-LICENSE.md');
         this._copyTemplate('NIKITA-README.md.ejs', 'NIKITA-README.md');
 

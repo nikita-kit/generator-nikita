@@ -11,7 +11,7 @@
 * updated all dependencies to newest version and improved configs   
 * improved jest code coverage output
 * enabled caching for eslint and stylelint
-* added eslintrc file for IDE integration
+* added eslintrc and stylelintrc files for IDE integration
 * added linting of grunt files
 * fixed browserSync page reload when js files are changing
 * added docker setup and Makefile
