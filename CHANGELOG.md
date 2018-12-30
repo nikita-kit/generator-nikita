@@ -8,7 +8,8 @@
   * renamed `sass`-folder to `scss`
   * moved jest setup files to `tests/setup/`
   * moved svg background icons to `scss/bg-icons/`
-* updated all dependencies to newest version and improved configs   
+* updated all dependencies to newest version and improved configs
+* updated browserlist declaration
 * improved jest code coverage output
 * enabled caching for eslint and stylelint
 * added eslintrc and stylelintrc files for IDE integration

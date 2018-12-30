@@ -30,17 +30,18 @@ module.exports = function (grunt) {
             },
             /*
              * dynamic browser list for css autoprefixer and babel-preset-env
-             * see https://github.com/ai/browserslist
-             * see http://browserl.ist/?q=last+2+versions%2C+not+OperaMobile+%3C+13%2C+not+OperaMini+all%2C+not+QQAndroid+%3E%3D+1%2C+not+UCAndroid+%3E%3D+1%2C+not+Baidu+%3E%3D+1%2C+not+BlackBerry+%3E%3D+1
+             * @see https://github.com/ai/browserslist
+             * @see https://browserl.ist/?q=IE+11%2Clast+2+Edge+versions%2Clast+2+Chrome+versions%2Clast+2+Firefox+versions%2Clast+2+Safari+major+versions%2Clast+2+iOS+major+versions%2Clast+2+ChromeAndroid+versions%2CAndroid+%3E%3D+4.4
              */
             browserslist: [
-                'last 2 versions',
-                'not BlackBerry >= 1',
-                'not OperaMini all',
-                'not OperaMobile < 13',
-                'not QQAndroid >= 1',
-                'not UCAndroid >= 1',
-                'not Baidu >= 1',
+                'IE 11',
+                'last 2 Edge versions',
+                'last 2 Chrome versions',
+                'last 2 Firefox versions',
+                'last 2 Safari major versions',
+                'last 2 iOS major versions',
+                'last 2 ChromeAndroid versions',
+                'Android >= 4.4',
             ],
         },
     });
