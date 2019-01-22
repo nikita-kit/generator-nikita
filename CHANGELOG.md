@@ -20,7 +20,7 @@
 * added `grunt-real-favicon` for app-icon generation
   * place desired image at `static/img/appicons/_source.png`
   * start favicon generator with `grunt generate-appicons`
-* added react.js
+* added react.js, including `react-router`, `react-waterfall`, `prop-types`, `enzyme` and `classnames`
 * made jsb optional
 * added foundation css framework
 * set html font-size to 1px; now rem units = px units
@@ -31,8 +31,8 @@
   * svg background mixin includes the background style directly without extends,
     so it can be used within media querys now
 * added shorthand grunt tasks `grunt check-code` and `grunt fix-code` for linting js and scss
-* added libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns` 
-* removed libraries `jquery`, `swiper` and `select2`
+* added optional libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns` 
+* removed optional libraries `jquery`, `swiper` and `select2`
 * removed `assemble`
 * removed `grunt-accessibility`
 * removed `grunt-htmlhint`
