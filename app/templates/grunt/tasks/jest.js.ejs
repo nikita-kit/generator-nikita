@@ -8,7 +8,7 @@ module.exports = function (grunt) {
             watch: !!grunt.option('watch'),
         };
 
-        require('jest-cli').runCLI(options, [process.cwd()]).then(() => {
+        require('jest-cli').runCLI(options, [process.cwd()]).then(({results}) => {
             if (taskOptions.collectCoverage) {
                 grunt.log.write('\n>> '.green);
                 grunt.log.write('View ');
@@ -16,7 +16,9 @@ module.exports = function (grunt) {
                 grunt.log.write(' in a browser for a more detailed overview.\n');
             }
 
-            done();
+            const testsSucceeded = !(results.numFailedTests || results.numFailedTestSuites);
+
+            done(testsSucceeded);
         });
     });
 };
