@@ -21,10 +21,7 @@
   "files": [
     "app"
   ],
-  "pre-commit": [
-    "lint",
-    "test"
-  ],
+  "pre-commit": ["lint", "test"],
   "pre-commit.silent": true,
   "eslintConfig": {
     "extends": [
