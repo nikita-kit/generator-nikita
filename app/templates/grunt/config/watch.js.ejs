@@ -14,7 +14,7 @@ module.exports = {
 <% } -%>
     js: {
         files: ['<%%= paths.src %>/js/**/*', '<%%= paths.src %>/components/**/*.{js,ejs,json}', '!<%%= paths.src %>/components/**/*.test.js'],
-        tasks: ['webpack:dev'],
+        tasks: [<% if (config.get('features').includes('modernJsBuild')) { %>'webpack:devModern', <% } %>'webpack:dev'],
     },
     html: {
         files: ['<%%= paths.src %>/html/**/*.{json,yml,yaml,twig}', '<%%= paths.src %>/components/**/*.twig'],

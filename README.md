@@ -64,6 +64,7 @@ Feel free to re-run the generator to add or remove features.
   - svg images as inlined css background images
   - useful scss mixins
   - webfonts
+  - separated JS build for modern browsers
   - pre-commit hook for code linting
   - docker setup
   - basic gitlab-ci setup

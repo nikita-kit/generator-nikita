@@ -19,6 +19,9 @@ module.exports = {
         'sass-globbing',
         'concurrent:dev',
         'postcss:dev',
+<% if (config.get('features').includes('modernJsBuild')) { -%>
+        'webpack:devModern',
+<% } -%>
         'webpack:dev',
     ],
 
@@ -38,8 +41,10 @@ module.exports = {
         'write-gitinfos',
 <% } -%>
         'twigRender:dist',
+<% if (config.get('features').includes('modernJsBuild')) { -%>
+        'webpack:distModern',
+<% } -%>
         'webpack:dist',
-        'uglify',
         'htmlmin',
     ],
 

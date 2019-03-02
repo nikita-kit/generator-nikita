@@ -136,6 +136,18 @@ module.exports = class extends Generator {
         customPrompts = customPrompts.concat([
             this._promptCheckbox('features', 'Which features do you want to use?', [
                 {
+                    name: 'Add a git pre-commit hook to lint your code automatically',
+                    value: 'preCommitHook',
+                }, {
+                    name: 'Add docker setup (docker-compose.yml, Makefile)',
+                    value: 'docker',
+                }, {
+                    name: 'Add basic gitlab setup (.gitlab-ci.yml)',
+                    value: 'gitlab',
+                }, {
+                    name: 'Add a separated JS build for modern browsers',
+                    value: 'modernJsBuild',
+                }, {
                     name: 'Self hosted webfonts, a fonts-folder will be added to your project',
                     value: 'webfonts',
                 }, {
@@ -147,15 +159,6 @@ module.exports = class extends Generator {
                 }, {
                     name: 'Add Git-Infos to your html files as comment',
                     value: 'gitinfos',
-                }, {
-                    name: 'Add a git pre-commit hook to lint your code automatically',
-                    value: 'preCommitHook',
-                }, {
-                    name: 'Add docker setup (docker-compose.yml, Makefile)',
-                    value: 'docker',
-                }, {
-                    name: 'Add basic gitlab setup (.gitlab-ci.yml)',
-                    value: 'gitlab',
                 },
             ]),
             this._promptList('jsFramework', 'Which JavaScript Framework do you want to use?', [
@@ -348,7 +351,6 @@ module.exports = class extends Generator {
         this._copyTemplate('grunt/config/sass-globbing.js.ejs', 'grunt/config/sass-globbing.js');
         this._copyTemplate('grunt/config/stylelint.js.ejs', 'grunt/config/stylelint.js');
         this._copyTemplate('grunt/config/twigRender.js.ejs', 'grunt/config/twigRender.js');
-        this._copyTemplate('grunt/config/uglify.js.ejs', 'grunt/config/uglify.js');
         this._copyTemplate('grunt/config/watch.js.ejs', 'grunt/config/watch.js');
         this._copyTemplate('grunt/config/webpack.js.ejs', 'grunt/config/webpack.js');
 

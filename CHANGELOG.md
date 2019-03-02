@@ -16,6 +16,9 @@
 * added linting of grunt files
 * fixed browserSync page reload when js files are changing
 * added docker setup and Makefile
+* added basic gitlab-ci setup
+* added separated JS build for modern browsers
+  * include it with script tag type module (see `master.twig`)
 * added `grunt-contrib-htmlmin` to minify html
 * added `grunt-real-favicon` for app-icon generation
   * place desired image at `static/img/appicons/_source.png`
@@ -33,6 +36,7 @@
 * added shorthand grunt tasks `grunt check-code` and `grunt fix-code` for linting js and scss
 * added optional libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns` 
 * removed optional libraries `jquery`, `swiper` and `select2`
+* removed `uglifyJS`
 * removed `assemble`
 * removed `grunt-accessibility`
 * removed `grunt-htmlhint`

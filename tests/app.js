@@ -26,10 +26,9 @@ describe('generator-nikita:app', () => {
         .withPrompts({
             template: 'web-app',
             name: `testrun${(new Date()).getTime()}`,
-            useBuildFolders: true,
             features: ['docker'],
             jsFramework: 'jsb',
-            libraries: [],
+            libraries: ['modernJsBuild'],
             scssMixins: [
                 'a11y-hide',
                 'clearfix',
@@ -74,7 +73,6 @@ describe('generator-nikita:web-app-jsb', () => {
         .withPrompts({
             template: 'web-app',
             name: `testrun${(new Date()).getTime()}`,
-            useBuildFolders: true,
             features: [],
             jsFramework: 'jsb',
             scssMixins: [],
@@ -132,7 +130,6 @@ describe('generator-nikita:web-app-react', () => {
             template: 'web-app',
             name: `testrun${(new Date()).getTime()}`,
             custom: true,
-            useBuildFolders: true,
             features: [],
             jsFramework: 'react',
             libraries: [
