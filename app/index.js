@@ -446,7 +446,7 @@ module.exports = class extends Generator {
             this._copyTemplate('grunt/config/svg2scss.js.ejs', 'grunt/config/svg2scss.js');
             this._copyTemplate('grunt/tasks/svg2scss.js.ejs', 'grunt/tasks/svg2scss.js');
             this._copyTemplate('src/scss/mixins/_svg-background.scss.ejs', `${rootFolder}src/scss/mixins/_svg-background.scss`);
-            this._copyTemplate('src/scss/bg-icons/README.md.ejs', `${rootFolder}src/scss/bg-icons/README.md`);
+            this._copyTemplate('src/scss/bg-svg-icons/README.md.ejs', `${rootFolder}src/scss/bg-svg-icons/README.md`);
         } else {
             delete packageJsonData.devDependencies.xmldom;
         }

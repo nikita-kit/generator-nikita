@@ -83,7 +83,7 @@ Have a look at `grunt/aliases.js` to see all available task group definitions an
 │   │   └── partials
 │   ├── js
 │   ├── scss
-│   │   ├── bg-icons
+│   │   ├── bg-svg-icons
 │   │   ├── blocks
 │   │   ├── extends
 │   │   ├── mixins
@@ -213,7 +213,7 @@ Imagemin is very expensive, so this step is not part of build task to save time.
 <% if (config.get('features').includes('svgBackgrounds')) { -%>
 ### SVG images as Data-URIs
 
-To include svg icons as background-images, just put your SVG-icons into `src/scss/bg-icons`-folder.
+To include svg icons as background-images, just put your SVG-icons into `src/scss/bg-svg-icons`-folder.
 All SVG-files will be processed with svg2scss-task which creates a sass map containing the SVGs as data-URI strings.
 Now you can include your svg icons by using the `_svg-background.scss` mixin. Just type `@include svg-background(name-of-your-icon);`.
 
