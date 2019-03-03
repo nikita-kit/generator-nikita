@@ -33,6 +33,7 @@
 * replaced `svg-css` task with `svg2scss`
   * svg background mixin includes the background style directly without extends,
     so it can be used within media querys now
+  * fixed encoding of parenthesis  
 * added shorthand grunt tasks `grunt check-code` and `grunt fix-code` for linting js and scss
 * added optional libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns` 
 * removed optional libraries `jquery`, `swiper` and `select2`

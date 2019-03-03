@@ -10,6 +10,8 @@ module.exports = function (grunt) {
     const pxReg = /([\d.]+)\D*/;
     const singleQuoteReg = /'/gmi;
     const tabReg = /\t/gmi;
+    const parenthesisOpenReg = /\(/gmi;
+    const parenthesisCloseReg = /\)/gmi;
     const svgdatauri = 'data:image/svg+xml;charset=US-ASCII,';
 
     /**
@@ -43,7 +45,9 @@ module.exports = function (grunt) {
             .replace(newlineReg, '')
             .replace(tabReg, ' ')
             .replace(commentsReg, '')
-            .replace(singleQuoteReg, '\\i'));
+            .replace(singleQuoteReg, '\\i'))
+            .replace(parenthesisOpenReg, '%28')
+            .replace(parenthesisCloseReg, '%29');
     }
 
     /**
