@@ -11,6 +11,7 @@
 * updated all dependencies to newest version and improved configs
 * updated browserlist declaration
 * improved jest code coverage output
+* improved JST template compiling
 * enabled caching for eslint and stylelint
 * added eslintrc and stylelintrc files for IDE integration
 * added linting of grunt files

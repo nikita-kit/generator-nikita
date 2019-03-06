@@ -8,6 +8,8 @@ module.exports = {
     process(src, filename) {
         const ejsOptions = {
             client: true,
+            _with: false,
+            localsName: 'data',
             filename: path.relative(process.cwd(), filename),
         };
 

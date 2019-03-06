@@ -17,7 +17,7 @@ module.exports = {
             '^.+\\.ejs$': '<rootDir>/<%%= paths.src %>/tests/setup/jest.transform-ejs.js',
 <% } -%>
         },
-        setupTestFrameworkScriptFile: '<rootDir>/<%%= paths.src %>/tests/setup/jest.setup.js',
+        setupFilesAfterEnv: ['<rootDir>/<%%= paths.src %>/tests/setup/jest.setup.js'],
         transformIgnorePatterns: ['/node_modules/'],
         moduleNameMapper: {
 <% if (config.get('libraries').includes('lodash')) { -%>

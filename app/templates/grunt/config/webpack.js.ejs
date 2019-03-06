@@ -8,6 +8,10 @@ module.exports = function (grunt, options) {
         const plugins = [new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/)];
 <% } -%>
 
+        /*
+         * remember to update jest transformer when changing loader options
+         * @see tests/setup/
+         */
         const getLoaderRulesConfig = (targets, debug = false) => ([
 <% if (config.get('jsFramework') === 'jsb') { -%>
             {
