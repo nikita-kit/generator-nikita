@@ -14,9 +14,9 @@ module.exports = class extends Generator {
 
         if (generatedVersion && selfVersion && compareVersions(selfVersion, generatedVersion)) {
             this.env.error(
-                `${chalk.red.bold('Error:')} Your generator-nikita is too old (Version ${chalk.yellow(selfVersion)})!\n` +
-                `This nikita kickstarter was generated with version ${chalk.yellow(generatedVersion)}, so update\n` +
-                `generator-nikita to newest version with ${chalk.green('npm install -g generator-nikita')}.`,
+                `${chalk.red.bold('Error:')} Your generator-nikita is too old (Version ${chalk.yellow(selfVersion)})!\n`
+                + `This nikita kickstarter was generated with version ${chalk.yellow(generatedVersion)}, so update\n`
+                + `generator-nikita to newest version with ${chalk.green('npm install -g generator-nikita')}.`,
             );
         }
 
@@ -37,14 +37,14 @@ module.exports = class extends Generator {
         this.log(yosay(`Welcome to the Nikita Project Generator ${version}!`));
 
         return this.prompt(this._getMainPrompts())
-            .then((answers) => this._handleMainPrompts(answers))
+            .then(answers => this._handleMainPrompts(answers))
             .then(() => this.prompt(this._getTemplateSpecificPrompts()))
-            .then((answers) => this._handleTemplateSpecificPrompts(answers))
+            .then(answers => this._handleTemplateSpecificPrompts(answers))
             .then(() => this.prompt(this._getCustomizePrompts()))
-            .then((answers) => this._handleCustomizePrompts(answers))
+            .then(answers => this._handleCustomizePrompts(answers))
             .then(() => this.prompt(this._getCustomLibrariesPrompts()))
-            .then((answers) => this._handleCustomLibrariesPrompts(answers))
-            .catch((error) => this.log(error));
+            .then(answers => this._handleCustomLibrariesPrompts(answers))
+            .catch(error => this.log(error));
     }
 
     _getMainPrompts() {
@@ -572,7 +572,7 @@ module.exports = class extends Generator {
             const javaName = this.config.get('name')
                 .replace(/-/g, ' ')
                 .toLowerCase()
-                .replace(/\b[a-z]/g, (letter) => letter.toUpperCase())
+                .replace(/\b[a-z]/g, letter => letter.toUpperCase())
                 .replace(/ /g, '');
 
             const javaNameWithLowercaseFirstLetter = javaName.substr(0, 1).toLowerCase() + javaName.substr(1);
