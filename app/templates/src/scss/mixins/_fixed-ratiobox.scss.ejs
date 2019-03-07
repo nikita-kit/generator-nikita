@@ -80,7 +80,7 @@ $intrinsic-ratio-direction: top !default;
 @mixin intrinsic-ratio($ratio: $intrinsic-ratio, $width: $intrinsic-ratio-width, $elements: $intrinsic-ratio-elements, $extend: $intrinsic-ratio-extend, $direction: $intrinsic-ratio-direction) {
     @include intrinsic-ratio-parent($extend);
     @include intrinsic-ratio-ratio($ratio, $width, $direction);
-	
+
     @each $element in $elements {
         #{$element} {
             @include intrinsic-ratio-child($extend);

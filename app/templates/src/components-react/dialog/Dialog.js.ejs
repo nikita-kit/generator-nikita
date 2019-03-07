@@ -42,7 +42,7 @@ class Dialog extends Component {
                     Open the dialog
                 </button>
 
-                <A11yDialog {...options} dialogRef={(dialog) => (this.dialog = dialog)}>
+                <A11yDialog {...options} dialogRef={(dialog) => { this.dialog = dialog; }}>
                     <p>Dialog Content</p>
                 </A11yDialog>
             </div>

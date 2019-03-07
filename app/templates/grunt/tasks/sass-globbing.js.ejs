@@ -34,9 +34,7 @@ module.exports = function (grunt) {
                     const files = grunt.file.expand({
                         cwd: `${paths.src}/scss/`,
                         filter: 'isFile',
-                    },
-                    match,
-                    );
+                    }, match);
 
                     const replaceContent = [];
 
