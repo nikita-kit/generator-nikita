@@ -4,13 +4,13 @@ node-cli:
 	docker-compose run --service-ports --rm node-cli
 
 node-update:
-	docker-compose run --no-deps --rm --entrypoint="npm install" node-cli
+	docker-compose run --no-deps --rm node-cli npm install
 
 node-dist:
-	docker-compose run --no-deps --rm --entrypoint="bash -c 'npm install && grunt dist'" node-cli
+	docker-compose run --no-deps --rm node-cli bash -c 'npm install && grunt dist'
 
 node-check-code:
-	docker-compose run --no-deps --rm --entrypoint="grunt check-code" node-cli
+	docker-compose run --no-deps --rm node-cli grunt check-code
 
 node-fix-code:
-	docker-compose run --no-deps --rm --entrypoint="grunt fix-code" node-cli
+	docker-compose run --no-deps --rm node-cli grunt fix-code
