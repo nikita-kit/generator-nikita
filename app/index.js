@@ -136,58 +136,58 @@ module.exports = class extends Generator {
         customPrompts = customPrompts.concat([
             this._promptCheckbox('features', 'Which features do you want to use?', [
                 {
-                    name: 'Add a git pre-commit hook to lint your code automatically',
+                    name: `${chalk.bold('pre-commit hook:')} to lint your code automatically`,
                     value: 'preCommitHook',
                 }, {
-                    name: 'Add docker setup (docker-compose.yml, Makefile)',
+                    name: `${chalk.bold('docker:')} adds basic docker setup (docker-compose.yml, Makefile)`,
                     value: 'docker',
                 }, {
-                    name: 'Add basic gitlab setup (.gitlab-ci.yml)',
+                    name: `${chalk.bold('gitlab-ci:')} adds basic gitlab-ci setup (.gitlab-ci.yml)`,
                     value: 'gitlab',
                 }, {
-                    name: 'Add a separated JS build for modern browsers',
+                    name: `${chalk.bold('modern JS build:')} adds separated JS build for modern browsers`,
                     value: 'modernJsBuild',
                 }, {
-                    name: 'Self hosted webfonts, a fonts-folder will be added to your project',
+                    name: `${chalk.bold('webfonts:')} adds font-folder an scss processing (_webfonts.scss)`,
                     value: 'webfonts',
                 }, {
-                    name: 'Browser Reset Styles, a _reset.scss will be added to your project',
-                    value: 'browserReset',
-                }, {
-                    name: 'Use background SVG files as base64 encoded dataURIs in your SCSS',
+                    name: `${chalk.bold('svg2scss:')} use SVGs as base64 encoded dataURIs in SCSS`,
                     value: 'svgBackgrounds',
                 }, {
-                    name: 'Add Git-Infos to your html files as comment',
+                    name: `${chalk.bold('browser reset:')} to reset default browser styles (_reset.scss)`,
+                    value: 'browserReset',
+                }, {
+                    name: `${chalk.bold('git infos:')} adds git infos to generated html files as comment`,
                     value: 'gitinfos',
                 },
             ]),
             this._promptList('jsFramework', 'Which JavaScript Framework do you want to use?', [
                 {
-                    name: 'JSB, BehaviourToolkit featuring module initializing and event bus',
+                    name: `${chalk.bold('JSB:')} BehaviourToolkit featuring module initializing and event bus`,
                     value: 'jsb',
                 }, {
-                    name: 'React.js, the famous view framework with addons like react-router and react-waterfall',
+                    name: `${chalk.bold('React.js:')} view framework including addons react-router and react-waterfall`,
                     value: 'react',
                 },
             ]),
-            this._promptCheckbox('scssMixins', 'Which nikita.css mixins do you want to use?', [
+            this._promptCheckbox('scssMixins', 'Which nikita mixins do you want to use?', [
                 {
-                    name: 'a11y-hide: Hide elements in sake of accessibility',
+                    name: `${chalk.bold('a11y-hide:')} hide elements in sake of accessibility`,
                     value: 'a11y-hide',
                 }, {
-                    name: 'clearfix: Micro clearfix',
+                    name: `${chalk.bold('clearfix:')} micro clearfix`,
                     value: 'clearfix',
                 }, {
-                    name: 'ellipsis: Ellipsis to point out text',
+                    name: `${chalk.bold('ellipsis:')} to point out text`,
                     value: 'ellipsis',
                 }, {
-                    name: 'fixed-ratiobox: Use intrinsic ratio to force child elements to fluidly scale at a given ratio',
+                    name: `${chalk.bold('fixed-ratiobox:')} intrinsic ratio to force child elements to fluidly scale at a given ratio`,
                     value: 'fixed-ratiobox',
                 }, {
-                    name: 'hide-text: Hide text on elements in sake of accessibility',
+                    name: `${chalk.bold('hide-text:')} hide text on elements in sake of accessibility`,
                     value: 'hide-text',
                 }, {
-                    name: 'triangle: Easy generating arrow-like triangles with the border-method',
+                    name: `${chalk.bold('triangle:')} arrow-like triangles with the border-method`,
                     value: 'triangle',
                 },
             ]),
@@ -212,16 +212,12 @@ module.exports = class extends Generator {
     _getCustomLibrariesPrompts() {
 
         const options = [
-            // {
-            //     name: 'logging.js, trace and logging library',
-            //     value: 'logging',
-            // },
             {
-                name: 'lodash, Javascript utility library',
+                name: `${chalk.bold('lodash:')} JavaScript utility library`,
                 value: 'lodash',
             },
             {
-                name: 'date-fns, date utility library',
+                name: `${chalk.bold('date-fns:')} date utility library`,
                 value: 'date-fns',
             },
         ];
@@ -229,30 +225,30 @@ module.exports = class extends Generator {
         if (this.config.get('jsFramework') === 'react') {
             options.push(
                 {
-                    name: 'Siema, the lightweight slider',
+                    name: `${chalk.bold('Siema:')} lightweight slider`,
                     value: 'siema',
                 },
                 {
-                    name: 'react-select, for styling select inputs',
+                    name: `${chalk.bold('react-select:')} styling select inputs`,
                     value: 'react-select',
                 },
                 {
-                    name: 'react-a11y-dialog, lightweight and accessible modal dialog',
+                    name: `${chalk.bold('react-a11y-dialog:')} lightweight and accessible modal dialog`,
                     value: 'react-a11y-dialog',
                 },
             );
         } else {
             options.push(
                 {
-                    name: 'Siema, the lightweight slider',
+                    name: `${chalk.bold('Siema:')} lightweight slider`,
                     value: 'siema',
                 },
                 {
-                    name: 'Choices, for styling select inputs',
+                    name: `${chalk.bold('choices:')} styling select inputs`,
                     value: 'choices',
                 },
                 {
-                    name: 'a11y-dialog, lightweight and accessible modal dialog',
+                    name: `${chalk.bold('a11y-dialog:')} lightweight and accessible modal dialog`,
                     value: 'a11y-dialog',
                 },
             );
@@ -585,7 +581,7 @@ module.exports = class extends Generator {
             this._copyTemplate('spring-boot/Application.java.ejs', `${springRootJavaFolder}/${javaName}Application.java`);
         }
 
-        this.fs.write(this.destinationPath('package.json'), JSON.stringify(packageJsonData, null, 4));
+        this.fs.write(this.destinationPath('package.json'), `${JSON.stringify(packageJsonData, null, 4)}\n`);
     }
 
     _copyTemplate(template, destination) {
@@ -621,6 +617,7 @@ module.exports = class extends Generator {
     }
 
     end() {
-        this.log(chalk.yellow.bold('\nNikita Project Generator run finished!\n'));
+        this.log(`${chalk.yellow.bold('\nNote: ')}Foundation JS dependencies are not installed because the use of it's JS components is not recommended due to the heavy script size!\n`);
+        this.log(chalk.yellow.bold('Nikita Project Generator run finished!\n'));
     }
 };
