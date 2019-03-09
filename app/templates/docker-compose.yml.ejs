@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3.6"
 
 services:
   node-cli:
@@ -14,7 +14,7 @@ services:
       - ./.docker/user/.bashrc:/home/node/.bashrc
     env_file:
       - ./.docker/common.env
-#      - .env
+      - .env
     working_dir: /usr/src/app
     environment:
       - TZ=Europe/Berlin

@@ -20,6 +20,8 @@
 * added basic gitlab-ci setup
 * added separated JS build for modern browsers
   * include it with script tag type module (see `master.twig`)
+* added `dotenv-webpack` to add .env supoort
+  * access .env values in JavaScript with `process.env.<NAME>`
 * added `grunt-contrib-htmlmin` to minify html
 * added `grunt-real-favicon` for app-icon generation
   * place desired image at `static/img/appicons/_source.png`

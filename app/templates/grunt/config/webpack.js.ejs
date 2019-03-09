@@ -3,9 +3,15 @@ module.exports = function (grunt, options) {
 
         const path = require('path');
         const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+        const DotenvPlugin = require('dotenv-webpack');
 <% if (config.get('jsFramework') === 'jsb') { -%>
         const webpack = require('webpack');
-        const plugins = [new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/)];
+        const plugins = [
+            new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/),
+            new DotenvPlugin(),
+        ];
+<% } else { -%>
+        const plugins = [new DotenvPlugin()];
 <% } -%>
 
         /*
@@ -81,9 +87,7 @@ module.exports = function (grunt, options) {
                     chunkFilename: '[name].js',
                     path: path.resolve('<%%= paths.static %>/generated/'),
                 },
-<% if (config.get('jsFramework') === 'jsb') { -%>
                 plugins,
-<% } -%>
                 resolve: {
                     mainFields: ['browser', 'main', 'module'],
                     symlinks: false,

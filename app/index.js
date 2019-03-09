@@ -582,6 +582,10 @@ module.exports = class extends Generator {
         }
 
         this.fs.write(this.destinationPath('package.json'), `${JSON.stringify(packageJsonData, null, 4)}\n`);
+
+        if (!this.fs.exists(this.destinationPath('.env'))) {
+            this.fs.write(this.destinationPath('.env'), '');
+        }
     }
 
     _copyTemplate(template, destination) {

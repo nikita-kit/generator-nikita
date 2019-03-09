@@ -133,6 +133,7 @@ It's the same as main.js file but without polyfills and transformations that mod
 
 Run `grunt analyze-js` to see bundled content of `static/generated/main.js` as convenient interactive zoomable treemap.
 For environment specific code, you can check `process.env.NODE_ENV` for `development` or `production`.
+Besides that, any values from `.env` file can be accessed with `process.env.<NAME>`.
 
 Please check [webpack docs](https://webpack.js.org/guides/code-splitting/) if you're interested in code splitting to speed up loading time.
 
