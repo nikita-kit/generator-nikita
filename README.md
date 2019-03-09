@@ -44,9 +44,9 @@ Feel free to re-run the generator to add or remove features.
 
 ## Project-Setup
 
-- [__Grunt__](http://gruntjs.com/) – Javascript task runner
+- [__Grunt__](http://gruntjs.com/) – JavaScript task runner
 - [__Webpack__](https://webpack.js.org/) – module bundler
-- [__Babel__](https://babeljs.io/) – next generation Javascript compiler
+- [__Babel__](https://babeljs.io/) – next generation JavaScript compiler
 - [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) – static site generator
 - [__React__](https://reactjs.org/) or [__JSB__](https://github.com/DracoBlue/jsb/) - JS framework
 - [__SCSS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – CSS preprocessing
