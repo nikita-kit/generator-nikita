@@ -72,27 +72,17 @@ Feel free to re-run the generator to add or remove features.
 
 ## Getting Started
 
-### Yeoman
+### Installation
 
-Not every new computer comes with a [Yeoman](http://yeoman.io/) pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
-
-```bash
-npm install -g yo
-```
-
-### Nikita Yeoman Generator
-
-To install or update generator-nikita, run:
+To execute generator-nikita, just go to desired directory and run:
 
 ```bash
-npm install -g generator-nikita
+npx -p yo -p generator-nikita yo nikita
 ```
 
-Finally, initiate the generator at desired directory and answer the questions:
+Then [npx](https://www.npmjs.com/package/npx) will download newest [Yeoman](http://yeoman.io/) cli
+and generator-nikita to it's cache dir and execute them. 
 
-```bash
-yo nikita
-```
 
 ### Generator main questions
 

@@ -6,7 +6,8 @@
     },
     "scripts": {
         "grunt": "grunt",
-        "check-code": "grunt check-code"
+        "check-code": "grunt check-code",
+        "generator": "npx -p yo -p generator-nikita yo nikita"
     },
     "pre-commit": "check-code",
     "pre-commit.silent": true,
