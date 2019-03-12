@@ -2,11 +2,7 @@ module.exports = {
     options: {
         baseConfig: {
 <% if (config.get('jsFramework') === 'react') { -%>
-            plugins: ['react'],
-            extends: [
-                'nikita',
-                'plugin:react/recommended',
-            ],
+            extends: ['nikita-react'],
 <% } else { -%>
             extends: ['nikita'],
 <% } -%>
@@ -38,11 +34,6 @@ module.exports = {
         parser: 'babel-eslint',
         parserOptions: {
             ecmaVersion: 2018,
-<% if (config.get('jsFramework') === 'react') { -%>
-            ecmaFeatures: {
-                jsx: true,
-            },
-<% } -%>
         },
         cache: true,
         cacheLocation: '<%%= paths.tmp %>/.eslintcache',
@@ -50,7 +41,7 @@ module.exports = {
         rules: {
             // override rules here
 <% if (config.get('jsFramework') === 'react') { -%>
-            'react/prop-types': 0,
+            'react/jsx-one-expression-per-line': 0,
 <% } -%>
         },
     },

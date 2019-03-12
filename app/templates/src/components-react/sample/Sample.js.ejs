@@ -43,20 +43,21 @@ class Sample extends Component {
 <% } -%>
         return (
             <div className="b-sample">
-                Congratulations, the nikita react prototype was built successfully! :)<br />
+                Congratulations, the nikita react prototype was built successfully! :)
+                <br />
                 <Link to="/state-example">goto state example</Link>
 
 <% if (config.get('libraries').includes('react-a11y-dialog')) { -%>
-                <br/>
-                <Dialog/>
+                <br />
+                <Dialog />
 <% } -%>
 <% if (config.get('libraries').includes('react-select')) { -%>
-                <br/>
+                <br />
                 <Select options={options} />
 <% } -%>
 <% if (config.get('libraries').includes('siema')) { -%>
-                <br/>
-                <Slider/>
+                <br />
+                <Slider />
 <% } -%>
             </div>
         );

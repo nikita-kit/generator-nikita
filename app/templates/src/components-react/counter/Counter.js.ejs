@@ -17,10 +17,10 @@ export class RawCounter extends Component {
     render() {
         return (
             <div className="b-counter">
-                counter value is: <span className="value">{ this.props.count }</span>
-                <br/>
-                <button onClick={this.onClick}>[Increase Counter]</button>
-                <br/>
+                <span className="value">counter value is: { this.props.count }</span>
+                <br />
+                <button type="button" onClick={this.onClick}>[Increase Counter]</button>
+                <br />
                 <Link to="/">go back</Link>
             </div>
         );

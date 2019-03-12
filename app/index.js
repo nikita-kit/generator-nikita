@@ -480,10 +480,13 @@ module.exports = class extends Generator {
             delete packageJsonData.dependencies['node-jsb'];
             delete packageJsonData.devDependencies['import-glob'];
             delete packageJsonData.devDependencies['ejs-webpack-loader'];
+            delete packageJsonData.devDependencies['eslint-config-nikita'];
         } else {
             delete packageJsonData.devDependencies['babel-preset-react'];
             delete packageJsonData.devDependencies.enzyme;
             delete packageJsonData.devDependencies['enzyme-adapter-react-16'];
+            delete packageJsonData.devDependencies['eslint-config-nikita-react'];
+            delete packageJsonData.devDependencies['eslint-plugin-jsx-a11y'];
             delete packageJsonData.devDependencies['eslint-plugin-react'];
             delete packageJsonData.dependencies.classnames;
             delete packageJsonData.dependencies['prop-types'];
