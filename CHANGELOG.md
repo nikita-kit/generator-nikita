@@ -47,6 +47,7 @@
 * removed `grunt-htmlhint`
 * removed `grunt-prettify`
 * removed form framework
+* removed css reset (use normalize.css included in foundation instead)
 * removed IE conditional classes from `master.twig`
 * rewrote generator logic completely and improved templates
 * updated generator dependencies

@@ -154,9 +154,6 @@ module.exports = class extends Generator {
                     name: `${chalk.bold('svg2scss:')} use SVGs as base64 encoded dataURIs in SCSS`,
                     value: 'svgBackgrounds',
                 }, {
-                    name: `${chalk.bold('browser reset:')} to reset default browser styles (_reset.scss)`,
-                    value: 'browserReset',
-                }, {
                     name: `${chalk.bold('git infos:')} adds git infos to generated html files as comment`,
                     value: 'gitinfos',
                 },
@@ -424,11 +421,6 @@ module.exports = class extends Generator {
             this._copyTemplate('src/html/partials/header.twig.ejs', `${rootFolder}src/html/partials/header.twig`);
             this._copyTemplate('src/html/partials/footer.twig.ejs', `${rootFolder}src/html/partials/footer.twig`);
             this._copyTemplate('src/components-jsb/sample/sample.twig.ejs', `${rootFolder}src/components/sample/sample.twig`);
-        }
-
-        // Optional Browser Reset SCSS-Partial
-        if (this.config.get('features').includes('browserReset')) {
-            this._copyTemplate('src/scss/_reset.scss.ejs', `${rootFolder}src/scss/_reset.scss`);
         }
 
         // Optional Webfonts folder and SCSS-Partial

@@ -12,11 +12,9 @@
 // Webfonts
 @import "webfonts";
 <% } -%>
-<% if (config.get('features').includes('browserReset')) { -%>
 
-// Browser-Reset
-@import "reset";
-<% } -%>
+// Foundation utils (mixins)
+@import 'node_modules/foundation-sites/scss/util/util';
 
 // Variables
 @import "variables/**/*.scss";
