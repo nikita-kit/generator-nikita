@@ -7,6 +7,7 @@
 
 html {
     box-sizing: border-box;
+    font-size: 1px; // font size trick to make rem units = px units
 }
 
 *,
@@ -131,13 +132,13 @@ mark {
 ::-moz-selection {
     text-shadow: none;
     color: #fff;
-    background-color: rgba($bg-color-02, 0.99); // rgba to adjust Chrome-Firefox differences
+    background-color: rgba($bg-color-02, .99); // rgba to adjust Chrome-Firefox differences
 }
 
 ::selection {
     text-shadow: none;
     color: #fff;
-    background-color: rgba($bg-color-02, 0.99); // rgba to adjust Chrome-Firefox differences
+    background-color: rgba($bg-color-02, .99); // rgba to adjust Chrome-Firefox differences
 }
 
 

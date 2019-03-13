@@ -26,10 +26,9 @@ describe('generator-nikita:app', () => {
         .withPrompts({
             template: 'web-app',
             name: `testrun${(new Date()).getTime()}`,
-            useBuildFolders: true,
-            features: [],
+            features: ['docker'],
             jsFramework: 'jsb',
-            libraries: [],
+            libraries: ['modernJsBuild'],
             scssMixins: [
                 'a11y-hide',
                 'clearfix',
@@ -44,6 +43,8 @@ describe('generator-nikita:app', () => {
         assert.file([
             'package.json',
             'Gruntfile.js',
+            'Makefile',
+            'docker-compose.yml',
             'grunt/aliases.js',
             'grunt/config/twigRender.js',
             'src/js/_main.js',
@@ -72,7 +73,6 @@ describe('generator-nikita:web-app-jsb', () => {
         .withPrompts({
             template: 'web-app',
             name: `testrun${(new Date()).getTime()}`,
-            useBuildFolders: true,
             features: [],
             jsFramework: 'jsb',
             scssMixins: [],
@@ -130,7 +130,6 @@ describe('generator-nikita:web-app-react', () => {
             template: 'web-app',
             name: `testrun${(new Date()).getTime()}`,
             custom: true,
-            useBuildFolders: true,
             features: [],
             jsFramework: 'react',
             libraries: [
@@ -199,9 +198,9 @@ describe('generator-nikita:symfony', () => {
             'package.json',
             'Gruntfile.js',
             'grunt/aliases.js',
-            'web/src/js/_main.js',
-            'web/src/scss/styles.scss',
-            'web/static/img/appicons/favicon.ico',
+            'public/src/js/_main.js',
+            'public/src/scss/styles.scss',
+            'public/static/img/appicons/favicon.ico',
         ]);
 
         if (process.env.TEMPLATE === 'symfony') {

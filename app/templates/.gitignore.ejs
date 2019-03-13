@@ -3,14 +3,15 @@ node_modules
 <%= config.get('rootFolder') %>static/**/*.html
 reports
 tmp
+<% if (config.get('features').includes('docker')) { -%>
+.docker/data
+<% } -%>
+.env*
 .DS_Store
 .idea
 .vscode
-*.bat
-*.bundle
-*.cache
 *.log
 *.sublime-project
 *.sublime-workspace
-*.temp
-*.tmp
+Thumbs.db
+[Dd]esktop.ini

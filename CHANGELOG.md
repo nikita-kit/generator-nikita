@@ -7,27 +7,48 @@
   * renamed `source`-folder to `src`
   * renamed `sass`-folder to `scss`
   * moved jest setup files to `tests/setup/`
-  * moved svg background icons to `scss/bg-icons/`
-* updated all dependencies to newest version and improved configs   
+  * moved svg background icons to `scss/bg-svg-icons/`
+* updated all dependencies to newest version and improved configs
+* updated browserlist declaration
 * improved jest code coverage output
+* improved JST template compiling
+* enabled caching for eslint and stylelint
+* added eslintrc and stylelintrc files for IDE integration
+* added linting of grunt files
 * fixed browserSync page reload when js files are changing
+* added docker setup and Makefile
+* added basic gitlab-ci setup
+* added separated JS build for modern browsers
+  * include it with script tag type module (see `master.twig`)
+* added `dotenv-webpack` to add .env supoort
+  * access .env values in JavaScript with `process.env.<NAME>`
+* added `grunt-contrib-htmlmin` to minify html
 * added `grunt-real-favicon` for app-icon generation
   * place desired image at `static/img/appicons/_source.png`
   * start favicon generator with `grunt generate-appicons`
-* added react.js
+* added react.js, including `react-router`, `react-waterfall`, `prop-types`, `enzyme` and `classnames`
 * made jsb optional
 * added foundation css framework
+* set html font-size to 1px; now rem units = px units
 * reworked included scss mixins
   * now all chosen mixins gets copied into project
   * converted extends to mixins
+* replaced `svg-css` task with `svg2scss`
+  * svg background mixin includes the background style directly without extends,
+    so it can be used within media querys now
+  * fixed encoding of parenthesis  
 * added shorthand grunt tasks `grunt check-code` and `grunt fix-code` for linting js and scss
-* added libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns` 
-* removed libraries `jquery`, `swiper` and `select2`
+* added npm command `npm run generator` to run latest generator-nikita locally
+* added optional libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns` 
+* removed optional libraries `jquery`, `swiper` and `select2`
+* removed `uglifyJS`
 * removed `assemble`
 * removed `grunt-accessibility`
 * removed `grunt-htmlhint`
 * removed `grunt-prettify`
 * removed form framework
+* removed css reset (use normalize.css included in foundation instead)
+* removed IE conditional classes from `master.twig`
 * rewrote generator logic completely and improved templates
 * updated generator dependencies
 * added eslint and pre commit hook to generator

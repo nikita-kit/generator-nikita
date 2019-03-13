@@ -45,7 +45,7 @@ npm install
 npm test
 ```
 
-5. generate a nikita project with the forked generator
+5. generate a nikita project with the forked generator (yeoman needs to be installed: `npm install yo -g`)
 
 ```bash
 cd ..

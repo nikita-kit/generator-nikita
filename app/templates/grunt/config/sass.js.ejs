@@ -1,5 +1,8 @@
+const sass = require('node-sass');
+
 module.exports = {
     options: {
+        implementation: sass,
         outputStyle: 'nested', // minifying by csso
         includePaths: ['<%%= paths.src %>/scss'],
     },
@@ -7,24 +10,28 @@ module.exports = {
         options: {
             sourceMap: true,
         },
-        files: [{
-            expand: true,
-            cwd: '<%%= paths.tmp %>',
-            dest: '<%%= paths.static %>/generated',
-            src: ['*.scss'],
-            ext: '.css',
-        }]
+        files: [
+            {
+                expand: true,
+                cwd: '<%%= paths.tmp %>',
+                dest: '<%%= paths.static %>/generated',
+                src: ['*.scss'],
+                ext: '.css',
+            },
+        ],
     },
     dist: {
         options: {
             sourceMap: false,
         },
-        files: [{
-            expand: true,
-            cwd: '<%%= paths.tmp %>',
-            dest: '<%%= paths.static %>/generated',
-            src: ['*.scss'],
-            ext: '.css',
-        }]
-    }
+        files: [
+            {
+                expand: true,
+                cwd: '<%%= paths.tmp %>',
+                dest: '<%%= paths.static %>/generated',
+                src: ['*.scss'],
+                ext: '.css',
+            },
+        ],
+    },
 };

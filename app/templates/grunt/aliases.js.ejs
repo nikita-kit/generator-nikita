@@ -2,35 +2,36 @@ module.exports = {
 
     // standard build task when calling grunt without arguments
     // development build task including server and watch
-    'default': [
+    default: [
         'dev',
         'browserSync:dev',
         'watch',
     ],
 
     // development build task
-    'dev': [
+    dev: [
         'clean:static',
         'clean:tmp',
 <% if (config.get('features').includes('svgBackgrounds')) { -%>
         'imagemin:bgSvg',
-        'svgcss',
-        'string-replace',
+        'svg2scss',
 <% } -%>
         'sass-globbing',
         'concurrent:dev',
         'postcss:dev',
+<% if (config.get('features').includes('modernJsBuild')) { -%>
+        'webpack:devModern',
+<% } -%>
         'webpack:dev',
     ],
 
     // distribution task
-    'dist': [
+    dist: [
         'clean:static',
         'clean:tmp',
 <% if (config.get('features').includes('svgBackgrounds')) { -%>
         'imagemin:bgSvg',
-        'svgcss',
-        'string-replace',
+        'svg2scss',
 <% } -%>
         'sass-globbing',
         'sass:dist',
@@ -40,32 +41,22 @@ module.exports = {
         'write-gitinfos',
 <% } -%>
         'twigRender:dist',
+<% if (config.get('features').includes('modernJsBuild')) { -%>
+        'webpack:distModern',
+<% } -%>
         'webpack:dist',
-        'uglify',
+        'htmlmin',
     ],
 
     // testing tasks
-
-    'test': [
-        'jest:test',
-    ],
-
-    'test-coverage': [
-        'jest:testCoverage',
-    ],
+    test: ['jest:test'],
+    'test-coverage': ['jest:testCoverage'],
 
     // image tasks
+    'minify-images': ['imagemin:static'],
+    'generate-appicons': ['realFavicon:static'],
 
-    'minify-images': [
-        'imagemin:static',
-    ],
-
-    'genrate-favicons': [
-        'realFavicon:static',
-    ],
-
-    // linting and fixing task
-
+    // linting and fixing tasks
     'check-code': [
         'check-js',
         'check-scss',
@@ -76,25 +67,12 @@ module.exports = {
         'fix-scss',
     ],
 
-    'check-scss': [
-        'stylelint:check',
-    ],
+    'check-scss': ['stylelint:check'],
+    'fix-scss': ['stylelint:fix'],
 
-    'fix-scss': [
-        'stylelint:fix',
-    ],
-
-    'check-js': [
-        'eslint:check',
-    ],
-
-    'fix-js': [
-        'eslint:fix',
-    ],
+    'check-js': ['eslint:check'],
+    'fix-js': ['eslint:fix'],
 
     // analyze tasks
-
-    'analyze-js': [
-        'webpack:analyze',
-    ],
+    'analyze-js': ['webpack:analyze'],
 };

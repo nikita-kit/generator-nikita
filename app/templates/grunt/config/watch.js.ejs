@@ -4,20 +4,20 @@ module.exports = {
     },
     scss: {
         files: ['<%%= paths.src %>/scss/**/*.scss', '<%%= paths.src %>/components/**/*.scss'],
-        tasks: ['sass-globbing', 'sass:dev', 'postcss:dev']
+        tasks: ['sass-globbing', 'sass:dev', 'postcss:dev'],
     },
 <% if (config.get('features').includes('svgBackgrounds')) { -%>
     svg_bgs: {
-        files: ['<%%= paths.src %>/scss/bg-icons/*.svg'],
-        tasks: ['svgmin:src_bg', 'svgcss', 'string-replace', 'sass:dev', 'postcss:dev']
+        files: ['<%%= paths.src %>/scss/bg-svg-icons/*.svg'],
+        tasks: ['clean:tmp', 'imagemin:bgSvg', 'svg2scss', 'sass-globbing', 'sass:dev', 'postcss:dev'],
     },
 <% } -%>
     js: {
         files: ['<%%= paths.src %>/js/**/*', '<%%= paths.src %>/components/**/*.{js,ejs,json}', '!<%%= paths.src %>/components/**/*.test.js'],
-        tasks: ['webpack:dev']
+        tasks: [<% if (config.get('features').includes('modernJsBuild')) { %>'webpack:devModern', <% } %>'webpack:dev'],
     },
     html: {
         files: ['<%%= paths.src %>/html/**/*.{json,yml,yaml,twig}', '<%%= paths.src %>/components/**/*.twig'],
-        tasks: ['twigRender:dev', 'prettify:static']
+        tasks: ['twigRender:dev'],
     },
 };

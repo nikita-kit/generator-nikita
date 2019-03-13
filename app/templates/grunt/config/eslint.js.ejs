@@ -1,46 +1,67 @@
 module.exports = {
     options: {
-        envs: ['browser', 'jest'],
-        configFile: './node_modules/eslint-config-nikita/index.js',
-<% if (config.get('jsFramework') === 'react') { -%>
-        plugins: ['react'],
         baseConfig: {
-            extends: [
-                'plugin:react/recommended',
-            ]
-        },
+<% if (config.get('jsFramework') === 'react') { -%>
+            extends: ['nikita-react'],
+<% } else { -%>
+            extends: ['nikita'],
 <% } -%>
+            env: {
+                browser: true,
+                jest: true,
+            },
+            overrides: [
+                {
+                    files: [
+                        'Gruntfile.js',
+                        'grunt/**/*.js',
+                        '<%%= paths.src %>/tests/setup/*.js',
+                    ],
+                    rules: {
+                        'import/no-nodejs-modules': 'off',
+                        'no-undef': 'off',
+                        'func-names': 'off',
+                    },
+                },
+                {
+                    files: ['<%%= paths.src %>/tests/**/*.js'],
+                    rules: {
+                        'no-console': 'off',
+                    },
+                },
+            ],
+        },
         parser: 'babel-eslint',
         parserOptions: {
             ecmaVersion: 2018,
-<% if (config.get('jsFramework') === 'react') { -%>
-            ecmaFeatures: {
-                jsx: true,
-            },
-<% } -%>
         },
+        cache: true,
+        cacheLocation: '<%%= paths.tmp %>/.eslintcache',
+        useEslintrc: false,
         rules: {
             // override rules here
 <% if (config.get('jsFramework') === 'react') { -%>
-            'react/prop-types': 0,
+            'react/jsx-one-expression-per-line': 0,
 <% } -%>
         },
     },
     check: [
+        'Gruntfile.js',
+        'grunt/**/*.js',
         '<%%= paths.src %>/js/**/*.js',
         '<%%= paths.src %>/components/**/*.js',
-        '<%%= paths.src %>/tests/**/*.test.js',
-        '<%%= paths.src %>/components/**/*.test.js',
+        '<%%= paths.src %>/tests/**/*.js',
     ],
     fix: {
         options: {
             fix: true,
         },
         src: [
+            'Gruntfile.js',
+            'grunt/**/*.js',
             '<%%= paths.src %>/js/**/*.js',
             '<%%= paths.src %>/components/**/*.js',
-            '<%%= paths.src %>/tests/**/*.test.js',
-            '<%%= paths.src %>/components/**/*.test.js',
-        ]
-    }
+            '<%%= paths.src %>/tests/**/*.js',
+        ],
+    },
 };

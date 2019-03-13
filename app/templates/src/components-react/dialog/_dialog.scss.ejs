@@ -1,6 +1,6 @@
 .b-dialog {
     &::backdrop {
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(0, 0, 0, .1);
     }
 
     .backdrop {
@@ -10,7 +10,7 @@
         bottom: 0;
         left: 0;
         z-index: 1;
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(0, 0, 0, .1);
     }
 
     /* hide custom backdrop when native dialogs are supported */
@@ -20,8 +20,15 @@
 
     /* ensure layout if dialog element is not supported */
     .dialog[open] {
+        position: absolute;
+        top: 50%;
+        left: 50%;
         z-index: 2;
         display: block;
+        margin: 0;
+        padding: 1em;
+        background: #fff;
+        transform: translate(-50%, -50%);
     }
 
     &[aria-hidden='true'] {

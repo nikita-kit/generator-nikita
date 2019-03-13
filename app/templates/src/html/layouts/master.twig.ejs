@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!--[if IE 9]> <html class="lt-ie10 ie9" lang="de"> <![endif]-->
-<!--[if gt IE 9]><!--> <html lang="de"> <!--<![endif]-->
+<html lang="de">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -14,7 +13,7 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link href="generated/styles.css?cb={{ currentTimestamp }}" rel="stylesheet"  />
+        <link href="generated/styles.css?cb={{ currentTimestamp }}" rel="stylesheet" />
 
         {% include 'partials::appicons.twig' %}
     </head>
@@ -35,6 +34,14 @@
         {% include 'partials::footer.twig' %}
 <% } -%>
 
+<% if (config.get('features').includes('modernJsBuild')) { -%>
+        {# safari 10 nomodule bugfix #}
+        <script>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()},!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
+
+        <script type="module" src="generated/main.modern.js?cb={{ currentTimestamp }}"></script>
+        <script nomodule defer src="generated/main.js?cb={{ currentTimestamp }}"></script>
+<% } else { -%>
         <script src="generated/main.js?cb={{ currentTimestamp }}"></script>
+<% } -%>
     </body>
 </html>

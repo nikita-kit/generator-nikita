@@ -14,9 +14,9 @@ module.exports = class extends Generator {
 
         if (generatedVersion && selfVersion && compareVersions(selfVersion, generatedVersion)) {
             this.env.error(
-                `${chalk.red.bold('Error:')} Your generator-nikita is too old (Version ${chalk.yellow(selfVersion)})!\n` +
-                `This nikita kickstarter was generated with version ${chalk.yellow(generatedVersion)}, so update\n` +
-                `generator-nikita to newest version with ${chalk.green('npm install -g generator-nikita')}.`,
+                `${chalk.red.bold('Error:')} Your generator-nikita is too old (Version ${chalk.yellow(selfVersion)})!\n`
+                + `This nikita kickstarter was generated with version ${chalk.yellow(generatedVersion)}, so update\n`
+                + `generator-nikita to newest version with ${chalk.green('npm install -g generator-nikita')}.`,
             );
         }
 
@@ -37,14 +37,14 @@ module.exports = class extends Generator {
         this.log(yosay(`Welcome to the Nikita Project Generator ${version}!`));
 
         return this.prompt(this._getMainPrompts())
-            .then((answers) => this._handleMainPrompts(answers))
+            .then(answers => this._handleMainPrompts(answers))
             .then(() => this.prompt(this._getTemplateSpecificPrompts()))
-            .then((answers) => this._handleTemplateSpecificPrompts(answers))
+            .then(answers => this._handleTemplateSpecificPrompts(answers))
             .then(() => this.prompt(this._getCustomizePrompts()))
-            .then((answers) => this._handleCustomizePrompts(answers))
+            .then(answers => this._handleCustomizePrompts(answers))
             .then(() => this.prompt(this._getCustomLibrariesPrompts()))
-            .then((answers) => this._handleCustomLibrariesPrompts(answers))
-            .catch((error) => this.log(error));
+            .then(answers => this._handleCustomLibrariesPrompts(answers))
+            .catch(error => this.log(error));
     }
 
     _getMainPrompts() {
@@ -99,7 +99,7 @@ module.exports = class extends Generator {
             if (this.config.get('template') === 'spring-boot') {
                 this.config.set('rootFolder', 'src/main/resources/web');
             } else if (this.config.get('template') === 'symfony') {
-                this.config.set('rootFolder', 'web');
+                this.config.set('rootFolder', 'public');
             } else if (this.config.get('template') === 'wordpress') {
                 this.config.set('rootFolder', 'web');
             }
@@ -136,49 +136,55 @@ module.exports = class extends Generator {
         customPrompts = customPrompts.concat([
             this._promptCheckbox('features', 'Which features do you want to use?', [
                 {
-                    name: 'Self hosted webfonts, a fonts-folder will be added to your project',
+                    name: `${chalk.bold('pre-commit hook:')} to lint your code automatically`,
+                    value: 'preCommitHook',
+                }, {
+                    name: `${chalk.bold('docker:')} adds basic docker setup (docker-compose.yml, Makefile)`,
+                    value: 'docker',
+                }, {
+                    name: `${chalk.bold('gitlab-ci:')} adds basic gitlab-ci setup (.gitlab-ci.yml)`,
+                    value: 'gitlab',
+                }, {
+                    name: `${chalk.bold('modern JS build:')} adds separated JS build for modern browsers`,
+                    value: 'modernJsBuild',
+                }, {
+                    name: `${chalk.bold('webfonts:')} adds font-folder an scss processing (_webfonts.scss)`,
                     value: 'webfonts',
                 }, {
-                    name: 'Browser Reset Styles, a _reset.scss will be added to your project',
-                    value: 'browserReset',
-                }, {
-                    name: 'Use background SVG files as base64 encoded dataURIs with placeholder extends',
+                    name: `${chalk.bold('svg2scss:')} use SVGs as base64 encoded dataURIs in SCSS`,
                     value: 'svgBackgrounds',
                 }, {
-                    name: 'Add Gitinfos to your distribution-task (grunt-gitinfos)',
+                    name: `${chalk.bold('git infos:')} adds git infos to generated html files as comment`,
                     value: 'gitinfos',
-                }, {
-                    name: 'Add a git pre-commit hook to lint your code automatically',
-                    value: 'preCommitHook',
                 },
             ]),
             this._promptList('jsFramework', 'Which JavaScript Framework do you want to use?', [
                 {
-                    name: 'JSB, BehaviourToolkit featuring module initializing and event bus',
+                    name: `${chalk.bold('JSB:')} BehaviourToolkit featuring module initializing and event bus`,
                     value: 'jsb',
                 }, {
-                    name: 'React.js, the famous view framework with addons like react-router and react-waterfall',
+                    name: `${chalk.bold('React.js:')} view framework including addons react-router and react-waterfall`,
                     value: 'react',
                 },
             ]),
-            this._promptCheckbox('scssMixins', 'Which nikita.css mixins do you want to use?', [
+            this._promptCheckbox('scssMixins', 'Which nikita mixins do you want to use?', [
                 {
-                    name: 'a11y-hide: Hide elements in sake of accessibility',
+                    name: `${chalk.bold('a11y-hide:')} hide elements in sake of accessibility`,
                     value: 'a11y-hide',
                 }, {
-                    name: 'clearfix: Micro clearfix',
+                    name: `${chalk.bold('clearfix:')} micro clearfix`,
                     value: 'clearfix',
                 }, {
-                    name: 'ellipsis: Ellipsis to point out text',
+                    name: `${chalk.bold('ellipsis:')} to point out text`,
                     value: 'ellipsis',
                 }, {
-                    name: 'fixed-ratiobox: Use intrinsic ratio to force child elements to fluidly scale at a given ratio',
+                    name: `${chalk.bold('fixed-ratiobox:')} intrinsic ratio to force child elements to fluidly scale at a given ratio`,
                     value: 'fixed-ratiobox',
                 }, {
-                    name: 'hide-text: Hide text on elements in sake of accessibility',
+                    name: `${chalk.bold('hide-text:')} hide text on elements in sake of accessibility`,
                     value: 'hide-text',
                 }, {
-                    name: 'triangle: Easy generating arrow-like triangles with the border-method',
+                    name: `${chalk.bold('triangle:')} arrow-like triangles with the border-method`,
                     value: 'triangle',
                 },
             ]),
@@ -203,16 +209,12 @@ module.exports = class extends Generator {
     _getCustomLibrariesPrompts() {
 
         const options = [
-            // {
-            //     name: 'logging.js, trace and logging library',
-            //     value: 'logging',
-            // },
             {
-                name: 'lodash, Javascript utility library',
+                name: `${chalk.bold('lodash:')} JavaScript utility library`,
                 value: 'lodash',
             },
             {
-                name: 'date-fns, date utility library',
+                name: `${chalk.bold('date-fns:')} date utility library`,
                 value: 'date-fns',
             },
         ];
@@ -220,30 +222,30 @@ module.exports = class extends Generator {
         if (this.config.get('jsFramework') === 'react') {
             options.push(
                 {
-                    name: 'Siema, the lightweight slider',
+                    name: `${chalk.bold('Siema:')} lightweight slider`,
                     value: 'siema',
                 },
                 {
-                    name: 'react-select, for styling select inputs',
+                    name: `${chalk.bold('react-select:')} styling select inputs`,
                     value: 'react-select',
                 },
                 {
-                    name: 'react-a11y-dialog, lightweight and accessible modal dialog',
+                    name: `${chalk.bold('react-a11y-dialog:')} lightweight and accessible modal dialog`,
                     value: 'react-a11y-dialog',
                 },
             );
         } else {
             options.push(
                 {
-                    name: 'Siema, the lightweight slider',
+                    name: `${chalk.bold('Siema:')} lightweight slider`,
                     value: 'siema',
                 },
                 {
-                    name: 'Choices, for styling select inputs',
+                    name: `${chalk.bold('choices:')} styling select inputs`,
                     value: 'choices',
                 },
                 {
-                    name: 'a11y-dialog, lightweight and accessible modal dialog',
+                    name: `${chalk.bold('a11y-dialog:')} lightweight and accessible modal dialog`,
                     value: 'a11y-dialog',
                 },
             );
@@ -319,6 +321,8 @@ module.exports = class extends Generator {
         // Standard Files
         this._copyTemplate('.gitignore.ejs', '.gitignore');
         this._copyTemplate('Gruntfile.js.ejs', 'Gruntfile.js');
+        this._copyTemplate('.eslintrc.js.ejs', '.eslintrc.js');
+        this._copyTemplate('.stylelintrc.js.ejs', '.stylelintrc.js');
         this._copyTemplate('NIKITA-LICENSE.md.ejs', 'NIKITA-LICENSE.md');
         this._copyTemplate('NIKITA-README.md.ejs', 'NIKITA-README.md');
 
@@ -331,6 +335,7 @@ module.exports = class extends Generator {
         this._copyTemplate('grunt/config/clean.js.ejs', 'grunt/config/clean.js');
         this._copyTemplate('grunt/config/concurrent.js.ejs', 'grunt/config/concurrent.js');
         this._copyTemplate('grunt/config/eslint.js.ejs', 'grunt/config/eslint.js');
+        this._copyTemplate('grunt/config/htmlmin.js.ejs', 'grunt/config/htmlmin.js');
         this._copyTemplate('grunt/config/imagemin.js.ejs', 'grunt/config/imagemin.js');
         this._copyTemplate('grunt/config/jest.js.ejs', 'grunt/config/jest.js');
         this._copyTemplate('grunt/config/postcss.js.ejs', 'grunt/config/postcss.js');
@@ -339,7 +344,6 @@ module.exports = class extends Generator {
         this._copyTemplate('grunt/config/sass-globbing.js.ejs', 'grunt/config/sass-globbing.js');
         this._copyTemplate('grunt/config/stylelint.js.ejs', 'grunt/config/stylelint.js');
         this._copyTemplate('grunt/config/twigRender.js.ejs', 'grunt/config/twigRender.js');
-        this._copyTemplate('grunt/config/uglify.js.ejs', 'grunt/config/uglify.js');
         this._copyTemplate('grunt/config/watch.js.ejs', 'grunt/config/watch.js');
         this._copyTemplate('grunt/config/webpack.js.ejs', 'grunt/config/webpack.js');
 
@@ -419,11 +423,6 @@ module.exports = class extends Generator {
             this._copyTemplate('src/components-jsb/sample/sample.twig.ejs', `${rootFolder}src/components/sample/sample.twig`);
         }
 
-        // Optional Browser Reset SCSS-Partial
-        if (this.config.get('features').includes('browserReset')) {
-            this._copyTemplate('src/scss/_reset.scss.ejs', `${rootFolder}src/scss/_reset.scss`);
-        }
-
         // Optional Webfonts folder and SCSS-Partial
         if (this.config.get('features').includes('webfonts')) {
             this._copy('static/fonts', `${rootFolder}static/fonts`);
@@ -432,13 +431,12 @@ module.exports = class extends Generator {
 
         // Optional SVG Backgrounds
         if (this.config.get('features').includes('svgBackgrounds')) {
-            this._copyTemplate('grunt/config/string-replace.js.ejs', 'grunt/config/string-replace.js');
-            this._copyTemplate('grunt/config/svgcss.js.ejs', 'grunt/config/svgcss.js');
+            this._copyTemplate('grunt/config/svg2scss.js.ejs', 'grunt/config/svg2scss.js');
+            this._copyTemplate('grunt/tasks/svg2scss.js.ejs', 'grunt/tasks/svg2scss.js');
             this._copyTemplate('src/scss/mixins/_svg-background.scss.ejs', `${rootFolder}src/scss/mixins/_svg-background.scss`);
-            this._copyTemplate('src/scss/bg-icons/README.md.ejs', `${rootFolder}src/scss/bg-icons/README.md`);
+            this._copyTemplate('src/scss/bg-svg-icons/README.md.ejs', `${rootFolder}src/scss/bg-svg-icons/README.md`);
         } else {
-            delete packageJsonData.devDependencies['grunt-svg-css'];
-            delete packageJsonData.devDependencies['grunt-string-replace'];
+            delete packageJsonData.devDependencies.xmldom;
         }
 
         // Optional Gitinfos
@@ -457,15 +455,30 @@ module.exports = class extends Generator {
             delete packageJsonData['pre-commit.silent'];
         }
 
+        // Optional Docker setup
+        if (this.config.get('features').includes('docker')) {
+            this._copyTemplate('docker-compose.yml.ejs', 'docker-compose.yml');
+            this._copyTemplate('Makefile.ejs', 'Makefile');
+            this._copy('.docker', '.docker');
+        }
+
+        // Optional Gitlab setup
+        if (this.config.get('features').includes('gitlab')) {
+            this._copyTemplate('.gitlab-ci.yml.ejs', '.gitlab-ci.yml');
+        }
+
         // jsFramework
         if (isReact) {
             delete packageJsonData.dependencies['node-jsb'];
             delete packageJsonData.devDependencies['import-glob'];
             delete packageJsonData.devDependencies['ejs-webpack-loader'];
+            delete packageJsonData.devDependencies['eslint-config-nikita'];
         } else {
             delete packageJsonData.devDependencies['babel-preset-react'];
             delete packageJsonData.devDependencies.enzyme;
             delete packageJsonData.devDependencies['enzyme-adapter-react-16'];
+            delete packageJsonData.devDependencies['eslint-config-nikita-react'];
+            delete packageJsonData.devDependencies['eslint-plugin-jsx-a11y'];
             delete packageJsonData.devDependencies['eslint-plugin-react'];
             delete packageJsonData.dependencies.classnames;
             delete packageJsonData.dependencies['prop-types'];
@@ -550,7 +563,7 @@ module.exports = class extends Generator {
             const javaName = this.config.get('name')
                 .replace(/-/g, ' ')
                 .toLowerCase()
-                .replace(/\b[a-z]/g, (letter) => letter.toUpperCase())
+                .replace(/\b[a-z]/g, letter => letter.toUpperCase())
                 .replace(/ /g, '');
 
             const javaNameWithLowercaseFirstLetter = javaName.substr(0, 1).toLowerCase() + javaName.substr(1);
@@ -563,7 +576,11 @@ module.exports = class extends Generator {
             this._copyTemplate('spring-boot/Application.java.ejs', `${springRootJavaFolder}/${javaName}Application.java`);
         }
 
-        this.fs.write(this.destinationPath('package.json'), JSON.stringify(packageJsonData, null, 4));
+        this.fs.write(this.destinationPath('package.json'), `${JSON.stringify(packageJsonData, null, 4)}\n`);
+
+        if (!this.fs.exists(this.destinationPath('.env'))) {
+            this.fs.write(this.destinationPath('.env'), '');
+        }
     }
 
     _copyTemplate(template, destination) {
@@ -599,6 +616,7 @@ module.exports = class extends Generator {
     }
 
     end() {
-        this.log(chalk.yellow.bold('\nNikita Project Generator run finished!\n'));
+        this.log(`${chalk.yellow.bold('\nNote: ')}Foundation JS dependencies are not installed because the use of it's JS components is not recommended due to the heavy script size!\n`);
+        this.log(chalk.yellow.bold('Nikita Project Generator run finished!\n'));
     }
 };

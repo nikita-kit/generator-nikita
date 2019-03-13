@@ -5,13 +5,15 @@ const ejs = require('ejs');
 const path = require('path');
 
 module.exports = {
-    process(src, filename, config, options) {
+    process(src, filename) {
         const ejsOptions = {
             client: true,
-            filename: path.relative(process.cwd(), filename)
+            _with: false,
+            localsName: 'data',
+            filename: path.relative(process.cwd(), filename),
         };
 
         const template = ejs.compile(src, ejsOptions);
-        return 'module.exports = ' + template.toString();
-    }
+        return `module.exports = ${template.toString()}`;
+    },
 };

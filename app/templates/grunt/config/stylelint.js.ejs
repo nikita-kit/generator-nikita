@@ -1,19 +1,27 @@
 module.exports = {
     options: {
-        configFile: './node_modules/stylelint-config-nikita/index.js',
         formatter: 'string',
         syntax: 'scss',
-        configOverrides: {
+        cache: true,
+        cacheLocation: '<%%= paths.tmp %>/.stylelintcache',
+        config: {
+            extends: ['stylelint-config-nikita'],
             rules: {
                 // override rules here
             },
         },
     },
-    check: ['<%%= paths.src %>/scss/**/*.scss', '<%%= paths.src %>/components/**/*.scss'],
+    check: [
+        '<%%= paths.src %>/scss/**/*.scss',
+        '<%%= paths.src %>/components/**/*.scss',
+    ],
     fix: {
         options: {
             fix: true,
         },
-        src: ['<%%= paths.src %>/scss/**/*.scss', '<%%= paths.src %>/components/**/*.scss'],
-    }
+        src: [
+            '<%%= paths.src %>/scss/**/*.scss',
+            '<%%= paths.src %>/components/**/*.scss',
+        ],
+    },
 };

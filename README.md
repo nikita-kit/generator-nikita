@@ -44,9 +44,9 @@ Feel free to re-run the generator to add or remove features.
 
 ## Project-Setup
 
-- [__Grunt__](http://gruntjs.com/) – Javascript task runner
+- [__Grunt__](http://gruntjs.com/) – JavaScript task runner
 - [__Webpack__](https://webpack.js.org/) – module bundler
-- [__Babel__](https://babeljs.io/) – next generation Javascript compiler
+- [__Babel__](https://babeljs.io/) – next generation JavaScript compiler
 - [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) – static site generator
 - [__React__](https://reactjs.org/) or [__JSB__](https://github.com/DracoBlue/jsb/) - JS framework
 - [__SCSS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – CSS preprocessing
@@ -59,37 +59,30 @@ Feel free to re-run the generator to add or remove features.
 - [__nikita.html__](https://github.com/nikita-kit/nikita-html) – HTML conventions and coding guidelines
 - [__nikita.css__](https://github.com/nikita-kit/nikita-css) – (S)CSS conventions and coding guidelines
 - [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines
-- and many more optional features:
+- and many more **optional** features:
   - libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns`
   - svg images as inlined css background images
   - useful scss mixins
   - webfonts
+  - separated JS build for modern browsers
   - pre-commit hook for code linting
+  - docker setup
+  - basic gitlab-ci setup
 
 
 ## Getting Started
 
-### Yeoman
+### Installation
 
-Not every new computer comes with a [Yeoman](http://yeoman.io/) pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
-
-```bash
-npm install -g yo
-```
-
-### Nikita Yeoman Generator
-
-To install or update generator-nikita, run:
+To execute generator-nikita, just go to desired directory and run:
 
 ```bash
-npm install -g generator-nikita
+npx -p yo -p generator-nikita yo nikita
 ```
 
-Finally, initiate the generator at desired directory and answer the questions:
+Then [npx](https://www.npmjs.com/package/npx) will download newest [Yeoman](http://yeoman.io/) cli
+and generator-nikita to it's cache dir and execute them. 
 
-```bash
-yo nikita
-```
 
 ### Generator main questions
 
@@ -140,7 +133,7 @@ This is the standard template for stand-alone web apps. The root folder is your 
 
 ### Symfony
 
-The Symfony template sets the root folder to `web/`.
+The Symfony template sets the root folder to `public/`.
 
 To use the nikita build files, just add something like following lines to your base.html.twig file:
 ```html
@@ -151,12 +144,11 @@ To use the nikita build files, just add something like following lines to your b
 ### Wordpress
 
 The Wordpress template sets the source folder to `web/`.
-In addition to nikita generator defaults, jQuery is added.
 
 To use the nikita build files (e.g. `web/static/generated/main.js` and `web/static/generated/styles.css`), just enqueue them in your wordpress theme like this:
 ```php
-wp_enqueue_script('main.js', rtrim(WP_HOME, '/') . '/web/static/generated/main.js', array(), '1.0', false);
-wp_enqueue_style('styles.css', rtrim(WP_HOME, '/') . '/web/static/generated/styles.css', array(), '1.0', 'all');
+wp_enqueue_script('main.js', '/web/static/generated/main.js', array(), '1.0', false);
+wp_enqueue_style('styles.css', '/web/static/generated/styles.css', array(), '1.0', 'all');
 ```
 
 ### Spring Boot

@@ -10,7 +10,7 @@ describe('The counter component', () => {
 
     it('should render 1 level deep without throwing an error', () => {
 
-        const shallowWrapper = shallow(<Counter/>);
+        const shallowWrapper = shallow(<Counter />);
         shallowWrapper.setProps({ count: 5 });
 
         expect(shallowWrapper.exists('.b-counter')).toBe(true);
@@ -22,7 +22,7 @@ describe('The counter component', () => {
 
         const mountWrapper = mount(
             <MemoryRouter>
-                <Counter/>
+                <Counter />
             </MemoryRouter>,
         );
 
@@ -34,7 +34,7 @@ describe('The counter component', () => {
 
         const renderWrapper = render(
             <MemoryRouter>
-                <Counter/>
+                <Counter />
             </MemoryRouter>,
         );
 

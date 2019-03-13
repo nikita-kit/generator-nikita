@@ -3,12 +3,78 @@ module.exports = function (grunt, options) {
 
         const path = require('path');
         const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+        const DotenvPlugin = require('dotenv-webpack');
 <% if (config.get('jsFramework') === 'jsb') { -%>
         const webpack = require('webpack');
         const plugins = [
             new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/),
+            new DotenvPlugin(),
         ];
+<% } else { -%>
+        const plugins = [new DotenvPlugin()];
 <% } -%>
+
+        /*
+         * remember to update jest transformer when changing loader options
+         * @see tests/setup/
+         */
+        const getLoaderRulesConfig = (targets, debug = false) => ([
+<% if (config.get('jsFramework') === 'jsb') { -%>
+            {
+                test: /\.ejs$/,
+                loader: 'ejs-webpack-loader',
+                options: {
+                    client: true,
+                    _with: false,
+                    localsName: 'data',
+                    compileDebug: debug,
+                    htmlmin: true,
+                    htmlminOptions: {
+                        removeComments: true,
+                    },
+                },
+            },
+            {
+                test: /\.js$/,
+                enforce: 'pre',
+                loader: 'import-glob',
+                include: [path.resolve('<%%= paths.src %>')],
+            },
+<% } -%>
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                include: [path.resolve('<%%= paths.src %>')],
+                options: {
+                    compact: true,
+                    cacheDirectory: true,
+                    cacheCompression: false,
+                    plugins: [
+                        [
+                            '@babel/plugin-transform-runtime', {
+                                regenerator: false,
+                                useESModules: true,
+                            },
+                        ],
+                        ['@babel/plugin-proposal-class-properties', { loose: true }],
+                    ],
+                    presets: [
+                        [
+                            '@babel/preset-env', {
+                                modules: false,
+                                loose: true,
+                                useBuiltIns: 'usage',
+                                targets,
+                                debug,
+                            },
+                        ],
+<% if (config.get('jsFramework') === 'react') { -%>
+                        '@babel/preset-react',
+<% } -%>
+                    ],
+                },
+            },
+        ]);
 
         return {
             options: {
@@ -19,72 +85,16 @@ module.exports = function (grunt, options) {
                 output: {
                     filename: '[name].js',
                     chunkFilename: '[name].js',
+                    path: path.resolve('<%%= paths.static %>/generated/'),
                 },
-                module: {
-<% if (config.get('jsFramework') === 'jsb') { -%>
-                    exprContextCritical: false,
-<% } -%>
-                    rules: [
-<% if (config.get('jsFramework') === 'jsb') { -%>
-                        {
-                            test: /\.js$/,
-                            enforce: 'pre',
-                            loader: 'import-glob',
-                            exclude: /node_modules/,
-                        },
-<% } -%>
-                        {
-                            test: /\.js$/,
-                            loader: 'babel-loader',
-                            include: [
-                                path.resolve('<%%= paths.src %>'),
-                            ],
-                            options: {
-                                compact: true,
-                                cacheDirectory: true,
-                                plugins: [
-                                    ['@babel/plugin-transform-runtime', {
-                                        regenerator: false,
-                                        useESModules: true,
-                                    }],
-                                    ['@babel/plugin-proposal-class-properties', { loose: true }],
-                                ],
-                                presets: [
-                                    ['@babel/preset-env', {
-                                        modules: false,
-                                        loose: true,
-                                        useBuiltIns: 'usage',
-                                        targets: {
-                                            browsers: options.browserslist,
-                                        },
-                                    }],
-<% if (config.get('jsFramework') === 'react') { -%>
-                                    '@babel/preset-react',
-<% } -%>
-                                ],
-                            },
-                        },
-<% if (config.get('jsFramework') === 'jsb') { -%>
-                        {
-                            test: /\.ejs$/,
-                            loader: 'ejs-webpack-loader',
-                            options: {
-                                'htmlmin': true,
-                                'htmlminOptions': {
-                                    removeComments: true,
-                                },
-                            },
-                        },
-<% } -%>
-                        {
-                            test: /\.scss$/,
-                            use: ['style-loader', 'css-loader', 'sass-loader'],
-                        },
-                    ],
-                },
+                plugins,
                 resolve: {
                     mainFields: ['browser', 'main', 'module'],
                     symlinks: false,
+                },
+                performance: {
+                    maxEntrypointSize: 500000,
+                    maxAssetSize: 500000,
                 },
             },
             analyze: {
@@ -99,31 +109,48 @@ module.exports = function (grunt, options) {
                 output: {
                     path: path.resolve('<%%= paths.tmp %>/js/'),
                 },
+                module: {
+                    rules: getLoaderRulesConfig({ esmodules: true }, true),
+                },
                 plugins: [new BundleAnalyzerPlugin()],
             },
             dev: {
                 mode: 'development',
-                devtool: 'source-map',
-                output: {
-                    path: path.resolve('<%%= paths.static %>/generated/'),
+                module: {
+                    rules: getLoaderRulesConfig({ browsers: options.browserslist }),
                 },
-<% if (config.get('jsFramework') === 'jsb') { -%>
-                plugins: plugins,
-<% } -%>
             },
+<% if (config.get('features').includes('modernJsBuild')) { -%>
+            devModern: {
+                mode: 'development',
+                devtool: 'source-map',
+                module: {
+                    rules: getLoaderRulesConfig({ esmodules: true }),
+                },
+                output: {
+                    filename: '[name].modern.js',
+                    chunkFilename: '[name].modern.js',
+                },
+            },
+<% } -%>
             dist: {
                 mode: 'production',
-                performance: {
-                    maxEntrypointSize: 500000,
-                    maxAssetSize: 500000,
+                module: {
+                    rules: getLoaderRulesConfig({ browsers: options.browserslist }),
+                },
+            },
+<% if (config.get('features').includes('modernJsBuild')) { -%>
+            distModern: {
+                mode: 'production',
+                module: {
+                    rules: getLoaderRulesConfig({ esmodules: true }),
                 },
                 output: {
-                    path: path.resolve('<%%= paths.static %>/generated/'),
+                    filename: '[name].modern.js',
+                    chunkFilename: '[name].modern.js',
                 },
-<% if (config.get('jsFramework') === 'jsb') { -%>
-                plugins: plugins,
-<% } -%>
             },
+<% } -%>
         };
-    })();
+    }());
 };
