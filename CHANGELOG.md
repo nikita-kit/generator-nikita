@@ -10,12 +10,14 @@
   * moved svg background icons to `scss/bg-svg-icons/`
 * updated all dependencies to newest version and improved configs
 * updated browserlist declaration
-* improved jest code coverage output
+* improved jest code coverage output and added `--ci` flag
+  * start jest in ci mode (omits snapshot generation)  with `grunt test --ci`
 * improved JST template compiling
 * enabled caching for eslint and stylelint
 * added eslintrc and stylelintrc files for IDE integration
 * added linting of grunt files
 * fixed browserSync page reload when js files are changing
+* fixed jest not exiting with error on fail
 * added docker setup and Makefile
 * added basic gitlab-ci setup
 * added separated JS build for modern browsers

@@ -6,9 +6,10 @@ module.exports = function (grunt) {
         const options = {
             config: JSON.stringify(taskOptions),
             watch: !!grunt.option('watch'),
+            ci: !!grunt.option('ci'),
         };
 
-        require('jest-cli').runCLI(options, [process.cwd()]).then(({results}) => {
+        require('jest-cli').runCLI(options, [process.cwd()]).then(({ results }) => {
             if (taskOptions.collectCoverage) {
                 grunt.log.write('\n>> '.green);
                 grunt.log.write('View ');

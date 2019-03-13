@@ -14,7 +14,7 @@ describe('The counter component', () => {
         shallowWrapper.setProps({ count: 5 });
 
         expect(shallowWrapper.exists('.b-counter')).toBe(true);
-        expect(shallowWrapper.find('.value').text()).toBe('5');
+        expect(shallowWrapper.find('.value').text()).toBe('counter value is: 5');
     });
 
     it('should mount in a full DOM', () => {
