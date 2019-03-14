@@ -14,10 +14,7 @@ module.exports = function (grunt, options) {
         const plugins = [new DotenvPlugin()];
 <% } -%>
 
-        /*
-         * remember to update jest transformer when changing loader options
-         * @see tests/setup/
-         */
+        /* remember to update jest transformer at tests/setup/ when changing loader options */
         const getLoaderRulesConfig = (targets, debug = false) => ([
 <% if (config.get('jsFramework') === 'jsb') { -%>
             {
@@ -44,7 +41,16 @@ module.exports = function (grunt, options) {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
+                /* remember to update jest transformIgnorePatterns at grunt/config/jest.js when adding inlcudes */
+<% if (config.get('libraries').includes('swiper')) { -%>
+                include: [
+                    path.resolve('<%%= paths.src %>'),
+                    path.resolve('node_modules/dom7'),
+                    path.resolve('node_modules/swiper'),
+                ],
+<% }  else { -%>
                 include: [path.resolve('<%%= paths.src %>')],
+<% } -%>
                 options: {
                     compact: true,
                     cacheDirectory: true,

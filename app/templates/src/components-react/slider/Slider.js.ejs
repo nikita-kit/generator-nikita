@@ -1,64 +1,59 @@
 import React, { Component } from 'react';
 import logging from 'node-logging-js';
-import Siema from 'siema';
+import { Swiper, Navigation } from 'swiper/dist/js/swiper.esm';
 
-/* @see https://github.com/pawelgrzybek/siema */
+/* @see http://idangero.us/swiper/api/ */
 class Slider extends Component {
     constructor(props) {
         super(props);
         logging.applyLogging(this, 'Slider');
         this.logDebug('init:', props);
-        this.container = React.createRef();
+
+        Swiper.use([Navigation]);
+        this.elementRef = React.createRef();
         this.slider = null;
     }
 
     componentDidMount() {
-        const options = {
-            resizeDebounce: 250,
-            duration: 200,
-            easing: 'ease-out',
-            perPage: 1,
-            startIndex: 0,
-            draggable: true,
-            threshold: 20,
-            loop: false,
-            ...this.props,
-            selector: this.container.current,
+        const defaults = {
+            initialSlide: 0,
+            slidesPerView: 1,
+            autoHeight: false,
+            effect: 'slide',
+            speed: 300,
+            navigation: {
+                nextEl: '.next',
+                prevEl: '.prev',
+            },
+            on: {
+                init: () => {
+                },
+                slideChange: () => {
+                },
+            },
         };
 
-        this.siema = new Siema(options);
-        window.addEventListener('resize', this.onResize);
+        const options = { ...defaults, ...this.props };
+
+        this.swiper = new Swiper(this.elementRef.current, options);
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize', this.onResize);
-    }
-
-    onResize = () => {
-        this.siema.resizeHandler();
-    }
-
-    onPrevClick = () => {
-        this.siema.prev();
-    }
-
-    onNextClick = () => {
-        this.siema.next();
+        this.swiper.destroy();
     }
 
     render() {
-
         return (
-            <div className="b-slider">
-                <div className="slide-container" ref={this.container}>
-                    <div className="slide">Hi, I&apos;m slide 1</div>
-                    <div className="slide">Hi, I&apos;m slide 2</div>
-                    <div className="slide">Hi, I&apos;m slide 3</div>
-                    <div className="slide">Hi, I&apos;m slide 4</div>
+            <div className="b-slider" ref={this.elementRef}>
+                <div className="swiper-wrapper">
+                    <div className="swiper-slide">Hi, I am slide 1</div>
+                    <div className="swiper-slide">Hi, I am slide 2</div>
+                    <div className="swiper-slide">Hi, I am slide 3</div>
+                    <div className="swiper-slide">Hi, I am slide 4</div>
                 </div>
 
-                <button className="prev" type="button" onClick={this.onPrevClick}>prev</button>
-                <button className="next" type="button" onClick={this.onNextClick}>next</button>
+                <button type="button" className="prev">Prev</button>
+                <button type="button" className="next">Next</button>
             </div>
         );
     }

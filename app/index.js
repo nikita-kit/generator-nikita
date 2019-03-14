@@ -222,8 +222,8 @@ module.exports = class extends Generator {
         if (this.config.get('jsFramework') === 'react') {
             options.push(
                 {
-                    name: `${chalk.bold('Siema:')} lightweight slider`,
-                    value: 'siema',
+                    name: `${chalk.bold('Swiper:')} modular slider`,
+                    value: 'swiper',
                 },
                 {
                     name: `${chalk.bold('react-select:')} styling select inputs`,
@@ -237,8 +237,8 @@ module.exports = class extends Generator {
         } else {
             options.push(
                 {
-                    name: `${chalk.bold('Siema:')} lightweight slider`,
-                    value: 'siema',
+                    name: `${chalk.bold('Swiper:')} modular slider`,
+                    value: 'swiper',
                 },
                 {
                     name: `${chalk.bold('choices:')} styling select inputs`,
@@ -493,15 +493,15 @@ module.exports = class extends Generator {
             delete packageJsonData.dependencies['choices.js'];
             delete packageJsonData.dependencies['a11y-dialog'];
 
-            // Optional Siema Slider
-            if (this.config.get('libraries').includes('siema')) {
+            // Optional Swiper Slider
+            if (this.config.get('libraries').includes('swiper')) {
                 this._copyTemplate('src/components-react/slider/Slider.js.ejs', `${rootFolder}src/components/slider/Slider.js`);
                 this._copyTemplate('src/components-react/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
             } else {
-                delete packageJsonData.dependencies.siema;
+                delete packageJsonData.dependencies.swiper;
             }
 
-            // Optional Choices
+            // Optional react-select
             if (this.config.get('libraries').includes('react-select')) {
                 this._copyTemplate('src/components-react/select/Select.js.ejs', `${rootFolder}src/components/select/Select.js`);
                 this._copyTemplate('src/components-react/select/_select.scss.ejs', `${rootFolder}src/components/select/_select.scss`);
@@ -520,13 +520,13 @@ module.exports = class extends Generator {
             delete packageJsonData.dependencies['react-select'];
             delete packageJsonData.dependencies['react-a11y-dialog'];
 
-            // Optional Siema Slider
-            if (this.config.get('libraries').includes('siema')) {
+            // Optional Swiper Slider
+            if (this.config.get('libraries').includes('swiper')) {
                 this._copyTemplate('src/components-jsb/slider/Slider.jsb.js.ejs', `${rootFolder}src/components/slider/Slider.jsb.js`);
                 this._copyTemplate('src/components-jsb/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
                 this._copyTemplate('src/components-jsb/slider/slider.twig.ejs', `${rootFolder}src/components/slider/slider.twig`);
             } else {
-                delete packageJsonData.dependencies.siema;
+                delete packageJsonData.dependencies.swiper;
             }
 
             // Optional Choices
