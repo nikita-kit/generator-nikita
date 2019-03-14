@@ -38,6 +38,7 @@ addons:
 deploy:
   provider: npm
   email: JanS@DracoBlue.de
+  skip_cleanup: true
   api_key:
     secure: b9/K16hOs/jdERiCPVH5PMqIY6x1f13pYxVyM+RJIr26luh6f1yPsABvJa/nCfCTFigOFlLiZA3h8hgGcDJFszccvyo4VaKnmoZyhe8Zbv5G8chLhwO0uhxnUghjLw9lpE3UCdFLBrV6cBDPpJ7CbUGS/grC++bRv+hQ33a78T0=
   on:
