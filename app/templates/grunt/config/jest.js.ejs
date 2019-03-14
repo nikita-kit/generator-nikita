@@ -18,7 +18,11 @@ module.exports = {
 <% } -%>
         },
         setupFilesAfterEnv: ['<rootDir>/<%%= paths.src %>/tests/setup/jest.setup.js'],
+<% if (config.get('libraries').includes('swiper')) { -%>
+        transformIgnorePatterns: ['/node_modules/(?!(swiper|dom7)/).*/'],
+<% } else { -%>
         transformIgnorePatterns: ['/node_modules/'],
+<% } -%>
         moduleNameMapper: {
 <% if (config.get('libraries').includes('lodash')) { -%>
             '^lodash-es$': 'lodash',

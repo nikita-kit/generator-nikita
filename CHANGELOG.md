@@ -10,12 +10,14 @@
   * moved svg background icons to `scss/bg-svg-icons/`
 * updated all dependencies to newest version and improved configs
 * updated browserlist declaration
-* improved jest code coverage output
+* improved jest code coverage output and added `--ci` flag
+  * start jest in ci mode (omits snapshot generation)  with `grunt test --ci`
 * improved JST template compiling
 * enabled caching for eslint and stylelint
 * added eslintrc and stylelintrc files for IDE integration
 * added linting of grunt files
 * fixed browserSync page reload when js files are changing
+* fixed jest not exiting with error on fail
 * added docker setup and Makefile
 * added basic gitlab-ci setup
 * added separated JS build for modern browsers
@@ -39,8 +41,8 @@
   * fixed encoding of parenthesis  
 * added shorthand grunt tasks `grunt check-code` and `grunt fix-code` for linting js and scss
 * added npm command `npm run generator` to run latest generator-nikita locally
-* added optional libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns` 
-* removed optional libraries `jquery`, `swiper` and `select2`
+* added optional libraries `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns` 
+* removed optional libraries `jquery`, and `select2`
 * removed `uglifyJS`
 * removed `assemble`
 * removed `grunt-accessibility`

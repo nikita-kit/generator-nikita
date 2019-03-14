@@ -60,7 +60,7 @@ Feel free to re-run the generator to add or remove features.
 - [__nikita.css__](https://github.com/nikita-kit/nikita-css) – (S)CSS conventions and coding guidelines
 - [__nikita.js__](https://github.com/nikita-kit/nikita-js) – JS conventions and coding guidelines
 - and many more **optional** features:
-  - libraries `siema`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns`
+  - libraries `swiper`, `choices`, `react-select`, `a11y-dialog`, `lodash` and `date-fns`
   - svg images as inlined css background images
   - useful scss mixins
   - webfonts

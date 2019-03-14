@@ -13,7 +13,7 @@ import Dialog from '../dialog/Dialog';
 <% if (config.get('libraries').includes('react-select')) { -%>
 import Select from '../select/Select';
 <% } -%>
-<% if (config.get('libraries').includes('siema')) { -%>
+<% if (config.get('libraries').includes('swiper')) { -%>
 import Slider from '../slider/Slider';
 <% } -%>
 
@@ -55,7 +55,7 @@ class Sample extends Component {
                 <br />
                 <Select options={options} />
 <% } -%>
-<% if (config.get('libraries').includes('siema')) { -%>
+<% if (config.get('libraries').includes('swiper')) { -%>
                 <br />
                 <Slider />
 <% } -%>

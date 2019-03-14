@@ -35,6 +35,11 @@
 
 // Basic Formatting
 @import "basics";
+<% if (config.get('libraries').includes('swiper')) { -%>
+
+// Swiper core styles
+@import "node_modules/swiper/src/swiper";
+<% } -%>
 
 // All Components
 @import "blocks/**/*.scss";

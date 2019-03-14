@@ -80,7 +80,7 @@ describe('generator-nikita:web-app-jsb', () => {
                 'lodash',
                 'date-fns',
                 'choices',
-                'siema',
+                'swiper',
                 'a11y-dialog',
             ],
         }));
@@ -135,7 +135,7 @@ describe('generator-nikita:web-app-react', () => {
             libraries: [
                 'lodash',
                 'date-fns',
-                'siema',
+                'swiper',
                 'react-select',
                 'react-a11y-dialog',
             ],
