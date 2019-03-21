@@ -1,4 +1,4 @@
-# dev
+# 5.0.0 (2019/03/14)
 
 * nikita now depends on node.js version >= 6.0 and npm >= 5.0
 * changed folder structure:
