@@ -1,7 +1,7 @@
 #dev
 
 * splitted background declaration in svg-background mixin
-
+* don't override `.docker/common.env`
 
 # 5.0.0 (2019/03/14)
 
