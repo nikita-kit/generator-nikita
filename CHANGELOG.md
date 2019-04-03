@@ -3,6 +3,7 @@
 * splitted background declaration in svg-background mixin
 * don't override `.docker/common.env`
 * integrate global font size trick (rem units = px units) with foundation
+* updated all dependencies to newest version
 
 # 5.0.0 (2019/03/14)
 
