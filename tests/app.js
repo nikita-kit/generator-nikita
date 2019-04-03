@@ -91,13 +91,14 @@ describe('generator-nikita:web-app-jsb', () => {
 
     test('creates files', (done) => {
         /* test svg icon processing */
-        fs.copyFileSync(
-            path.join(__dirname, '../img/babel.svg'),
-            path.join(tempDir, 'src/scss/bg-svg-icons/babel.svg'),
-        );
+        if (process.env.TEMPLATE === 'web-app') {
+            fs.copyFileSync(
+                path.join(__dirname, '../img/babel.svg'),
+                path.join(tempDir, 'src/scss/bg-svg-icons/babel.svg'),
+            );
+        }
 
         assert.file([
-            'src/scss/bg-svg-icons/babel.svg',
             'package.json',
             'Gruntfile.js',
             'grunt/aliases.js',
@@ -128,14 +129,12 @@ describe('generator-nikita:web-app-jsb', () => {
             buildApp(() => {
                 /* test svg icon processing */
                 assert.file([
+                    'src/scss/bg-svg-icons/babel.svg',
                     'tmp/svg-bgs/babel.svg',
                     'tmp/svg-scss/_svg-icon-map.scss',
                 ]);
 
-                assert.fileContent([
-                    ['tmp/svg-scss/_svg-icon-map.scss', /babel:/],
-                    ['tmp/svg-scss/_svg-icon-map.scss', /babel:/],
-                ]);
+                assert.fileContent([['tmp/svg-scss/_svg-icon-map.scss', /babel:/]]);
 
                 done();
             });
