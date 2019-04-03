@@ -459,7 +459,11 @@ module.exports = class extends Generator {
         if (this.config.get('features').includes('docker')) {
             this._copyTemplate('docker-compose.yml.ejs', 'docker-compose.yml');
             this._copyTemplate('Makefile.ejs', 'Makefile');
-            this._copy('.docker', '.docker');
+            this._copy('.docker/user', '.docker/user');
+
+            if (!this.fs.exists(this.destinationPath('.docker/common.env'))) {
+                this._copyTemplate('.docker/common.env', '.docker/common.env');
+            }
         }
 
         // Optional Gitlab setup

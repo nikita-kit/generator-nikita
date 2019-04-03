@@ -2,6 +2,8 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 const spawnCommand = require('yeoman-generator/lib/actions/spawn-command').spawnCommand;
+const fs = require('fs');
+
 
 const defaultTimeout = 10 * 1000;
 const buildTimeout = 5 * 60 * 1000;
@@ -66,14 +68,16 @@ describe('generator-nikita:app', () => {
 
 describe('generator-nikita:web-app-jsb', () => {
     jest.setTimeout(defaultTimeout);
+    let tempDir = null;
 
     beforeAll(() => helpers
         .run(path.join(__dirname, '../app'))
         .withOptions({ skipInstall: true })
+        .inTmpDir((dir) => { tempDir = dir; })
         .withPrompts({
             template: 'web-app',
             name: `testrun${(new Date()).getTime()}`,
-            features: [],
+            features: ['svgBackgrounds'],
             jsFramework: 'jsb',
             scssMixins: [],
             libraries: [
@@ -86,6 +90,14 @@ describe('generator-nikita:web-app-jsb', () => {
         }));
 
     test('creates files', (done) => {
+        /* test svg icon processing */
+        if (process.env.TEMPLATE === 'web-app') {
+            fs.copyFileSync(
+                path.join(__dirname, '../img/babel.svg'),
+                path.join(tempDir, 'src/scss/bg-svg-icons/babel.svg'),
+            );
+        }
+
         assert.file([
             'package.json',
             'Gruntfile.js',
@@ -113,7 +125,19 @@ describe('generator-nikita:web-app-jsb', () => {
 
         if (process.env.TEMPLATE === 'web-app') {
             jest.setTimeout(buildTimeout);
-            buildApp(done);
+
+            buildApp(() => {
+                /* test svg icon processing */
+                assert.file([
+                    'src/scss/bg-svg-icons/babel.svg',
+                    'tmp/svg-bgs/babel.svg',
+                    'tmp/svg-scss/_svg-icon-map.scss',
+                ]);
+
+                assert.fileContent([['tmp/svg-scss/_svg-icon-map.scss', /babel:/]]);
+
+                done();
+            });
         } else {
             done();
         }

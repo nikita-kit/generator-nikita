@@ -53,20 +53,20 @@
     "nikita"
   ],
   "dependencies": {
-    "yeoman-generator": "3.1.1",
-    "chalk": "2.4.1",
+    "yeoman-generator": "3.2.0",
+    "chalk": "2.4.2",
     "yosay": "2.0.2",
     "compare-versions": "3.4.0"
   },
   "devDependencies": {
-    "eslint": "5.15.1",
+    "eslint": "5.16.0",
     "eslint-config-nikita": "3.0.0",
     "eslint-plugin-import": "2.16.0",
-    "eslint-plugin-promise": "4.0.1",
+    "eslint-plugin-promise": "4.1.1",
     "pre-commit": "1.2.2",
     "yeoman-test": "1.9.1",
     "yeoman-assert": "3.1.1",
-    "jest": "24.1.0"
+    "jest": "24.7.0"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"

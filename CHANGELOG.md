@@ -1,4 +1,11 @@
-# dev
+#dev
+
+* splitted background declaration in svg-background mixin
+* don't override `.docker/common.env`
+* integrate global font size trick (rem units = px units) with foundation
+* updated all dependencies to newest version
+
+# 5.0.0 (2019/03/14)
 
 * nikita now depends on node.js version >= 6.0 and npm >= 5.0
 * changed folder structure:
@@ -54,7 +61,6 @@
 * rewrote generator logic completely and improved templates
 * updated generator dependencies
 * added eslint and pre commit hook to generator
-
 
 # 4.0.2 (2018/03/27)
 
