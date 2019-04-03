@@ -13,10 +13,10 @@
 @import "webfonts";
 <% } -%>
 
-// Foundation utils (mixins)
+// Foundation utils (mixins and functions)
 @import 'node_modules/foundation-sites/scss/util/util';
 
-// Variables
+// Variables (including foundation settings)
 @import "variables/**/*.scss";
 
 // Foundation
@@ -33,7 +33,7 @@
 @import "../../tmp/svg-scss/_svg-icon-map.scss";
 <% } -%>
 
-// Basic Formatting
+// Basic formatting
 @import "basics";
 <% if (config.get('libraries').includes('swiper')) { -%>
 
@@ -41,6 +41,6 @@
 @import "node_modules/swiper/src/swiper";
 <% } -%>
 
-// All Components
+// All components
 @import "blocks/**/*.scss";
 @import "../components/**/*.scss";

@@ -2,6 +2,7 @@
 
 * splitted background declaration in svg-background mixin
 * don't override `.docker/common.env`
+* integrate global font size trick (rem units = px units) with foundation
 
 # 5.0.0 (2019/03/14)
 
@@ -59,7 +60,6 @@
 * rewrote generator logic completely and improved templates
 * updated generator dependencies
 * added eslint and pre commit hook to generator
-
 
 # 4.0.2 (2018/03/27)
 
