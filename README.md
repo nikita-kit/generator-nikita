@@ -52,6 +52,9 @@ Feel free to re-run the generator to add or remove features.
 - [__SCSS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – CSS preprocessing
 - [__PostCSS__](http://postcss.org/) – CSS postprocessing
 - [__Foundation__](https://foundation.zurb.com/sites.html) – SCSS framework
+  - use of foundation breakpoints (https://foundation.zurb.com/sites/docs/media-queries.html#sass)
+  - to add or customize the breakpoints and sizes please change the defaults in src/scss/variables/_foundation-settings.scss
+  - feel free to add more feature mixins from foundation by changing src/scss/foundation.scss
 - [__Jest__](https://facebook.github.io/jest/) – JS testing framework
 - [__ESLint__](http://eslint.org/) – linter for JS files
 - [__stylelint__](https://stylelint.io/) – linter for SCSS files
