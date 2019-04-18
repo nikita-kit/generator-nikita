@@ -1,3 +1,7 @@
+# dev
+
+* adjust global font size trick to fix bug in chrome, now 1rem = 10px
+
 # 5.1.0 (2019/04/03)
 
 * splitted background declaration in svg-background mixin

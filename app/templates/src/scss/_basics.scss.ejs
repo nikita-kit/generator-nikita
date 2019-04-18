@@ -10,6 +10,13 @@ html {
     font-size: $global-font-size;
 }
 
+// fix IE root font size calculation
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    html {
+        font-size: $global-font-size-ie;
+    }
+}
+
 *,
 *::before,
 *::after {
