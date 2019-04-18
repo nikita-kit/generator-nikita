@@ -8,6 +8,8 @@ cache:
   - node_modules/
 
 variables:
+  GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
+  TZ: "Europe/Berlin"
 
 test-frontend:
   stage: test
@@ -19,7 +21,7 @@ test-frontend:
     - npm -v
     - npm install
     - npm run check-code
-    - npm run grunt test --ci
+    - npm run grunt test -- --ci
   except:
     - tags
 
