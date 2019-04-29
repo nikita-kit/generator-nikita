@@ -17,8 +17,9 @@ module.exports = {
         'svg2scss',
 <% } -%>
         'sass-globbing',
-        'concurrent:dev',
+        'sass:dev',
         'postcss:dev',
+        'twigRender:dev',
 <% if (config.get('features').includes('modernJsBuild')) { -%>
         'webpack:devModern',
 <% } -%>

@@ -4,6 +4,7 @@
 * improved gitlab-ci config (set Timezone and git ssh command, fixed test task)
 * ensure no `.babelrc`-file is processed
 * prevent double browser reload when using modern JS build
+* removed concurrent setup of html and sass processing to speed up grunt builds
 
 # 5.1.0 (2019/04/03)
 
