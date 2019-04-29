@@ -5,6 +5,7 @@
 * ensure no `.babelrc`-file is processed
 * prevent double browser reload when using modern JS build
 * removed concurrent setup of html and sass processing to speed up grunt builds
+* prevent `grunt-watch` from spawning child processes for faster rebuilds
 
 # 5.1.0 (2019/04/03)
 
