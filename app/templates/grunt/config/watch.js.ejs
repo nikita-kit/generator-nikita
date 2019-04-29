@@ -3,6 +3,12 @@ module.exports = {
         interrupt: true,
         spawn: false,
     },
+    grunt: {
+        files: ['Gruntfile.js', 'grunt/**/*.js'],
+        options: {
+            reload: true,
+        },
+    },
     scss: {
         files: ['<%%= paths.src %>/scss/**/*.scss', '<%%= paths.src %>/components/**/*.scss'],
         tasks: ['sass-globbing', 'sass:dev', 'postcss:dev'],
