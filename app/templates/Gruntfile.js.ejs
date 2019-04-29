@@ -8,7 +8,9 @@
 module.exports = function (grunt) {
     const path = require('path');
 
-    require('time-grunt')(grunt);
+    if (!grunt.option('no-times')) {
+        require('time-grunt')(grunt);
+    }
 
     require('load-grunt-config')(grunt, {
         configPath: path.join(process.cwd(), 'grunt/config'),

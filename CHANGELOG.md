@@ -7,7 +7,7 @@
 * removed concurrent setup of html and sass processing to speed up grunt builds
 * prevent `grunt-watch` from spawning child processes for faster rebuilds
 * added watch target for changes of grunt config files to reload grunt automatically
-
+* added grunt flag to disable `time-grunt` with `grunt --no-times`
 
 # 5.1.0 (2019/04/03)
 

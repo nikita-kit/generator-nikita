@@ -1,5 +1,9 @@
 module.exports = {
 
+    // supported options:
+    // --port:     specify BrowserSync port
+    // --no-times: disable time-grunt
+
     // standard build task when calling grunt without arguments
     // development build task including server and watch
     default: [
@@ -50,6 +54,10 @@ module.exports = {
     ],
 
     // testing tasks
+    //
+    // supported options:
+    //   --watch: start in watch mode
+    //   --ci:    omits snapshot generation
     test: ['jest:test'],
     'test-coverage': ['jest:testCoverage'],
 
