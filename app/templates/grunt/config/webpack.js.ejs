@@ -1,4 +1,10 @@
 module.exports = function (grunt, options) {
+
+    /* skip loading if task is not necessary for current target */
+    if (!grunt.isLoadingRequiredForCurrentTarget('webpack')) {
+        return {};
+    }
+
     return (function () {
 
         const path = require('path');

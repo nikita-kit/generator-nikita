@@ -1,37 +1,45 @@
-const sass = require('node-sass');
+module.exports = function (grunt) {
 
-module.exports = {
-    options: {
-        implementation: sass,
-        outputStyle: 'nested', // minifying by csso
-        includePaths: ['<%%= paths.src %>/scss'],
-    },
-    dev: {
+    /* skip loading if task is not necessary for current target */
+    if (!grunt.isLoadingRequiredForCurrentTarget('sass')) {
+        return {};
+    }
+
+    const sass = require('node-sass');
+
+    return {
         options: {
-            sourceMap: true,
+            implementation: sass,
+            outputStyle: 'nested', // minifying by csso
+            includePaths: ['<%%= paths.src %>/scss'],
         },
-        files: [
-            {
-                expand: true,
-                cwd: '<%%= paths.tmp %>',
-                dest: '<%%= paths.static %>/generated',
-                src: ['*.scss'],
-                ext: '.css',
+        dev: {
+            options: {
+                sourceMap: true,
             },
-        ],
-    },
-    dist: {
-        options: {
-            sourceMap: false,
+            files: [
+                {
+                    expand: true,
+                    cwd: '<%%= paths.tmp %>',
+                    dest: '<%%= paths.static %>/generated',
+                    src: ['*.scss'],
+                    ext: '.css',
+                },
+            ],
         },
-        files: [
-            {
-                expand: true,
-                cwd: '<%%= paths.tmp %>',
-                dest: '<%%= paths.static %>/generated',
-                src: ['*.scss'],
-                ext: '.css',
+        dist: {
+            options: {
+                sourceMap: false,
             },
-        ],
-    },
+            files: [
+                {
+                    expand: true,
+                    cwd: '<%%= paths.tmp %>',
+                    dest: '<%%= paths.static %>/generated',
+                    src: ['*.scss'],
+                    ext: '.css',
+                },
+            ],
+        },
+    };
 };
