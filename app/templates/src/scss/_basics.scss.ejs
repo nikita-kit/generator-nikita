@@ -24,7 +24,7 @@ html {
 }
 
 [hidden] {
-    display: none !important;
+    display: none !important; // stylelint-disable-line declaration-no-important
 }
 
 
@@ -41,8 +41,7 @@ body {
     line-height: $base-lineheight;
     text-align: left;
     text-rendering: optimizeLegibility;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     color: $text-color-02;
     background: $bg-color-01;
     -webkit-font-smoothing: antialiased;
@@ -185,8 +184,7 @@ button {
     @extend %btn;
 
     overflow: visible;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    appearance: none;
     margin: 0;
     border: 0;
     border-radius: 0;

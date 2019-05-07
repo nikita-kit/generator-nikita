@@ -495,6 +495,7 @@ module.exports = class extends Generator {
         // Optional Framework specific Libraries
         if (isReact) {
             delete packageJsonData.dependencies['choices.js'];
+            delete packageJsonData.dependencies['custom-event-polyfill'];
             delete packageJsonData.dependencies['a11y-dialog'];
 
             // Optional Swiper Slider
@@ -540,6 +541,7 @@ module.exports = class extends Generator {
                 this._copyTemplate('src/components-jsb/select/select.twig.ejs', `${rootFolder}src/components/select/select.twig`);
             } else {
                 delete packageJsonData.dependencies['choices.js'];
+                delete packageJsonData.dependencies['custom-event-polyfill'];
             }
 
             // Optional A11y Dialog
