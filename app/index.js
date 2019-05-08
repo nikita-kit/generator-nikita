@@ -615,10 +615,15 @@ module.exports = class extends Generator {
      */
 
     install() {
-        this.installDependencies({
-            npm: true,
-            bower: false,
-        });
+        if (this.options['skip-install']) {
+            this.log(chalk.yellow('\nSkipping npm install command.'));
+        } else if (this.config.get('features').includes('docker')) {
+            this.log(chalk.yellow('\nRunning npm install in docker node-cli container...\n'));
+            this.spawnCommandSync('docker-compose', ['run', '--no-deps', '--rm', 'node-cli', 'npm', 'install']);
+        } else {
+            this.log(chalk.yellow('\nRunning npm install...\n'));
+            this.npmInstall();
+        }
     }
 
     end() {

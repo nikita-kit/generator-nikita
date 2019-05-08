@@ -12,6 +12,7 @@
 * updated all dependencies to newest version
 * updated nikita eslint and stylelint config
 * mention foundation and babel polyfilling in readme
+* run npm install in docker container if docker setup is used
 
 # 5.1.0 (2019/04/03)
 
