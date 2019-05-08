@@ -11,6 +11,7 @@
 * added grunt flag to disable `time-grunt` with `grunt --no-times`
 * updated all dependencies to newest version
 * updated nikita eslint and stylelint config
+* mention foundation and babel polyfilling in readme
 
 # 5.1.0 (2019/04/03)
 
