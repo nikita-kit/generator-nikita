@@ -1,7 +1,7 @@
 module.exports = function (grunt, options) {
 
     /* skip loading if task is not necessary for current target */
-    if (!grunt.isLoadingRequiredForCurrentTarget('webpack')) {
+    if (!grunt.isConfigLoadingRequired('webpack')) {
         return {};
     }
 
@@ -47,7 +47,7 @@ module.exports = function (grunt, options) {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                /* remember to update jest transformIgnorePatterns at grunt/config/jest.js when adding inlcudes */
+                /* remember to update jest transformIgnorePatterns at grunt/config/jest.js when adding includes */
 <% if (config.get('libraries').includes('swiper')) { -%>
                 include: [
                     path.resolve('<%%= paths.src %>'),
