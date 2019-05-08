@@ -1,3 +1,19 @@
+# dev
+
+* adjust global font size trick to fix bug in chrome, now 1rem = 10px
+* improved gitlab-ci config (set Timezone and git ssh command, fixed test task)
+* ensure no `.babelrc`-file is processed
+* prevent double browser reload when using modern JS build
+* exclude heavy grunt tasks from loading when these are not necessary for current build target
+* removed concurrent setup of html and sass processing to speed up grunt builds
+* prevent `grunt-watch` from spawning child processes for faster rebuilds
+* added watch target for changes of grunt config files to reload grunt automatically
+* added grunt flag to disable `time-grunt` with `grunt --no-times`
+* updated all dependencies to newest version
+* updated nikita eslint and stylelint config
+* mention foundation and babel polyfilling in readme
+* run npm install in docker container if docker setup is used
+
 # 5.1.0 (2019/04/03)
 
 * splitted background declaration in svg-background mixin

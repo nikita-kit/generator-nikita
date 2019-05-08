@@ -1,6 +1,13 @@
 module.exports = {
     options: {
         interrupt: true,
+        spawn: false,
+    },
+    grunt: {
+        files: ['Gruntfile.js', 'grunt/**/*.js'],
+        options: {
+            reload: true,
+        },
     },
     scss: {
         files: ['<%%= paths.src %>/scss/**/*.scss', '<%%= paths.src %>/components/**/*.scss'],

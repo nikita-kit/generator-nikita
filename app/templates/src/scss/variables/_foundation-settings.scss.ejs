@@ -63,7 +63,8 @@
 // 1. Global
 // ---------
 
-$global-font-size: 1px; // global font size trick to make rem units = px units
+$global-font-size: 62.5%; // root font size calculation trick to make 1rem  = 10px
+$global-font-size-ie: 10px; // root font size fallback for IE
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
@@ -453,7 +454,7 @@ $label-color: $white;
 $label-color-alt: $black;
 $label-palette: $foundation-palette;
 $label-font-size: .8rem;
-$label-padding: .33333rem .5rem;
+$label-padding: .333rem .5rem;
 $label-radius: $global-radius;
 
 // 22. Media Object
@@ -562,7 +563,7 @@ $prototype-arrow-directions: (
     right,
     left
 );
-$prototype-arrow-size: .4375rem;
+$prototype-arrow-size: .438rem;
 $prototype-arrow-color: $black;
 
 // 30. Prototype Border-Box

@@ -5,12 +5,15 @@ module.exports = function (grunt) {
                 src: [
                     '<%%= paths.static %>/img/**/*.{jpg,jpeg,png,gif,ico,svg}',
                     '<%%= paths.static %>/generated/**/*.{css,js}',
+<% if (config.get('features').includes('modernJsBuild')) { -%>
+                    '!<%%= paths.static %>/generated/main.js',
+<% } -%>
                     '<%%= paths.static %>/**/*.html',
                 ],
             },
             options: {
                 open: false,
-                online: false,
+                online: true,
                 watchTask: true,
 <% if (config.get('jsFramework') === 'react') { -%>
                 single: true,

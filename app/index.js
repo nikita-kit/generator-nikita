@@ -495,6 +495,7 @@ module.exports = class extends Generator {
         // Optional Framework specific Libraries
         if (isReact) {
             delete packageJsonData.dependencies['choices.js'];
+            delete packageJsonData.dependencies['custom-event-polyfill'];
             delete packageJsonData.dependencies['a11y-dialog'];
 
             // Optional Swiper Slider
@@ -540,6 +541,7 @@ module.exports = class extends Generator {
                 this._copyTemplate('src/components-jsb/select/select.twig.ejs', `${rootFolder}src/components/select/select.twig`);
             } else {
                 delete packageJsonData.dependencies['choices.js'];
+                delete packageJsonData.dependencies['custom-event-polyfill'];
             }
 
             // Optional A11y Dialog
@@ -613,10 +615,15 @@ module.exports = class extends Generator {
      */
 
     install() {
-        this.installDependencies({
-            npm: true,
-            bower: false,
-        });
+        if (this.options['skip-install']) {
+            this.log(chalk.yellow('\nSkipping npm install command.'));
+        } else if (this.config.get('features').includes('docker')) {
+            this.log(chalk.yellow('\nRunning npm install in docker node-cli container...\n'));
+            this.spawnCommandSync('docker-compose', ['run', '--no-deps', '--rm', 'node-cli', 'npm', 'install']);
+        } else {
+            this.log(chalk.yellow('\nRunning npm install...\n'));
+            this.npmInstall();
+        }
     }
 
     end() {
