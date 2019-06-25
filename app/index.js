@@ -12,7 +12,7 @@ module.exports = class extends Generator {
         const generatedVersion = this.config.get('version');
         const selfVersion = this.pkg.version;
 
-        if (generatedVersion && selfVersion && compareVersions(selfVersion, generatedVersion)) {
+        if (generatedVersion && selfVersion && compareVersions(selfVersion, generatedVersion) === 1) {
             this.env.error(
                 `${chalk.red.bold('Error:')} Your generator-nikita is too old (Version ${chalk.yellow(selfVersion)})!\n`
                 + `This nikita kickstarter was generated with version ${chalk.yellow(generatedVersion)}, so update\n`

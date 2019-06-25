@@ -1,3 +1,7 @@
+# dev
+
+* fixed generator version compare bug
+
 # 5.2.0 (2019/05/08)
 
 * adjust global font size trick to fix bug in chrome, now 1rem = 10px
