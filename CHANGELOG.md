@@ -1,6 +1,7 @@
 # dev
 
 * fixed generator version compare bug
+* fixed grunt task `analyze-js`
 
 # 5.2.0 (2019/05/08)
 

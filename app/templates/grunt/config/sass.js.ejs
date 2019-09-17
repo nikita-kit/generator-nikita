@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
 
     /* skip loading if task is not necessary for current target */
-    if (!grunt.isConfigLoadingRequired('sass')) {
+    if (!grunt.isConfigLoadingRequired(['sass'])) {
         return {};
     }
 
