@@ -392,7 +392,7 @@ module.exports = class extends Generator {
             this._copyTemplate('src/js-react/Store.js.ejs', `${rootFolder}src/js/Store.js`);
         } else {
             this._copyTemplate('src/js-jsb/_main.js.ejs', `${rootFolder}src/js/_main.js`);
-            this._copyTemplate('src/js-jsb/app.js.ejs', `${rootFolder}src/js/app.js`);
+            this._copyTemplate('src/js-jsb/App.js.ejs', `${rootFolder}src/js/App.js`);
         }
 
         // Sample Component Files

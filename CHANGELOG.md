@@ -2,6 +2,7 @@
 
 * fixed generator version compare bug
 * fixed grunt task `analyze-js`
+* renamed `App.js` to PascalCase
 
 # 5.2.0 (2019/05/08)
 
