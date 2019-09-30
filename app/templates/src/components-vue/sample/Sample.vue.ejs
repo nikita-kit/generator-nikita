@@ -7,7 +7,27 @@
 </template>
 
 <script>
+import logging from 'node-logging-js';
+<% if (config.get('libraries').includes('lodash')) { -%>
+import { camelCase } from 'lodash-es';
+<% } -%>
+<% if (config.get('libraries').includes('date-fns')) { -%>
+import { format } from 'date-fns/esm';
+<% } -%>
+
 export default {
     name: 'sample',
+    mounted() {
+        logging.applyLogging(this, 'Sample');
+        this.logDebug('init:', this);
+<% if (config.get('libraries').includes('lodash')) { -%>
+
+        this.logDebug(`lodash in nikita: ${camelCase('this should be camel case')}`);
+<% } -%>
+<% if (config.get('libraries').includes('date-fns')) { -%>
+
+        this.logDebug(`date-fns in nikita: Today is a ${format(new Date(), 'EEEE')}`);
+<% } -%>
+    }
 }
 </script>
