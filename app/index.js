@@ -397,6 +397,7 @@ module.exports = class extends Generator {
         } else if (isVue) {
             this._copyTemplate('src/js-vue/_main.js.ejs', `${rootFolder}src/js/_main.js`);
             this._copyTemplate('src/js-vue/Store.js.ejs', `${rootFolder}src/js/Store.js`);
+            this._copyTemplate('src/js-vue/Router.js.ejs', `${rootFolder}src/js/Router.js`);
         } else {
             this._copyTemplate('src/js-jsb/_main.js.ejs', `${rootFolder}src/js/_main.js`);
             this._copyTemplate('src/js-jsb/App.js.ejs', `${rootFolder}src/js/App.js`);
