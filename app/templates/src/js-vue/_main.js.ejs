@@ -1,0 +1,18 @@
+/**
+ * Main JavaScript entry point
+ *
+ * all imported modules will be bundled to main.js
+ */
+
+import Vue from 'vue/dist/vue';
+import store from './Store';
+import router from './router';
+
+/* global process */
+Vue.config.devtools = process.env.NODE_ENV !== 'production';
+
+const app = new Vue({
+    el: '#main-app',
+    store,
+    router,
+});

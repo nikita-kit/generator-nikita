@@ -3,7 +3,7 @@
 {% block title %}Nikita Prototype{% endblock %}
 {% block description %}This is the startpage of your Nikita prototype{% endblock %}
 
-<% if (config.get('jsFramework') === 'react') { -%>
+<% if (config.get('jsFramework') === 'react' || config.get('jsFramework') === 'vue') { -%>
 {% block body %}
     <div id="main-app"></div>
 <%     if (config.get('libraries').includes('react-a11y-dialog')) { -%>

@@ -165,6 +165,9 @@ module.exports = class extends Generator {
                 }, {
                     name: `${chalk.bold('React.js:')} view framework including addons react-router and react-waterfall`,
                     value: 'react',
+                }, {
+                    name: `${chalk.bold('Vue.js:')} view framework including addons vue-router and vuex for state management`,
+                    value: 'vue',
                 },
             ]),
             this._promptCheckbox('scssMixins', 'Which nikita mixins do you want to use?', [
@@ -316,6 +319,7 @@ module.exports = class extends Generator {
         packageJsonData.name = this.config.get('name');
 
         const isReact = (this.config.get('jsFramework') === 'react');
+        const isVue = (this.config.get('jsFramework') === 'vue');
         const rootFolder = this.config.get('rootFolder');
 
         // Standard Files
@@ -390,6 +394,9 @@ module.exports = class extends Generator {
             this._copyTemplate('src/js-react/_main.js.ejs', `${rootFolder}src/js/_main.js`);
             this._copyTemplate('src/js-react/App.js.ejs', `${rootFolder}src/js/App.js`);
             this._copyTemplate('src/js-react/Store.js.ejs', `${rootFolder}src/js/Store.js`);
+        } else if (isVue) {
+            this._copyTemplate('src/js-vue/_main.js.ejs', `${rootFolder}src/js/_main.js`);
+            this._copyTemplate('src/js-vue/Store.js.ejs', `${rootFolder}src/js/Store.js`);
         } else {
             this._copyTemplate('src/js-jsb/_main.js.ejs', `${rootFolder}src/js/_main.js`);
             this._copyTemplate('src/js-jsb/App.js.ejs', `${rootFolder}src/js/App.js`);
@@ -417,7 +424,7 @@ module.exports = class extends Generator {
         this._copyTemplate('src/html/macros/.gitkeep', `${rootFolder}src/html/macros/.gitkeep`);
         this._copyTemplate('src/html/pages/index.twig.ejs', `${rootFolder}src/html/pages/index.twig`);
         this._copyTemplate('src/html/partials/appicons.twig.ejs', `${rootFolder}src/html/partials/appicons.twig`);
-        if (!isReact) {
+        if (!isReact && !isVue) {
             this._copyTemplate('src/html/partials/header.twig.ejs', `${rootFolder}src/html/partials/header.twig`);
             this._copyTemplate('src/html/partials/footer.twig.ejs', `${rootFolder}src/html/partials/footer.twig`);
             this._copyTemplate('src/components-jsb/sample/sample.twig.ejs', `${rootFolder}src/components/sample/sample.twig`);
@@ -472,7 +479,7 @@ module.exports = class extends Generator {
         }
 
         // jsFramework
-        if (isReact) {
+        if (isReact || isVue) {
             delete packageJsonData.dependencies['node-jsb'];
             delete packageJsonData.devDependencies['import-glob'];
             delete packageJsonData.devDependencies['ejs-webpack-loader'];
@@ -490,6 +497,9 @@ module.exports = class extends Generator {
             delete packageJsonData.dependencies['react-dom'];
             delete packageJsonData.dependencies['react-router-dom'];
             delete packageJsonData.dependencies['react-waterfall'];
+            delete packageJsonData.dependencies.vue;
+            delete packageJsonData.dependencies.vuex;
+            delete packageJsonData.dependencies['vue-router'];
         }
 
         // Optional Framework specific Libraries
