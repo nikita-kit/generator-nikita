@@ -166,7 +166,7 @@ module.exports = class extends Generator {
                     name: `${chalk.bold('React.js:')} view framework including addons react-router and react-waterfall`,
                     value: 'react',
                 }, {
-                    name: `${chalk.bold('Vue.js:')} view framework including addons vue-router and vuex for state management`,
+                    name: `${chalk.bold('Vue.js:')} use Single File Components to build your UI. Includes vue-router for routing and vuex for state management`,
                     value: 'vue',
                 },
             ]),
