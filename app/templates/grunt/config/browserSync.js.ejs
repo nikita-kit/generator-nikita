@@ -19,7 +19,7 @@ module.exports = function (grunt) {
                 open: false,
                 online: true,
                 watchTask: true,
-<% if (config.get('jsFramework') === 'react') { -%>
+<% if (config.get('jsFramework') === 'react' || config.get('jsFramework') === 'vue') { -%>
                 single: true,
 <% } -%>
                 port: grunt.option('port') || 3000,
