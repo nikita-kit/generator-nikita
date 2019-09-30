@@ -237,6 +237,13 @@ module.exports = class extends Generator {
                     value: 'react-a11y-dialog',
                 },
             );
+        } else if (this.config.get('jsFramework') === 'vue') {
+            options.push(
+                {
+                    name: `${chalk.bold('Swiper:')} modular slider`,
+                    value: 'swiper',
+                },
+            );
         } else {
             options.push(
                 {
@@ -511,17 +518,21 @@ module.exports = class extends Generator {
         }
 
         // Optional Framework specific Libraries
-        if (isReact) {
+        if (isReact || isVue) {
             delete packageJsonData.dependencies['choices.js'];
             delete packageJsonData.dependencies['custom-event-polyfill'];
             delete packageJsonData.dependencies['a11y-dialog'];
 
+            if (!this.config.get('libraries').includes('swiper')) {
+                delete packageJsonData.dependencies.swiper;
+            }
+        }
+
+        if (isReact) {
             // Optional Swiper Slider
             if (this.config.get('libraries').includes('swiper')) {
                 this._copyTemplate('src/components-react/slider/Slider.js.ejs', `${rootFolder}src/components/slider/Slider.js`);
                 this._copyTemplate('src/components-react/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
-            } else {
-                delete packageJsonData.dependencies.swiper;
             }
 
             // Optional react-select
@@ -538,6 +549,12 @@ module.exports = class extends Generator {
                 this._copyTemplate('src/components-react/dialog/_dialog.scss.ejs', `${rootFolder}src/components/dialog/_dialog.scss`);
             } else {
                 delete packageJsonData.dependencies['react-a11y-dialog'];
+            }
+        } else if (isVue) {
+            // Optional Swiper Slider
+            if (this.config.get('libraries').includes('swiper')) {
+                this._copyTemplate('src/components-vue/slider/Slider.vue.ejs', `${rootFolder}src/components/slider/Slider.vue`);
+                this._copyTemplate('src/components-vue/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
             }
         } else {
             delete packageJsonData.dependencies['react-select'];

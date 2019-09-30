@@ -1,8 +1,12 @@
 <template>
     <div class="b-sample">
-        Congratulations, the nikita react prototype was built successfully! :)
+        Congratulations, the nikita vue prototype was built successfully! :)
         <br />
         <router-link to="/state-example">goto state example</router-link>
+
+<% if (config.get('libraries').includes('swiper')) { -%>
+        <Slider />
+<% } -%>
     </div>
 </template>
 
@@ -14,9 +18,17 @@ import { camelCase } from 'lodash-es';
 <% if (config.get('libraries').includes('date-fns')) { -%>
 import { format } from 'date-fns/esm';
 <% } -%>
+<% if (config.get('libraries').includes('swiper')) { -%>
+import Slider from '../slider/Slider.vue';
+<% } -%>
 
 export default {
     name: 'sample',
+<% if (config.get('libraries').includes('swiper')) { -%>
+    components: {
+        Slider,
+    },
+<% } -%>
     mounted() {
         logging.applyLogging(this, 'Sample');
         this.logDebug('init:', this);

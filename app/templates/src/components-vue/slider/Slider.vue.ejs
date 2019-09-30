@@ -1,0 +1,44 @@
+<template>
+    <div class="b-slider" ref="sliderContainer">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Hi, I am slide 1</div>
+            <div class="swiper-slide">Hi, I am slide 2</div>
+            <div class="swiper-slide">Hi, I am slide 3</div>
+            <div class="swiper-slide">Hi, I am slide 4</div>
+        </div>
+
+        <button type="button" ref="prevBtn" class="prev">Prev</button>
+        <button type="button" ref="nextBtn" class="next">Next</button>
+    </div>
+</template>
+
+<script>
+import { Swiper, Navigation } from 'swiper/dist/js/swiper.esm';
+
+export default {
+    name: 'slider',
+    mounted() {
+        const options = {
+            initialSlide: 0,
+            slidesPerView: 1,
+            autoHeight: false,
+            effect: 'slide',
+            speed: 300,
+            navigation: {
+                prevEl: this.$refs.prevBtn,
+                nextEl: this.$refs.nextBtn,
+            },
+            on: {
+                init: () => {
+                },
+                slideChange: () => {
+                },
+            },
+        };
+
+        Swiper.use([Navigation]);
+
+        this.swiper = new Swiper(this.$refs.sliderContainer, options);
+    }
+}
+</script>
