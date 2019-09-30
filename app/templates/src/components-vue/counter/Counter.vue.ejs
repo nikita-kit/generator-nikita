@@ -1,0 +1,23 @@
+<template>
+    <div className="b-counter">
+        <span className="value">counter value is: {{ count }}</span>
+        <br />
+        <button type="button" @click="increment">[Increase Counter]</button>
+        <br />
+        <router-link to="/">go back</router-link>
+    </div>
+</template>
+
+<script>
+import { mapState, mapMutations } from 'vuex';
+
+export default {
+    name: 'counter',
+    computed: {
+        ...mapState(['count']),
+    },
+    methods: {
+        ...mapMutations(['increment']),
+    }
+}
+</script>

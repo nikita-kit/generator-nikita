@@ -411,6 +411,11 @@ module.exports = class extends Generator {
             this._copyTemplate('src/components-react/counter/Counter.js.ejs', `${rootFolder}src/components/counter/Counter.js`);
             this._copyTemplate('src/components-react/counter/Counter.test.js.ejs', `${rootFolder}src/components/counter/Counter.test.js`);
             this._copyTemplate('src/components-react/counter/_counter.scss.ejs', `${rootFolder}src/components/counter/_counter.scss`);
+        } else if (isVue) {
+            this._copyTemplate('src/components-vue/sample/Sample.vue.ejs', `${rootFolder}src/components/sample/Sample.vue`);
+            this._copyTemplate('src/components-vue/sample/_sample.scss.ejs', `${rootFolder}src/components/sample/_sample.scss`);
+            this._copyTemplate('src/components-vue/counter/Counter.vue.ejs', `${rootFolder}src/components/counter/Counter.vue`);
+            this._copyTemplate('src/components-vue/counter/_counter.scss.ejs', `${rootFolder}src/components/counter/_counter.scss`);
         } else {
             this._copyTemplate('src/components-jsb/sample/Sample.jsb.js.ejs', `${rootFolder}src/components/sample/Sample.jsb.js`);
             this._copyTemplate('src/components-jsb/sample/SampleTemplate.ejs.ejs', `${rootFolder}src/components/sample/SampleTemplate.ejs`);
@@ -501,6 +506,8 @@ module.exports = class extends Generator {
             delete packageJsonData.dependencies.vue;
             delete packageJsonData.dependencies.vuex;
             delete packageJsonData.dependencies['vue-router'];
+            delete packageJsonData.dependencies['vue-loader'];
+            delete packageJsonData.dependencies['vue-template-compiler'];
         }
 
         // Optional Framework specific Libraries
