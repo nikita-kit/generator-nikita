@@ -14,6 +14,9 @@ Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerat
 <a href="https://reactjs.org/">
     <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/react.svg" alt="react">
 </a>
+<a href="https://vuejs.org/">
+    <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/vue.svg" alt="vue">
+</a>
 <a href="https://github.com/sass/node-sass">
     <img height="75" width="70" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/node-sass.svg" alt="sass">
 </a>
@@ -48,7 +51,7 @@ Feel free to re-run the generator to add or remove features.
 - [__Webpack__](https://webpack.js.org/) – module bundler
 - [__Babel__](https://babeljs.io/) – next generation JavaScript compiler
 - [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) – static site generator
-- [__React__](https://reactjs.org/) or [__JSB__](https://github.com/DracoBlue/jsb/) - JS framework
+- [__React__](https://reactjs.org/) or [__Vue__](https://vuejs.org/) or [__JSB__](https://github.com/DracoBlue/jsb/) - JS framework
 - [__SCSS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – CSS preprocessing
 - [__PostCSS__](http://postcss.org/) – CSS postprocessing
 - [__Foundation__](https://foundation.zurb.com/sites.html) – SCSS framework
