@@ -4,7 +4,7 @@ module.exports = function (grunt) {
             bsFiles: {
                 src: [
                     '<%%= paths.static %>/img/**/*.{jpg,jpeg,png,gif,ico,svg}',
-<% if (config.get('jsFramework') === 'react') { -%>
+<% if (config.get('jsFramework') === 'vue') { -%>
                     '<%%= paths.static %>/generated/**/*.{css,js,vue}',
 <% } else { -%>
                     '<%%= paths.static %>/generated/**/*.{css,js}',
