@@ -243,6 +243,10 @@ module.exports = class extends Generator {
                     name: `${chalk.bold('Swiper:')} modular slider`,
                     value: 'swiper',
                 },
+                {
+                    name: `${chalk.bold('choices:')} styling select inputs`,
+                    value: 'choices',
+                },
             );
         } else {
             options.push(
@@ -497,7 +501,11 @@ module.exports = class extends Generator {
             delete packageJsonData.devDependencies['import-glob'];
             delete packageJsonData.devDependencies['ejs-webpack-loader'];
             delete packageJsonData.devDependencies['eslint-config-nikita'];
-        } else {
+            delete packageJsonData.dependencies['custom-event-polyfill'];
+            delete packageJsonData.dependencies['a11y-dialog'];
+        }
+
+        if (!isReact) {
             delete packageJsonData.devDependencies['babel-preset-react'];
             delete packageJsonData.devDependencies.enzyme;
             delete packageJsonData.devDependencies['enzyme-adapter-react-16'];
@@ -510,6 +518,11 @@ module.exports = class extends Generator {
             delete packageJsonData.dependencies['react-dom'];
             delete packageJsonData.dependencies['react-router-dom'];
             delete packageJsonData.dependencies['react-waterfall'];
+            delete packageJsonData.dependencies['react-select'];
+            delete packageJsonData.dependencies['react-a11y-dialog'];
+        }
+
+        if (!isVue) {
             delete packageJsonData.dependencies.vue;
             delete packageJsonData.dependencies.vuex;
             delete packageJsonData.dependencies['vue-router'];
@@ -518,21 +531,15 @@ module.exports = class extends Generator {
         }
 
         // Optional Framework specific Libraries
-        if (isReact || isVue) {
-            delete packageJsonData.dependencies['choices.js'];
-            delete packageJsonData.dependencies['custom-event-polyfill'];
-            delete packageJsonData.dependencies['a11y-dialog'];
-
-            if (!this.config.get('libraries').includes('swiper')) {
-                delete packageJsonData.dependencies.swiper;
-            }
-        }
-
         if (isReact) {
+            delete packageJsonData.dependencies['choices.js'];
+
             // Optional Swiper Slider
             if (this.config.get('libraries').includes('swiper')) {
                 this._copyTemplate('src/components-react/slider/Slider.js.ejs', `${rootFolder}src/components/slider/Slider.js`);
                 this._copyTemplate('src/components-react/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
+            } else {
+                delete packageJsonData.dependencies.swiper;
             }
 
             // Optional react-select
@@ -556,10 +563,14 @@ module.exports = class extends Generator {
                 this._copyTemplate('src/components-vue/slider/Slider.vue.ejs', `${rootFolder}src/components/slider/Slider.vue`);
                 this._copyTemplate('src/components-vue/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
             }
-        } else {
-            delete packageJsonData.dependencies['react-select'];
-            delete packageJsonData.dependencies['react-a11y-dialog'];
 
+            if (this.config.get('libraries').includes('choices')) {
+                this._copyTemplate('src/components-vue/select/Select.vue.ejs', `${rootFolder}src/components/select/Select.vue`);
+                this._copyTemplate('src/components-vue/select/_select.scss.ejs', `${rootFolder}src/components/select/_select.scss`);
+            } else {
+                delete packageJsonData.dependencies['choices.js'];
+            }
+        } else {
             // Optional Swiper Slider
             if (this.config.get('libraries').includes('swiper')) {
                 this._copyTemplate('src/components-jsb/slider/Slider.jsb.js.ejs', `${rootFolder}src/components/slider/Slider.jsb.js`);

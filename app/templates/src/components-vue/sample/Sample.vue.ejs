@@ -7,6 +7,29 @@
 <% if (config.get('libraries').includes('swiper')) { -%>
         <Slider />
 <% } -%>
+<% if (config.get('libraries').includes('choices')) { -%>
+        <SelectField
+            selectId="test-select"
+            :selectOptions="[
+                {
+                    title: 'Option 1',
+                    value: 'option-1',
+                },
+                {
+                    title: 'Option 2',
+                    value: 'option-2',
+                },
+                {
+                    title: 'Option 3',
+                    value: 'option-3',
+                },
+                {
+                    title: 'Option 4',
+                    value: 'option-4',
+                }
+            ]"
+        />
+<% } -%>
     </div>
 </template>
 
@@ -21,12 +44,20 @@ import { format } from 'date-fns/esm';
 <% if (config.get('libraries').includes('swiper')) { -%>
 import Slider from '../slider/Slider.vue';
 <% } -%>
+<% if (config.get('libraries').includes('choices')) { -%>
+import SelectField from '../select/Select.vue';
+<% } -%>
 
 export default {
     name: 'sample',
-<% if (config.get('libraries').includes('swiper')) { -%>
+<% if (config.get('libraries').includes('swiper') || config.get('libraries').includes('choices')) { -%>
     components: {
+<% if (config.get('libraries').includes('swiper')) { -%>
         Slider,
+<% } -%>
+<% if (config.get('libraries').includes('choices')) { -%>
+        SelectField,
+<% } -%>
     },
 <% } -%>
     mounted() {

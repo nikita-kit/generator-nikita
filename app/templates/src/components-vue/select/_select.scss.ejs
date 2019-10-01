@@ -1,0 +1,174 @@
+.b-select {
+    position: relative;
+
+    .select-field {
+        // remove default icon for dropdown
+        appearance: none;
+        width: 100%;
+        outline: 0;
+        border-radius: 0;
+        font-family: $base-font;
+        font-size: $base-fontsize;
+        line-height: 1.3;
+
+        // remove default icon for dropdown | IE11
+        &::-ms-expand {
+            display: none;
+        }
+
+        // css states
+        &:hover,
+        &:focus {
+            outline: none;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        // data attribute states
+        &[data-type*="select-one"] {
+            cursor: pointer;
+
+            .select-field-input {
+                width: 100%;
+                margin: 0;
+                border-bottom: 1px solid $line-color-03;
+                padding: 1rem;
+                background-color: $white;
+            }
+        }
+
+        &[data-type*="select-multiple"],
+        &[data-type*="text"] {
+            .select-field-inner {
+                cursor: text;
+            }
+        }
+
+        &.is-disabled {
+            .select-field-inner,
+            .select-field-input {
+                user-select: none;
+                cursor: not-allowed;
+            }
+
+            .select-field-list-item {
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    .select-label {
+        position: absolute;
+        top: .8rem;
+        left: 2rem;
+        display: block;
+    }
+
+    .select-field-inner {
+        overflow: hidden;
+        box-sizing: border-box;
+        display: inline-block;
+        width: 100%;
+        border: 1px solid $line-color-03;
+        padding: 1rem 1.5rem;
+        vertical-align: top;
+    }
+
+    .select-field-list {
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+
+        &.is-single {
+            display: inline-block;
+            width: 100%;
+
+            .select-field-list-item {
+                width: 100%;
+            }
+        }
+
+        &.is-dropdown {
+            overflow: hidden;
+            box-sizing: border-box;
+            position: absolute;
+            top: 100%;
+            z-index: 1;
+            display: none;
+            width: 100%;
+            border: 1px solid $line-color-03;
+            border-top: none;
+            word-break: break-all;
+
+            &.is-active {
+                display: block;
+            }
+
+            .is-flipped & {
+                top: auto;
+                bottom: 100%;
+                margin-top: 0;
+                border-radius: .25rem .25rem 0 0;
+            }
+
+            .select-field-list {
+                overflow: auto;
+                position: relative;
+                max-height: 30rem;
+                -webkit-overflow-scrolling: touch;
+                will-change: scroll-position;
+            }
+
+            .select-field-list-item {
+                position: relative;
+                padding: 1rem;
+
+                &.is-selectable.is-highlighted {
+                    background-color: $bg-color-04;
+
+                    &::after {
+                        opacity: .5;
+                    }
+                }
+            }
+        }
+    }
+
+
+    .select-field-list-item {
+        cursor: default;
+
+        &.is-selectable {
+            cursor: pointer;
+        }
+
+        &.is-disabled {
+            opacity: .5;
+            user-select: none;
+            cursor: not-allowed;
+        }
+    }
+
+    .select-field-input {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: .5rem;
+        border: 0;
+        border-radius: 0;
+        padding: .4rem 0;
+        font-family: inherit;
+        font-size: inherit;
+        vertical-align: baseline;
+        color: inherit;
+
+        &:focus {
+            outline: 0;
+        }
+
+        &.is-hidden {
+            display: none;
+        }
+    }
+}
