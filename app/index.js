@@ -500,7 +500,6 @@ module.exports = class extends Generator {
             delete packageJsonData.dependencies['node-jsb'];
             delete packageJsonData.devDependencies['import-glob'];
             delete packageJsonData.devDependencies['ejs-webpack-loader'];
-            delete packageJsonData.devDependencies['eslint-config-nikita'];
             delete packageJsonData.dependencies['custom-event-polyfill'];
             delete packageJsonData.dependencies['a11y-dialog'];
         }
@@ -532,6 +531,7 @@ module.exports = class extends Generator {
 
         // Optional Framework specific Libraries
         if (isReact) {
+            delete packageJsonData.devDependencies['eslint-config-nikita'];
             delete packageJsonData.dependencies['choices.js'];
 
             // Optional Swiper Slider

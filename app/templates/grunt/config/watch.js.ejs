@@ -20,11 +20,11 @@ module.exports = {
     },
 <% } -%>
     js: {
-    <% if (config.get('jsFramework') === 'vue') { -%>
+<% if (config.get('jsFramework') === 'vue') { -%>
         files: ['<%%= paths.src %>/js/**/*', '<%%= paths.src %>/components/**/*.{js,vue,json}', '!<%%= paths.src %>/components/**/*.test.js'],
-    <% } else { -%>
+<% } else { -%>
         files: ['<%%= paths.src %>/js/**/*', '<%%= paths.src %>/components/**/*.{js,ejs,json}', '!<%%= paths.src %>/components/**/*.test.js'],
-    <% } -%>
+<% } -%>
         tasks: [<% if (config.get('features').includes('modernJsBuild')) { %>'webpack:devModern', <% } %>'webpack:dev'],
     },
     html: {

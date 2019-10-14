@@ -172,7 +172,13 @@ Within the JavaScript modules it's also possible to use client side templates wi
 - [prop-types](https://github.com/facebook/prop-types)
 - [logging.js](https://github.com/DracoBlue/logging-js)
 <% } else { -%>
+<%     if (config.get('jsFramework') === 'vue') { -%>
+- [vue](https://vuejs.org/)
+- [vue-router](https://router.vuejs.org/)
+- [vuex](https://vuex.vuejs.org/)
+<%     } else { -%>
 - [jsb](https://github.com/DracoBlue/jsb)
+<%     } -%>
 - [logging.js](https://github.com/DracoBlue/logging-js)
 <%     if (config.get('libraries').includes('choices')) { -%>
 - [choices](https://joshuajohnson.co.uk/Choices/)

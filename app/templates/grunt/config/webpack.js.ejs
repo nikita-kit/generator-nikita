@@ -114,6 +114,11 @@ module.exports = function (grunt, options) {
                     filename: '[name].js',
                     chunkFilename: '[name].js',
                     path: path.resolve('<%%= paths.static %>/generated/'),
+<% if (config.get('template') === 'symfony') { -%>
+                    publicPath: './static/generated/',
+<% } else { -%>
+                    publicPath: './generated/',
+<% } -%>
                 },
                 plugins,
                 resolve: {
