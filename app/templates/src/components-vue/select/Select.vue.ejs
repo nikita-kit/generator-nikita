@@ -1,0 +1,128 @@
+<template>
+    <div
+        class="b-select"
+    >
+        <select
+            :id="selectId"
+            ref="selectElement"
+            class="select-field"
+            :value="value"
+            @input="eventInput"
+            @focus="eventFocus"
+            @blur="eventBlur"
+            @change="eventChange"
+        >
+
+            <option
+                :disabled="defaultOptionDisabled"
+                value=""
+            >
+                {{ defaultOption }}
+            </option>
+
+            <option
+                :value="selectOption.value"
+                v-for="selectOption in selectOptions"
+                v-bind:key="selectOption.key"
+            >
+                {{ selectOption.title }}
+            </option>
+
+        </select>
+
+        <label
+            class="select-label"
+            :for="selectId"
+            v-if="selectLabel"
+        >
+            {{ selectLabel }}
+        </label>
+
+    </div>
+</template>
+
+<script>
+import Choices from 'choices.js';
+
+const SELECT_ELEMENT_CLASS = 'select-field';
+
+export default {
+    name: 'select-field',
+    props: {
+        selectId: {
+            type: String,
+            required: true,
+        },
+        selectLabel: {
+            type: String,
+        },
+        defaultOption: {
+            type: String,
+            default: 'Bitte wählen…',
+        },
+        selectOptions: {
+            type: Array,
+            title: {
+                type: String,
+            },
+            value: {
+                type: String,
+            },
+        },
+        defaultOptionDisabled: {
+            type: Boolean,
+            default: true,
+        },
+        value: {
+            default: '',
+            type: String,
+        },
+    },
+    methods: {
+        eventChoice(value) {
+            this.$emit('input', value);
+        },
+        eventInput(event) {
+            this.$emit('input', event.target.value);
+        },
+        eventChange(event) {
+            this.$emit('change', event.target.value);
+        },
+        eventFocus(event) {
+            this.$emit('focus', event.target.value);
+        },
+        eventBlur(event) {
+            this.$emit('blur', event.target.value);
+        },
+    },
+    mounted() {
+        this.choicesSelect = new Choices(this.$refs.selectElement, {
+            itemSelectText: '',
+            noResultsText: 'Keine Ergebnisse',
+            shouldSort: false,
+            classNames: {
+                containerOuter: SELECT_ELEMENT_CLASS,
+                containerInner: `${SELECT_ELEMENT_CLASS}-inner`,
+                input: `${SELECT_ELEMENT_CLASS}-input`,
+                inputCloned: 'is-cloned',
+                list: `${SELECT_ELEMENT_CLASS}-list`,
+                listItems: 'is-multiple',
+                listSingle: 'is-single',
+                listDropdown: 'is-dropdown',
+                item: `${SELECT_ELEMENT_CLASS}-list-item`,
+                itemSelectable: 'is-selectable',
+                itemDisabled: 'is-disabled',
+                itemChoice: 'is-choice',
+                placeholder: `${SELECT_ELEMENT_CLASS}-placeholder`,
+                group: `${SELECT_ELEMENT_CLASS}-group`,
+                groupHeading: `${SELECT_ELEMENT_CLASS}-heading`,
+                button: `${SELECT_ELEMENT_CLASS}-button`,
+            },
+        });
+
+        this.$refs.selectElement.addEventListener('choice', (event) => {
+            this.eventChoice(event.detail.choice.value);
+        });
+    },
+};
+</script>

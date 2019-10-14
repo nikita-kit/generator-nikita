@@ -165,6 +165,9 @@ module.exports = class extends Generator {
                 }, {
                     name: `${chalk.bold('React.js:')} view framework including addons react-router and react-waterfall`,
                     value: 'react',
+                }, {
+                    name: `${chalk.bold('Vue.js:')} use Single File Components to build your UI. Includes vue-router for routing and vuex for state management`,
+                    value: 'vue',
                 },
             ]),
             this._promptCheckbox('scssMixins', 'Which nikita mixins do you want to use?', [
@@ -232,6 +235,17 @@ module.exports = class extends Generator {
                 {
                     name: `${chalk.bold('react-a11y-dialog:')} lightweight and accessible modal dialog`,
                     value: 'react-a11y-dialog',
+                },
+            );
+        } else if (this.config.get('jsFramework') === 'vue') {
+            options.push(
+                {
+                    name: `${chalk.bold('Swiper:')} modular slider`,
+                    value: 'swiper',
+                },
+                {
+                    name: `${chalk.bold('choices:')} styling select inputs`,
+                    value: 'choices',
                 },
             );
         } else {
@@ -316,6 +330,7 @@ module.exports = class extends Generator {
         packageJsonData.name = this.config.get('name');
 
         const isReact = (this.config.get('jsFramework') === 'react');
+        const isVue = (this.config.get('jsFramework') === 'vue');
         const rootFolder = this.config.get('rootFolder');
 
         // Standard Files
@@ -390,6 +405,10 @@ module.exports = class extends Generator {
             this._copyTemplate('src/js-react/_main.js.ejs', `${rootFolder}src/js/_main.js`);
             this._copyTemplate('src/js-react/App.js.ejs', `${rootFolder}src/js/App.js`);
             this._copyTemplate('src/js-react/Store.js.ejs', `${rootFolder}src/js/Store.js`);
+        } else if (isVue) {
+            this._copyTemplate('src/js-vue/_main.js.ejs', `${rootFolder}src/js/_main.js`);
+            this._copyTemplate('src/js-vue/Store.js.ejs', `${rootFolder}src/js/Store.js`);
+            this._copyTemplate('src/js-vue/Router.js.ejs', `${rootFolder}src/js/Router.js`);
         } else {
             this._copyTemplate('src/js-jsb/_main.js.ejs', `${rootFolder}src/js/_main.js`);
             this._copyTemplate('src/js-jsb/App.js.ejs', `${rootFolder}src/js/App.js`);
@@ -403,6 +422,11 @@ module.exports = class extends Generator {
             this._copyTemplate('src/components-react/counter/Counter.js.ejs', `${rootFolder}src/components/counter/Counter.js`);
             this._copyTemplate('src/components-react/counter/Counter.test.js.ejs', `${rootFolder}src/components/counter/Counter.test.js`);
             this._copyTemplate('src/components-react/counter/_counter.scss.ejs', `${rootFolder}src/components/counter/_counter.scss`);
+        } else if (isVue) {
+            this._copyTemplate('src/components-vue/sample/Sample.vue.ejs', `${rootFolder}src/components/sample/Sample.vue`);
+            this._copyTemplate('src/components-vue/sample/_sample.scss.ejs', `${rootFolder}src/components/sample/_sample.scss`);
+            this._copyTemplate('src/components-vue/counter/Counter.vue.ejs', `${rootFolder}src/components/counter/Counter.vue`);
+            this._copyTemplate('src/components-vue/counter/_counter.scss.ejs', `${rootFolder}src/components/counter/_counter.scss`);
         } else {
             this._copyTemplate('src/components-jsb/sample/Sample.jsb.js.ejs', `${rootFolder}src/components/sample/Sample.jsb.js`);
             this._copyTemplate('src/components-jsb/sample/SampleTemplate.ejs.ejs', `${rootFolder}src/components/sample/SampleTemplate.ejs`);
@@ -417,7 +441,7 @@ module.exports = class extends Generator {
         this._copyTemplate('src/html/macros/.gitkeep', `${rootFolder}src/html/macros/.gitkeep`);
         this._copyTemplate('src/html/pages/index.twig.ejs', `${rootFolder}src/html/pages/index.twig`);
         this._copyTemplate('src/html/partials/appicons.twig.ejs', `${rootFolder}src/html/partials/appicons.twig`);
-        if (!isReact) {
+        if (!isReact && !isVue) {
             this._copyTemplate('src/html/partials/header.twig.ejs', `${rootFolder}src/html/partials/header.twig`);
             this._copyTemplate('src/html/partials/footer.twig.ejs', `${rootFolder}src/html/partials/footer.twig`);
             this._copyTemplate('src/components-jsb/sample/sample.twig.ejs', `${rootFolder}src/components/sample/sample.twig`);
@@ -472,12 +496,15 @@ module.exports = class extends Generator {
         }
 
         // jsFramework
-        if (isReact) {
+        if (isReact || isVue) {
             delete packageJsonData.dependencies['node-jsb'];
             delete packageJsonData.devDependencies['import-glob'];
             delete packageJsonData.devDependencies['ejs-webpack-loader'];
-            delete packageJsonData.devDependencies['eslint-config-nikita'];
-        } else {
+            delete packageJsonData.dependencies['custom-event-polyfill'];
+            delete packageJsonData.dependencies['a11y-dialog'];
+        }
+
+        if (!isReact) {
             delete packageJsonData.devDependencies['babel-preset-react'];
             delete packageJsonData.devDependencies.enzyme;
             delete packageJsonData.devDependencies['enzyme-adapter-react-16'];
@@ -490,13 +517,22 @@ module.exports = class extends Generator {
             delete packageJsonData.dependencies['react-dom'];
             delete packageJsonData.dependencies['react-router-dom'];
             delete packageJsonData.dependencies['react-waterfall'];
+            delete packageJsonData.dependencies['react-select'];
+            delete packageJsonData.dependencies['react-a11y-dialog'];
+        }
+
+        if (!isVue) {
+            delete packageJsonData.dependencies.vue;
+            delete packageJsonData.dependencies.vuex;
+            delete packageJsonData.dependencies['vue-router'];
+            delete packageJsonData.dependencies['vue-loader'];
+            delete packageJsonData.dependencies['vue-template-compiler'];
         }
 
         // Optional Framework specific Libraries
         if (isReact) {
+            delete packageJsonData.devDependencies['eslint-config-nikita'];
             delete packageJsonData.dependencies['choices.js'];
-            delete packageJsonData.dependencies['custom-event-polyfill'];
-            delete packageJsonData.dependencies['a11y-dialog'];
 
             // Optional Swiper Slider
             if (this.config.get('libraries').includes('swiper')) {
@@ -521,10 +557,20 @@ module.exports = class extends Generator {
             } else {
                 delete packageJsonData.dependencies['react-a11y-dialog'];
             }
-        } else {
-            delete packageJsonData.dependencies['react-select'];
-            delete packageJsonData.dependencies['react-a11y-dialog'];
+        } else if (isVue) {
+            // Optional Swiper Slider
+            if (this.config.get('libraries').includes('swiper')) {
+                this._copyTemplate('src/components-vue/slider/Slider.vue.ejs', `${rootFolder}src/components/slider/Slider.vue`);
+                this._copyTemplate('src/components-vue/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
+            }
 
+            if (this.config.get('libraries').includes('choices')) {
+                this._copyTemplate('src/components-vue/select/Select.vue.ejs', `${rootFolder}src/components/select/Select.vue`);
+                this._copyTemplate('src/components-vue/select/_select.scss.ejs', `${rootFolder}src/components/select/_select.scss`);
+            } else {
+                delete packageJsonData.dependencies['choices.js'];
+            }
+        } else {
             // Optional Swiper Slider
             if (this.config.get('libraries').includes('swiper')) {
                 this._copyTemplate('src/components-jsb/slider/Slider.jsb.js.ejs', `${rootFolder}src/components/slider/Slider.jsb.js`);

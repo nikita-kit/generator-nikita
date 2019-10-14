@@ -10,18 +10,32 @@ module.exports = function (grunt, options) {
         const path = require('path');
         const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
         const DotenvPlugin = require('dotenv-webpack');
+<% if (config.get('jsFramework') === 'vue') { -%>
+        const VueLoaderPlugin = require('vue-loader/lib/plugin');
+        const plugins = [
+            new DotenvPlugin(),
+            new VueLoaderPlugin(),
+        ];
+<% } -%>
 <% if (config.get('jsFramework') === 'jsb') { -%>
         const webpack = require('webpack');
         const plugins = [
             new webpack.IgnorePlugin(/^(.*)$/, /node-jsb$/),
             new DotenvPlugin(),
         ];
-<% } else { -%>
+<% } -%>
+<% if (config.get('jsFramework') !== 'jsb' && config.get('jsFramework') !== 'vue') { -%>
         const plugins = [new DotenvPlugin()];
 <% } -%>
 
         /* remember to update jest transformer at tests/setup/ when changing loader options */
         const getLoaderRulesConfig = (targets, debug = false) => ([
+<% if (config.get('jsFramework') === 'vue') { -%>
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+            },
+<% } -%>
 <% if (config.get('jsFramework') === 'jsb') { -%>
             {
                 test: /\.ejs$/,
@@ -100,6 +114,11 @@ module.exports = function (grunt, options) {
                     filename: '[name].js',
                     chunkFilename: '[name].js',
                     path: path.resolve('<%%= paths.static %>/generated/'),
+<% if (config.get('template') === 'symfony') { -%>
+                    publicPath: './static/generated/',
+<% } else { -%>
+                    publicPath: './generated/',
+<% } -%>
                 },
                 plugins,
                 resolve: {

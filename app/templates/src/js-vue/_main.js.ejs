@@ -1,0 +1,21 @@
+/**
+ * Main JavaScript entry point
+ *
+ * all imported modules will be bundled to main.js
+ */
+
+/* eslint no-unused-vars: "off" */
+
+import Vue from 'vue/dist/vue.esm';
+import store from './Store';
+import router from './Router';
+
+/* global process */
+Vue.config.devtools = process.env.NODE_ENV !== 'production';
+
+const app = new Vue({
+    el: '#main-app',
+    store,
+    router,
+    template: '<router-view></router-view>',
+});

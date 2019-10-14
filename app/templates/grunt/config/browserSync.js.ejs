@@ -4,7 +4,11 @@ module.exports = function (grunt) {
             bsFiles: {
                 src: [
                     '<%%= paths.static %>/img/**/*.{jpg,jpeg,png,gif,ico,svg}',
+<% if (config.get('jsFramework') === 'vue') { -%>
+                    '<%%= paths.static %>/generated/**/*.{css,js,vue}',
+<% } else { -%>
                     '<%%= paths.static %>/generated/**/*.{css,js}',
+<% } -%>
 <% if (config.get('features').includes('modernJsBuild')) { -%>
                     '!<%%= paths.static %>/generated/main.js',
 <% } -%>
@@ -15,7 +19,7 @@ module.exports = function (grunt) {
                 open: false,
                 online: true,
                 watchTask: true,
-<% if (config.get('jsFramework') === 'react') { -%>
+<% if (config.get('jsFramework') === 'react' || config.get('jsFramework') === 'vue') { -%>
                 single: true,
 <% } -%>
                 port: grunt.option('port') || 3000,

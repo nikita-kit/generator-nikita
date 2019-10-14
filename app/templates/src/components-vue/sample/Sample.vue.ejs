@@ -1,0 +1,76 @@
+<template>
+    <div class="b-sample">
+        Congratulations, the nikita vue prototype was built successfully! :)
+        <br />
+        <router-link to="/state-example">goto state example</router-link>
+
+<% if (config.get('libraries').includes('swiper')) { -%>
+        <Slider />
+<% } -%>
+<% if (config.get('libraries').includes('choices')) { -%>
+        <SelectField
+            selectId="test-select"
+            :selectOptions="[
+                {
+                    title: 'Option 1',
+                    value: 'option-1',
+                },
+                {
+                    title: 'Option 2',
+                    value: 'option-2',
+                },
+                {
+                    title: 'Option 3',
+                    value: 'option-3',
+                },
+                {
+                    title: 'Option 4',
+                    value: 'option-4',
+                }
+            ]"
+        />
+<% } -%>
+    </div>
+</template>
+
+<script>
+import logging from 'node-logging-js';
+<% if (config.get('libraries').includes('lodash')) { -%>
+import { camelCase } from 'lodash-es';
+<% } -%>
+<% if (config.get('libraries').includes('date-fns')) { -%>
+import { format } from 'date-fns/esm';
+<% } -%>
+<% if (config.get('libraries').includes('swiper')) { -%>
+import Slider from '../slider/Slider.vue';
+<% } -%>
+<% if (config.get('libraries').includes('choices')) { -%>
+import SelectField from '../select/Select.vue';
+<% } -%>
+
+export default {
+    name: 'sample',
+<% if (config.get('libraries').includes('swiper') || config.get('libraries').includes('choices')) { -%>
+    components: {
+<% if (config.get('libraries').includes('swiper')) { -%>
+        Slider,
+<% } -%>
+<% if (config.get('libraries').includes('choices')) { -%>
+        SelectField,
+<% } -%>
+    },
+<% } -%>
+    mounted() {
+        logging.applyLogging(this, 'Sample');
+        this.logDebug('init:', this);
+<% if (config.get('libraries').includes('lodash')) { -%>
+
+        this.logDebug(`lodash in nikita: ${camelCase('this should be camel case')}`);
+<% } -%>
+<% if (config.get('libraries').includes('date-fns')) { -%>
+
+        this.logDebug(`date-fns in nikita: Today is a ${format(new Date(), 'EEEE')}`);
+<% } -%>
+    }
+}
+</script>

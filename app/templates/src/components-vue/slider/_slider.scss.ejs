@@ -1,0 +1,32 @@
+.b-slider {
+    overflow: hidden;
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+
+    .swiper-wrapper {
+        z-index: auto;
+    }
+
+    .swiper-slide {
+        min-height: 200px;
+        text-align: center;
+        background-color: $bg-color-06;
+    }
+
+    .prev,
+    .next {
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+        padding: 10px;
+    }
+
+    .prev {
+        left: 0;
+    }
+
+    .next {
+        right: 0;
+    }
+}
