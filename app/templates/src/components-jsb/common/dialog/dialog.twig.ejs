@@ -1,0 +1,19 @@
+{#
+    blocks: content
+
+    id: string (required)
+    title: string (required)
+    text: string
+    class: string
+#}
+<div id="{{ id }}" class="{{ html_classes('b-dialog jsb_ jsb_Dialog', class|default()) }}" data-jsb=''>
+    <div class="backdrop" tabindex="-1" data-a11y-dialog-hide></div>
+
+    <dialog class="dialog" aria-labelledby="my-dialog-title">
+        <button class="close" type="button" data-a11y-dialog-hide aria-label="Close dialog">&times;</button>
+        <h3 class="title">{{ title }}</h3>
+        {% block content %}
+            <p>{{ text|default('') }}</p>
+        {% endblock %}
+    </dialog>
+</div>

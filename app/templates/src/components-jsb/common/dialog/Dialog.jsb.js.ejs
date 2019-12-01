@@ -1,0 +1,26 @@
+import logging from 'node-logging-js';
+import jsb from 'node-jsb';
+import A11yDialog from 'a11y-dialog';
+
+/* @see https://github.com/edenspiekermann/a11y-dialog */
+export default class Dialog {
+    constructor(element) {
+        logging.applyLogging(this, 'Dialog', false);
+        this.logDebug('init');
+
+        const container = document.getElementById('main');
+
+        this.dialog = new A11yDialog(element, container);
+        this.logDebug('init', element);
+
+        jsb.on('Dialog::SHOW', { id: element.id }, () => {
+            this.dialog.show();
+        });
+
+        jsb.on('Dialog::HIDE', { id: element.id }, () => {
+            this.dialog.hide();
+        });
+    }
+}
+
+jsb.registerHandler('Dialog', Dialog);

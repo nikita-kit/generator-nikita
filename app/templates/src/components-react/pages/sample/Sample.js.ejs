@@ -1,0 +1,59 @@
+import React, { Component } from 'react';
+import logging from 'node-logging-js';
+<% if (config.get('libraries').includes('lodash')) { -%>
+import { camelCase } from 'lodash-es';
+<% } -%>
+<% if (config.get('libraries').includes('date-fns')) { -%>
+import { format } from 'date-fns/esm';
+<% } -%>
+<% if (config.get('libraries').includes('react-a11y-dialog')) { -%>
+import Button from '../../common/button/Button';
+import Dialog from '../../common/dialog/Dialog';
+<% } -%>
+<% if (config.get('libraries').includes('swiper')) { -%>
+import Slider from '../../common/slider/Slider';
+<% } -%>
+
+class Sample extends Component {
+    constructor(props) {
+        super(props);
+        logging.applyLogging(this, 'Sample');
+        this.logDebug('init:', props);
+<% if (config.get('libraries').includes('lodash')) { -%>
+
+        this.logDebug(`lodash in nikita: ${camelCase('this should be camel case')}`);
+<% } -%>
+<% if (config.get('libraries').includes('date-fns')) { -%>
+
+        this.logDebug(`date-fns in nikita: Today is a ${format(new Date(), 'EEEE')}`);
+<% } -%>
+    }
+
+    render() {
+        return (
+            <div className="b-sample">
+                Congratulations, the nikita react prototype was built successfully! :)
+                <br />
+<% if (config.get('libraries').includes('react-a11y-dialog')) { -%>
+                <br />
+                <Button isPrimary data-a11y-dialog-show="my-dialog">Open sample dialog</Button>
+                <Dialog id="my-dialog" title="Dialog title">
+                    <p>Dialog Content</p>
+                </Dialog>
+                <br />
+<% } -%>
+<% if (config.get('libraries').includes('swiper')) { -%>
+                <br />
+                <Slider>
+                    <Slider.Slide>Hi, I am slide 1</Slider.Slide>
+                    <Slider.Slide>Hi, I am slide 2</Slider.Slide>
+                    <Slider.Slide>Hi, I am slide 3</Slider.Slide>
+                    <Slider.Slide>Hi, I am slide 4</Slider.Slide>
+                </Slider>
+<% } -%>
+            </div>
+        );
+    }
+}
+
+export default Sample;

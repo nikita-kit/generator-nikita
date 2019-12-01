@@ -1,0 +1,40 @@
+import logging from 'node-logging-js';
+import jsb from 'node-jsb';
+import MediaQuery from '../../js/MediaQuery';
+
+export default class Header {
+    constructor(element) {
+        logging.applyLogging(this, 'Header', false);
+
+        this.element = element;
+        this.toggleButton = this.element.querySelector('.js-menu-toggle');
+
+        this.isOpen = false;
+
+        this.initializeEventListeners();
+    }
+
+    initializeEventListeners() {
+        MediaQuery.match('large').addEventListener('change', this.onMediaQueryChange);
+        this.toggleButton.addEventListener('click', this.toggleMenu);
+    }
+
+    onMediaQueryChange = (event) => {
+        if (this.isOpen && event.matches) {
+            this.toggleMenu();
+        }
+    }
+
+    toggleMenu = () => {
+        if (this.isOpen) {
+            this.element.classList.remove('is-menu-visible');
+        } else {
+            this.element.classList.add('is-menu-visible');
+        }
+
+        this.isOpen = !this.isOpen;
+        this.toggleButton.setAttribute('aria-expanded', this.isOpen);
+    }
+}
+
+jsb.registerHandler('Header', Header);

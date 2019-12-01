@@ -1,0 +1,139 @@
+import logging from 'node-logging-js';
+
+/**
+ * media query lib to match against foundation breakpoints
+ *
+ * Usage:
+ *
+ * if (MediaQuery.match('medium down').matches) {
+ * }
+ *
+ * MediaQuery.match('portrait').addEventListener('change', (event) => {
+ *     if (event.matches) {
+ *     }
+ * });
+ */
+class MediaQuery {
+
+    /* a breakpoint max value is 0.2px under the next breakpoint (0.02 / 16 = 0.00125) */
+    static maxBreakpointSubtrahend = 0.00125
+
+    static breakpoints = []
+
+    constructor() {
+        logging.applyLogging(this, 'MediaQuery', false);
+
+        const element = document.head.querySelector('.foundation-mq');
+
+        if (!element) {
+            this.logError('Foundation meta element missing. Please add <meta class="foundation-mq"> to document head.');
+            return;
+        }
+
+        const extractedStyles = window.getComputedStyle(element).getPropertyValue('font-family');
+
+        if (!extractedStyles.includes('em&')) {
+            this.logError('Foundation breakpoint styles missing. Please re-add class ".foundation-mq" to your scss/_foundation.scss file.');
+            return;
+        }
+
+        const namedQueries = this.parseStyleToObject(extractedStyles);
+
+        Object.keys(namedQueries).forEach((key) => {
+            MediaQuery.breakpoints.push({
+                name: key,
+                value: Number.parseFloat(namedQueries[key]),
+            });
+        });
+
+        MediaQuery.breakpoints.sort((itemA, itemB) => (itemA.value - itemB.value));
+        this.logDebug('initialized breakpoints (in em):', MediaQuery.breakpoints);
+    }
+
+    /**
+     * Checks if the screen matches a breakpoint.
+     *
+     * @param {String} expression - Name of the breakpoint to check, eg 'small', 'small only' or 'small down'
+     * @returns {MediaQueryList} - matchMedia API result, see https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList
+     */
+    match(expression) {
+        const [term, modifier] = expression.trim().split(' ');
+        const query = this.calculateQuery(term, modifier);
+
+        this.logDebug(`calculated query for "${expression}":`, query);
+        const matchMediaResult = window.matchMedia(query);
+
+        /* polyfill for IE and safari */
+        if (!matchMediaResult.addEventListener) {
+            matchMediaResult.addEventListener = (type, callback) => matchMediaResult.addListener(callback);
+        }
+
+        return matchMediaResult;
+    }
+
+    calculateQuery(term, modifier = null) {
+        if (term === 'landscape' || term === 'portrait') {
+            return `(orientation: ${term})`;
+        }
+        if (term === 'retina') {
+            return '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)';
+        }
+
+        const breakpoint = MediaQuery.breakpoints.find(query => (term === query.name));
+        const breakpointIndex = MediaQuery.breakpoints.indexOf(breakpoint);
+        let minBreakpoint = null;
+        let maxBreakpoint = null;
+
+        if (!breakpoint) {
+            throw new Error(`breakpoint "${term}" not supported`);
+        }
+
+        if (modifier === 'only') {
+            if (breakpointIndex === 0) {
+                maxBreakpoint = MediaQuery.breakpoints[breakpointIndex + 1];
+            } else if (breakpointIndex === (MediaQuery.breakpoints.length - 1)) {
+                minBreakpoint = breakpoint;
+            } else {
+                minBreakpoint = breakpoint;
+                maxBreakpoint = MediaQuery.breakpoints[breakpointIndex + 1];
+            }
+        } else if (modifier === 'down') {
+            if (breakpointIndex === (MediaQuery.breakpoints.length - 1)) {
+                [minBreakpoint] = MediaQuery.breakpoints;
+            } else {
+                maxBreakpoint = MediaQuery.breakpoints[breakpointIndex + 1];
+            }
+        } else {
+            minBreakpoint = breakpoint;
+        }
+
+        if (minBreakpoint && maxBreakpoint) {
+            return `screen and (min-width: ${minBreakpoint.value}em) and (max-width: ${maxBreakpoint.value - MediaQuery.maxBreakpointSubtrahend}em)`;
+        }
+        if (maxBreakpoint) {
+            return `screen and (max-width: ${maxBreakpoint.value - MediaQuery.maxBreakpointSubtrahend}em)`;
+        }
+        return `screen and (min-width: ${minBreakpoint.value}em)`;
+    }
+
+    parseStyleToObject(extractedStyles) {
+        const stylesString = extractedStyles.trim().slice(1, -1); // browsers re-quote string style values
+
+        return stylesString.split('&').reduce((acc, param) => {
+            let [key, value] = param.replace(/\+/g, ' ').split('=');
+            key = decodeURIComponent(key);
+            value = typeof value === 'undefined' ? null : decodeURIComponent(value);
+
+            if (!acc[key]) {
+                acc[key] = value;
+            } else if (Array.isArray(acc[key])) {
+                acc[key].push(value);
+            } else {
+                acc[key] = [acc[key], value];
+            }
+            return acc;
+        }, {});
+    }
+}
+
+export default new MediaQuery();

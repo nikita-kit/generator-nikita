@@ -1,0 +1,71 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import logging from 'node-logging-js';
+import A11yDialog from 'react-a11y-dialog';
+import classNames from 'classnames';
+
+/* @see https://github.com/HugoGiraudel/react-a11y-dialog */
+class Dialog extends Component {
+
+    static defaultProps = {
+        text: '',
+        className: null,
+        children: null,
+    }
+
+    static propTypes = {
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        text: PropTypes.string,
+        className: PropTypes.string,
+        children: PropTypes.oneOfType([
+            PropTypes.element,
+            PropTypes.string,
+            PropTypes.arrayOf(PropTypes.element),
+        ]),
+    }
+
+    constructor(props) {
+        super(props);
+        logging.applyLogging(this, 'Dialog');
+        this.logDebug('init:', props);
+        this.dialog = null;
+    }
+
+    show() {
+        this.dialog.show();
+    }
+
+    hide() {
+        this.dialog.hide();
+    }
+
+    render() {
+        const {
+            text, className, children, ...restProps
+        } = this.props;
+
+        const content = children || text;
+        const options = {
+            appRoot: '#main-app',
+            dialogRoot: '#main-dialogs',
+            closeButtonLabel: 'close Dialog',
+            ...restProps,
+            classNames: {
+                base: classNames('b-dialog', className),
+                overlay: 'backdrop',
+                element: 'dialog',
+                title: 'title',
+                closeButton: 'close',
+            },
+        };
+
+        return (
+            <A11yDialog {...options} dialogRef={(dialog) => { this.dialog = dialog; }}>
+                {content}
+            </A11yDialog>
+        );
+    }
+}
+
+export default Dialog;

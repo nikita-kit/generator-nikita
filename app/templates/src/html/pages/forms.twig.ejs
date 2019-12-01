@@ -1,0 +1,64 @@
+{% extends 'layouts::master.twig' %}
+
+{% block activeRoute %}/forms.html{% endblock %}
+{% block title %}Nikita project prototype{% endblock %}
+
+{% block body %}
+    {% include 'components::form-elements/input/input.twig' with {
+        id: 'input',
+        label: 'Input',
+        value: 'text',
+    } only %}
+    <br />
+    {% include 'components::form-elements/checkbox/checkbox.twig' with {
+        id: 'checkbox',
+        label: 'Checkbox',
+        value: true,
+    } only %}
+    <br />
+    {% include 'components::form-elements/textarea/textarea.twig' with {
+        id: 'textarea',
+        label: 'Textarea',
+        value: 'Text',
+    } only %}
+<%     if (config.get('libraries').includes('choices')) { -%>
+    <br />
+    {% include 'components::form-elements/select/select.twig' with {
+        id: 'select',
+        label: 'Select',
+        placeholder: "choose wisely…",
+        options: [
+            { value: 'option-1', label: 'option 1' },
+            { value: 'option-2', label: 'option 2' },
+            { value: 'option-3', label: 'option 3' },
+        ],
+    } only %}
+    <br />
+    {% include 'components::form-elements/select/select.twig' with {
+        id: 'multi-select',
+        label: 'Multi-Select',
+        placeholder: "type to search…",
+        multiple: true,
+        selectedValues: [2],
+        valueField: 'id',
+        labelField: 'title',
+        jsbOptions: { searchEnabled: true },
+        options: [
+            {
+                label: 'Group A',
+                options: [
+                    { id: 1, title: 'option 1' },
+                    { id: 2, title: 'option 2' },
+                ],
+            },
+            {
+                label: 'Group B',
+                options: [
+                    { id: 3, title: 'option 3' },
+                    { id: 4, title: 'option 4' },
+                ],
+            },
+        ],
+    } only %}
+<%     } -%>
+{% endblock %}

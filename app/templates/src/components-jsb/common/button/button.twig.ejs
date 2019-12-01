@@ -1,0 +1,33 @@
+{#
+    blocks: content
+
+    isSecondary: bool (default=false)
+    isPrimary: bool (default=false)
+    disabled: bool (default=false)
+    type: string (default=button)
+    class: string
+    text: string
+    url: string
+    attr: object
+#}
+
+{% set classes = html_classes('b-button', class|default(), {
+    'is-primary': isPrimary|default(false),
+    'is-secondary': not isPrimary|default(false) and isSecondary|default(false),
+}) %}
+
+{% set attr = attr|default({})|merge({
+    class: classes,
+    type: type|default(url ? false : 'button'),
+    disabled: disabled|default(false),
+}) %}
+
+{% if url is defined and not attr.disabled %}
+    <a href="{{ url }}"{{ html_attr(attr) }}>
+        {% block content %}{{ text|default('') }}{% endblock %}
+    </a>
+{% else %}
+    <button{{ html_attr(attr) }}>
+        {% block content %}{{ text|default('') }}{% endblock %}
+    </button>
+{% endif %}

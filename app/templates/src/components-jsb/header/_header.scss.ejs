@@ -1,0 +1,51 @@
+.b-header {
+    border-bottom: $line-color-06 1px dashed;
+    padding: 40px;
+    background-color: $bg-color-04;
+
+    .button-menu {
+        @include breakpoint(large) {
+            display: none;
+        }
+
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .nav-list {
+        @include breakpoint(medium down) {
+            display: none;
+        }
+
+        display: flex;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        background-color: $bg-color-04;
+    }
+
+    .nav-item {
+        margin: 0 2rem;
+    }
+
+    .is-active {
+        border-bottom: 2px solid $bg-color-06;
+    }
+
+    &.is-menu-visible {
+        .nav-list {
+            position: absolute;
+            top: 81px;
+            left: 0;
+            z-index: 1;
+            display: block;
+            width: 100%;
+            border-bottom: $line-color-06 1px dashed;
+        }
+
+        .nav-item {
+            margin: 2rem;
+        }
+    }
+}

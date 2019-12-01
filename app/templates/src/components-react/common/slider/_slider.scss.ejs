@@ -1,0 +1,33 @@
+.b-slider {
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    border: 1px solid $bg-color-04;
+
+    .swiper-wrapper {
+        z-index: auto;
+    }
+
+    .swiper-slide {
+        min-height: 200px;
+        text-align: center;
+        background-color: #fff;
+        background-image: linear-gradient(3deg, $bg-color-04 0%, $bg-color-01 40%, $bg-color-01 60%, $bg-color-04 100%);
+    }
+
+    .prev,
+    .next {
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+        transform: translateY(-50%);
+    }
+
+    .prev {
+        left: 10px;
+    }
+
+    .next {
+        right: 10px;
+    }
+}

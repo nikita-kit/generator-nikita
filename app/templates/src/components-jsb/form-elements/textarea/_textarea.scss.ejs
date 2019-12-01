@@ -1,0 +1,30 @@
+.b-textarea {
+    .textarea-field {
+        display: block;
+        width: 100%;
+        min-height: 6em;
+        outline: 0;
+        border: 1px solid $line-color-04;
+        border-radius: 4px;
+        padding: 1rem;
+        font-size: $base-fontsize;
+        color: $text-color-02;
+        resize: vertical;
+        transition: border-color .2s;
+
+        &:not(:disabled) {
+            &:hover {
+                border-color: $line-color-03;
+            }
+
+            &:focus {
+                border-color: $line-color-06;
+            }
+        }
+
+        &:disabled {
+            color: $text-color-03;
+            background-color: $bg-color-04;
+        }
+    }
+}

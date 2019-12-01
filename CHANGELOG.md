@@ -1,8 +1,13 @@
 # dev
 
-* fixed generator version compare bug
+* improved styling and structure of all boilerplate components
+* added more boilerplate components like header, footer, button and form elements
+* added `MediaQuery.js` lib as an adapter to foundation breakpoints
+* added twig.js functions `html_attr` and `html_classes`
 * fixed grunt task `analyze-js`
 * renamed `App.js` to PascalCase
+* fixed generator version compare bug
+* internal: added method to copy complete template directory to generator
 
 # 5.2.0 (2019/05/08)
 

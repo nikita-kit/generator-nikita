@@ -1,6 +1,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const glob = require('glob');
 const compareVersions = require('compare-versions');
 
 module.exports = class extends Generator {
@@ -349,14 +350,9 @@ module.exports = class extends Generator {
 
         // Test Files
         if (isReact) {
-            this._copyTemplate('src/tests-react/setup/jest.setup.js.ejs', `${rootFolder}src/tests/setup/jest.setup.js`);
-            this._copyTemplate('src/tests-react/setup/jest.transform.js.ejs', `${rootFolder}src/tests/setup/jest.transform.js`);
-            this._copyTemplate('src/tests-react/App.test.js.ejs', `${rootFolder}src/tests/App.test.js`);
+            this._copyTemplateDir('src/tests-react/', `${rootFolder}src/tests/`);
         } else {
-            this._copyTemplate('src/tests-jsb/setup/jest.setup.js.ejs', `${rootFolder}src/tests/setup/jest.setup.js`);
-            this._copyTemplate('src/tests-jsb/setup/jest.transform.js.ejs', `${rootFolder}src/tests/setup/jest.transform.js`);
-            this._copyTemplate('src/tests-jsb/setup/jest.transform-ejs.js.ejs', `${rootFolder}src/tests/setup/jest.transform-ejs.js`);
-            this._copyTemplate('src/tests-jsb/App.test.js.ejs', `${rootFolder}src/tests/App.test.js`);
+            this._copyTemplateDir('src/tests-jsb/', `${rootFolder}src/tests/`);
         }
 
         // images Folder
@@ -367,60 +363,53 @@ module.exports = class extends Generator {
         this._copyTemplate('src/scss/styles.scss.ejs', `${rootFolder}src/scss/styles.scss`);
         this._copyTemplate('src/scss/_basics.scss.ejs', `${rootFolder}src/scss/_basics.scss`);
         this._copyTemplate('src/scss/_foundation.scss.ejs', `${rootFolder}src/scss/_foundation.scss`);
-        if (!isReact) {
-            this._copyTemplate('src/scss/blocks/_header.scss.ejs', `${rootFolder}src/scss/blocks/_header.scss`);
-            this._copyTemplate('src/scss/blocks/_footer.scss.ejs', `${rootFolder}src/scss/blocks/_footer.scss`);
-        }
+        this._copyTemplate('src/scss/blocks/_page.scss.ejs', `${rootFolder}src/scss/blocks/_page.scss`);
 
         // SCSS extends/mixins Files
-        this._copyTemplate('src/scss/extends/_buttons.scss.ejs', `${rootFolder}src/scss/extends/_buttons.scss`);
+        this._copyTemplateDir('src/scss/extends/', `${rootFolder}src/scss/extends/`);
         this.config.get('scssMixins').forEach((mixin) => {
             this._copyTemplate(`src/scss/mixins/_${mixin}.scss.ejs`, `${rootFolder}src/scss/mixins/_${mixin}.scss`);
         });
 
         // SCSS Variables
-        this._copyTemplate('src/scss/variables/_foundation-settings.scss.ejs', `${rootFolder}src/scss/variables/_foundation-settings.scss`);
-        this._copyTemplate('src/scss/variables/_color.scss.ejs', `${rootFolder}src/scss/variables/_color.scss`);
-        this._copyTemplate('src/scss/variables/_timing.scss.ejs', `${rootFolder}src/scss/variables/_timing.scss`);
-        this._copyTemplate('src/scss/variables/_typography.scss.ejs', `${rootFolder}src/scss/variables/_typography.scss`);
-        this._copyTemplate('src/scss/variables/_z-layers.scss.ejs', `${rootFolder}src/scss/variables/_z-layers.scss`);
+        this._copyTemplateDir('src/scss/variables/', `${rootFolder}src/scss/variables/`);
 
         // JS Files
         if (isReact) {
-            this._copyTemplate('src/js-react/_main.js.ejs', `${rootFolder}src/js/_main.js`);
-            this._copyTemplate('src/js-react/App.js.ejs', `${rootFolder}src/js/App.js`);
-            this._copyTemplate('src/js-react/Store.js.ejs', `${rootFolder}src/js/Store.js`);
+            this._copyTemplateDir('src/js-react/', `${rootFolder}src/js/`);
         } else {
-            this._copyTemplate('src/js-jsb/_main.js.ejs', `${rootFolder}src/js/_main.js`);
-            this._copyTemplate('src/js-jsb/App.js.ejs', `${rootFolder}src/js/App.js`);
+            this._copyTemplateDir('src/js-jsb/', `${rootFolder}src/js/`);
         }
 
-        // Sample Component Files
+        // Boilerplate Component Files
         if (isReact) {
-            this._copyTemplate('src/components-react/sample/Sample.js.ejs', `${rootFolder}src/components/sample/Sample.js`);
-            this._copyTemplate('src/components-react/sample/Sample.test.js.ejs', `${rootFolder}src/components/sample/Sample.test.js`);
-            this._copyTemplate('src/components-react/sample/_sample.scss.ejs', `${rootFolder}src/components/sample/_sample.scss`);
-            this._copyTemplate('src/components-react/counter/Counter.js.ejs', `${rootFolder}src/components/counter/Counter.js`);
-            this._copyTemplate('src/components-react/counter/Counter.test.js.ejs', `${rootFolder}src/components/counter/Counter.test.js`);
-            this._copyTemplate('src/components-react/counter/_counter.scss.ejs', `${rootFolder}src/components/counter/_counter.scss`);
+            this._copyTemplateDir('src/components-react/header/', `${rootFolder}src/components/header/`);
+            this._copyTemplateDir('src/components-react/footer/', `${rootFolder}src/components/footer/`);
+            this._copyTemplateDir('src/components-react/pages/', `${rootFolder}src/components/pages/`);
+            this._copyTemplateDir('src/components-react/common/button/', `${rootFolder}src/components/common/button/`);
+            this._copyTemplateDir('src/components-react/form-elements/input/', `${rootFolder}src/components/form-elements/input/`);
+            this._copyTemplateDir('src/components-react/form-elements/textarea/', `${rootFolder}src/components/form-elements/textarea/`);
+            this._copyTemplateDir('src/components-react/form-elements/checkbox/', `${rootFolder}src/components/form-elements/checkbox/`);
         } else {
-            this._copyTemplate('src/components-jsb/sample/Sample.jsb.js.ejs', `${rootFolder}src/components/sample/Sample.jsb.js`);
-            this._copyTemplate('src/components-jsb/sample/SampleTemplate.ejs.ejs', `${rootFolder}src/components/sample/SampleTemplate.ejs`);
-            this._copyTemplate('src/components-jsb/sample/Sample.jsb.test.js.ejs', `${rootFolder}src/components/sample/Sample.jsb.test.js`);
-            this._copyTemplate('src/components-jsb/sample/_sample.scss.ejs', `${rootFolder}src/components/sample/_sample.scss`);
+            this._copyTemplateDir('src/components-jsb/header/', `${rootFolder}src/components/header/`);
+            this._copyTemplateDir('src/components-jsb/footer/', `${rootFolder}src/components/footer/`);
+            this._copyTemplateDir('src/components-jsb/common/button/', `${rootFolder}src/components/common/button/`);
+            this._copyTemplateDir('src/components-jsb/form-elements/input/', `${rootFolder}src/components/form-elements/input/`);
+            this._copyTemplateDir('src/components-jsb/form-elements/textarea/', `${rootFolder}src/components/form-elements/textarea/`);
+            this._copyTemplateDir('src/components-jsb/form-elements/checkbox/', `${rootFolder}src/components/form-elements/checkbox/`);
+            this._copyTemplateDir('src/components-jsb/page-blocks/sample/', `${rootFolder}src/components/page-blocks/sample/`);
         }
 
-        // twigRender
+        // Twig files
         this._copyTemplate('src/html/README.md.ejs', `${rootFolder}src/html/README.md`);
-        this._copyTemplate('src/html/data/.gitkeep', `${rootFolder}src/html/data/.gitkeep`);
-        this._copyTemplate('src/html/layouts/master.twig.ejs', `${rootFolder}src/html/layouts/master.twig`);
-        this._copyTemplate('src/html/macros/.gitkeep', `${rootFolder}src/html/macros/.gitkeep`);
-        this._copyTemplate('src/html/pages/index.twig.ejs', `${rootFolder}src/html/pages/index.twig`);
+        this._copy('src/html/data/', `${rootFolder}src/html/data/`);
+        this._copyTemplateDir('src/html/layouts/', `${rootFolder}src/html/layouts/`);
+        this._copy('src/html/macros/', `${rootFolder}src/html/macros/`);
         this._copyTemplate('src/html/partials/appicons.twig.ejs', `${rootFolder}src/html/partials/appicons.twig`);
-        if (!isReact) {
-            this._copyTemplate('src/html/partials/header.twig.ejs', `${rootFolder}src/html/partials/header.twig`);
-            this._copyTemplate('src/html/partials/footer.twig.ejs', `${rootFolder}src/html/partials/footer.twig`);
-            this._copyTemplate('src/components-jsb/sample/sample.twig.ejs', `${rootFolder}src/components/sample/sample.twig`);
+        if (isReact) {
+            this._copyTemplate('src/html/pages/index.twig.ejs', `${rootFolder}src/html/pages/index.twig`);
+        } else {
+            this._copyTemplateDir('src/html/pages/', `${rootFolder}src/html/pages/`);
         }
 
         // Optional Webfonts folder and SCSS-Partial
@@ -434,7 +423,7 @@ module.exports = class extends Generator {
             this._copyTemplate('grunt/config/svg2scss.js.ejs', 'grunt/config/svg2scss.js');
             this._copyTemplate('grunt/tasks/svg2scss.js.ejs', 'grunt/tasks/svg2scss.js');
             this._copyTemplate('src/scss/mixins/_svg-background.scss.ejs', `${rootFolder}src/scss/mixins/_svg-background.scss`);
-            this._copyTemplate('src/scss/bg-svg-icons/README.md.ejs', `${rootFolder}src/scss/bg-svg-icons/README.md`);
+            this._copy('src/scss/bg-svg-icons/', `${rootFolder}src/scss/bg-svg-icons/`);
         } else {
             delete packageJsonData.devDependencies.xmldom;
         }
@@ -488,6 +477,7 @@ module.exports = class extends Generator {
             delete packageJsonData.dependencies['prop-types'];
             delete packageJsonData.dependencies.react;
             delete packageJsonData.dependencies['react-dom'];
+            delete packageJsonData.dependencies['react-media'];
             delete packageJsonData.dependencies['react-router-dom'];
             delete packageJsonData.dependencies['react-waterfall'];
         }
@@ -500,24 +490,21 @@ module.exports = class extends Generator {
 
             // Optional Swiper Slider
             if (this.config.get('libraries').includes('swiper')) {
-                this._copyTemplate('src/components-react/slider/Slider.js.ejs', `${rootFolder}src/components/slider/Slider.js`);
-                this._copyTemplate('src/components-react/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
+                this._copyTemplateDir('src/components-react/common/slider/', `${rootFolder}src/components/common/slider/`);
             } else {
                 delete packageJsonData.dependencies.swiper;
             }
 
             // Optional react-select
             if (this.config.get('libraries').includes('react-select')) {
-                this._copyTemplate('src/components-react/select/Select.js.ejs', `${rootFolder}src/components/select/Select.js`);
-                this._copyTemplate('src/components-react/select/_select.scss.ejs', `${rootFolder}src/components/select/_select.scss`);
+                this._copyTemplateDir('src/components-react/form-elements/select/', `${rootFolder}src/components/form-elements/select/`);
             } else {
                 delete packageJsonData.dependencies['react-select'];
             }
 
             // Optional A11y Dialog
             if (this.config.get('libraries').includes('react-a11y-dialog')) {
-                this._copyTemplate('src/components-react/dialog/Dialog.js.ejs', `${rootFolder}src/components/dialog/Dialog.js`);
-                this._copyTemplate('src/components-react/dialog/_dialog.scss.ejs', `${rootFolder}src/components/dialog/_dialog.scss`);
+                this._copyTemplateDir('src/components-react/common/dialog/', `${rootFolder}src/components/common/dialog/`);
             } else {
                 delete packageJsonData.dependencies['react-a11y-dialog'];
             }
@@ -527,18 +514,14 @@ module.exports = class extends Generator {
 
             // Optional Swiper Slider
             if (this.config.get('libraries').includes('swiper')) {
-                this._copyTemplate('src/components-jsb/slider/Slider.jsb.js.ejs', `${rootFolder}src/components/slider/Slider.jsb.js`);
-                this._copyTemplate('src/components-jsb/slider/_slider.scss.ejs', `${rootFolder}src/components/slider/_slider.scss`);
-                this._copyTemplate('src/components-jsb/slider/slider.twig.ejs', `${rootFolder}src/components/slider/slider.twig`);
+                this._copyTemplateDir('src/components-jsb/common/slider/', `${rootFolder}src/components/common/slider/`);
             } else {
                 delete packageJsonData.dependencies.swiper;
             }
 
             // Optional Choices
             if (this.config.get('libraries').includes('choices')) {
-                this._copyTemplate('src/components-jsb/select/Select.jsb.js.ejs', `${rootFolder}src/components/select/Select.jsb.js`);
-                this._copyTemplate('src/components-jsb/select/_select.scss.ejs', `${rootFolder}src/components/select/_select.scss`);
-                this._copyTemplate('src/components-jsb/select/select.twig.ejs', `${rootFolder}src/components/select/select.twig`);
+                this._copyTemplateDir('src/components-jsb/form-elements/select/', `${rootFolder}src/components/form-elements/select/`);
             } else {
                 delete packageJsonData.dependencies['choices.js'];
                 delete packageJsonData.dependencies['custom-event-polyfill'];
@@ -546,9 +529,7 @@ module.exports = class extends Generator {
 
             // Optional A11y Dialog
             if (this.config.get('libraries').includes('a11y-dialog')) {
-                this._copyTemplate('src/components-jsb/dialog/Dialog.jsb.js.ejs', `${rootFolder}src/components/dialog/Dialog.jsb.js`);
-                this._copyTemplate('src/components-jsb/dialog/_dialog.scss.ejs', `${rootFolder}src/components/dialog/_dialog.scss`);
-                this._copyTemplate('src/components-jsb/dialog/dialog.twig.ejs', `${rootFolder}src/components/dialog/dialog.twig`);
+                this._copyTemplateDir('src/components-jsb/common/dialog/', `${rootFolder}src/components/common/dialog/`);
             } else {
                 delete packageJsonData.dependencies['a11y-dialog'];
             }
@@ -595,6 +576,20 @@ module.exports = class extends Generator {
             this.destinationPath(destination),
             { config: this.config },
         );
+    }
+
+    _copyTemplateDir(dir, destination) {
+        const files = glob.sync('**/*.ejs', {
+            cwd: `${this.templatePath()}/${dir}`,
+        });
+
+        if (files.length === 0) {
+            throw new Error(`Error: no template files found in directory: ${dir}`);
+        }
+
+        files.forEach((file) => {
+            this._copyTemplate(dir + file, destination + file.slice(0, -4));
+        });
     }
 
     _copy(template, destination) {

@@ -13,7 +13,7 @@
     "pre-commit.silent": true,
     "dependencies": {
         "a11y-dialog": "5.2.0",
-        "choices.js": "7.0.0",
+        "choices.js": "8.0.0",
         "classnames": "2.2.6",
         "custom-event-polyfill": "1.0.7",
         "date-fns": "2.0.0-alpha.27",
@@ -25,6 +25,7 @@
         "react": "16.8.6",
         "react-a11y-dialog": "4.1.0",
         "react-dom": "16.8.6",
+        "react-media": "1.10.0",
         "react-router-dom": "5.0.0",
         "react-select": "2.4.3",
         "react-waterfall": "4.0.1",

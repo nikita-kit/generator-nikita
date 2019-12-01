@@ -59,9 +59,9 @@ describe('generator-nikita:app', () => {
         ]);
 
         assert.noFile([
-            'src/components/slider/Slider.jsb.js',
-            'src/components/select/Select.jsb.js',
-            'src/components/dialog/Dialog.jsb.js',
+            'src/components/common/slider/Slider.jsb.js',
+            'src/components/common/dialog/Dialog.jsb.js',
+            'src/components/form-elements/select/Select.jsb.js',
         ]);
     });
 });
@@ -104,23 +104,23 @@ describe('generator-nikita:web-app-jsb', () => {
             'grunt/aliases.js',
             'grunt/config/twigRender.js',
             'src/js/_main.js',
-            'src/js/app.js',
-            'src/components/sample/Sample.jsb.js',
-            'src/components/slider/Slider.jsb.js',
-            'src/components/select/Select.jsb.js',
-            'src/components/dialog/Dialog.jsb.js',
+            'src/js/App.js',
+            'src/components/page-blocks/sample/Sample.jsb.js',
+            'src/components/common/slider/Slider.jsb.js',
+            'src/components/common/dialog/Dialog.jsb.js',
+            'src/components/form-elements/select/Select.jsb.js',
             'src/scss/styles.scss',
-            'src/scss/blocks/_header.scss',
-            'src/scss/blocks/_footer.scss',
+            'src/scss/blocks/_page.scss',
             'src/html/pages/index.twig',
+            'src/html/pages/forms.twig',
             'static/img/appicons/favicon.ico',
         ]);
 
         assert.noFile(['src/scss/mixins/_clearfix.scss']);
 
         assert.fileContent([
-            ['src/components/sample/Sample.jsb.js', /lodash-es/],
-            ['src/components/sample/Sample.jsb.js', /date-fns\/esm/],
+            ['src/components/page-blocks/sample/Sample.jsb.js', /lodash-es/],
+            ['src/components/page-blocks/sample/Sample.jsb.js', /date-fns\/esm/],
         ]);
 
         if (process.env.TEMPLATE === 'web-app') {
@@ -175,25 +175,22 @@ describe('generator-nikita:web-app-react', () => {
             'src/js/_main.js',
             'src/js/App.js',
             'src/js/Store.js',
-            'src/components/sample/Sample.js',
-            'src/components/counter/Counter.js',
-            'src/components/slider/Slider.js',
-            'src/components/select/Select.js',
-            'src/components/dialog/Dialog.js',
+            'src/components/pages/sample/Sample.js',
+            'src/components/pages/counter/Counter.js',
+            'src/components/common/slider/Slider.js',
+            'src/components/common/dialog/Dialog.js',
+            'src/components/form-elements/select/Select.js',
             'src/scss/styles.scss',
+            'src/scss/blocks/_page.scss',
             'src/html/pages/index.twig',
             'static/img/appicons/favicon.ico',
         ]);
 
-        assert.noFile([
-            'src/scss/mixins/_clearfix.scss',
-            'src/scss/blocks/_header.scss',
-            'src/scss/blocks/_footer.scss',
-        ]);
+        assert.noFile(['src/html/pages/forms.twig']);
 
         assert.fileContent([
-            ['src/components/sample/Sample.js', /lodash-es/],
-            ['src/components/sample/Sample.js', /date-fns\/esm/],
+            ['src/components/pages/sample/Sample.js', /lodash-es/],
+            ['src/components/pages/sample/Sample.js', /date-fns\/esm/],
         ]);
 
         if (process.env.TEMPLATE === 'web-app') {

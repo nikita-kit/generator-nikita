@@ -1,0 +1,29 @@
+{#
+    id: string (required)
+    label: string (required)
+    hideLabel: bool
+    class: string
+    type: string
+    value: bool
+    placeholder: string
+    disabled: bool
+#}
+<div class="{{ html_classes('b-input', class|default()) }}">
+    <label
+        for="{{ id }}"
+        class="{{ html_classes('input-label', {
+            'u-visuallyhidden': hideLabel|default(false),
+        }) }}"
+    >
+        {{ label }}
+    </label>
+    <input
+        id="{{ id }}"
+        name="{{ id }}"
+        class="input-field"
+        type="{{ type|default('text') }}"
+        value="{{ value|default('') }}"
+        placeholder="{{ placeholder|default() }}"
+        {% if disabled|default(false) %}disabled{% endif %}
+    />
+</div>

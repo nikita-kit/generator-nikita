@@ -1,0 +1,81 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import logging from 'node-logging-js';
+import { Swiper, Navigation } from 'swiper/dist/js/swiper.esm';
+import classNames from 'classnames';
+import Button from '../button/Button';
+
+/* @see http://idangero.us/swiper/api/ */
+class Slider extends Component {
+
+    static defaultProps = {
+        className: null,
+    }
+
+    static propTypes = {
+        className: PropTypes.string,
+        children: PropTypes.oneOfType([
+            PropTypes.element,
+            PropTypes.arrayOf(PropTypes.element),
+        ]).isRequired,
+    }
+
+    constructor(props) {
+        super(props);
+        logging.applyLogging(this, 'Slider');
+
+        Swiper.use([Navigation]);
+        this.elementRef = React.createRef();
+        this.slider = null;
+    }
+
+    componentDidMount() {
+        const {
+            className, children, ...restProps
+        } = this.props;
+
+        const options = {
+            initialSlide: 0,
+            slidesPerView: 1,
+            autoHeight: false,
+            effect: 'slide',
+            speed: 300,
+            navigation: {
+                nextEl: '.next',
+                prevEl: '.prev',
+                disabledClass: 'is-disabled',
+            },
+            on: {
+                init: () => {
+                },
+                slideChange: () => {
+                },
+            },
+            ...restProps,
+        };
+
+        this.swiper = new Swiper(this.elementRef.current, options);
+        this.logDebug('init:', options);
+    }
+
+    componentWillUnmount() {
+        this.swiper.destroy();
+    }
+
+    render() {
+        return (
+            <div className={classNames('b-slider', this.props.className)} ref={this.elementRef}>
+                <div className="swiper-wrapper">
+                    {this.props.children}
+                </div>
+
+                <Button isSecondary className="prev">Prev</Button>
+                <Button isSecondary className="next">Next</Button>
+            </div>
+        );
+    }
+}
+
+Slider.Slide = props => (<div className="swiper-slide">{props.children}</div>);
+
+export default Slider;

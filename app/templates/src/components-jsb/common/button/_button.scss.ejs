@@ -1,0 +1,43 @@
+.b-button {
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: $base-fontsize;
+    text-decoration: none;
+
+    &.is-primary {
+        color: $text-color-01;
+        background-color: $bg-color-03;
+
+        &:hover,
+        &:focus {
+            background-color: $bg-color-06;
+        }
+
+        &:active {
+            background-color: $bg-color-03;
+        }
+    }
+
+    &.is-secondary {
+        border: solid 1px $line-color-03;
+        color: $text-color-02;
+        background-color: $bg-color-01;
+
+        &:hover,
+        &:focus {
+            border-color: $line-color-06;
+            color: $text-color-06;
+        }
+
+        &:active {
+            border-color: $line-color-03;
+            color: $text-color-02;
+        }
+    }
+
+    &:disabled,
+    &.is-disabled {
+        opacity: .5;
+        pointer-events: none;
+    }
+}

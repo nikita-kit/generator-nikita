@@ -1,7 +1,10 @@
 {% extends 'layouts::master.twig' %}
 
-{% block title %}Nikita Prototype{% endblock %}
-{% block description %}This is the startpage of your Nikita prototype{% endblock %}
+<% if (config.get('jsFramework') === 'jsb') { -%>
+{% block activeRoute %}/{% endblock %}
+<% } -%>
+{% block title %}Nikita project prototype{% endblock %}
+{% block description %}This is the startpage of your Nikita project prototype.{% endblock %}
 
 <% if (config.get('jsFramework') === 'react') { -%>
 {% block body %}
@@ -13,21 +16,33 @@
 <% } -%>
 <% if (config.get('jsFramework') === 'jsb') { -%>
 {% block body %}
-    <p>Congratulations, your Nikita prototype was built successfully! :)</p>
-
-    <br />
-    {% include 'components::sample/sample.twig' %}
+    {% include 'components::page-blocks/sample/sample.twig' %}
 <%     if (config.get('libraries').includes('a11y-dialog')) { -%>
     <br />
-    {% include 'components::dialog/dialog.twig' %}
-<%     } -%>
-<%     if (config.get('libraries').includes('choices')) { -%>
-    <br />
-    {% include 'components::select/select.twig' %}
+    {% include 'components::common/button/button.twig' with {
+        isPrimary: true,
+        text: 'Open sample dialog',
+        attr: { 'data-a11y-dialog-show': 'my-dialog' },
+    } only %}
+    {% embed 'components::common/dialog/dialog.twig' with {
+        id: 'my-dialog',
+        title: 'Dialog Title',
+    } only %}
+        {% block content %}
+            <p>Dialog Content</p>
+        {% endblock %}
+    {% endembed %}
 <%     } -%>
 <%     if (config.get('libraries').includes('swiper')) { -%>
     <br />
-    {% include 'components::slider/slider.twig' %}
+    {% embed 'components::common/slider/slider.twig' %}
+        {% block content %}
+            <div class="swiper-slide">Hi, I am slide 1</div>
+            <div class="swiper-slide">Hi, I am slide 2</div>
+            <div class="swiper-slide">Hi, I am slide 3</div>
+            <div class="swiper-slide">Hi, I am slide 4</div>
+        {% endblock %}
+    {% endembed %}
 <%     } -%>
 {% endblock %}
 <% } -%>
