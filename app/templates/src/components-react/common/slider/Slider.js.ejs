@@ -8,16 +8,16 @@ import Button from '../button/Button';
 /* @see http://idangero.us/swiper/api/ */
 class Slider extends Component {
 
-    static defaultProps = {
-        className: null,
-    }
-
     static propTypes = {
         className: PropTypes.string,
         children: PropTypes.oneOfType([
             PropTypes.element,
             PropTypes.arrayOf(PropTypes.element),
         ]).isRequired,
+    }
+
+    static defaultProps = {
+        className: null,
     }
 
     constructor(props) {

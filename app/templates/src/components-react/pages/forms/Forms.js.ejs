@@ -17,13 +17,13 @@ class Forms extends Component {
 <% } -%>
     }
 
-    onChange = ({ id, value }) => {
-        this.setState({ [id]: value });
-    }
-
     constructor(props) {
         super(props);
         logging.applyLogging(this, 'Forms', ['setState']);
+    }
+
+    onChange = ({ id, value }) => {
+        this.setState({ [id]: value });
     }
 
     render() {

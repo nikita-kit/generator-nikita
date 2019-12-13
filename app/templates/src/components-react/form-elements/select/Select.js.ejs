@@ -7,16 +7,6 @@ import classNames from 'classnames';
 /* @see https://github.com/JedWatson/react-select */
 class Select extends Component {
 
-    static defaultProps = {
-        className: null,
-        hideLabel: false,
-        value: '',
-        placeholder: '',
-        disabled: false,
-        multiple: false,
-        onChange: () => {},
-    }
-
     static propTypes = {
         id: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
@@ -27,6 +17,16 @@ class Select extends Component {
         disabled: PropTypes.bool,
         multiple: PropTypes.bool,
         onChange: PropTypes.func,
+    }
+
+    static defaultProps = {
+        className: null,
+        hideLabel: false,
+        value: '',
+        placeholder: '',
+        disabled: false,
+        multiple: false,
+        onChange: () => {},
     }
 
     constructor(props) {

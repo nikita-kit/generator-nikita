@@ -5,17 +5,6 @@ import classNames from 'classnames';
 
 class Input extends Component {
 
-    static defaultProps = {
-        className: null,
-        hideLabel: false,
-        type: 'text',
-        value: '',
-        placeholder: null,
-        disabled: false,
-        onChange: () => {},
-        onBlur: () => {},
-    }
-
     static propTypes = {
         id: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
@@ -27,6 +16,17 @@ class Input extends Component {
         disabled: PropTypes.bool,
         onChange: PropTypes.func,
         onBlur: PropTypes.func,
+    }
+
+    static defaultProps = {
+        className: null,
+        hideLabel: false,
+        type: 'text',
+        value: '',
+        placeholder: null,
+        disabled: false,
+        onChange: () => {},
+        onBlur: () => {},
     }
 
     constructor(props) {
@@ -61,7 +61,7 @@ class Input extends Component {
                 <input
                     id={id}
                     className="input-field"
-                    {...restProps}
+                    {...restProps} // eslint-disable-line react/jsx-props-no-spreading
                     onChange={this.onChange}
                 />
             </div>

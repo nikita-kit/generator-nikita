@@ -4,25 +4,25 @@
     background-color: $bg-color-04;
 
     .button-menu {
-        @include breakpoint(large) {
-            display: none;
-        }
-
         position: absolute;
         top: 20px;
         right: 20px;
+
+        @include breakpoint(large) {
+            display: none;
+        }
     }
 
     .nav-list {
-        @include breakpoint(medium down) {
-            display: none;
-        }
-
         display: flex;
         margin: 0;
         padding: 0;
         list-style: none;
         background-color: $bg-color-04;
+
+        @include breakpoint(medium down) {
+            display: none;
+        }
     }
 
     .nav-item {
