@@ -10,6 +10,7 @@
 * fixed grunt task `analyze-js`
 * renamed `App.js` to PascalCase
 * fixed generator version compare bug
+* added nikita version to npm generator script target
 * internal: added method to copy complete template directory to generator
 
 # 5.2.0 (2019/05/08)

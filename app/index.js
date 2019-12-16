@@ -16,8 +16,7 @@ module.exports = class extends Generator {
         if (generatedVersion && selfVersion && compareVersions(selfVersion, generatedVersion) === 1) {
             this.env.error(
                 `${chalk.red.bold('Error:')} Your generator-nikita is too old (Version ${chalk.yellow(selfVersion)})!\n`
-                + `This nikita kickstarter was generated with version ${chalk.yellow(generatedVersion)}, so update\n`
-                + `generator-nikita to newest version with ${chalk.green('npm install -g generator-nikita')}.`,
+                + `This nikita project boilerplate was generated with version ${chalk.yellow(generatedVersion)}, so use at least this version!`,
             );
         }
 
@@ -315,6 +314,7 @@ module.exports = class extends Generator {
     writing() {
         const packageJsonData = this.fs.readJSON(this.templatePath('_package.json'));
         packageJsonData.name = this.config.get('name');
+        packageJsonData.scripts.generator = packageJsonData.scripts.generator.replace('%VERSION%', this.config.get('version'));
 
         const isReact = (this.config.get('jsFramework') === 'react');
         const rootFolder = this.config.get('rootFolder');
