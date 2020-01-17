@@ -72,6 +72,7 @@
         "import-glob": "1.5.0",
         "jest-cli": "24.9.0",
         "jit-grunt": "0.10.0",
+        "license-checker": "25.0.1",
         "load-grunt-config": "3.0.1",
         "node-sass": "4.13.0",
         "postcss-csso": "4.0.0",

@@ -12,6 +12,7 @@
 * fixed generator version compare bug
 * added nikita version to npm generator script target
 * internal: added method to copy complete template directory to generator
+* added grunt task to check licenses used in the project
 
 # 5.2.0 (2019/05/08)
 

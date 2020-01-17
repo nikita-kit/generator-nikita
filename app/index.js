@@ -329,10 +329,12 @@ module.exports = class extends Generator {
 
         // grunt Files
         this._copyTemplate('grunt/aliases.js.ejs', 'grunt/aliases.js');
+        this._copyTemplate('grunt/tasks/check-licenses.js.ejs', 'grunt/tasks/check-licenses.js');
         this._copyTemplate('grunt/tasks/sass-globbing.js.ejs', 'grunt/tasks/sass-globbing.js');
         this._copyTemplate('grunt/tasks/jest.js.ejs', 'grunt/tasks/jest.js');
 
         this._copyTemplate('grunt/config/browserSync.js.ejs', 'grunt/config/browserSync.js');
+        this._copyTemplate('grunt/config/check-licenses.js.ejs', 'grunt/config/check-licenses.js');
         this._copyTemplate('grunt/config/clean.js.ejs', 'grunt/config/clean.js');
         this._copyTemplate('grunt/config/concurrent.js.ejs', 'grunt/config/concurrent.js');
         this._copyTemplate('grunt/config/eslint.js.ejs', 'grunt/config/eslint.js');
