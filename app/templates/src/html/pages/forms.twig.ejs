@@ -1,29 +1,29 @@
-{% extends 'layouts::master.twig' %}
+{% extends '@layouts/master.twig' %}
 
 {% block activeRoute %}/forms.html{% endblock %}
 {% block title %}Nikita project prototype{% endblock %}
 
 {% block body %}
-    {% include 'components::form-elements/input/input.twig' with {
+    {% include '@components/form-elements/input/input.twig' with {
         id: 'input',
         label: 'Input',
         value: 'text',
     } only %}
     <br />
-    {% include 'components::form-elements/checkbox/checkbox.twig' with {
+    {% include '@components/form-elements/checkbox/checkbox.twig' with {
         id: 'checkbox',
         label: 'Checkbox',
         value: true,
     } only %}
     <br />
-    {% include 'components::form-elements/textarea/textarea.twig' with {
+    {% include '@components/form-elements/textarea/textarea.twig' with {
         id: 'textarea',
         label: 'Textarea',
         value: 'Text',
     } only %}
 <%     if (config.get('libraries').includes('choices')) { -%>
     <br />
-    {% include 'components::form-elements/select/select.twig' with {
+    {% include '@components/form-elements/select/select.twig' with {
         id: 'select',
         label: 'Select',
         placeholder: "choose wisely…",
@@ -34,7 +34,7 @@
         ],
     } only %}
     <br />
-    {% include 'components::form-elements/select/select.twig' with {
+    {% include '@components/form-elements/select/select.twig' with {
         id: 'multi-select',
         label: 'Multi-Select',
         placeholder: "type to search…",

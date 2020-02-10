@@ -1,4 +1,4 @@
-{% extends 'layouts::master.twig' %}
+{% extends '@layouts/master.twig' %}
 
 <% if (config.get('jsFramework') === 'jsb') { -%>
 {% block activeRoute %}/{% endblock %}
@@ -16,15 +16,15 @@
 <% } -%>
 <% if (config.get('jsFramework') === 'jsb') { -%>
 {% block body %}
-    {% include 'components::page-blocks/sample/sample.twig' %}
+    {% include '@components/page-blocks/sample/sample.twig' %}
 <%     if (config.get('libraries').includes('a11y-dialog')) { -%>
     <br />
-    {% include 'components::common/button/button.twig' with {
+    {% include '@components/common/button/button.twig' with {
         isPrimary: true,
         text: 'Open sample dialog',
         attr: { 'data-a11y-dialog-show': 'my-dialog' },
     } only %}
-    {% embed 'components::common/dialog/dialog.twig' with {
+    {% embed '@components/common/dialog/dialog.twig' with {
         id: 'my-dialog',
         title: 'Dialog Title',
     } only %}
@@ -35,7 +35,7 @@
 <%     } -%>
 <%     if (config.get('libraries').includes('swiper')) { -%>
     <br />
-    {% embed 'components::common/slider/slider.twig' %}
+    {% embed '@components/common/slider/slider.twig' %}
         {% block content %}
             <div class="swiper-slide">Hi, I am slide 1</div>
             <div class="swiper-slide">Hi, I am slide 2</div>

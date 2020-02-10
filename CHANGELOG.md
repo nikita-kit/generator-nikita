@@ -5,6 +5,7 @@
 * added more boilerplate components like header, footer, button and form elements
 * added `MediaQuery.js` lib as an adapter to foundation breakpoints
 * added twig.js functions `html_attr` and `html_classes`
+* changed twig namespaces to  at-notation
 * updated all dependencies to newest version
 * updated nikita eslint and stylelint config
 * fixed grunt task `analyze-js`

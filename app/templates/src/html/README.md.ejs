@@ -19,7 +19,7 @@ Put all your layout skeleton files in here.
 You can decorate a page using twigs `extends` tag in a page template like this:
 
 ```
-{% extends 'layouts::master.twig' %}
+{% extends '@layouts/master.twig' %}
 ```
 
 
@@ -29,7 +29,7 @@ Put all your partials in here.
 You can use a partial in a page using twigs `import`, `embed` and `use` tags:
 
 ```
-{% include 'partials::gitinfos.twig' %}
+{% include '@partials/gitinfos.twig' %}
 ```
 
 
@@ -39,7 +39,7 @@ Put all your twig macro files in here.
 You can import them in a page or a partial using twigs `import` tag:
 
 ```
-{% include 'macros::mymacro.twig' %}
+{% include '@macros/mymacro.twig' %}
 ```
 
 
@@ -49,5 +49,5 @@ Put your json or yaml data files in here.
 Include them in any template with the custom twig `data` function to set a variable with its content: 
 
 ```
-{% set mydata = data("data::data.json") %}
+{% set mydata = data('@data/data.json') %}
 ```
