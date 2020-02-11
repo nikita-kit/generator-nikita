@@ -380,7 +380,6 @@ module.exports = class extends Generator {
 
         // SCSS Variables
         this._copyTemplate('src/scss/variables/_foundation-settings.scss.ejs', `${rootFolder}src/scss/variables/_foundation-settings.scss`);
-        this._copyTemplate('src/scss/variables/_color.scss.ejs', `${rootFolder}src/scss/variables/_color.scss`);
         this._copyTemplate('src/scss/variables/_timing.scss.ejs', `${rootFolder}src/scss/variables/_timing.scss`);
         this._copyTemplate('src/scss/variables/_typography.scss.ejs', `${rootFolder}src/scss/variables/_typography.scss`);
         this._copyTemplate('src/scss/variables/_z-layers.scss.ejs', `${rootFolder}src/scss/variables/_z-layers.scss`);
