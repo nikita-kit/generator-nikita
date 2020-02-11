@@ -1,0 +1,47 @@
+.b-dialog {
+    &::backdrop {
+        background: rgba(0, 0, 0, .1);
+    }
+
+    .backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        background: rgba(0, 0, 0, .1);
+    }
+
+    /* hide custom backdrop when native dialogs are supported */
+    &[data-a11y-dialog-native] .backdrop {
+        display: none;
+    }
+
+    /* ensure layout if dialog element is not supported */
+    .dialog[open] {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        display: block;
+        max-width: 90%;
+        margin: 0;
+        border: 1px solid $primary-color;
+        border-radius: 4px;
+        padding: 4rem;
+        background: #fff;
+        transform: translate(-50%, -50%);
+    }
+
+    &[aria-hidden='true'] {
+        display: none;
+    }
+
+    .close {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        font-size: 20px;
+    }
+}

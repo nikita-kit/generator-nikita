@@ -1,0 +1,23 @@
+{% set routes = {
+    Home: '/',
+    Forms: '/forms.html',
+} %}
+
+<header class="b-header jsb_ jsb_Header">
+
+    {% include 'components::common/button/button.twig' with {
+        text: 'Menu',
+        class: 'button-menu js-menu-toggle',
+        isSecondary: true,
+        attr: { 'aria-expanded': 'false' },
+    } only %}
+
+    <ul class="nav-list">
+        {% for routeName, route in routes %}
+            <li class="nav-item">
+                {% set class = html_classes('nav-link', { 'is-active': route == activeRoute }) %}
+                <a class="{{ class }}" href="{{ route }}">{{ routeName }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</header>

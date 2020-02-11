@@ -1,0 +1,23 @@
+{#
+    blocks: content
+
+    class: string
+    jsbOptions: object
+#}
+<div class="{{ html_classes('b-slider jsb_ jsb_Slider', class|default()) }}" data-jsb='{{ jsbOptions|default({})|json_encode() }}'>
+    <div class="swiper-wrapper">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% include 'components::common/button/button.twig' with {
+        text: 'Prev',
+        class: 'prev',
+        isSecondary: true,
+    } only %}
+
+    {% include 'components::common/button/button.twig' with {
+        text: 'Next',
+        class: 'next',
+        isSecondary: true,
+    } only %}
+</div>

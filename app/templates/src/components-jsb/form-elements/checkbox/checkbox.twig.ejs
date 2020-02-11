@@ -1,0 +1,23 @@
+{#
+    id: string (required)
+    label: string (required)
+    hideLabel: bool
+    class: string
+    value: bool
+    disabled: bool
+#}
+<label class="{{ html_classes('b-checkbox', class|default())}}" for="{{ id }}">
+    <input
+        id="{{ id }}"
+        name="{{ id }}"
+        type="checkbox"
+        class="checkbox-field"
+        {% if value|default(false) %}checked{% endif %}
+        {% if disabled|default(false) %}disabled{% endif %}
+    />
+    <span class="checkbox-label">
+        {% if not hideLabel|default(false) %}
+            {{ label }}
+        {% endif %}
+    </span>
+</label>

@@ -11,7 +11,9 @@
 @import 'node_modules/foundation-sites/scss/foundation';
 
 // Global styles
-// @include foundation-global-styles;  // includes normalize.css
+.foundation-mq {
+    font-family: '#{-zf-bp-serialize($breakpoints)}';
+}
 // @include foundation-forms;
 // @include foundation-typography;
 

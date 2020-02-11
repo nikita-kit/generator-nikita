@@ -10,7 +10,50 @@ module.exports = function (grunt) {
             },
             extensions: [
                 function (Twig) {
-                    Twig.exports.extendFunction('data', function (filename) {
+                    /* custom implementation for twig.js, @see https://twig.symfony.com/doc/2.x/functions/html_classes.html */
+                    Twig.exports.extendFunction('html_classes', (...expressions) => {
+                        const classes = [];
+
+                        expressions.forEach((expression) => {
+                            if (expression) {
+                                if (typeof expression === 'string') {
+                                    classes.push(expression);
+                                } else {
+                                    Object.keys(expression).forEach((key) => {
+                                        if (key !== '_keys' && expression[key]) {
+                                            classes.push(key);
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                        return [...new Set(classes)].join(' ');
+                    });
+
+                    /* function to generate html attributes string from object */
+                    Twig.exports.extendFunction('html_attr', (attributes) => {
+                        let output = '';
+                        const escape = value => (String(value)
+                            .replace('"', '&quot;')
+                            .replace('<', '&lt;')
+                        );
+
+                        Object.keys(attributes).forEach((attribute) => {
+                            const value = attributes[attribute];
+
+                            if (value === true) {
+                                output += ` ${attribute}`;
+                            } else if (typeof value === 'string' || typeof value === 'number') {
+                                output += ` ${attribute}="${escape(value)}"`;
+                            }
+                        });
+
+                        return output;
+                    });
+
+                    /* function to import json/yaml test data */
+                    Twig.exports.extendFunction('data', (filename) => {
                         const namespacePath = Twig.path.parsePath.apply(this, [this, filename]);
 
                         if (/\.yml$/i.test(namespacePath) || /\.yaml/i.test(namespacePath)) {

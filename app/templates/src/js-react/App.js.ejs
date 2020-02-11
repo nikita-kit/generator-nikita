@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import logging from 'node-logging-js';
-import { Provider } from './Store';
+import { ROUTES } from './config';
 
-import Sample from '../components/sample/Sample';
-import Counter from '../components/counter/Counter';
+import Header from '../components/header/Header';
+import Footer from '../components/footer/Footer';
+import Sample from '../components/pages/sample/Sample';
+import Forms from '../components/pages/forms/Forms';
+import Counter from '../components/pages/counter/Counter';
+import NotFound from '../components/pages/not-found/NotFound';
 
 export default class App extends Component {
 
@@ -16,14 +20,18 @@ export default class App extends Component {
 
     render() {
         return (
-            <Provider>
-                <BrowserRouter>
+            <BrowserRouter>
+                <Header />
+                <main className="b-page">
                     <Switch>
-                        <Route exact path="/" component={Sample} />
-                        <Route exact path="/state-example" component={Counter} />
+                        <Route exact path={ROUTES.home} component={Sample} />
+                        <Route exact path={ROUTES.forms} component={Forms} />
+                        <Route exact path={ROUTES.counter} component={Counter} />
+                        <Route component={NotFound} />
                     </Switch>
-                </BrowserRouter>
-            </Provider>
+                </main>
+                <Footer />
+            </BrowserRouter>
         );
     }
 }

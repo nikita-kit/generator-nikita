@@ -1,0 +1,51 @@
+.b-header {
+    border-bottom: $primary-color 1px dashed;
+    padding: 40px;
+    background-color: $light-gray;
+
+    .button-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+
+        @include breakpoint(large) {
+            display: none;
+        }
+    }
+
+    .nav-list {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        background-color: $light-gray;
+
+        @include breakpoint(medium down) {
+            display: none;
+        }
+    }
+
+    .nav-item {
+        margin: 0 2rem;
+    }
+
+    .is-active {
+        border-bottom: 2px solid $primary-color;
+    }
+
+    &.is-menu-visible {
+        .nav-list {
+            position: absolute;
+            top: 81px;
+            left: 0;
+            z-index: 1;
+            display: block;
+            width: 100%;
+            border-bottom: $primary-color 1px dashed;
+        }
+
+        .nav-item {
+            margin: 2rem;
+        }
+    }
+}

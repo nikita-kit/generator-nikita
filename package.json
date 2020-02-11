@@ -55,8 +55,9 @@
   "dependencies": {
     "yeoman-generator": "3.2.0",
     "chalk": "2.4.2",
-    "yosay": "2.0.2",
-    "compare-versions": "3.4.0"
+    "compare-versions": "3.4.0",
+    "glob": "7.1.4",
+    "yosay": "2.0.2"
   },
   "devDependencies": {
     "eslint": "5.16.0",

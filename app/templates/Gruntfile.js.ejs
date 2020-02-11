@@ -9,6 +9,7 @@ module.exports = function (grunt) {
     const path = require('path');
 
     /* custom helper method to check if config loading is necessary for current running task */
+    // eslint-disable-next-line no-param-reassign
     grunt.isConfigLoadingRequired = (taskNames) => {
         const isDefaultTarget = (grunt.cli.tasks.length === 0);
         return (isDefaultTarget || grunt.cli.tasks.some(target => (

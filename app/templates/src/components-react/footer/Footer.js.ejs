@@ -1,0 +1,14 @@
+import React, { Component } from 'react';
+
+class Footer extends Component {
+
+    render() {
+        return (
+            <footer className="b-footer">
+                Nikita react project prototype <%= config.get('version') %> - <%= config.get('template') %> - <%= config.get('jsFramework') %>
+            </footer>
+        );
+    }
+}
+
+export default Footer;

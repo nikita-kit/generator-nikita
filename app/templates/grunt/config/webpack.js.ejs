@@ -8,7 +8,7 @@ module.exports = function (grunt, options) {
     return (function () {
 
         const path = require('path');
-        const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+        const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
         const DotenvPlugin = require('dotenv-webpack');
 <% if (config.get('jsFramework') === 'jsb') { -%>
         const webpack = require('webpack');

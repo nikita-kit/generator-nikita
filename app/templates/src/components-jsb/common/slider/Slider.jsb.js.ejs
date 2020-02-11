@@ -1,0 +1,35 @@
+import logging from 'node-logging-js';
+import jsb from 'node-jsb';
+import { Swiper, Navigation } from 'swiper/dist/js/swiper.esm';
+
+/* @see http://idangero.us/swiper/api/ */
+export default class Slider {
+    constructor(element, options = {}) {
+        logging.applyLogging(this, 'Slider', false);
+        this.logDebug('init:', options);
+
+        Swiper.use([Navigation]);
+
+        const defaults = {
+            initialSlide: 0,
+            slidesPerView: 1,
+            autoHeight: false,
+            effect: 'slide',
+            speed: 300,
+            navigation: {
+                nextEl: '.next',
+                prevEl: '.prev',
+            },
+            on: {
+                init: () => {
+                },
+                slideChange: () => {
+                },
+            },
+        };
+
+        this.swiper = new Swiper(element, { ...defaults, options });
+    }
+}
+
+jsb.registerHandler('Slider', Slider);

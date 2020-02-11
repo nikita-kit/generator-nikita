@@ -1,0 +1,89 @@
+import React, { Component } from 'react';
+import logging from 'node-logging-js';
+import Select from '../../form-elements/select/Select';
+import Input from '../../form-elements/input/Input';
+import Checkbox from '../../form-elements/checkbox/Checkbox';
+import Textarea from '../../form-elements/textarea/Textarea';
+
+class Forms extends Component {
+
+    state = {
+        checkbox: false,
+        input: 'text',
+        textarea: 'text',
+<% if (config.get('libraries').includes('react-select')) { -%>
+        select: null,
+        multiSelect: null,
+<% } -%>
+    }
+
+    constructor(props) {
+        super(props);
+        logging.applyLogging(this, 'Forms', ['setState']);
+    }
+
+    onChange = ({ id, value }) => {
+        this.setState({ [id]: value });
+    }
+
+    render() {
+        const {
+            checkbox, input, textarea,<% if (config.get('libraries').includes('react-select')) { %> select, multiSelect,<% } %>
+        } = this.state;
+
+        return (
+            <div className="b-forms">
+                <Input id="input" label="Input" value={input} onChange={this.onChange} />
+                <br />
+                <Checkbox id="checkbox" label="Checkbox" value={checkbox} onChange={this.onChange} />
+                <br />
+                <Textarea id="textarea" label="Textarea" value={textarea} onChange={this.onChange} />
+                <br />
+<% if (config.get('libraries').includes('react-select')) { -%>
+                <Select
+                    id="select"
+                    label="Select"
+                    placeholder="choose wisely…"
+                    value={select}
+                    onChange={this.onChange}
+                    options={[
+                        { value: 'option-1', label: 'option 1' },
+                        { value: 'option-2', label: 'option 2' },
+                        { value: 'option-3', label: 'option 3' },
+                    ]}
+                />
+                <br />
+                <Select
+                    id="multiSelect"
+                    label="Multi-Select"
+                    placeholder="type to search…"
+                    value={multiSelect}
+                    onChange={this.onChange}
+                    multiple
+                    isSearchable
+                    getOptionValue={option => option.id}
+                    getOptionLabel={option => option.title}
+                    options={[
+                        {
+                            label: 'Group A',
+                            options: [
+                                { id: 1, title: 'option 1' },
+                                { id: 2, title: 'option 2' },
+                            ],
+                        },
+                        {
+                            label: 'Group B',
+                            options: [
+                                { id: 3, title: 'option 3' },
+                                { id: 4, title: 'option 4' },
+                            ],
+                        },
+                    ]}
+                />
+<% } -%>
+            </div>
+        );
+    }
+}
+
+export default Forms;

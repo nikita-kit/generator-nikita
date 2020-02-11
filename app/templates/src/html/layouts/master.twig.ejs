@@ -14,6 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <link href="generated/styles.css?cb={{ currentTimestamp }}" rel="stylesheet" />
+        <meta class="foundation-mq">
 
         {% include 'partials::appicons.twig' %}
     </head>
@@ -24,14 +25,15 @@
         {% endif %}
 <% } -%>
 
-<% if (config.get('jsFramework') === 'jsb') { -%>
-        {% include 'partials::header.twig' %}
-<% } -%>
-        <main id="main" class="main">
+<% if (config.get('jsFramework') === 'react') { -%>
         {% block body %}{% endblock %}
-        </main>
+<% } -%>
 <% if (config.get('jsFramework') === 'jsb') { -%>
-        {% include 'partials::footer.twig' %}
+        {% include 'components::header/header.twig' with { activeRoute: block('activeRoute') } %}
+        <main id="main" class="b-page">
+            {% block body %}{% endblock %}
+        </main>
+        {% include 'components::footer/footer.twig' %}
 <% } -%>
 
 <% if (config.get('features').includes('modernJsBuild')) { -%>

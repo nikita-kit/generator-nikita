@@ -1,0 +1,57 @@
+import 'custom-event-polyfill';
+import logging from 'node-logging-js';
+import jsb from 'node-jsb';
+import Choices from 'choices.js';
+
+/* @see https://github.com/jshjohnson/Choices */
+export default class Select {
+    constructor(element, jsbOptions) {
+        logging.applyLogging(this, 'Select', false);
+
+        const defaults = {
+            silent: true,
+            searchEnabled: false,
+            removeItemButton: true,
+            duplicateItemsAllowed: false,
+            noResultsText: 'No options found',
+            noChoicesText: 'No options left',
+            itemSelectText: '',
+        };
+
+        let { selectOptions, valueField, ...options } = jsbOptions;
+        const choicesOptions = { ...defaults, ...options };
+
+        selectOptions = selectOptions.flatMap(option => (option.options || option));
+        valueField = valueField || 'value';
+
+        this.logDebug('init', element, jsbOptions);
+        this.choices = new Choices(element, choicesOptions);
+
+        element.addEventListener('change', () => {
+            const state = this.choices.getValue(true);
+            let value;
+
+            if (Array.isArray(state)) {
+                value = state.map(stateValue => (
+                    selectOptions.find(option => (stateValue === String(option[valueField])))
+                ));
+            } else {
+                value = selectOptions.find(option => (state === String(option[valueField]))) || null;
+            }
+
+            jsb.fireEvent('Select::CHANGED', {
+                id: element.id,
+                value,
+            });
+        }, false);
+    }
+}
+
+jsb.registerHandler('Select', Select);
+
+/* babel polyfill hints (removed by minifier) */
+/* eslint-disable no-unused-expressions */
+[].find;
+[].includes;
+Array.from;
+Object.assign;

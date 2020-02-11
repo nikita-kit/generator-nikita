@@ -1,0 +1,27 @@
+{#
+    id: string (required)
+    label: string (required)
+    hideLabel: bool
+    class: string
+    rows: number
+    value: bool
+    placeholder: string
+    disabled: bool
+#}
+<div class="{{ html_classes('b-textarea', class|default()) }}">
+    <label
+        for="{{ id }}"
+        class="{{ html_classes('textarea-label', {
+            'u-visuallyhidden': hideLabel|default(false),
+        }) }}"
+    >
+        {{ label }}
+    </label>
+    <textarea
+        id="{{ id }}"
+        name="{{ id }}"
+        class="textarea-field"
+        rows="{{ rows|default(6) }}"
+        {% if disabled|default(false) %}disabled{% endif %}
+    >{{ value|default('') }}</textarea>
+</div>

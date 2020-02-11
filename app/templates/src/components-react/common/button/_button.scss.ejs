@@ -1,0 +1,43 @@
+.b-button {
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: $base-fontsize;
+    text-decoration: none;
+
+    &.is-primary {
+        color: $dark-gray;
+        background-color: $medium-gray;
+
+        &:hover,
+        &:focus {
+            background-color: $primary-color;
+        }
+
+        &:active {
+            background-color: $medium-gray;
+        }
+    }
+
+    &.is-secondary {
+        border: solid 1px $medium-gray;
+        color: $dark-gray;
+        background-color: $white;
+
+        &:hover,
+        &:focus {
+            border-color: $primary-color;
+            color: $primary-color;
+        }
+
+        &:active {
+            border-color: $medium-gray;
+            color: $dark-gray;
+        }
+    }
+
+    &:disabled,
+    &.is-disabled {
+        opacity: .5;
+        pointer-events: none;
+    }
+}

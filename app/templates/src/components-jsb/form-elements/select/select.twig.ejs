@@ -1,0 +1,63 @@
+{#
+    id: string (required)
+    label: string (required)
+    options: array (required)
+    selectedValues: array
+    valueField: string (default=value)
+    labelField: string (default=label)
+    hideLabel: bool (default=false)
+    class: string
+    placeholder: string
+    disabled: bool (default=false)
+    multiple: bool (default=false)
+    jsbOptions: object
+#}
+{% set jsbOptions = jsbOptions|default({})|merge({ selectOptions: options, valueField: valueField }) %}
+
+{% macro option(option, valueField = 'value', labelField = 'label', selectedValues) %}
+    {% set value = attribute(option, valueField) %}
+
+    <option value="{{ value }}"{% if value in selectedValues %} selected{% endif %}>
+        {{ attribute(option, labelField) }}
+    </option>
+{% endmacro %}
+{% import _self as macros %}
+
+
+<div class="{{ html_classes('b-select', class|default()) }}">
+    <label
+        for="{{ id }}"
+        class="{{ html_classes('select-label', {
+            'u-visuallyhidden': hideLabel|default(false),
+        }) }}"
+    >
+        {{ label }}
+    </label>
+    <select
+        id="{{ id }}"
+        name="{{ id }}"
+        class="jsb_ jsb_Select"
+        data-jsb='{{ jsbOptions|json_encode() }}'
+        {% if disabled|default(false) %}disabled{% endif %}
+        {% if multiple|default(false) %}multiple{% endif %}
+        {% if multiple|default(false) and placeholder is defined %}placeholder="{{ placeholder }}"{% endif %}
+    >
+        {% if not multiple|default(false) and placeholder is defined %}
+            {% if placeholder is defined %}
+                <option value="" placeholder>{{ placeholder }}</option>
+            {% endif %}
+        {% endif %}
+
+        {% for optionOrGroup in options %}
+            {% if optionOrGroup.options is defined %}
+                <optgroup label="{{ optionOrGroup.label }}">
+                    {% for option in optionOrGroup.options %}
+                        {{ macros.option(option, valueField, labelField, selectedValues) }}
+                    {% endfor %}
+                  </optgroup>
+            {% else %}
+                {{ macros.option(optionOrGroup, valueField, labelField, selectedValues) }}
+            {% endif %}
+        {% endfor %}
+    </select>
+</div>

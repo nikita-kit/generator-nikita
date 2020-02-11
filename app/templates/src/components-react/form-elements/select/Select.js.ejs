@@ -1,0 +1,80 @@
+import React, { Component } from 'react';
+import logging from 'node-logging-js';
+import ReactSelect from 'react-select';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+
+/* @see https://github.com/JedWatson/react-select */
+class Select extends Component {
+
+    static propTypes = {
+        id: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        hideLabel: PropTypes.bool,
+        className: PropTypes.string,
+        value: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+        placeholder: PropTypes.string,
+        disabled: PropTypes.bool,
+        multiple: PropTypes.bool,
+        onChange: PropTypes.func,
+    }
+
+    static defaultProps = {
+        className: null,
+        hideLabel: false,
+        value: '',
+        placeholder: '',
+        disabled: false,
+        multiple: false,
+        onChange: () => {},
+    }
+
+    constructor(props) {
+        super(props);
+        logging.applyLogging(this, 'Select', false);
+        this.logDebug('init:', props);
+    }
+
+    onChange = (option, action) => {
+        this.props.onChange({
+            value: option,
+            id: this.props.id,
+            action,
+        });
+    }
+
+    render() {
+        const {
+            id, label, hideLabel, className, disabled, multiple, ...restProps
+        } = this.props;
+
+        return (
+            <div className={classNames('b-select', className)}>
+                <label
+                    htmlFor={id}
+                    className={classNames('select-label', {
+                        'u-visuallyhidden': hideLabel,
+                    })}
+                >
+                    {label}
+                </label>
+                <ReactSelect
+                    id={id}
+                    isSearchable={false}
+                    components={{
+                        IndicatorSeparator: null,
+                    }}
+                    className="select-field"
+                    classNamePrefix="select"
+                    isDisabled={disabled}
+                    isMulti={multiple}
+                    {...restProps}
+                    onChange={this.onChange}
+                    // menuIsOpen /* add to inspect styling */
+                />
+            </div>
+        );
+    }
+}
+
+export default Select;
