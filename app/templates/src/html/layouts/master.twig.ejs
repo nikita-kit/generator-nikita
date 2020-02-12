@@ -16,12 +16,12 @@
         <link href="generated/styles.css?cb={{ currentTimestamp }}" rel="stylesheet" />
         <meta class="foundation-mq">
 
-        {% include 'partials::appicons.twig' %}
+        {% include '@partials/appicons.twig' %}
     </head>
     <body>
 <% if (config.get('features').includes('gitinfos')) { -%>
         {% if production %}
-            {% include 'partials::gitinfos.twig' %}
+            {% include '@partials/gitinfos.twig' %}
         {% endif %}
 <% } -%>
 
@@ -29,11 +29,11 @@
         {% block body %}{% endblock %}
 <% } -%>
 <% if (config.get('jsFramework') === 'jsb') { -%>
-        {% include 'components::header/header.twig' with { activeRoute: block('activeRoute') } %}
+        {% include '@components/header/header.twig' with { activeRoute: block('activeRoute') } %}
         <main id="main" class="b-page">
             {% block body %}{% endblock %}
         </main>
-        {% include 'components::footer/footer.twig' %}
+        {% include '@components/footer/footer.twig' %}
 <% } -%>
 
 <% if (config.get('features').includes('modernJsBuild')) { -%>

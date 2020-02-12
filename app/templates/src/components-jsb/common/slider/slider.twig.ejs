@@ -9,13 +9,13 @@
         {% block content %}{% endblock %}
     </div>
 
-    {% include 'components::common/button/button.twig' with {
+    {% include '@components/common/button/button.twig' with {
         text: 'Prev',
         class: 'prev',
         isSecondary: true,
     } only %}
 
-    {% include 'components::common/button/button.twig' with {
+    {% include '@components/common/button/button.twig' with {
         text: 'Next',
         class: 'next',
         isSecondary: true,

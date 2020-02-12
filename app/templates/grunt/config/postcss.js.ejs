@@ -14,7 +14,7 @@ module.exports = function (grunt, options) {
                 map: true,
                 processors: [
                     autoprefixer({
-                        browsers: options.browserslist,
+                        overrideBrowserslist: options.browserslist,
                     }),
                 ],
             },
@@ -24,7 +24,7 @@ module.exports = function (grunt, options) {
             options: {
                 processors: [
                     autoprefixer({
-                        browsers: options.browserslist,
+                        overrideBrowserslist: options.browserslist,
                     }),
                     csso({
                         restructure: false,
