@@ -11,25 +11,25 @@
         transition: border-color .2s;
 
         &:not([type="file"]) {
-            border: 1px solid $line-color-04;
+            border: 1px solid $light-gray;
         }
 
         &:not(:disabled) {
             &:hover {
-                border-color: $line-color-03;
+                border-color: $medium-gray;
             }
 
             &:focus {
-                border-color: $line-color-06;
+                border-color: $primary-color;
             }
         }
 
         &:disabled {
-            color: $text-color-03;
-            background-color: $bg-color-04;
+            color: $medium-gray;
+            background-color: $light-gray;
 
             ::placeholder {
-                color: $text-color-03;
+                color: $medium-gray;
             }
         }
     }

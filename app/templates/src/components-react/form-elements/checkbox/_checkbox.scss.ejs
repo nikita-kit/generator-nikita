@@ -23,7 +23,7 @@
             width: 2rem;
             height: 2rem;
             margin-right: 1rem;
-            border: 1px solid $line-color-04;
+            border: 1px solid $light-gray;
             border-radius: 4px;
             vertical-align: sub;
         }
@@ -52,17 +52,17 @@
 
     .checkbox-field:not(:disabled) {
         + .checkbox-label:hover::before {
-            border-color: $line-color-03;
+            border-color: $medium-gray;
         }
 
         &:focus + .checkbox-label::before {
-            border-color: $line-color-06;
+            border-color: $primary-color;
         }
     }
 
     .checkbox-field:disabled {
         + .checkbox-label::before {
-            background-color: $bg-color-04;
+            background-color: $light-gray;
         }
     }
 }
