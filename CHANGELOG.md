@@ -2,6 +2,7 @@
 
 * nikita now depends on node.js version >= 8.12 and npm >= 6.4
 * improved styling and structure of all boilerplate components
+* moved color declarations to `scss/variables/_foundation-settings.scss` and removed file `scss/variables/_color.scss`
 * added more boilerplate components like header, footer, button and form elements
 * added `MediaQuery.js` lib as an adapter to foundation breakpoints
 * added twig.js functions `html_attr` and `html_classes`
