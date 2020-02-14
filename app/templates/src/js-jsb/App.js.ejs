@@ -1,10 +1,12 @@
 import logging from 'node-logging-js';
+import KeyboardFocus from './KeyboardFocus';
 
 /* singleton, place global code here */
 class App {
     constructor() {
         logging.applyLogging(this, 'App');
 
+        KeyboardFocus.initialize();
         this.initializeEventListeners();
     }
 

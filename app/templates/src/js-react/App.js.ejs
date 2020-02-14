@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import logging from 'node-logging-js';
+import KeyboardFocus from './KeyboardFocus';
 import { ROUTES } from './config';
 
 import Header from '../components/header/Header';
@@ -16,6 +17,7 @@ export default class App extends Component {
         super(props);
         logging.applyLogging(this, 'App');
         this.logDebug('init');
+        KeyboardFocus.initialize();
     }
 
     render() {

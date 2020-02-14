@@ -5,6 +5,7 @@
 * moved color declarations to `scss/variables/_foundation-settings.scss` and removed file `scss/variables/_color.scss`
 * added more boilerplate components like header, footer, button and form elements
 * added `MediaQuery.js` lib as an adapter to foundation breakpoints
+* added `KeyboardFocus.js` lib to restrict focus styles to keyboard navigation
 * added twig.js functions `html_attr` and `html_classes`
 * changed twig namespaces to  at-notation
 * updated all dependencies to newest version
