@@ -12,8 +12,9 @@
 * updated nikita eslint and stylelint config
 * fixed grunt task `analyze-js`
 * renamed `App.js` to PascalCase
-* fixed generator version compare bug
+* improved readme (added appicon section, integrated sub readme files, equalized naming)
 * added nikita version to npm generator script target
+* internal: fixed generator version compare bug
 * internal: added method to copy complete template directory to generator
 
 # 5.2.0 (2019/05/08)

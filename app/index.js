@@ -16,7 +16,7 @@ module.exports = class extends Generator {
         if (generatedVersion && selfVersion && compareVersions(selfVersion, generatedVersion) === 1) {
             this.env.error(
                 `${chalk.red.bold('Error:')} Your generator-nikita is too old (Version ${chalk.yellow(selfVersion)})!\n`
-                + `This nikita project boilerplate was generated with version ${chalk.yellow(generatedVersion)}, so use at least this version!`,
+                + `This nikita kickstarter was generated with version ${chalk.yellow(generatedVersion)}, so use at least this version!`,
             );
         }
 
@@ -34,7 +34,7 @@ module.exports = class extends Generator {
 
         const version = this.pkg.version || '';
 
-        this.log(yosay(`Welcome to the Nikita Project Generator ${version}!`));
+        this.log(yosay(`Welcome to the nikita kickstarter generator ${version}!`));
 
         return this.prompt(this._getMainPrompts())
             .then(answers => this._handleMainPrompts(answers))
@@ -356,8 +356,7 @@ module.exports = class extends Generator {
         }
 
         // images Folder
-        this._copy('static/img/appicons', `${rootFolder}static/img/appicons`);
-        this._copyTemplate('static/img/temp/README.md.ejs', `${rootFolder}static/img/temp/README.md`);
+        this._copy('static/img', `${rootFolder}static/img`);
 
         // SCSS Basic Files
         this._copyTemplate('src/scss/styles.scss.ejs', `${rootFolder}src/scss/styles.scss`);
@@ -401,7 +400,6 @@ module.exports = class extends Generator {
         }
 
         // Twig files
-        this._copyTemplate('src/html/README.md.ejs', `${rootFolder}src/html/README.md`);
         this._copy('src/html/data/', `${rootFolder}src/html/data/`);
         this._copyTemplateDir('src/html/layouts/', `${rootFolder}src/html/layouts/`);
         this._copy('src/html/macros/', `${rootFolder}src/html/macros/`);
@@ -623,6 +621,6 @@ module.exports = class extends Generator {
 
     end() {
         this.log(`${chalk.yellow.bold('\nNote: ')}Foundation JS dependencies are not installed because the use of it's JS components is not recommended due to the heavy script size!\n`);
-        this.log(chalk.yellow.bold('Nikita Project Generator run finished!\n'));
+        this.log(chalk.yellow.bold('nikita kickstarter generator run finished!\n'));
     }
 };

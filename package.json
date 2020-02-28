@@ -1,6 +1,6 @@
 {
   "name": "generator-nikita",
-  "description": "The yeoman generator for nikita.kit project boilerplate featuring Grunt, Webpack, Babel, twig, React, SASS, PostCSS, Jest, ESLint and stylelint.",
+  "description": "The yeoman generator for nikita kickstarter featuring Grunt, Webpack, Babel, twig, React, SASS, PostCSS, Jest, ESLint and stylelint.",
   "license": "CC0-1.0",
   "main": "app/index.js",
   "repository": "nikita-kit/generator-nikita",

@@ -38,7 +38,7 @@ Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerat
 
 
 This is our generator to start a new web project from scratch.
-It will generate a completely customized version of our nikita-kit project boilerplate for your project.
+It will generate a completely customized version of our nikita kickstarter for your project.
 Feel free to re-run the generator to add or remove features.
 
 
