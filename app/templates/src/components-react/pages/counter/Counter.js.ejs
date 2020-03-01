@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logging from 'node-logging-js';
+import { Helmet } from 'react-helmet-async';
 import { connect, actions } from '../../../js/Store';
 import Button from '../../common/button/Button';
 
@@ -17,6 +18,10 @@ export class RawCounter extends Component {
     render() {
         return (
             <div className="b-counter">
+                <Helmet>
+                    <title>Counter - nikita kickstarter</title>
+                </Helmet>
+
                 <span className="value">counter value is: { this.props.count }</span>
                 <br /><br />
                 <Button isPrimary onClick={this.onClick}>Increase Counter</Button>

@@ -475,6 +475,7 @@ module.exports = class extends Generator {
             delete packageJsonData.dependencies['prop-types'];
             delete packageJsonData.dependencies.react;
             delete packageJsonData.dependencies['react-dom'];
+            delete packageJsonData.dependencies['react-helmet-async'];
             delete packageJsonData.dependencies['react-media'];
             delete packageJsonData.dependencies['react-router-dom'];
             delete packageJsonData.dependencies['react-waterfall'];

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import logging from 'node-logging-js';
+import { HelmetProvider } from 'react-helmet-async';
 import KeyboardFocus from './KeyboardFocus';
 import { ROUTES } from './config';
 
@@ -22,18 +23,20 @@ export default class App extends Component {
 
     render() {
         return (
-            <BrowserRouter>
-                <Header />
-                <main className="b-page">
-                    <Switch>
-                        <Route exact path={ROUTES.home} component={Sample} />
-                        <Route exact path={ROUTES.forms} component={Forms} />
-                        <Route exact path={ROUTES.counter} component={Counter} />
-                        <Route component={NotFound} />
-                    </Switch>
-                </main>
-                <Footer />
-            </BrowserRouter>
+            <HelmetProvider>
+                <BrowserRouter>
+                    <Header />
+                    <main className="b-page">
+                        <Switch>
+                            <Route exact path={ROUTES.home} component={Sample} />
+                            <Route exact path={ROUTES.forms} component={Forms} />
+                            <Route exact path={ROUTES.counter} component={Counter} />
+                            <Route component={NotFound} />
+                        </Switch>
+                    </main>
+                    <Footer />
+                </BrowserRouter>
+            </HelmetProvider>
         );
     }
 }

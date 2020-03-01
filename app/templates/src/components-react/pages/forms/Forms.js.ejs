@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logging from 'node-logging-js';
+import { Helmet } from 'react-helmet-async';
 import Select from '../../form-elements/select/Select';
 import Input from '../../form-elements/input/Input';
 import Checkbox from '../../form-elements/checkbox/Checkbox';
@@ -33,6 +34,10 @@ class Forms extends Component {
 
         return (
             <div className="b-forms">
+                <Helmet>
+                    <title>Forms - nikita kickstarter</title>
+                </Helmet>
+
                 <Input id="input" label="Input" value={input} onChange={this.onChange} />
                 <br />
                 <Checkbox id="checkbox" label="Checkbox" value={checkbox} onChange={this.onChange} />

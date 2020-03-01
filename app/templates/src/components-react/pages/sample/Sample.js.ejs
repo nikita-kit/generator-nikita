@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logging from 'node-logging-js';
+import { Helmet } from 'react-helmet-async';
 <% if (config.get('libraries').includes('lodash')) { -%>
 import { camelCase } from 'lodash-es';
 <% } -%>
@@ -32,6 +33,11 @@ class Sample extends Component {
     render() {
         return (
             <div className="b-sample">
+                <Helmet>
+                    <title>nikita kickstarter</title>
+                    <meta name="description" content="This is the startpage of your nikita kickstarter." />
+                </Helmet>
+
                 Congratulations, your nikita kickstarter was built successfully! :)
                 <br />
 <% if (config.get('libraries').includes('react-a11y-dialog')) { -%>
