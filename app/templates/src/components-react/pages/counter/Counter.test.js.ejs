@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
-import { MemoryRouter } from 'react-router';
+import { HelmetProvider } from 'react-helmet-async';
 
 /* import non-connected component for shallow rendering */
 import { RawCounter as Counter } from './Counter';
@@ -21,9 +21,9 @@ describe('The counter component', () => {
         /* wrapping with MemoryRouter is necessary because Counter uses Link Component */
 
         const mountWrapper = mount(
-            <MemoryRouter>
+            <HelmetProvider>
                 <Counter />
-            </MemoryRouter>,
+            </HelmetProvider>,
         );
 
         expect(mountWrapper.find('.b-counter').length).toBe(1);
@@ -33,9 +33,9 @@ describe('The counter component', () => {
         /* wrapping with MemoryRouter is necessary because Counter uses Link Component */
 
         const renderWrapper = render(
-            <MemoryRouter>
+            <HelmetProvider>
                 <Counter />
-            </MemoryRouter>,
+            </HelmetProvider>,
         );
 
         expect(renderWrapper.text()).toEqual('counter value is: Increase Counter');

@@ -1,0 +1,21 @@
+/* eslint-disable no-console */
+import React from 'react';
+import { mount } from 'enzyme';
+import { HelmetProvider } from 'react-helmet-async';
+import Home from './Home';
+
+test('Home Component loads correctly', () => {
+
+<% if (config.get('libraries').includes('react-a11y-dialog')) { -%>
+    document.body.innerHTML = '<div id="main-dialogs"></div>';
+
+<% } -%>
+    const component = mount(
+        <HelmetProvider>
+            <Home />
+        </HelmetProvider>,
+    );
+
+    expect(component.find('.b-home')).toHaveLength(1);
+    expect(console.log).toHaveBeenCalledWith('[Home.render]');
+});

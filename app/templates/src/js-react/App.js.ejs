@@ -7,7 +7,7 @@ import { ROUTES } from './config';
 
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import Sample from '../components/pages/sample/Sample';
+import Home from '../components/pages/home/Home';
 import Forms from '../components/pages/forms/Forms';
 import Counter from '../components/pages/counter/Counter';
 import NotFound from '../components/pages/not-found/NotFound';
@@ -28,7 +28,7 @@ export default class App extends Component {
                     <Header />
                     <main className="b-page">
                         <Switch>
-                            <Route exact path={ROUTES.home} component={Sample} />
+                            <Route exact path={ROUTES.home} component={Home} />
                             <Route exact path={ROUTES.forms} component={Forms} />
                             <Route exact path={ROUTES.counter} component={Counter} />
                             <Route component={NotFound} />

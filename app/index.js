@@ -385,6 +385,7 @@ module.exports = class extends Generator {
             this._copyTemplateDir('src/components-react/header/', `${rootFolder}src/components/header/`);
             this._copyTemplateDir('src/components-react/footer/', `${rootFolder}src/components/footer/`);
             this._copyTemplateDir('src/components-react/pages/', `${rootFolder}src/components/pages/`);
+            this._copyTemplateDir('src/components-react/page-blocks/', `${rootFolder}src/components/page-blocks/`);
             this._copyTemplateDir('src/components-react/common/button/', `${rootFolder}src/components/common/button/`);
             this._copyTemplateDir('src/components-react/form-elements/input/', `${rootFolder}src/components/form-elements/input/`);
             this._copyTemplateDir('src/components-react/form-elements/textarea/', `${rootFolder}src/components/form-elements/textarea/`);

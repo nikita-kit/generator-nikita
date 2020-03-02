@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import logging from 'node-logging-js';
 import { Helmet } from 'react-helmet-async';
-<% if (config.get('libraries').includes('lodash')) { -%>
-import { camelCase } from 'lodash-es';
-<% } -%>
-<% if (config.get('libraries').includes('date-fns')) { -%>
-import { format } from 'date-fns/esm';
-<% } -%>
+import Sample from '../../page-blocks/sample/Sample';
 <% if (config.get('libraries').includes('react-a11y-dialog')) { -%>
 import Button from '../../common/button/Button';
 import Dialog from '../../common/dialog/Dialog';
@@ -15,30 +10,22 @@ import Dialog from '../../common/dialog/Dialog';
 import Slider from '../../common/slider/Slider';
 <% } -%>
 
-class Sample extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
-        logging.applyLogging(this, 'Sample');
+        logging.applyLogging(this, 'Home');
         this.logDebug('init:', props);
-<% if (config.get('libraries').includes('lodash')) { -%>
-
-        this.logDebug(`lodash in nikita: ${camelCase('this should be camel case')}`);
-<% } -%>
-<% if (config.get('libraries').includes('date-fns')) { -%>
-
-        this.logDebug(`date-fns in nikita: Today is a ${format(new Date(), 'EEEE')}`);
-<% } -%>
     }
 
     render() {
         return (
-            <div className="b-sample">
+            <div className="b-home">
                 <Helmet>
                     <title>nikita kickstarter</title>
                     <meta name="description" content="This is the startpage of your nikita kickstarter." />
                 </Helmet>
 
-                Congratulations, your nikita kickstarter was built successfully! :)
+                <Sample />
                 <br />
 <% if (config.get('libraries').includes('react-a11y-dialog')) { -%>
                 <br />
@@ -62,4 +49,4 @@ class Sample extends Component {
     }
 }
 
-export default Sample;
+export default Home;

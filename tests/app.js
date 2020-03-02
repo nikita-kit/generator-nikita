@@ -174,7 +174,8 @@ describe('generator-nikita:web-app-react', () => {
             'src/js/_main.js',
             'src/js/App.js',
             'src/js/Store.js',
-            'src/components/pages/sample/Sample.js',
+            'src/components/page-blocks/sample/Sample.js',
+            'src/components/pages/home/Home.js',
             'src/components/pages/counter/Counter.js',
             'src/components/common/slider/Slider.js',
             'src/components/common/dialog/Dialog.js',
@@ -188,8 +189,8 @@ describe('generator-nikita:web-app-react', () => {
         assert.noFile(['src/html/pages/forms.twig']);
 
         assert.fileContent([
-            ['src/components/pages/sample/Sample.js', /lodash-es/],
-            ['src/components/pages/sample/Sample.js', /date-fns\/esm/],
+            ['src/components/page-blocks/sample/Sample.js', /lodash-es/],
+            ['src/components/page-blocks/sample/Sample.js', /date-fns\/esm/],
         ]);
 
         if (process.env.TEMPLATE === 'web-app') {
