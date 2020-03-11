@@ -13,7 +13,8 @@ module.exports = function (grunt) {
         const options = {
             start: process.cwd(),
             json: true,
-            exclude: excludedLicenses
+            exclude: excludedLicenses,
+            production: true,
         };
 
         licenseChecker.init(options, (err, packages) => {
