@@ -474,6 +474,7 @@ module.exports = class extends Generator {
             delete packageJsonData.devDependencies['eslint-config-nikita-react'];
             delete packageJsonData.devDependencies['eslint-plugin-jsx-a11y'];
             delete packageJsonData.devDependencies['eslint-plugin-react'];
+            delete packageJsonData.devDependencies['eslint-plugin-react-hooks'];
             delete packageJsonData.dependencies.classnames;
             delete packageJsonData.dependencies['prop-types'];
             delete packageJsonData.dependencies.react;
