@@ -20,7 +20,8 @@ test-frontend:
     - node -v
     - npm -v
     - npm install
-    - npm run check-code
+    - npm run grunt check-code
+    - npm run grunt check-licenses
     - npm run grunt test -- --ci
   except:
     - tags

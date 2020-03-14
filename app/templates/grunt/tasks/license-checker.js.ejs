@@ -29,7 +29,7 @@ module.exports = function (grunt) {
                 done(true);
                 return;
             }
-            packageNames.forEach(key => {
+            packageNames.forEach((key) => {
                 grunt.log.write('Package: ');
                 grunt.log.write(key.red);
                 grunt.log.write(', is not allowed because of License: ');
