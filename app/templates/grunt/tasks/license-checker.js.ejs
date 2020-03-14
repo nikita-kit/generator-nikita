@@ -1,7 +1,7 @@
 const licenseChecker = require('license-checker');
 
 module.exports = function (grunt) {
-    grunt.registerMultiTask('check-licenses', 'check the used packages for invalid licenses', function () {
+    grunt.registerMultiTask('license-checker', 'check the used packages for invalid licenses', function () {
         grunt.log.write('\n>> '.green);
         grunt.log.writeln('starting license check');
 

@@ -7,6 +7,7 @@
 * added `react-helmet-async` lib to modify html document head
 * added `MediaQuery.js` lib as an adapter to foundation breakpoints
 * added `KeyboardFocus.js` lib to restrict focus styles to keyboard navigation
+* added grunt task to check licenses used in the project
 * added twig.js functions `html_attr` and `html_classes`
 * changed twig namespaces to  @-notation
 * updated all dependencies to newest version
@@ -17,7 +18,6 @@
 * added nikita version to npm generator script target
 * internal: fixed generator version compare bug
 * internal: added method to copy complete template directory to generator
-* added grunt task to check licenses used in the project
 
 # 5.2.0 (2019/05/08)
 

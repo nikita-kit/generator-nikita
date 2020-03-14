@@ -69,6 +69,7 @@ module.exports = {
     'check-code': [
         'check-js',
         'check-scss',
+        'check-licenses',
     ],
 
     'fix-code': [
@@ -81,6 +82,8 @@ module.exports = {
 
     'check-js': ['eslint:check'],
     'fix-js': ['eslint:fix'],
+
+    'check-licenses': ['license-checker:all'],
 
     // analyze tasks
     'analyze-js': ['webpack:analyze'],
