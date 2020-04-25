@@ -1,6 +1,19 @@
 module.exports = function (grunt) {
+    const now = new Date();
+
+<% if (config.get('template') === 'symfony') { -%>
+    if (!grunt.option('static')) {
+        return {
+            dev: {},
+            dist: {},
+        };
+    }
+
+<% } -%>
     return {
         options: {
+            strict_variables: false,
+            rethrow: true,
             namespaces: {
                 data: '<%%= paths.src %>/html/data/',
                 layouts: '<%%= paths.src %>/html/layouts/',
@@ -10,6 +23,9 @@ module.exports = function (grunt) {
             },
             extensions: [
                 function (Twig) {
+                    /* custom implementation for twig.js, @see https://symfony.com/doc/current/reference/twig_reference.html#asset */
+                    Twig.exports.extendFunction('asset', assetPath => `${assetPath}?${now.getTime()}`);
+
                     /* custom implementation for twig.js, @see https://twig.symfony.com/doc/2.x/functions/html_classes.html */
                     Twig.exports.extendFunction('html_classes', (...expressions) => {
                         const classes = [];
@@ -70,7 +86,6 @@ module.exports = function (grunt) {
                 {
                     data: {
                         production: false,
-                        currentTimestamp: (new Date()).getTime(),
                     },
                     expand: true,
                     cwd: '<%%= paths.src %>/html/pages/',
@@ -89,7 +104,6 @@ module.exports = function (grunt) {
 <% } -%>
                         {
                             production: true,
-                            currentTimestamp: (new Date()).getTime(),
                         },
                     ],
                     expand: true,

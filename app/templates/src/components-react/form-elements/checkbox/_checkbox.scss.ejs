@@ -3,7 +3,15 @@
     display: flex;
 
     .checkbox-field {
+<% if (config.get('scssMixins').includes('a11y-hide')) { -%>
         @include a11y-hide();
+<% } else { -%>
+        overflow: hidden;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        clip: rect(1px, 1px, 1px, 1px);
+<% } -%>
     }
 
     .checkbox-label {

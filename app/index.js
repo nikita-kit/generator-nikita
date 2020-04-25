@@ -115,6 +115,15 @@ module.exports = class extends Generator {
             ];
         }
 
+        if (this.config.get('template') === 'symfony') {
+            return [
+                this._promptInput('devServerProxy', 'proxy url for dev server'),
+                this._promptInput('devServerHost', 'host name for dev server', ''),
+                this._promptInput('devServerHttpsKeyFile', 'https key file for dev server', ''),
+                this._promptInput('devServerHttpsCertFile', 'https cert file for dev server', ''),
+            ];
+        }
+
         return [];
     }
 
@@ -167,7 +176,7 @@ module.exports = class extends Generator {
                     value: 'react',
                 },
             ]),
-            this._promptCheckbox('scssMixins', 'Which nikita mixins do you want to use?', [
+            this._promptCheckbox('scssMixins', 'Which nikita mixins do you want to add?', [
                 {
                     name: `${chalk.bold('a11y-hide:')} hide elements in sake of accessibility`,
                     value: 'a11y-hide',
@@ -269,7 +278,7 @@ module.exports = class extends Generator {
             message: question,
             default: this.config.get(name) || defaultValue,
             validate(value) {
-                if (value && value.length > 0) {
+                if (defaultValue === '' || (value && value.length > 0)) {
                     return true;
                 }
 
@@ -318,6 +327,7 @@ module.exports = class extends Generator {
 
         const isReact = (this.config.get('jsFramework') === 'react');
         const rootFolder = this.config.get('rootFolder');
+        const assetBasePath = (this.config.get('template') === 'symfony') ? '/static' : '';
 
         // Standard Files
         this._copyTemplate('.gitignore.ejs', '.gitignore');
@@ -404,9 +414,9 @@ module.exports = class extends Generator {
 
         // Twig files
         this._copy('src/html/data/', `${rootFolder}src/html/data/`);
-        this._copyTemplateDir('src/html/layouts/', `${rootFolder}src/html/layouts/`);
+        this._copyTemplateDir('src/html/layouts/', `${rootFolder}src/html/layouts/`, { assetBasePath });
         this._copy('src/html/macros/', `${rootFolder}src/html/macros/`);
-        this._copyTemplate('src/html/partials/appicons.twig.ejs', `${rootFolder}src/html/partials/appicons.twig`);
+        this._copyTemplate('src/html/partials/appicons.twig.ejs', `${rootFolder}src/html/partials/appicons.twig`, { assetBasePath });
         if (isReact) {
             this._copyTemplate('src/html/pages/index.twig.ejs', `${rootFolder}src/html/pages/index.twig`);
         } else {
@@ -573,15 +583,15 @@ module.exports = class extends Generator {
         }
     }
 
-    _copyTemplate(template, destination) {
+    _copyTemplate(template, destination, variables = {}) {
         this.fs.copyTpl(
             this.templatePath(template),
             this.destinationPath(destination),
-            { config: this.config },
+            { ...variables, config: this.config },
         );
     }
 
-    _copyTemplateDir(dir, destination) {
+    _copyTemplateDir(dir, destination, variables = {}) {
         const files = glob.sync('**/*.ejs', {
             cwd: `${this.templatePath()}/${dir}`,
         });
@@ -591,7 +601,7 @@ module.exports = class extends Generator {
         }
 
         files.forEach((file) => {
-            this._copyTemplate(dir + file, destination + file.slice(0, -4));
+            this._copyTemplate(dir + file, destination + file.slice(0, -4), variables);
         });
     }
 

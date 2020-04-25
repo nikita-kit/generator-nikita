@@ -1,5 +1,54 @@
 module.exports = function (grunt) {
+<% if (config.get('template') === 'symfony') { -%>
+    const options = grunt.option('static') ? {
+        server: {
+            baseDir: ['<%%= paths.static %>/..'],
+        },
+        middleware(req, res, next) {
+            if (req.url.split('/').length <= 2) {
+                res.writeHead(302, {
+                    Location: `/static${req.url}`,
+                });
+                res.end();
+            }
+            return next();
+        },
+    } : {
+        proxy: '<%= config.get('devServerProxy') %>',
+<% if (config.get('devServerHost')) { -%>
+        host: '<%= config.get('devServerHost') %>',
+<% } -%>
+<% if (config.get('devServerHttpsKeyFile') && config.get('devServerHttpsCertFile')) { -%>
+        https: {
+            key: '<%= config.get('devServerHttpsKeyFile') %>',
+            cert: '<%= config.get('devServerHttpsCertFile') %>',
+        },
+<% } -%>
+        snippetOptions: {
+            ignorePaths: '/admin/**',
+        },
+    };
+
+<% } -%>
     return {
+        options: {
+            open: false,
+            online: true,
+            watchTask: true,
+            ghostMode: false,
+<% if (config.get('jsFramework') === 'react') { -%>
+            single: true,
+<% } -%>
+            port: grunt.option('port') || 3000,
+            ui: {
+                port: grunt.option('port') + 1 || 3001,
+            },
+<% if (config.get('template') !== 'symfony') { -%>
+            server: {
+                baseDir: ['<%%= paths.static %>'],
+            },
+<% } -%>
+        },
         dev: {
             bsFiles: {
                 src: [
@@ -9,24 +58,15 @@ module.exports = function (grunt) {
                     '!<%%= paths.static %>/generated/main.js',
 <% } -%>
                     '<%%= paths.static %>/**/*.html',
+<% if (config.get('template') === 'symfony') { -%>
+                    '<%%= paths.src %>/components/**/*.twig',
+                    'templates/**/*.twig',
+<% } -%>
                 ],
             },
-            options: {
-                open: false,
-                online: true,
-                watchTask: true,
-<% if (config.get('jsFramework') === 'react') { -%>
-                single: true,
+<% if (config.get('template') === 'symfony') { -%>
+            options,
 <% } -%>
-                port: grunt.option('port') || 3000,
-                ui: {
-                    port: grunt.option('port') + 1 || 3001,
-                },
-                server: {
-                    baseDir: ['<%%= paths.static %>'],
-                },
-                ghostMode: false,
-            },
         },
     };
 };

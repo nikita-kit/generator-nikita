@@ -134,6 +134,7 @@ This is the standard template for stand-alone web apps. The root folder is your 
 ### Symfony
 
 The Symfony template sets the root folder to `public/`.
+In addition, the dev server can proxy your web-server and watch to twig template changes.
 
 To use the nikita build files, just add something like following lines to your base.html.twig file:
 ```html

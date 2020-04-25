@@ -4,11 +4,17 @@
 * improved styling and structure of all boilerplate components
 * moved color declarations to `scss/variables/_foundation-settings.scss` and removed file `scss/variables/_color.scss`
 * added more boilerplate components like header, footer, button and form elements
+* improved symfony integration
+  * added static mode (`--static`) to start the dev server with static page generator without proxy
+  * added proxy setting for browserSync dev server
+  * added https cert and key file settings to support https with browserSync
+  * watch symfony twig template files
+  * changed dev server root to `public/`-folder
 * added `react-helmet-async` lib to modify html document head
 * added `MediaQuery.js` lib as an adapter to foundation breakpoints
 * added `KeyboardFocus.js` lib to restrict focus styles to keyboard navigation
-* added grunt task to check licenses used in the project
-* added twig.js functions `html_attr` and `html_classes`
+* added grunt task to check licenses used in dependencies
+* added twig.js functions `asset`, `html_attr` and `html_classes`
 * changed twig namespaces to  @-notation
 * updated all dependencies to newest version
 * updated nikita eslint and stylelint config

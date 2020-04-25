@@ -1,6 +1,9 @@
 module.exports = {
 
     // supported options:
+<% if (config.get('template') === 'symfony') { -%>
+    // --static:   start static page generator (using twig.js, without proxy)
+<% } -%>
     // --port:     specify BrowserSync port
     // --no-times: disable time-grunt
 

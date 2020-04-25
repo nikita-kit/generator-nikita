@@ -13,8 +13,8 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link href="generated/styles.css?cb={{ currentTimestamp }}" rel="stylesheet" />
-        <meta class="foundation-mq">
+        <link href="{{ asset('<%= assetBasePath %>/generated/styles.css') }}" rel="stylesheet" />
+        <meta class="foundation-mq" />
 
         {% include '@partials/appicons.twig' %}
     </head>
@@ -40,10 +40,10 @@
         {# safari 10 nomodule bugfix #}
         <script>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()},!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
 
-        <script type="module" src="generated/main.modern.js?cb={{ currentTimestamp }}"></script>
-        <script nomodule defer src="generated/main.js?cb={{ currentTimestamp }}"></script>
+        <script type="module" src="{{ asset('<%= assetBasePath %>/generated/main.js') }}"></script>
+        <script nomodule defer src="{{ asset('<%= assetBasePath %>/generated/main.js') }}"></script>
 <% } else { -%>
-        <script src="generated/main.js?cb={{ currentTimestamp }}"></script>
+        <script src="{{ asset('<%= assetBasePath %>/generated/main.js') }}"></script>
 <% } -%>
     </body>
 </html>
