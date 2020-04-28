@@ -9,7 +9,7 @@ module.exports = function (grunt) {
             ci: !!grunt.option('ci'),
         };
 
-        require('jest-cli').runCLI(options, [process.cwd()]).then(({ results }) => {
+        require('@jest/core').runCLI(options, [process.cwd()]).then(({ results }) => {
             if (taskOptions.collectCoverage) {
                 grunt.log.write('\n>> '.green);
                 grunt.log.write('View ');
