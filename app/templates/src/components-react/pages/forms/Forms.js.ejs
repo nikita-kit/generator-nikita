@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import logging from 'node-logging-js';
 import { Helmet } from 'react-helmet-async';
+<% if (config.get('libraries').includes('react-select')) { -%>
 import Select from '../../form-elements/select/Select';
+<% } -%>
 import Input from '../../form-elements/input/Input';
 import Checkbox from '../../form-elements/checkbox/Checkbox';
 import Textarea from '../../form-elements/textarea/Textarea';

@@ -1,3 +1,7 @@
+# dev
+
+* fixed non removed slider import when slider option gets not selected
+
 # 6.0.0 (2020/04/29)
 
 * nikita now depends on node.js version >= 8.12 and npm >= 6.4
