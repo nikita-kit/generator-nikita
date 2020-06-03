@@ -6,8 +6,8 @@
     valueField: string (default=value)
     labelField: string (default=label)
     hideLabel: bool (default=false)
-    class: string
-    placeholder: string
+    class: string (default=undefined)
+    placeholder: string (default=undefined)
     disabled: bool (default=false)
     multiple: bool (default=false)
     jsbOptions: object
@@ -40,12 +40,9 @@
         data-jsb='{{ jsbOptions|json_encode() }}'
         {% if disabled|default(false) %}disabled{% endif %}
         {% if multiple|default(false) %}multiple{% endif %}
-        {% if multiple|default(false) and placeholder is defined %}placeholder="{{ placeholder }}"{% endif %}
     >
-        {% if not multiple|default(false) and placeholder is defined %}
-            {% if placeholder is defined %}
-                <option value="" placeholder>{{ placeholder }}</option>
-            {% endif %}
+        {% if placeholder is defined %}
+            <option value="" placeholder>{{ placeholder }}</option>
         {% endif %}
 
         {% for optionOrGroup in options %}
