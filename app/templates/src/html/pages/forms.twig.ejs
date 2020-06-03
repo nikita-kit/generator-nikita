@@ -13,13 +13,13 @@
     {% include '@components/form-elements/checkbox/checkbox.twig' with {
         id: 'checkbox',
         label: 'Checkbox',
-        value: true,
+        value: false,
     } only %}
     <br />
     {% include '@components/form-elements/textarea/textarea.twig' with {
         id: 'textarea',
         label: 'Textarea',
-        value: 'Text',
+        value: 'text',
     } only %}
 <%     if (config.get('libraries').includes('choices')) { -%>
     <br />
