@@ -16,18 +16,16 @@
     'is-secondary': not isPrimary|default(false) and isSecondary|default(false),
 }) %}
 
+{% set isLink = (url|default() and not disabled|default(false)) %}
+{% set element = isLink ? 'a' : 'button' %}
+
 {% set attr = attr|default({})|merge({
+    href: isLink ? url : false,
     class: classes,
-    type: type|default(url ? false : 'button'),
+    type: type|default(isLink ? false : 'button'),
     disabled: disabled|default(false),
 }) %}
 
-{% if url is defined and not attr.disabled %}
-    <a href="{{ url }}"{{ html_attr(attr) }}>
-        {% block content %}{{ text|default('') }}{% endblock %}
-    </a>
-{% else %}
-    <button{{ html_attr(attr) }}>
-        {% block content %}{{ text|default('') }}{% endblock %}
-    </button>
-{% endif %}
+<{{ element }}{{ html_attr(attr) }}>
+    {% block content %}{{ text|default('') }}{% endblock %}
+</{{ element }}>

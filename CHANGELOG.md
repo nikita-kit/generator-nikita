@@ -3,6 +3,7 @@
 * fixed non removed slider import when slider option gets not selected
 * fixed checkbox hook icon when svg background image feature is not selected
 * fixed choices.js placeholder of multi selects not being visible
+* fixed syntax errors in `button.twig` and `header.twig` components when running with twig php
 * internal: fixed generator version compare bug (finally)
 
 # 6.0.0 (2020/04/29)

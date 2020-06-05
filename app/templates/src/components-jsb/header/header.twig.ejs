@@ -1,8 +1,3 @@
-{% set routes = {
-    Home: '/',
-    Forms: '/forms.html',
-} %}
-
 <header class="b-header jsb_ jsb_Header">
 
     {% include '@components/common/button/button.twig' with {
@@ -12,12 +7,19 @@
         attr: { 'aria-expanded': 'false' },
     } only %}
 
-    <ul class="nav-list">
-        {% for routeName, route in routes %}
-            <li class="nav-item">
-                {% set class = html_classes('nav-link', { 'is-active': route == activeRoute }) %}
-                <a class="{{ class }}" href="{{ route }}">{{ routeName }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    {% block menu %}
+        {% set routes = {
+            Home: '/',
+            Forms: '/forms.html',
+        } %}
+
+        <ul class="nav-list">
+            {% for routeName, route in routes %}
+                <li class="nav-item">
+                    {% set class = html_classes('nav-link', { 'is-active': route == activeRoute }) %}
+                    <a class="{{ class }}" href="{{ route }}">{{ routeName }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endblock %}
 </header>
