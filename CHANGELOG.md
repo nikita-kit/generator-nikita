@@ -1,4 +1,4 @@
-# dev
+# 6.0.1 (2020/06/05)
 
 * fixed non removed slider import when slider option gets not selected
 * fixed checkbox hook icon when svg background image feature is not selected
