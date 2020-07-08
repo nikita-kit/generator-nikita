@@ -1,3 +1,7 @@
+#dev
+
+* fixed wrong file name of modern js build file in twig master layout
+
 # 6.0.1 (2020/06/05)
 
 * fixed non removed slider import when slider option gets not selected
