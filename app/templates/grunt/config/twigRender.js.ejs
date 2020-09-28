@@ -69,8 +69,8 @@ module.exports = function (grunt) {
                     });
 
                     /* function to import json/yaml test data */
-                    Twig.exports.extendFunction('data', (filename) => {
-                        const namespacePath = Twig.path.parsePath.apply(this, [this, filename]);
+                    Twig.exports.extendFunction('data', function data(filename) {
+                        const namespacePath = Twig.path.parsePath.apply(this.template, [this.template, filename]);
 
                         if (/\.yml$/i.test(namespacePath) || /\.yaml/i.test(namespacePath)) {
                             return grunt.file.readYAML(namespacePath);

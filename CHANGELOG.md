@@ -1,3 +1,7 @@
+# dev 
+
+* fixed twig data function
+
 # 6.0.2 (2020/07/08)
 
 * fixed wrong file name of modern js build file in twig master layout
