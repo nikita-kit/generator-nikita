@@ -1,4 +1,4 @@
-# dev 
+# 6.0.3 (2020/09/28)
 
 * fixed twig data function
 
