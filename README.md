@@ -14,7 +14,7 @@ Latest Release: [![GitHub version](https://badge.fury.io/gh/nikita-kit%2Fgenerat
 <a href="https://reactjs.org/">
     <img height="75" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/react.svg" alt="react">
 </a>
-<a href="https://github.com/sass/node-sass">
+<a href="https://github.com/sass/dart-sass">
     <img height="75" width="70" src="https://cdn.rawgit.com/nikita-kit/generator-nikita/master/img/node-sass.svg" alt="sass">
 </a>
 <a href="http://postcss.org/">
@@ -49,7 +49,7 @@ Feel free to re-run the generator to add or remove features.
 - [__Babel__](https://babeljs.io/) – next generation JavaScript compiler
 - [__twigRender__](https://github.com/stefanullinger/grunt-twig-render) – static site generator
 - [__React__](https://reactjs.org/) or [__JSB__](https://github.com/DracoBlue/jsb/) - JS framework
-- [__SCSS__](http://sass-lang.com/) with [__LibSass__](http://libsass.org/) – CSS preprocessing
+- [__SCSS__](http://sass-lang.com/) - CSS preprocessing
 - [__PostCSS__](http://postcss.org/) – CSS postprocessing
 - [__Foundation__](https://foundation.zurb.com/sites.html) – SCSS framework
 - [__Jest__](https://facebook.github.io/jest/) – JS testing framework
@@ -81,7 +81,7 @@ npx -p yo -p generator-nikita yo nikita
 ```
 
 Then [npx](https://www.npmjs.com/package/npx) will download newest [Yeoman](http://yeoman.io/) cli
-and generator-nikita to it's cache dir and execute them. 
+and generator-nikita to it's cache dir and execute them.
 
 
 ### Generator main questions

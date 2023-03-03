@@ -10,7 +10,7 @@ module.exports = function (grunt) {
     return {
         options: {
             implementation: sass,
-            outputStyle: 'nested', // minifying by csso
+            outputStyle: 'compress',
             includePaths: ['<%%= paths.src %>/scss'],
         },
         dev: {
